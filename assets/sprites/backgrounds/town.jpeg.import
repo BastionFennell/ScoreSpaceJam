@@ -2,25 +2,25 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/thomas.png-b1d388c406605b491e87e3c43a92d641.stex"
+path="res://.import/town.jpeg-30410279b1f737ca9898c65238f885f0.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/characters/thomas/thomas.png"
-dest_files=[ "res://.import/thomas.png-b1d388c406605b491e87e3c43a92d641.stex" ]
+source_file="res://assets/sprites/backgrounds/town.jpeg"
+dest_files=[ "res://.import/town.jpeg-30410279b1f737ca9898c65238f885f0.stex" ]
 
 [params]
 
-compress/mode=3
+compress/mode=0
 compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=false
+flags/filter=true
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2
@@ -31,5 +31,5 @@ process/invert_color=false
 process/normal_map_invert_y=false
 stream=false
 size_limit=0
-detect_3d=false
+detect_3d=true
 svg/scale=1.0
