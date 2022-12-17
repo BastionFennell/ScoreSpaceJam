@@ -1,8 +1,11 @@
 extends KinematicBody2D
 
-export (int) var speed = 1000;
+export (int) var speed = 1000
+export (float) var health = 100.00
 
+signal health_change
 var velocity = Vector2()
+var touching = 0;
 
 func get_input():
 	velocity = Vector2()
@@ -19,10 +22,13 @@ func get_input():
 	velocity = velocity.normalized() * speed
 
 
+func _on_damage(damage):
+	health -= damage
+	emit_signal("health_change", health);
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
-
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
