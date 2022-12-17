@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Halloween Spooky.mp3-60ee6d36c313cdd630e9263da9787458.mp3str"
+
+[deps]
+
+source_file="res://assets/audio/songs/Halloween Spooky.mp3"
+dest_files=[ "res://.import/Halloween Spooky.mp3-60ee6d36c313cdd630e9263da9787458.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -12,5 +12,6 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if overlaps_body(player):
+	var dead = get_parent().dead
+	if overlaps_body(player) && !dead:
 		emit_signal("damage_player", damage * delta)

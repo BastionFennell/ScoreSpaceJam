@@ -35,6 +35,7 @@ func _spawn_bullet():
 func _on_shoot():
 	if (!reloading):
 		reloading = true
+		get_node("SFX").playing = true
 		_animate_gunshot()
 		_spawn_bullet()
 
