@@ -12,10 +12,6 @@ var viewportWidth = 550
 var viewportHeight = 300
 
 func _ready():
-	var bg = get_node("/root/World/Background")
-
-	height = bg.get_rect().size.x * bg.scale.x
-	width = bg.get_rect().size.y * bg.scale.y
 
 	_spawn_enemy()
 

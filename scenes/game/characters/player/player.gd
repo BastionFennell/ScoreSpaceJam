@@ -41,3 +41,5 @@ func _process(_delta):
 		velocity = move_and_slide(velocity)
 		if velocity.x or velocity.y != 0:
 			$AnimationPlayer.play("walking")
+		else:
+			$Thomas.frame = 0
