@@ -156,6 +156,7 @@ custom_fonts/font = SubResource( 1 )
 text = "Resume"
 
 [node name="Game Over Screen" type="CanvasLayer" parent="."]
+pause_mode = 2
 visible = false
 script = ExtResource( 13 )
 

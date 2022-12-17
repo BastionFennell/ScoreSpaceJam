@@ -80,6 +80,8 @@ func _on_death():
 
 	save_game.close()
 	self.visible = true
+	get_tree().paused = true
 
 func _retry():
+	get_tree().paused = false
 	get_tree().reload_current_scene()
