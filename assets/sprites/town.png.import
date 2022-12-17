@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/town.jpeg-251686872104389dde364b3b5126e0bb.stex"
+path="res://.import/town.png-63fa61d263ba3cfa8fb68e09abc185bb.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/town.jpeg"
-dest_files=[ "res://.import/town.jpeg-251686872104389dde364b3b5126e0bb.stex" ]
+source_file="res://assets/sprites/town.png"
+dest_files=[ "res://.import/town.png-63fa61d263ba3cfa8fb68e09abc185bb.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2
@@ -31,5 +31,5 @@ process/invert_color=false
 process/normal_map_invert_y=false
 stream=false
 size_limit=0
-detect_3d=true
+detect_3d=false
 svg/scale=1.0
