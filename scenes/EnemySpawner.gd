@@ -23,8 +23,6 @@ func _is_coordinate_valid(coord):
 	var player = get_node("/root/World/Player")
 	var playerX = player.global_position.x - 1100
 	var playerY = player.global_position.y - 600
-	print (playerX)
-	print (playerY)
 
 	var inXRange = coord.x > playerX && coord.x < playerX + 2200
 	var inYRange = coord.x > playerY && coord.y < playerY + 1200
