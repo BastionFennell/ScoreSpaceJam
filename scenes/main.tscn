@@ -36,6 +36,7 @@ health = 100000.0
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 current = true
+zoom = Vector2( 2, 2 )
 process_mode = 0
 limit_left = 0
 limit_top = 0

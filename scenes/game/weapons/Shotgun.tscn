@@ -7,7 +7,7 @@
 script = ExtResource( 2 )
 
 [node name="Bullet Spawner" type="Position2D" parent="."]
-position = Vector2( 156, -4 )
+position = Vector2( 152, -2.38419e-07 )
 scale = Vector2( 8, 8 )
 
 [node name="Sprite" type="Sprite" parent="."]
@@ -15,4 +15,4 @@ position = Vector2( 104, 1.13687e-13 )
 scale = Vector2( 8, 8 )
 texture = ExtResource( 1 )
 region_enabled = true
-region_rect = Rect2( 1, 6, 10, 5 )
+region_rect = Rect2( 1, 5, 12, 6 )

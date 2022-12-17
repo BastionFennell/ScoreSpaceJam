@@ -1,6 +1,7 @@
 extends KinematicBody2D
 
 export (int) var speed = 300
+export (int) var health = 250000
 
 var player
 
@@ -16,5 +17,7 @@ func _physics_process(_delta):
 		velocity += position.direction_to(player.position)
 		move_and_slide(velocity * speed)
 
-
-
+func damage(amount):
+	health -= amount
+	if health <= 0:
+		queue_free()
