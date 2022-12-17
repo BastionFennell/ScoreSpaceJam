@@ -1,8 +1,7 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://scenes/game/GUI/Volume Section.gd" type="Script" id=1]
 [ext_resource path="res://assets/fonts/contrite_in_spirit.ttf" type="DynamicFontData" id=2]
-[ext_resource path="res://scenes/game/GUI/Volume Slider.gd" type="Script" id=3]
 
 [sub_resource type="DynamicFont" id=2]
 size = 24
@@ -36,4 +35,3 @@ rect_min_size = Vector2( 200, 0 )
 value = 100.0
 scrollable = false
 tick_count = 10
-script = ExtResource( 3 )

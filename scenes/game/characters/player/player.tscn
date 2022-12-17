@@ -1,10 +1,42 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://assets/sprites/characters/thomas/thomas.png" type="Texture" id=1]
+[ext_resource path="res://scenes/game/characters/player/ninja.png" type="Texture" id=1]
 [ext_resource path="res://scenes/game/characters/player/player.gd" type="Script" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 5.5, 6 )
+
+[sub_resource type="Animation" id=2]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Thomas:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "walking"
+length = 0.28
+step = 0.14
+tracks/0/type = "value"
+tracks/0/path = NodePath("Thomas:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.14 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 0, 1 ]
+}
 
 [node name="Player" type="KinematicBody2D"]
 collision_mask = 0
@@ -18,5 +50,9 @@ shape = SubResource( 1 )
 [node name="Thomas" type="Sprite" parent="."]
 position = Vector2( 0.5, 0 )
 texture = ExtResource( 1 )
-region_enabled = true
+hframes = 3
 region_rect = Rect2( 2, 2, 11, 12 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 2 )
+anims/walking = SubResource( 3 )
