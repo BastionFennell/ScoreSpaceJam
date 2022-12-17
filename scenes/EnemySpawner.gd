@@ -3,13 +3,13 @@ extends Node2D
 var Enemy = preload("res://scenes/game/enemies/zombie/Zombie.tscn") 
 
 export (int) var margin = 50
-export (float) var respawn_timer = 10
-export (float) var decay = 1
-
-signal spawn_enemy
+export (float) var respawn_timer = 10.00
+export (float) var decay = 1.00
 
 var height = 0;
 var width = 0;
+var viewportWidth = 550
+var viewportHeight = 300
 
 func _ready():
 	var bg = get_node("/root/World/Background")
@@ -21,11 +21,11 @@ func _ready():
 
 func _is_coordinate_valid(coord):
 	var player = get_node("/root/World/Player")
-	var playerX = player.global_position.x - 1100
-	var playerY = player.global_position.y - 600
+	var playerX = player.global_position.x - viewportWidth / 2
+	var playerY = player.global_position.y - viewportHeight / 2
 
-	var inXRange = coord.x > playerX && coord.x < playerX + 2200
-	var inYRange = coord.x > playerY && coord.y < playerY + 1200
+	var inXRange = coord.x > playerX && coord.x < playerX + viewportWidth
+	var inYRange = coord.x > playerY && coord.y < playerY + viewportHeight
 
 	if (inXRange && inYRange):
 		return false
@@ -42,8 +42,6 @@ func _get_spawn_position():
 		x = randf() * (width - 2 * margin) - margin
 
 	return Vector2(x, y)
-
-
 
 func _spawn_enemy():
 	var coords = _get_spawn_position()

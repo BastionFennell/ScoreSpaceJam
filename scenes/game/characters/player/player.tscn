@@ -4,18 +4,19 @@
 [ext_resource path="res://scenes/game/characters/player/player.gd" type="Script" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 44, 48 )
+extents = Vector2( 5.5, 6 )
 
 [node name="Player" type="KinematicBody2D"]
 collision_mask = 0
 script = ExtResource( 2 )
+speed = 100
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0.5, 0 )
 shape = SubResource( 1 )
 
 [node name="Thomas" type="Sprite" parent="."]
-position = Vector2( 5.96046e-08, 0 )
-scale = Vector2( 8.04545, 8.04545 )
+position = Vector2( 0.5, 0 )
 texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 2, 2, 11, 12 )
