@@ -56,6 +56,12 @@ func _reload():
 
 func _process(_delta):
 	look_at(get_global_mouse_position())
+	var rotation = fmod(self.rotation_degrees, 360)
+	if rotation > 90 && rotation < 270: 
+		get_node("Sprite").set_flip_v(true)
+	else:
+		get_node("Sprite").set_flip_v(false)
+
 	if Input.is_action_pressed("shoot"):
 		_on_shoot()
 
