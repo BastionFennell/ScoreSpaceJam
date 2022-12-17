@@ -21,5 +21,5 @@ func _process(_delta):
 		else:
 			_pause()
 
-	if get_tree().paused && Input.is_action_just_pressed("ui_cancel"):
+	if get_tree().paused && Input.is_action_just_pressed("controller_cancel"):
 		_unpause()
