@@ -55,7 +55,20 @@ func _reload():
 	reloading = false
 
 func _process(_delta):
-	look_at(get_global_mouse_position())
+	var controller_mode = get_node("/root/World/").controller_mode
+
+	if !controller_mode:
+		look_at(get_global_mouse_position())
+	else:
+		var deadzone = 0.1
+		var controllerangle = Vector2.ZERO
+		var xAxisRL = Input.get_joy_axis(0, JOY_AXIS_2)
+		var yAxisUD = Input.get_joy_axis(0 ,JOY_AXIS_3)
+
+		if abs(xAxisRL) > deadzone || abs(yAxisUD) > deadzone:
+			controllerangle = Vector2(xAxisRL, yAxisUD).angle()
+			self.rotation = controllerangle
+
 	var rotation = abs(fmod(self.rotation_degrees, 360))
 	if rotation > 90 && rotation < 270: 
 		get_node("Sprite").set_flip_v(true)
