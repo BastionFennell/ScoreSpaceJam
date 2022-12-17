@@ -2,6 +2,7 @@ extends KinematicBody2D
 
 export (int) var reload_time = 2
 export (int) var spread = 10
+export (int) var screen_shake = 0.5
 
 var Bullet = preload("res://scenes/game/weapons/Shotgun Bullet.tscn") 
 var reloading = false;
@@ -32,12 +33,16 @@ func _spawn_bullet():
 	for i in spread:
 		_spawn_single_bullet(spawner.global_rotation + (randf() * 0.5 - 0.25), spawner.global_position)
 
+func _shake_camera():
+	get_node("/root/World/Player/Camera2D").add_trauma(screen_shake)
+
 func _on_shoot():
 	if (!reloading):
 		reloading = true
 		get_node("SFX").playing = true
 		_animate_gunshot()
 		_spawn_bullet()
+		_shake_camera()
 
 		var timer = Timer.new()
 		timer.one_shot = true
