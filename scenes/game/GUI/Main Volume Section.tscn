@@ -7,3 +7,6 @@
 [node name="Text" parent="." index="0"]
 margin_right = 101.0
 text = "Main Volume"
+
+[node name="Volume Slider" parent="." index="1"]
+value = 50.0

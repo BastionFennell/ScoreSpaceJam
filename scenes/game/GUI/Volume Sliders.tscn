@@ -11,6 +11,7 @@ margin_right = 476.0
 margin_bottom = 202.0
 
 [node name="Main Volume Section" parent="." instance=ExtResource( 3 )]
+audio_bus = "Master"
 
 [node name="Music Volume Section" parent="." instance=ExtResource( 2 )]
 margin_top = 32.0
@@ -19,3 +20,4 @@ margin_bottom = 60.0
 [node name="SFX Volume Section" parent="." instance=ExtResource( 4 )]
 margin_top = 64.0
 margin_bottom = 92.0
+audio_bus = "SFX"
