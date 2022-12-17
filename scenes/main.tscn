@@ -101,6 +101,7 @@ margin_bottom = 68.0
 
 [node name="Pause Menu" type="CanvasLayer" parent="."]
 pause_mode = 2
+visible = false
 script = ExtResource( 10 )
 
 [node name="Background" type="ColorRect" parent="Pause Menu"]

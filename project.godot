@@ -14,6 +14,10 @@ config/name="ScoreSpace Jam"
 run/main_scene="res://scenes/main.tscn"
 config/icon="res://icon.png"
 
+[display]
+
+window/size/resizable=false
+
 [global]
 
 vim=false
