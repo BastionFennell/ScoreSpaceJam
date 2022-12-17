@@ -2,7 +2,7 @@ extends KinematicBody2D
 
 export (int) var reload_time = 2
 export (int) var spread = 10
-export (int) var screen_shake = 0.5
+export (int) var screen_shake = 0.3
 
 var Bullet = preload("res://scenes/game/weapons/Shotgun Bullet.tscn") 
 var reloading = false;
