@@ -4,8 +4,11 @@ export (int) var speed = 1000
 export (float) var health = 100.00
 
 signal health_change
+signal player_death 
+
 var velocity = Vector2()
 var touching = 0;
+var playing = true;
 
 func get_input():
 	velocity = Vector2()
@@ -23,14 +26,16 @@ func get_input():
 
 
 func _on_damage(damage):
-	health -= damage
-	emit_signal("health_change", health);
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
+	if(playing):
+		health -= damage
+		if (health <= 0):
+			emit_signal("player_death")
+			playing = false
+		else:
+			emit_signal("health_change", floor(health));
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	get_input()
-	velocity = move_and_slide(velocity)
+	if(playing):
+		get_input()
+		velocity = move_and_slide(velocity)

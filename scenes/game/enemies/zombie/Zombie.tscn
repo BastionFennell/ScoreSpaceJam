@@ -1,17 +1,16 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://assets/sprites/enemies/zombie.png" type="Texture" id=1]
 [ext_resource path="res://scenes/game/enemies/zombie/zombie.gd" type="Script" id=2]
+[ext_resource path="res://scenes/game/enemies/enemy.gd" type="Script" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 6, 6 )
 
-[node name="Zombie" type="RigidBody2D"]
+[node name="Zombie" type="KinematicBody2D"]
 collision_layer = 2
 collision_mask = 2
-mode = 2
-gravity_scale = 0.0
-linear_damp = 15.0
+script = ExtResource( 3 )
 
 [node name="Area2D" type="Area2D" parent="."]
 script = ExtResource( 2 )
