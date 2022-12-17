@@ -1,11 +1,13 @@
 extends CanvasLayer
 
 func _ready():
-	get_node("Resume").connect("pressed", self, "_unpause")
+	get_node("Grid/Resume").connect("pressed", self, "_unpause")
 
 func _pause():
 	get_tree().paused = true
 	self.visible = true
+
+	get_node("Grid/Volume Sliders/Main Volume Section/Volume Slider").grab_focus()
 	
 func _unpause():
 	self.visible = false
@@ -18,3 +20,6 @@ func _process(_delta):
 			_unpause()
 		else:
 			_pause()
+
+	if get_tree().paused && Input.is_action_just_pressed("ui_cancel"):
+		_unpause()
