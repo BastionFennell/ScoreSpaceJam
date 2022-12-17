@@ -11,11 +11,10 @@ collision_mask = 0
 script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 44, 48 )
 shape = SubResource( 1 )
 
 [node name="Thomas" type="Sprite" parent="."]
-position = Vector2( 43.75, 48.2727 )
+position = Vector2( 5.96046e-08, 0 )
 scale = Vector2( 8.04545, 8.04545 )
 texture = ExtResource( 1 )
 region_enabled = true
