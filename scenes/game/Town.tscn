@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://assets/audio/songs/Halloween Spooky.mp3" type="AudioStream" id=1]
 [ext_resource path="res://scenes/Pause Menu.gd" type="Script" id=2]
@@ -25,6 +25,12 @@ font_data = ExtResource( 7 )
 
 [sub_resource type="DynamicFont" id=2]
 size = 50
+outline_size = 5
+outline_color = Color( 0.352941, 0.0352941, 0.0352941, 1 )
+font_data = ExtResource( 7 )
+
+[sub_resource type="DynamicFont" id=5]
+size = 30
 outline_size = 5
 outline_color = Color( 0.352941, 0.0352941, 0.0352941, 1 )
 font_data = ExtResource( 7 )
@@ -160,11 +166,21 @@ text = "Try Again?"
 anchor_left = 0.5
 anchor_right = 0.5
 margin_left = -102.5
-margin_top = 208.0
+margin_top = 153.0
 margin_right = 102.5
-margin_bottom = 276.0
+margin_bottom = 221.0
 custom_fonts/font = SubResource( 2 )
 text = "Game Over"
+align = 1
+
+[node name="Survived" type="Label" parent="Game Over Screen"]
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_top = -68.0
+margin_bottom = -33.0
+custom_fonts/font = SubResource( 5 )
+text = "You Survived"
 align = 1
 
 [node name="BG Music" type="AudioStreamPlayer" parent="."]
