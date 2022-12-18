@@ -1,17 +1,11 @@
-extends Area2D
+extends "res://scenes/game/enemies/enemy.gd"
 
-export (int) var damage = 10
+var Heart = preload("res://scenes/game/drops/Heart/Health.tscn")
+var Speed = preload("res://scenes/game/drops/ShotSpeed/ShotSpeed.tscn")
 
-signal damage_player
-var player
-
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	player = get_node("/root/World/Player")
-	self.connect("damage_player", player, "_on_damage")
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	var dead = get_parent().dead
-	if overlaps_body(player) && !dead:
-		emit_signal("damage_player", damage * delta)
+	speed = 30
+	health = 5
+	drops = [Heart, Speed]
+	weights = [10, 80]
+	damage = 10
