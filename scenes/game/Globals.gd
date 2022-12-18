@@ -10,6 +10,9 @@ var inventory = {
 var days = 0
 var kills = 0
 
+func _ready():
+    Engine.set_target_fps(Engine.get_iterations_per_second())
+
 func add_item(item, amount):
 	var new_amount = inventory[item] + amount if inventory[item] else amount
 

@@ -68,6 +68,7 @@ current = true
 zoom = Vector2( 0.25, 0.25 )
 process_mode = 0
 limit_smoothed = true
+smoothing_enabled = true
 script = ExtResource( 8 )
 
 [node name="Shotgun" parent="Player" instance=ExtResource( 13 )]
