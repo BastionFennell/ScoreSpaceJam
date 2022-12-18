@@ -4,6 +4,8 @@ export (int) var reload_time = 2
 export (int) var spread = 10
 export (int) var screen_shake = 0.3
 
+var base_reload_time = 2
+
 var Bullet = preload("res://scenes/game/weapons/Shotgun Bullet.tscn") 
 var reloading = false
 	
@@ -14,6 +16,9 @@ func _spawn_single_bullet(rotation, position):
 	bullet.set_position(position)
 
 	get_node('/root/World').add_child(bullet)
+
+func _reset_reload_time():
+	reload_time = base_reload_time
 
 func _spawn_bullet():
 	var spawner = get_node('./Bullet Spawner')

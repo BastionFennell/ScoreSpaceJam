@@ -1,8 +1,9 @@
 extends KinematicBody2D
 
 var Heart = preload("res://scenes/game/drops/Heart/Health.tscn")
-var drops = [Heart]
-var weights = [10]
+var Speed = preload("res://scenes/game/drops/ShotSpeed/ShotSpeed.tscn")
+var drops = [Heart, Speed]
+var weights = [10, 80]
 
 export (int) var speed = 300
 export (int) var health = 50
