@@ -11,6 +11,7 @@ var tilemap = [
 	{ "img": preload("res://assets/sprites/tiles/tile 2.png"), "chance": 0.10},
 	{ "img": preload("res://assets/sprites/tiles/tile 3.png"), "chance": 0.15},
 	{ "img": preload("res://assets/sprites/tiles/tile 4.png"), "chance": 0.15},
+	{ "img": preload("res://assets/sprites/tiles/tile 1.png"), "chance": 0.6},
 ]
 
 var current_map = [[]]

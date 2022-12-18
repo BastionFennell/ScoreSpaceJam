@@ -65,6 +65,7 @@ script = ExtResource( 5 )
 
 [node name="Zombie" parent="." instance=ExtResource( 15 )]
 position = Vector2( 315, 212 )
+speed = 50
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
