@@ -1,11 +1,11 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://assets/audio/songs/Halloween Spooky.mp3" type="AudioStream" id=1]
 [ext_resource path="res://scenes/Pause Menu.gd" type="Script" id=2]
 [ext_resource path="res://scenes/game/GUI/Volume Sliders.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/EnemySpawner.gd" type="Script" id=4]
 [ext_resource path="res://scenes/Camera2D.gd" type="Script" id=5]
-[ext_resource path="res://assets/sprites/town.png" type="Texture" id=6]
+[ext_resource path="res://scenes/game/Terrain Generator.gd" type="Script" id=6]
 [ext_resource path="res://assets/fonts/contrite_in_spirit.ttf" type="DynamicFontData" id=7]
 [ext_resource path="res://scenes/game/weapons/Shotgun.tscn" type="PackedScene" id=8]
 [ext_resource path="res://scenes/game/World.gd" type="Script" id=9]
@@ -15,12 +15,6 @@
 [ext_resource path="res://scenes/game over.gd" type="Script" id=13]
 [ext_resource path="res://scenes/game/TextEdit.gd" type="Script" id=14]
 [ext_resource path="res://scenes/game/enemies/zombie/Zombie.tscn" type="PackedScene" id=15]
-
-[sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 631, 33 )
-
-[sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 52, 524 )
 
 [sub_resource type="DynamicFont" id=1]
 size = 30
@@ -49,46 +43,11 @@ font_data = ExtResource( 7 )
 [node name="World" type="Node2D"]
 script = ExtResource( 9 )
 
-[node name="Background" type="Sprite" parent="."]
-position = Vector2( 595, 495 )
-texture = ExtResource( 6 )
+[node name="Terrain Generator" type="Node" parent="."]
+script = ExtResource( 6 )
 
 [node name="EnemySpawner" type="Node2D" parent="."]
 script = ExtResource( 4 )
-
-[node name="Walls" type="Node" parent="."]
-
-[node name="KinematicBody2D2" type="KinematicBody2D" parent="Walls"]
-collision_layer = 8
-collision_mask = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/KinematicBody2D2"]
-position = Vector2( 598, -23 )
-shape = SubResource( 3 )
-
-[node name="KinematicBody2D" type="KinematicBody2D" parent="Walls"]
-collision_layer = 8
-collision_mask = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/KinematicBody2D"]
-position = Vector2( 614, 1015 )
-shape = SubResource( 3 )
-
-[node name="KinematicBody2D4" type="KinematicBody2D" parent="Walls"]
-collision_layer = 8
-collision_mask = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/KinematicBody2D4"]
-position = Vector2( -42, 466 )
-shape = SubResource( 4 )
-
-[node name="KinematicBody2D3" type="KinematicBody2D" parent="Walls"]
-collision_layer = 8
-collision_mask = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/KinematicBody2D3"]
-position = Vector2( 1245, 495 )
-shape = SubResource( 4 )
 
 [node name="Player" parent="." instance=ExtResource( 11 )]
 position = Vector2( 250, 250 )
@@ -99,10 +58,6 @@ health = 10.0
 current = true
 zoom = Vector2( 0.25, 0.25 )
 process_mode = 0
-limit_left = 0
-limit_top = 0
-limit_right = 1194
-limit_bottom = 995
 limit_smoothed = true
 script = ExtResource( 5 )
 
