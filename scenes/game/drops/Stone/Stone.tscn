@@ -1,11 +1,11 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://scenes/game/drops/Wood/Wood.gd" type="Script" id=1]
+[ext_resource path="res://scenes/game/drops/Stone/Stone.gd" type="Script" id=1]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 0.734375, 0.734375 )
 
-[node name="Wood" type="KinematicBody2D"]
+[node name="Stone" type="KinematicBody2D"]
 collision_layer = 0
 collision_mask = 0
 script = ExtResource( 1 )
@@ -19,4 +19,4 @@ margin_left = -5.0
 margin_top = -5.0
 margin_right = 5.0
 margin_bottom = 5.0
-color = Color( 0.498039, 0.172549, 0.0156863, 1 )
+color = Color( 0.411765, 0.415686, 0.415686, 1 )
