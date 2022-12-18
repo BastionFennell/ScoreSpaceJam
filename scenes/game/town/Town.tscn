@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://scenes/Camera2D.gd" type="Script" id=1]
 [ext_resource path="res://assets/sprites/town.png" type="Texture" id=2]
@@ -6,6 +6,32 @@
 [ext_resource path="res://scenes/game/weapons/Axegun.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/game/town/Tree Spawner.gd" type="Script" id=5]
 [ext_resource path="res://scenes/game/World.gd" type="Script" id=6]
+[ext_resource path="res://assets/sprites/village/ground.png" type="Texture" id=7]
+
+[sub_resource type="TileSet" id=4]
+0/name = "ground.png 0"
+0/texture = ExtResource( 7 )
+0/tex_offset = Vector2( 0, 0 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( 0, 0, 48, 48 )
+0/tile_mode = 1
+0/autotile/bitmask_mode = 2
+0/autotile/bitmask_flags = [ Vector2( 0, 0 ), 484, Vector2( 0, 1 ), 487, Vector2( 0, 2 ), 295, Vector2( 1, 0 ), 493, Vector2( 1, 1 ), 511, Vector2( 1, 2 ), 367, Vector2( 2, 0 ), 457, Vector2( 2, 1 ), 463, Vector2( 2, 2 ), 79 ]
+0/autotile/icon_coordinate = Vector2( 0, 0 )
+0/autotile/tile_size = Vector2( 16, 16 )
+0/autotile/spacing = 0
+0/autotile/occluder_map = [  ]
+0/autotile/navpoly_map = [  ]
+0/autotile/priority_map = [  ]
+0/autotile/z_index_map = [  ]
+0/occluder_offset = Vector2( 0, 0 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shape_offset = Vector2( 0, 0 )
+0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+0/shape_one_way = false
+0/shape_one_way_margin = 0.0
+0/shapes = [  ]
+0/z_index = 0
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 316, 7.5 )
@@ -17,11 +43,18 @@ extents = Vector2( 17.5, 291.5 )
 extents = Vector2( 256.5, 120 )
 
 [node name="World" type="Node2D"]
+position = Vector2( 29, 16 )
 script = ExtResource( 6 )
 
 [node name="Town" type="Sprite" parent="."]
 position = Vector2( 45, 23 )
 texture = ExtResource( 2 )
+
+[node name="TileMap" type="TileMap" parent="Town"]
+tile_set = SubResource( 4 )
+cell_size = Vector2( 16, 16 )
+format = 1
+tile_data = PoolIntArray( -1507343, 1073741824, 0, -1507342, 1073741824, 0, -1507341, 1073741824, 0, -1441810, 1073741824, 0, -1441809, 1073741824, 0, -1441808, 1073741824, 0, -1441807, 1073741824, 0, -1376276, 1073741824, 0, -1376275, 1073741824, 0, -1376274, 1073741824, 0, -1376273, 1073741824, 0, -1376271, 1073741824, 0, -851971, 1073741824, 0, -851970, 1073741824, 1, -851969, 1073741824, 1, -917504, 1073741824, 2, -786435, 1073741824, 65536, -786434, 1073741824, 65537, -786433, 1073741824, 65537, -851968, 1073741824, 65538, -720911, 1073741824, 0, -720910, 1073741824, 2, -720909, 1073741824, 2, -720908, 1073741824, 2, -720907, 1073741824, 0, -720906, 1073741824, 0, -720905, 1073741824, 1, -720904, 1073741824, 0, -720903, 1073741824, 0, -720902, 1073741824, 0, -720901, 1073741824, 0, -720899, 1073741824, 65536, -720898, 1073741824, 65537, -720897, 1073741824, 65537, -786432, 1073741824, 65538, -655375, 1073741824, 65536, -655374, 1073741824, 131073, -655373, 1073741824, 0, -655372, 1073741824, 2, -655370, 1073741824, 131072, -655369, 1073741824, 131072, -655368, 1073741824, 0, -655367, 1073741824, 0, -655366, 1073741824, 0, -655365, 1073741824, 0, -655363, 1073741824, 65536, -655362, 1073741824, 65537, -655361, 1073741824, 65537, -720896, 1073741824, 0, -720895, 1073741824, 2, -589839, 1073741824, 65536, -589838, 1073741824, 131074, -589837, 1073741824, 65537, -589836, 1073741824, 0, -589835, 1073741824, 2, -589827, 1073741824, 65536, -589826, 1073741824, 65537, -589825, 1073741824, 65537, -655360, 1073741824, 0, -655359, 1073741824, 131074, -524303, 1073741824, 131072, -524302, 1073741824, 131072, -524301, 1073741824, 131073, -524300, 1073741824, 131072, -524299, 1073741824, 131074, -524295, 1073741824, 0, -524294, 1073741824, 0, -524293, 1073741824, 0, -524292, 1073741824, 1, -524291, 1073741824, 0, -524290, 1073741824, 65537, -524289, 1073741824, 0, -589824, 1073741824, 131074, -458757, 1073741824, 0, -458756, 1073741824, 65537, -458755, 1073741824, 0, -458754, 1073741824, 131073, -458753, 1073741824, 131074, -393221, 1073741824, 0, -393220, 1073741824, 0, -393219, 1073741824, 0 )
 
 [node name="Walls" type="Node2D" parent="."]
 position = Vector2( 45, 23 )
@@ -73,7 +106,7 @@ position = Vector2( 257, 120 )
 shape = SubResource( 3 )
 
 [node name="Player" parent="." instance=ExtResource( 3 )]
-position = Vector2( -2, 13 )
+position = Vector2( 39, 44 )
 collision_mask = 8
 
 [node name="Camera2D" type="Camera2D" parent="Player"]

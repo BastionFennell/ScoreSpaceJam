@@ -1,0 +1,1 @@
+windmill size 128x176 each frame
