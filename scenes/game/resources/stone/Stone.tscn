@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://assets/sprites/resources/rock.png" type="Texture" id=1]
 [ext_resource path="res://scenes/game/resources/stone/Stone.gd" type="Script" id=2]
@@ -7,6 +7,9 @@
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 15.5, 5.5 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 0.734375, 0.734375 )
 
 [node name="Rock" type="KinematicBody2D"]
 position = Vector2( 9, 0 )
@@ -48,3 +51,10 @@ bus = "SFX"
 stream = ExtResource( 4 )
 volume_db = 2.622
 bus = "SFX"
+
+[node name="Hit Box" type="Area2D" parent="."]
+position = Vector2( 1, -8 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hit Box"]
+scale = Vector2( 8, 8 )
+shape = SubResource( 2 )
