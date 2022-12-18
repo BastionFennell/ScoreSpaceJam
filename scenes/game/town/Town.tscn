@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://scenes/Camera2D.gd" type="Script" id=1]
 [ext_resource path="res://assets/sprites/town.png" type="Texture" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://scenes/game/drops/ItemSpawner.gd" type="Script" id=9]
 [ext_resource path="res://scenes/game/town/Door.gd" type="Script" id=10]
 [ext_resource path="res://assets/fonts/contrite_in_spirit.ttf" type="DynamicFontData" id=11]
+[ext_resource path="res://scenes/game/town/Inventory GUI.gd" type="Script" id=12]
 
 [sub_resource type="TileSet" id=4]
 0/name = "ground.png 0"
@@ -219,20 +220,21 @@ script = ExtResource( 1 )
 [node name="ItemSpawner" type="Node2D" parent="."]
 script = ExtResource( 9 )
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="Inventory GUI" type="CanvasLayer" parent="."]
+script = ExtResource( 12 )
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+[node name="ColorRect" type="ColorRect" parent="Inventory GUI"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 
-[node name="Wood GUI" type="HBoxContainer" parent="CanvasLayer"]
+[node name="wood GUI" type="HBoxContainer" parent="Inventory GUI"]
 margin_left = 758.0
 margin_top = 13.0
 margin_right = 823.0
 margin_bottom = 53.0
 
-[node name="Wood Text2" type="Label" parent="CanvasLayer/Wood GUI"]
+[node name="Wood Text" type="Label" parent="Inventory GUI/wood GUI"]
 margin_top = 2.0
 margin_right = 56.0
 margin_bottom = 37.0
@@ -240,7 +242,7 @@ custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_fonts/font = SubResource( 7 )
 text = "Wood:"
 
-[node name="Amount" type="Label" parent="CanvasLayer/Wood GUI"]
+[node name="Amount" type="Label" parent="Inventory GUI/wood GUI"]
 margin_left = 60.0
 margin_top = 2.0
 margin_right = 72.0
@@ -249,13 +251,13 @@ custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_fonts/font = SubResource( 7 )
 text = "0"
 
-[node name="Stone GUI" type="HBoxContainer" parent="CanvasLayer"]
+[node name="stone GUI" type="HBoxContainer" parent="Inventory GUI"]
 margin_left = 868.0
 margin_top = 13.0
 margin_right = 930.0
 margin_bottom = 53.0
 
-[node name="Stone Text" type="Label" parent="CanvasLayer/Stone GUI"]
+[node name="Stone Text" type="Label" parent="Inventory GUI/stone GUI"]
 margin_top = 2.0
 margin_right = 59.0
 margin_bottom = 37.0
@@ -263,7 +265,7 @@ custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_fonts/font = SubResource( 8 )
 text = "Stone:"
 
-[node name="Amount" type="Label" parent="CanvasLayer/Stone GUI"]
+[node name="Amount" type="Label" parent="Inventory GUI/stone GUI"]
 margin_left = 63.0
 margin_top = 2.0
 margin_right = 75.0

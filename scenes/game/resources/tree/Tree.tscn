@@ -1,7 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://assets/sprites/resources/tree.png" type="Texture" id=1]
 [ext_resource path="res://scenes/game/resources/tree/Tree.gd" type="Script" id=2]
+[ext_resource path="res://assets/audio/sfx/zombie_hit.wav" type="AudioStream" id=3]
+[ext_resource path="res://assets/audio/sfx/zombie_die.wav" type="AudioStream" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 7, 2 )
@@ -36,3 +38,13 @@ initial_velocity_random = 0.2
 scale_amount = 4.0
 scale_amount_random = 0.3
 color = Color( 0.364706, 0.12549, 0.0117647, 1 )
+
+[node name="Oof" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+volume_db = 5.681
+bus = "SFX"
+
+[node name="Ded" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+volume_db = 2.622
+bus = "SFX"
