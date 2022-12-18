@@ -1,25 +1,26 @@
 extends KinematicBody2D
 
-export (int) var reload_time = 2
-export (int) var spread = 8
 export (float) var screen_shake = 0.3
-export (int) var count = 10
+export (float) var reload_multiplier = 1.0
+export (float) var reload_buff_remaining = null
+export (float) var damage_add = 0.0
+export var reloading = false
 
-var base_reload_time = 2
+var remaining_reload_time = null
+var reload_time = 2
+var spread = 8
+var count = 10
 
 var Bullet = preload("res://scenes/game/weapons/Shotgun Bullet.tscn") 
-var reloading = false
 	
 func _spawn_single_bullet(rotation, position):
 	var bullet = Bullet.instance()
+	bullet.damage = bullet.damage + damage_add
 
 	bullet.set_rotation(rotation)
 	bullet.set_position(position)
 
 	get_node('/root/World').add_child(bullet)
-
-func _reset_reload_time():
-	reload_time = base_reload_time
 
 func _spawn_bullet():
 	var spawner = get_node('./Bullet Spawner')
@@ -30,6 +31,11 @@ func _spawn_bullet():
 func _shake_camera():
 	get_node("/root/World/Player/Camera2D").add_trauma(screen_shake)
 
+func _temp_speed_buff():
+	reloading = false
+	reload_multiplier = 0.1
+	reload_buff_remaining = 1
+
 func _on_shoot():
 	if (!reloading):
 		reloading = true
@@ -38,12 +44,7 @@ func _on_shoot():
 		_spawn_bullet()
 		_shake_camera()
 
-		var timer = Timer.new()
-		timer.one_shot = true
-		timer.wait_time = reload_time
-		timer.connect("timeout", self, "_reload") 
-		add_child(timer)
-		timer.start()
+		remaining_reload_time = reload_time * reload_multiplier
 
 func _reload():
 	reloading = false
@@ -68,7 +69,20 @@ func _process(_delta):
 		get_node("Gun").set_flip_v(true)
 	else:
 		get_node("Gun").set_flip_v(false)
+	
+	if reloading:
+		remaining_reload_time = remaining_reload_time - _delta
+		if remaining_reload_time <=0:
+			reloading = false
+			remaining_reload_time = null
+	else:
+		if Input.is_action_pressed("shoot"):
+			_on_shoot()
 
-	if Input.is_action_pressed("shoot"):
-		_on_shoot()
+	if reload_buff_remaining != null:
+		var remaining = reload_buff_remaining - _delta
+		if  remaining <= 0:
+			reload_multiplier = 1.0
+			remaining = null
+		reload_buff_remaining = remaining
 

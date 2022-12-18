@@ -7,7 +7,6 @@ extends KinematicBody2D
 var player
 var gun
 var collected = false
-var original_reload_time = 1
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -23,15 +22,6 @@ func _physics_process(_delta):
 		_pickUp()
 
 func _pickUp():
-	original_reload_time = gun.reload_time
-	gun.reload_time = original_reload_time * 0.3
-	
-	var timer = Timer.new()
-	timer.one_shot = true
-	timer.wait_time = 3
-	timer.connect("timeout", gun, "_reset_reload_time")
-	gun.add_child(timer)
-	timer.start()
-	
+	gun._temp_speed_buff()
 	queue_free()
 	
