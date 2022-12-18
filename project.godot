@@ -20,7 +20,8 @@ Globals="*res://scenes/game/Globals.gd"
 
 [display]
 
-window/size/resizable=false
+window/stretch/mode="viewport"
+window/stretch/aspect="keep"
 
 [global]
 

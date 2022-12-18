@@ -91,7 +91,7 @@ extents = Vector2( 316, 7.5 )
 extents = Vector2( 17.5, 291.5 )
 
 [sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 62.1875, 65.5 )
+extents = Vector2( 62.1875, 88 )
 
 [sub_resource type="RectangleShape2D" id=9]
 extents = Vector2( 60, 97 )
@@ -198,7 +198,7 @@ position = Vector2( 61, 97 )
 shape = SubResource( 9 )
 
 [node name="Door" type="Area2D" parent="."]
-position = Vector2( -1, 2 )
+position = Vector2( -196, -181 )
 collision_layer = 0
 script = ExtResource( 10 )
 
@@ -207,7 +207,7 @@ position = Vector2( 36.5, -5.5 )
 shape = SubResource( 6 )
 
 [node name="KinematicBody2D" type="KinematicBody2D" parent="."]
-position = Vector2( -169, -138 )
+position = Vector2( -211, -190 )
 collision_layer = 8
 collision_mask = 0
 
@@ -223,7 +223,7 @@ position = Vector2( 61.2, 33 )
 polygon = PoolVector2Array( -19, -21, -44, -21, -44, -27, -56, -27, -56, -21, -61, -21, -61, -41, -55, -41, -55, -47, -39, -47, -39, -43, 13, -43, 13, -21, 1, -21, 1, -37, -19, -37 )
 
 [node name="Player" parent="." instance=ExtResource( 3 )]
-position = Vector2( -116, -119 )
+position = Vector2( -137, -153 )
 collision_mask = 12
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
