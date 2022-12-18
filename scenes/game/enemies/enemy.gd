@@ -45,8 +45,11 @@ func damage(amount):
 		
 
 		var ded = get_node("Ded")
-		ded.playing = true
-		yield(ded, "finished")
+		if ded:
+			ded.playing = true
+			yield(ded, "finished")
+
 		queue_free()
 	else:
-		get_node("Oof").playing = true
+		if(get_node("Oof")):
+			get_node("Oof").playing = true

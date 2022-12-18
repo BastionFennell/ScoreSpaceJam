@@ -26,6 +26,7 @@ extents = Vector2( 5, 4.5 )
 collision_mask = 2
 script = ExtResource( 1 )
 speed = 2
+damage = 50
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "Spinning"
@@ -33,7 +34,7 @@ playback_speed = 2.0
 anims/Spinning = SubResource( 2 )
 
 [node name="ShotgunBullet" type="Sprite" parent="."]
-rotation = 1.59258
+rotation = 3.45769
 texture = ExtResource( 2 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 10, 9 )
