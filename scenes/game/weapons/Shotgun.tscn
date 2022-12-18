@@ -1,11 +1,11 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://assets/sprites/weapons/shotgun.png" type="Texture" id=1]
 [ext_resource path="res://scenes/game/weapons/shotgun.gd" type="Script" id=2]
 [ext_resource path="res://assets/audio/sfx/shotgun.wav" type="AudioStream" id=3]
 [ext_resource path="res://scenes/game/weapons/Animate Gun.gd" type="Script" id=4]
 
-[sub_resource type="AtlasTexture" id=3]
+[sub_resource type="AtlasTexture" id=4]
 atlas = ExtResource( 1 )
 region = Rect2( 1, 5, 12, 6 )
 
@@ -13,13 +13,9 @@ region = Rect2( 1, 5, 12, 6 )
 atlas = ExtResource( 1 )
 region = Rect2( 17, 5, 12, 6 )
 
-[sub_resource type="AtlasTexture" id=4]
-atlas = ExtResource( 1 )
-region = Rect2( 1, 5, 12, 6 )
-
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {
-"frames": [ SubResource( 3 ) ],
+"frames": [ SubResource( 4 ) ],
 "loop": true,
 "name": "default",
 "speed": 1.0
