@@ -6,10 +6,6 @@ var weights = []
 export (int) var speed = 300
 export (int) var health = 5
 export (int) var damage = 10
-export (float) var respawn_timer = 0.1
-export (float) var decay = 0.01
-export (float) var difficulty_timer = 1.00
-export (float) var min_respawn_time = 0.01
 
 var player
 var hit_box
