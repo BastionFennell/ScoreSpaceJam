@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://scenes/Camera2D.gd" type="Script" id=1]
 [ext_resource path="res://assets/sprites/town.png" type="Texture" id=2]
@@ -8,6 +8,8 @@
 [ext_resource path="res://scenes/game/World.gd" type="Script" id=6]
 [ext_resource path="res://assets/sprites/village/ground.png" type="Texture" id=7]
 [ext_resource path="res://assets/sprites/village/props-shdw.png" type="Texture" id=8]
+[ext_resource path="res://scenes/game/drops/ItemSpawner.gd" type="Script" id=9]
+[ext_resource path="res://scenes/game/town/Door.gd" type="Script" id=10]
 
 [sub_resource type="TileSet" id=4]
 0/name = "ground.png 0"
@@ -90,13 +92,13 @@ extents = Vector2( 17.5, 291.5 )
 extents = Vector2( 256.5, 120 )
 
 [sub_resource type="RectangleShape2D" id=6]
-extents = Vector2( 5.5, 5 )
+extents = Vector2( 9.5, 7.5 )
 
 [node name="World" type="YSort"]
 script = ExtResource( 6 )
 
 [node name="Town" type="Sprite" parent="."]
-position = Vector2( 44, 25 )
+position = Vector2( 42, 23 )
 z_index = -4096
 texture = ExtResource( 2 )
 
@@ -163,10 +165,13 @@ position = Vector2( -216, 42 )
 position = Vector2( 257, 120 )
 shape = SubResource( 3 )
 
-[node name="Door" type="KinematicBody2D" parent="."]
+[node name="Door" type="Area2D" parent="."]
+position = Vector2( -1, 2 )
+collision_layer = 0
+script = ExtResource( 10 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Door"]
-position = Vector2( 36, -6 )
+position = Vector2( 36.5, -5.5 )
 shape = SubResource( 6 )
 
 [node name="KinematicBody2D" type="KinematicBody2D" parent="."]
@@ -201,3 +206,6 @@ limit_smoothed = true
 script = ExtResource( 1 )
 
 [node name="Axegun" parent="Player" instance=ExtResource( 4 )]
+
+[node name="ItemSpawner" type="Node2D" parent="."]
+script = ExtResource( 9 )
