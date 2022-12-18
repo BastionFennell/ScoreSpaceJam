@@ -7,6 +7,7 @@ export var max_roll = 0.1  # Maximum rotation in radians (use sparingly).
 var trauma = 0.0  # Current shake strength.
 var trauma_power = 2  # Trauma exponent. Use [2, 3].
 var noise_y = 0
+var max_trauma = 0.5
 
 onready var noise = OpenSimplexNoise.new()
 
@@ -18,7 +19,7 @@ func _ready():
 
 
 func add_trauma(amount):
-	trauma = min(trauma + amount, 1.0)
+	trauma = min(trauma + amount, max_trauma)
 
 func shake():
 	var amount = pow(trauma, trauma_power)
