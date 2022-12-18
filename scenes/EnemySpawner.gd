@@ -1,16 +1,12 @@
 extends Node2D
 
-var Enemy = preload("res://scenes/game/enemies/zombie/Zombie.tscn") 
-
-export (float) var respawn_timer = 0.1
-export (float) var decay = 0.01
-export (float) var difficulty_timer = 1.00
-export (float) var min_respawn_time = 0.01
+var Zombie = preload("res://scenes/game/enemies/zombie/Zombie.tscn") 
 
 var safe_radius = 150
+var enemies = { "zombie": Zombie }
 
 func _ready():
-	_spawn_enemy()
+	_spawn_enemy("zombie")
 
 func _get_spawn_position():
 	var player = get_node("/root/World/Player")
@@ -22,7 +18,13 @@ func _get_spawn_position():
 	
 	return center + Vector2(distance, 0).rotated(direction)
 
-func _ramp_difficulty():
+func _ramp_difficulty(enemy_type):
+	var enemy = enemies[enemy_type];
+	var min_respawn_time = enemy.min_respawn_time
+	var decay = enemy.decay
+	var respawn_timer = enemy.respawn_timer
+	var difficulty_timer = enemy.difficulty_timer
+
 	if respawn_timer > min_respawn_time:
 		respawn_timer -= decay * randf()
 		if respawn_timer < min_respawn_time:
@@ -31,20 +33,20 @@ func _ramp_difficulty():
 	var timer = Timer.new()
 	timer.one_shot = true
 	timer.wait_time = difficulty_timer
-	timer.connect("timeout", self, "_ramp_difficulty") 
+	timer.connect("timeout", self, "_ramp_difficulty", [enemy_type]) 
 	add_child(timer)
 	timer.start()
 
-func _spawn_enemy():
+func _spawn_enemy(enemy_type):
 	var coords = _get_spawn_position()
 
-	var enemy = Enemy.instance();
+	var enemy = enemies[enemy_type].instance();
 	enemy.set_position(coords)
 	get_node("/root/World").call_deferred("add_child", enemy)
 
 	var timer = Timer.new()
 	timer.one_shot = true
-	timer.wait_time = respawn_timer
-	timer.connect("timeout", self, "_spawn_enemy") 
+	timer.wait_time = enemy.respawn_timer
+	timer.connect("timeout", self, "_spawn_enemy", [enemy_type]) 
 	add_child(timer)
 	timer.start()

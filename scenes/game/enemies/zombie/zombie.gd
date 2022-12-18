@@ -9,3 +9,7 @@ func _ready():
 	drops = [Heart, Speed]
 	weights = [10, 80]
 	damage = 10
+	respawn_timer = 0.1
+	decay = 0.01
+	difficulty_timer = 1.00
+	min_respawn_time = 0.01
