@@ -2,7 +2,6 @@ extends Node2D
 
 var Enemy = preload("res://scenes/game/enemies/zombie/Zombie.tscn") 
 
-export (int) var margin = 50
 export (float) var respawn_timer = 0.1
 export (float) var decay = 0.01
 export (float) var difficulty_timer = 1.00
@@ -11,10 +10,6 @@ export (float) var min_respawn_time = 0.01
 var safe_radius = 150
 
 func _ready():
-<<<<<<< HEAD
-
-=======
->>>>>>> 346fbf24ddc09498a81a99b9221873df0d56fe51
 	_spawn_enemy()
 
 func _get_spawn_position():

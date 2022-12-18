@@ -15,12 +15,9 @@ signal spawn_item
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	player = get_node("/root/World/Player")
-<<<<<<< HEAD
 	$AnimationPlayer.play("walking")
-=======
 	var itemSpawner = get_node("/root/World/ItemSpawner")
 	self.connect("spawn_item", itemSpawner, "_on_spawn_item")
->>>>>>> 346fbf24ddc09498a81a99b9221873df0d56fe51
 
 func _explode():
 	var p = get_node("Blood").duplicate()

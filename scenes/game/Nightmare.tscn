@@ -1,111 +1,6 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=19 format=2]
 
-<<<<<<< HEAD:scenes/game/Town.tscn
-[ext_resource path="res://assets/audio/songs/Halloween Spooky.mp3" type="AudioStream" id=1]
-[ext_resource path="res://scenes/Pause Menu.gd" type="Script" id=2]
-[ext_resource path="res://scenes/game/GUI/Volume Sliders.tscn" type="PackedScene" id=3]
-[ext_resource path="res://scenes/EnemySpawner.gd" type="Script" id=4]
-[ext_resource path="res://scenes/Camera2D.gd" type="Script" id=5]
-[ext_resource path="res://scenes/game/background/basic background.png" type="Texture" id=6]
-[ext_resource path="res://assets/fonts/contrite_in_spirit.ttf" type="DynamicFontData" id=7]
-[ext_resource path="res://scenes/game/weapons/Shotgun.tscn" type="PackedScene" id=8]
-[ext_resource path="res://scenes/game/World.gd" type="Script" id=9]
-[ext_resource path="res://scenes/game/GUI/GUI.tscn" type="PackedScene" id=10]
-[ext_resource path="res://scenes/game/characters/player/player.tscn" type="PackedScene" id=11]
-[ext_resource path="res://scenes/game/background/tiles1.png" type="Texture" id=12]
-[ext_resource path="res://scenes/game over.gd" type="Script" id=13]
-[ext_resource path="res://scenes/game/background/fhjdkalhfjdkshflkdhajsf.png" type="Texture" id=14]
-
-[sub_resource type="ConvexPolygonShape2D" id=6]
-points = PoolVector2Array( 0, 0, 8, 0, 8, 7, 0, 7 )
-
-[sub_resource type="ConvexPolygonShape2D" id=7]
-points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
-
-[sub_resource type="ConvexPolygonShape2D" id=8]
-points = PoolVector2Array( 32, 32, 32, 32, 32, 0 )
-
-[sub_resource type="TileSet" id=5]
-0/name = "basic background.png 0"
-0/texture = ExtResource( 6 )
-0/tex_offset = Vector2( 0, 0 )
-0/modulate = Color( 1, 1, 1, 1 )
-0/region = Rect2( 0, 0, 64, 64 )
-0/tile_mode = 0
-0/occluder_offset = Vector2( 0, 0 )
-0/navigation_offset = Vector2( 0, 0 )
-0/shape_offset = Vector2( 0, 0 )
-0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-0/shape_one_way = false
-0/shape_one_way_margin = 0.0
-0/shapes = [  ]
-0/z_index = 0
-1/name = "tiles1.png 1"
-1/texture = ExtResource( 12 )
-1/tex_offset = Vector2( 0, 0 )
-1/modulate = Color( 1, 1, 1, 1 )
-1/region = Rect2( 0, 0, 32, 32 )
-1/tile_mode = 0
-1/occluder_offset = Vector2( 0, 0 )
-1/navigation_offset = Vector2( 0, 0 )
-1/shape_offset = Vector2( 0, 0 )
-1/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-1/shape = SubResource( 6 )
-1/shape_one_way = false
-1/shape_one_way_margin = 1.0
-1/shapes = [ {
-"autotile_coord": Vector2( 0, 0 ),
-"one_way": false,
-"one_way_margin": 1.0,
-"shape": SubResource( 6 ),
-"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
-}, {
-"autotile_coord": Vector2( 0, 0 ),
-"one_way": false,
-"one_way_margin": 1.0,
-"shape": SubResource( 7 ),
-"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
-}, {
-"autotile_coord": Vector2( 0, 0 ),
-"one_way": false,
-"one_way_margin": 1.0,
-"shape": SubResource( 8 ),
-"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
-} ]
-1/z_index = 0
-2/name = "fhjdkalhfjdkshflkdhajsf.png 2"
-2/texture = ExtResource( 14 )
-2/tex_offset = Vector2( 0, 0 )
-2/modulate = Color( 1, 1, 1, 1 )
-2/region = Rect2( 0, 0, 32, 32 )
-2/tile_mode = 1
-2/autotile/bitmask_mode = 0
-2/autotile/bitmask_flags = [ Vector2( 0, 0 ), 1 ]
-2/autotile/icon_coordinate = Vector2( 0, 0 )
-2/autotile/tile_size = Vector2( 32, 32 )
-2/autotile/spacing = 0
-2/autotile/occluder_map = [  ]
-2/autotile/navpoly_map = [  ]
-2/autotile/priority_map = [  ]
-2/autotile/z_index_map = [  ]
-2/occluder_offset = Vector2( 0, 0 )
-2/navigation_offset = Vector2( 0, 0 )
-2/shape_offset = Vector2( 0, 0 )
-2/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-2/shape_one_way = false
-2/shape_one_way_margin = 0.0
-2/shapes = [  ]
-2/z_index = 0
-
-[sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 631, 33 )
-
-[sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 52, 524 )
-=======
 [ext_resource path="res://scenes/game/World.gd" type="Script" id=1]
-[ext_resource path="res://scenes/game/Submit Score.gd" type="Script" id=2]
-[ext_resource path="res://scenes/game/TextEdit.gd" type="Script" id=3]
 [ext_resource path="res://assets/fonts/contrite_in_spirit.ttf" type="DynamicFontData" id=4]
 [ext_resource path="res://assets/audio/songs/Halloween Spooky.mp3" type="AudioStream" id=5]
 [ext_resource path="res://scenes/Pause Menu.gd" type="Script" id=6]
@@ -118,7 +13,6 @@ extents = Vector2( 52, 524 )
 [ext_resource path="res://scenes/game/weapons/Shotgun.tscn" type="PackedScene" id=13]
 [ext_resource path="res://scenes/game/GUI/GUI.tscn" type="PackedScene" id=14]
 [ext_resource path="res://scenes/game/drops/ItemSpawner.gd" type="Script" id=16]
->>>>>>> 346fbf24ddc09498a81a99b9221873df0d56fe51:scenes/game/Nightmare.tscn
 
 [sub_resource type="DynamicFont" id=1]
 size = 30
@@ -130,8 +24,6 @@ outline_size = 5
 outline_color = Color( 0.352941, 0.0352941, 0.0352941, 1 )
 font_data = ExtResource( 4 )
 
-<<<<<<< HEAD:scenes/game/Town.tscn
-=======
 [sub_resource type="DynamicFont" id=5]
 size = 30
 outline_size = 5
@@ -146,73 +38,11 @@ font_data = ExtResource( 4 )
 size = 25
 font_data = ExtResource( 4 )
 
->>>>>>> 346fbf24ddc09498a81a99b9221873df0d56fe51:scenes/game/Nightmare.tscn
 [node name="World" type="Node2D"]
 script = ExtResource( 1 )
 
-<<<<<<< HEAD:scenes/game/Town.tscn
-[node name="TileMap" type="TileMap" parent="."]
-tile_set = SubResource( 5 )
-format = 1
-tile_data = PoolIntArray( 65537, 0, 0, 65538, 0, 0, 65539, 0, 0, 65540, 0, 0, 65541, 0, 0, 65542, 0, 0, 65543, 0, 0, 131073, 0, 0, 131074, 0, 0, 131075, 0, 0, 131076, 0, 0, 131077, 0, 0, 131078, 0, 0, 131079, 0, 0, 196609, 0, 0, 196610, 0, 0, 196611, 0, 0, 196612, 0, 0, 196613, 0, 0, 196614, 0, 0, 196615, 0, 0, 262145, 0, 0, 262146, 0, 0, 262147, 0, 0, 262148, 0, 0, 262149, 0, 0, 262150, 0, 0, 262151, 0, 0, 327681, 0, 0, 327682, 0, 0, 327683, 0, 0, 327684, 0, 0, 327685, 0, 0, 327686, 0, 0, 327687, 0, 0, 393217, 0, 0, 393218, 0, 0, 393219, 0, 0, 393220, 0, 0, 393221, 0, 0, 393222, 0, 0, 393223, 0, 0 )
-
-[node name="background" type="Node2D" parent="."]
-
-[node name="Sprite" type="Sprite" parent="background"]
-position = Vector2( 191, 216 )
-texture = ExtResource( 12 )
-offset = Vector2( 3, 4 )
-hframes = 6
-frame = 5
-
-[node name="Sprite2" type="Sprite" parent="background"]
-
-[node name="Sprite3" type="Sprite" parent="background"]
-position = Vector2( 174, 217 )
-texture = ExtResource( 12 )
-offset = Vector2( 2, 3 )
-hframes = 6
-
-[node name="Sprite4" type="Sprite" parent="background"]
-position = Vector2( 176, 227 )
-texture = ExtResource( 12 )
-hframes = 6
-frame = 2
-
-[node name="Sprite5" type="Sprite" parent="background"]
-position = Vector2( 185, 227 )
-texture = ExtResource( 12 )
-hframes = 6
-frame = 3
-
-[node name="Sprite6" type="Sprite" parent="background"]
-position = Vector2( 194, 227 )
-texture = ExtResource( 12 )
-hframes = 6
-frame = 4
-
-[node name="Sprite7" type="Sprite" parent="background"]
-position = Vector2( 179, 216 )
-texture = ExtResource( 12 )
-offset = Vector2( 3, 4 )
-hframes = 6
-frame = 5
-
-[node name="Sprite8" type="Sprite" parent="background"]
-position = Vector2( 188, 220 )
-texture = ExtResource( 12 )
-hframes = 6
-frame = 4
-
-[node name="Sprite9" type="Sprite" parent="background"]
-position = Vector2( 180, 210 )
-texture = ExtResource( 12 )
-offset = Vector2( 2, 3 )
-hframes = 6
-=======
 [node name="Terrain Generator" type="Node" parent="."]
 script = ExtResource( 11 )
->>>>>>> 346fbf24ddc09498a81a99b9221873df0d56fe51:scenes/game/Nightmare.tscn
 
 [node name="EnemySpawner" type="Node2D" parent="."]
 script = ExtResource( 7 )
@@ -240,11 +70,7 @@ process_mode = 0
 limit_smoothed = true
 script = ExtResource( 8 )
 
-<<<<<<< HEAD:scenes/game/Town.tscn
-[node name="Shotgun" parent="Player" instance=ExtResource( 8 )]
-=======
 [node name="Shotgun" parent="Player" instance=ExtResource( 13 )]
->>>>>>> 346fbf24ddc09498a81a99b9221873df0d56fe51:scenes/game/Nightmare.tscn
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -291,6 +117,7 @@ custom_fonts/font = SubResource( 1 )
 text = "Resume"
 
 [node name="Game Over Screen" type="CanvasLayer" parent="."]
+pause_mode = 2
 visible = false
 script = ExtResource( 9 )
 
@@ -299,31 +126,17 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 0.235294, 0.113725, 0.113725, 1 )
 
-[node name="Retry" type="Button" parent="Game Over Screen"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -57.0
-margin_top = -2.5
-margin_right = 57.0
-margin_bottom = 38.5
-custom_fonts/font = SubResource( 1 )
-text = "Try Again?"
-
 [node name="Text" type="Label" parent="Game Over Screen"]
 anchor_left = 0.5
 anchor_right = 0.5
 margin_left = -102.5
-margin_top = 208.0
+margin_top = 153.0
 margin_right = 102.5
-margin_bottom = 276.0
+margin_bottom = 221.0
 custom_fonts/font = SubResource( 2 )
 text = "Game Over"
 align = 1
 
-<<<<<<< HEAD:scenes/game/Town.tscn
-=======
 [node name="Survived" type="Label" parent="Game Over Screen"]
 anchor_top = 0.5
 anchor_right = 1.0
@@ -345,7 +158,6 @@ margin_right = 12.0
 margin_bottom = 34.0
 custom_fonts/font = SubResource( 6 )
 text = "Gun Smith"
-script = ExtResource( 3 )
 
 [node name="Submit Score" type="Button" parent="Game Over Screen"]
 anchor_left = 0.5
@@ -358,7 +170,6 @@ margin_right = 126.0
 margin_bottom = 34.0
 custom_fonts/font = SubResource( 7 )
 text = "Add Score"
-script = ExtResource( 2 )
 
 [node name="Retry" type="Button" parent="Game Over Screen"]
 anchor_left = 0.5
@@ -501,20 +312,11 @@ margin_bottom = 7.0
 text = "0 minutes and 0 seconds"
 align = 2
 
->>>>>>> 346fbf24ddc09498a81a99b9221873df0d56fe51:scenes/game/Nightmare.tscn
 [node name="BG Music" type="AudioStreamPlayer" parent="."]
 pause_mode = 2
 stream = ExtResource( 5 )
 autoplay = true
 bus = "Music"
 
-<<<<<<< HEAD:scenes/game/Town.tscn
-[node name="Sprite3" type="Sprite" parent="."]
-position = Vector2( 192, 210 )
-texture = ExtResource( 12 )
-offset = Vector2( 2, 3 )
-hframes = 6
-=======
 [node name="ItemSpawner" type="Node2D" parent="."]
 script = ExtResource( 16 )
->>>>>>> 346fbf24ddc09498a81a99b9221873df0d56fe51:scenes/game/Nightmare.tscn

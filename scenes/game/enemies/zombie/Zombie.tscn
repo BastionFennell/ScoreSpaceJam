@@ -7,7 +7,7 @@
 [ext_resource path="res://assets/audio/sfx/zombie_die.wav" type="AudioStream" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 6, 6 )
+extents = Vector2( 0.734375, 0.734375 )
 
 [sub_resource type="Animation" id=2]
 length = 0.001
