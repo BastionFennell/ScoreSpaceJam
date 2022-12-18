@@ -1,15 +1,26 @@
 extends KinematicBody2D
 
+var Heart = preload("res://scenes/game/drops/Heart/Health.tscn")
+var Speed = preload("res://scenes/game/drops/ShotSpeed/ShotSpeed.tscn")
+var drops = [Heart, Speed]
+var weights = [10, 80]
+
 export (int) var speed = 300
 export (int) var health = 50
 
 var player
 var dead = false
+signal spawn_item
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	player = get_node("/root/World/Player")
+<<<<<<< HEAD
 	$AnimationPlayer.play("walking")
+=======
+	var itemSpawner = get_node("/root/World/ItemSpawner")
+	self.connect("spawn_item", itemSpawner, "_on_spawn_item")
+>>>>>>> 346fbf24ddc09498a81a99b9221873df0d56fe51
 
 func _explode():
 	var p = get_node("Blood").duplicate()
@@ -32,12 +43,18 @@ func damage(amount):
 		dead = true
 		self.visible = false
 		self.remove_child(get_node("CollisionShape2D"))
+		
+		emit_signal("spawn_item", drops, weights, self)
 
 		_explode()
+		
 
 		var ded = get_node("Ded")
-		ded.playing = true
-		yield(ded, "finished")
+		if ded:
+			ded.playing = true
+			yield(ded, "finished")
+
 		queue_free()
 	else:
-		get_node("Oof").playing = true
+		if(get_node("Oof")):
+			get_node("Oof").playing = true

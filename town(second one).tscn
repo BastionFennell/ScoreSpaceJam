@@ -1,0 +1,367 @@
+[gd_scene load_steps=20 format=2]
+
+[ext_resource path="res://scenes/game/characters/player/player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/sprites/town.png" type="Texture" id=2]
+[ext_resource path="res://scenes/Camera2D.gd" type="Script" id=3]
+[ext_resource path="res://scenes/game/weapons/Axegun.tscn" type="PackedScene" id=4]
+[ext_resource path="res://town(second one).gd" type="Script" id=5]
+[ext_resource path="res://assets/sprites/extraWater.png" type="Texture" id=6]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 1.5, 26 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 6, 2 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 10, 5 )
+
+[sub_resource type="Animation" id=4]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("TownSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "animations"
+length = 0.91
+loop = true
+step = 0.13
+tracks/0/type = "value"
+tracks/0/path = NodePath("TownSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.13, 0.26, 0.39, 0.52, 0.65, 0.78 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 6 ]
+}
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 6, 7.25 )
+
+[sub_resource type="RectangleShape2D" id=7]
+extents = Vector2( 6.5, 0.5 )
+
+[sub_resource type="RectangleShape2D" id=8]
+extents = Vector2( 5.5, 1.5 )
+
+[sub_resource type="RectangleShape2D" id=9]
+extents = Vector2( 2.5, 1.5 )
+
+[sub_resource type="RectangleShape2D" id=10]
+extents = Vector2( 7.25, 5 )
+
+[sub_resource type="RectangleShape2D" id=11]
+extents = Vector2( 4.5, 3.5 )
+
+[sub_resource type="RectangleShape2D" id=12]
+extents = Vector2( 2, 5.75 )
+
+[sub_resource type="RectangleShape2D" id=13]
+
+[node name="World" type="Node2D"]
+script = ExtResource( 5 )
+
+[node name="TownSprite" type="Sprite" parent="."]
+position = Vector2( 23, 68 )
+texture = ExtResource( 2 )
+hframes = 7
+
+[node name="LongAroundIsland" type="KinematicBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LongAroundIsland"]
+position = Vector2( -67, 8 )
+shape = SubResource( 1 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="LongAroundIsland"]
+position = Vector2( 122, 9 )
+shape = SubResource( 1 )
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="LongAroundIsland"]
+position = Vector2( -38, -20 )
+rotation = 1.5708
+shape = SubResource( 1 )
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="LongAroundIsland"]
+position = Vector2( 27, -20 )
+rotation = 1.5708
+shape = SubResource( 1 )
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="LongAroundIsland"]
+position = Vector2( 93, -20 )
+rotation = 1.5708
+shape = SubResource( 1 )
+
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="LongAroundIsland"]
+position = Vector2( -39, 30 )
+rotation = 1.5708
+shape = SubResource( 1 )
+
+[node name="CollisionShape2D7" type="CollisionShape2D" parent="LongAroundIsland"]
+position = Vector2( 93, 30 )
+rotation = 1.5708
+shape = SubResource( 1 )
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 25, 55 )
+collision_mask = 12
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+current = true
+zoom = Vector2( 0.25, 0.25 )
+process_mode = 0
+limit_left = -210
+limit_top = -228
+limit_right = 296
+limit_bottom = 275
+limit_smoothed = true
+script = ExtResource( 3 )
+
+[node name="Axegun" parent="Player" instance=ExtResource( 4 )]
+
+[node name="smallAroundIsland" type="KinematicBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="smallAroundIsland"]
+position = Vector2( 7, 30 )
+shape = SubResource( 2 )
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="smallAroundIsland"]
+position = Vector2( 16, 40 )
+rotation = 1.5708
+shape = SubResource( 2 )
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="smallAroundIsland"]
+position = Vector2( 35, 41 )
+rotation = 1.5708
+shape = SubResource( 2 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="smallAroundIsland"]
+position = Vector2( 47, 30 )
+shape = SubResource( 2 )
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="smallAroundIsland"]
+position = Vector2( 38, 56 )
+rotation = 1.5708
+shape = SubResource( 2 )
+
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="smallAroundIsland"]
+position = Vector2( -2, 28 )
+rotation = 1.5708
+shape = SubResource( 2 )
+
+[node name="CollisionShape2D7" type="CollisionShape2D" parent="smallAroundIsland"]
+position = Vector2( -10, 28 )
+rotation = 1.5708
+shape = SubResource( 2 )
+
+[node name="CollisionShape2D8" type="CollisionShape2D" parent="smallAroundIsland"]
+position = Vector2( -6, 17 )
+shape = SubResource( 2 )
+
+[node name="CollisionShape2D9" type="CollisionShape2D" parent="smallAroundIsland"]
+position = Vector2( -6, 0 )
+shape = SubResource( 2 )
+
+[node name="CollisionShape2D10" type="CollisionShape2D" parent="smallAroundIsland"]
+position = Vector2( -2, -7 )
+rotation = 1.5708
+shape = SubResource( 2 )
+
+[node name="CollisionShape2D11" type="CollisionShape2D" parent="smallAroundIsland"]
+position = Vector2( -10, -7 )
+rotation = 1.5708
+shape = SubResource( 2 )
+
+[node name="CollisionShape2D12" type="CollisionShape2D" parent="smallAroundIsland"]
+position = Vector2( 56, -6 )
+rotation = 1.5708
+shape = SubResource( 2 )
+
+[node name="CollisionShape2D13" type="CollisionShape2D" parent="smallAroundIsland"]
+position = Vector2( 64, -6 )
+rotation = 1.5708
+shape = SubResource( 2 )
+
+[node name="CollisionShape2D14" type="CollisionShape2D" parent="smallAroundIsland"]
+position = Vector2( 56, 29 )
+rotation = 1.5708
+shape = SubResource( 2 )
+
+[node name="CollisionShape2D15" type="CollisionShape2D" parent="smallAroundIsland"]
+position = Vector2( 64, 29 )
+rotation = 1.5708
+shape = SubResource( 2 )
+
+[node name="CollisionShape2D16" type="CollisionShape2D" parent="smallAroundIsland"]
+position = Vector2( 60, 1 )
+shape = SubResource( 2 )
+
+[node name="CollisionShape2D17" type="CollisionShape2D" parent="smallAroundIsland"]
+position = Vector2( 60, 17 )
+shape = SubResource( 2 )
+
+[node name="CollisionShape2D18" type="CollisionShape2D" parent="smallAroundIsland"]
+position = Vector2( 39, 30 )
+shape = SubResource( 2 )
+
+[node name="CollisionShape2D19" type="CollisionShape2D" parent="smallAroundIsland"]
+position = Vector2( 12, 30 )
+shape = SubResource( 2 )
+
+[node name="CollisionShape2D20" type="CollisionShape2D" parent="smallAroundIsland"]
+position = Vector2( 64, -15 )
+rotation = 1.5708
+shape = SubResource( 2 )
+
+[node name="CollisionShape2D21" type="CollisionShape2D" parent="smallAroundIsland"]
+position = Vector2( 56, -15 )
+rotation = 1.5708
+shape = SubResource( 2 )
+
+[node name="CollisionShape2D22" type="CollisionShape2D" parent="smallAroundIsland"]
+position = Vector2( -2, -15 )
+rotation = 1.5708
+shape = SubResource( 2 )
+
+[node name="CollisionShape2D23" type="CollisionShape2D" parent="smallAroundIsland"]
+position = Vector2( -10, -15 )
+rotation = 1.5708
+shape = SubResource( 2 )
+
+[node name="CollisionShape2D24" type="CollisionShape2D" parent="smallAroundIsland"]
+position = Vector2( 38, 65 )
+rotation = 1.5708
+shape = SubResource( 2 )
+
+[node name="CollisionShape2D25" type="CollisionShape2D" parent="smallAroundIsland"]
+position = Vector2( 13, 56 )
+rotation = 1.5708
+shape = SubResource( 2 )
+
+[node name="CollisionShape2D26" type="CollisionShape2D" parent="smallAroundIsland"]
+position = Vector2( 13, 65 )
+rotation = 1.5708
+shape = SubResource( 2 )
+
+[node name="CollisionShape2D27" type="CollisionShape2D" parent="smallAroundIsland"]
+position = Vector2( 21, 70 )
+shape = SubResource( 2 )
+
+[node name="CollisionShape2D28" type="CollisionShape2D" parent="smallAroundIsland"]
+position = Vector2( 32, 70 )
+shape = SubResource( 2 )
+
+[node name="HouseMiddle" type="KinematicBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HouseMiddle"]
+position = Vector2( 36, -8 )
+shape = SubResource( 3 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 4 )
+anims/animations = SubResource( 5 )
+
+[node name="npcs" type="KinematicBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="npcs"]
+position = Vector2( 20, 4 )
+shape = SubResource( 6 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="npcs"]
+position = Vector2( -28, -7 )
+shape = SubResource( 6 )
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="npcs"]
+position = Vector2( 83, 5 )
+shape = SubResource( 6 )
+
+[node name="tent" type="KinematicBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="tent"]
+position = Vector2( 105.5, -7.5 )
+shape = SubResource( 7 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="tent"]
+position = Vector2( 105.5, -9.5 )
+shape = SubResource( 8 )
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="tent"]
+position = Vector2( 105.5, -12 )
+shape = SubResource( 9 )
+
+[node name="anvil and healing pot" type="KinematicBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="anvil and healing pot"]
+position = Vector2( 106, 15 )
+shape = SubResource( 10 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="anvil and healing pot"]
+position = Vector2( -52.5, 13.5 )
+shape = SubResource( 11 )
+
+[node name="flags" type="KinematicBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="flags"]
+position = Vector2( -53, -8.25 )
+shape = SubResource( 12 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="flags"]
+position = Vector2( 13, -8 )
+shape = SubResource( 12 )
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="flags"]
+position = Vector2( 81, -9 )
+shape = SubResource( 12 )
+
+[node name="Shrine" type="KinematicBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Shrine"]
+position = Vector2( -25, -17 )
+shape = SubResource( 13 )
+
+[node name="extrawater" type="Node2D" parent="."]
+
+[node name="ExtraWater" type="Sprite" parent="extrawater"]
+position = Vector2( 216, 113 )
+texture = ExtResource( 6 )
+
+[node name="ExtraWater2" type="Sprite" parent="extrawater"]
+position = Vector2( 216, 9 )
+texture = ExtResource( 6 )
+
+[node name="ExtraWater3" type="Sprite" parent="extrawater"]
+position = Vector2( 212, -128 )
+texture = ExtResource( 6 )
+
+[node name="ExtraWater4" type="Sprite" parent="extrawater"]
+position = Vector2( 94, -121 )
+texture = ExtResource( 6 )
+
+[node name="ExtraWater5" type="Sprite" parent="extrawater"]
+position = Vector2( -39, -126 )
+texture = ExtResource( 6 )
+
+[node name="ExtraWater6" type="Sprite" parent="extrawater"]
+position = Vector2( -170, 121 )
+texture = ExtResource( 6 )
+
+[node name="ExtraWater7" type="Sprite" parent="extrawater"]
+position = Vector2( -170, 7 )
+texture = ExtResource( 6 )
+
+[node name="ExtraWater8" type="Sprite" parent="extrawater"]
+position = Vector2( -183, -104 )
+texture = ExtResource( 6 )

@@ -1,5 +1,6 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=21 format=2]
 
+<<<<<<< HEAD:scenes/game/Town.tscn
 [ext_resource path="res://assets/audio/songs/Halloween Spooky.mp3" type="AudioStream" id=1]
 [ext_resource path="res://scenes/Pause Menu.gd" type="Script" id=2]
 [ext_resource path="res://scenes/game/GUI/Volume Sliders.tscn" type="PackedScene" id=3]
@@ -101,20 +102,55 @@ extents = Vector2( 631, 33 )
 
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 52, 524 )
+=======
+[ext_resource path="res://scenes/game/World.gd" type="Script" id=1]
+[ext_resource path="res://scenes/game/Submit Score.gd" type="Script" id=2]
+[ext_resource path="res://scenes/game/TextEdit.gd" type="Script" id=3]
+[ext_resource path="res://assets/fonts/contrite_in_spirit.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://assets/audio/songs/Halloween Spooky.mp3" type="AudioStream" id=5]
+[ext_resource path="res://scenes/Pause Menu.gd" type="Script" id=6]
+[ext_resource path="res://scenes/EnemySpawner.gd" type="Script" id=7]
+[ext_resource path="res://scenes/Camera2D.gd" type="Script" id=8]
+[ext_resource path="res://scenes/game over.gd" type="Script" id=9]
+[ext_resource path="res://scenes/game/GUI/Volume Sliders.tscn" type="PackedScene" id=10]
+[ext_resource path="res://scenes/game/Terrain Generator.gd" type="Script" id=11]
+[ext_resource path="res://scenes/game/characters/player/player.tscn" type="PackedScene" id=12]
+[ext_resource path="res://scenes/game/weapons/Shotgun.tscn" type="PackedScene" id=13]
+[ext_resource path="res://scenes/game/GUI/GUI.tscn" type="PackedScene" id=14]
+[ext_resource path="res://scenes/game/drops/ItemSpawner.gd" type="Script" id=16]
+>>>>>>> 346fbf24ddc09498a81a99b9221873df0d56fe51:scenes/game/Nightmare.tscn
 
 [sub_resource type="DynamicFont" id=1]
 size = 30
-font_data = ExtResource( 7 )
+font_data = ExtResource( 4 )
 
 [sub_resource type="DynamicFont" id=2]
 size = 50
 outline_size = 5
 outline_color = Color( 0.352941, 0.0352941, 0.0352941, 1 )
-font_data = ExtResource( 7 )
+font_data = ExtResource( 4 )
 
+<<<<<<< HEAD:scenes/game/Town.tscn
+=======
+[sub_resource type="DynamicFont" id=5]
+size = 30
+outline_size = 5
+outline_color = Color( 0.352941, 0.0352941, 0.0352941, 1 )
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=6]
+size = 25
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=7]
+size = 25
+font_data = ExtResource( 4 )
+
+>>>>>>> 346fbf24ddc09498a81a99b9221873df0d56fe51:scenes/game/Nightmare.tscn
 [node name="World" type="Node2D"]
-script = ExtResource( 9 )
+script = ExtResource( 1 )
 
+<<<<<<< HEAD:scenes/game/Town.tscn
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource( 5 )
 format = 1
@@ -173,45 +209,15 @@ position = Vector2( 180, 210 )
 texture = ExtResource( 12 )
 offset = Vector2( 2, 3 )
 hframes = 6
+=======
+[node name="Terrain Generator" type="Node" parent="."]
+script = ExtResource( 11 )
+>>>>>>> 346fbf24ddc09498a81a99b9221873df0d56fe51:scenes/game/Nightmare.tscn
 
 [node name="EnemySpawner" type="Node2D" parent="."]
-script = ExtResource( 4 )
+script = ExtResource( 7 )
 
-[node name="Walls" type="Node" parent="."]
-
-[node name="KinematicBody2D2" type="KinematicBody2D" parent="Walls"]
-collision_layer = 8
-collision_mask = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/KinematicBody2D2"]
-position = Vector2( 598, -23 )
-shape = SubResource( 3 )
-
-[node name="KinematicBody2D" type="KinematicBody2D" parent="Walls"]
-collision_layer = 8
-collision_mask = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/KinematicBody2D"]
-position = Vector2( 614, 1015 )
-shape = SubResource( 3 )
-
-[node name="KinematicBody2D4" type="KinematicBody2D" parent="Walls"]
-collision_layer = 8
-collision_mask = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/KinematicBody2D4"]
-position = Vector2( -42, 466 )
-shape = SubResource( 4 )
-
-[node name="KinematicBody2D3" type="KinematicBody2D" parent="Walls"]
-collision_layer = 8
-collision_mask = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/KinematicBody2D3"]
-position = Vector2( 1245, 495 )
-shape = SubResource( 4 )
-
-[node name="Player" parent="." instance=ExtResource( 11 )]
+[node name="Player" parent="." instance=ExtResource( 12 )]
 position = Vector2( 250, 250 )
 collision_mask = 8
 health = 10.0
@@ -220,24 +226,24 @@ health = 10.0
 current = true
 zoom = Vector2( 0.25, 0.25 )
 process_mode = 0
-limit_left = 0
-limit_top = 0
-limit_right = 1194
-limit_bottom = 995
 limit_smoothed = true
-script = ExtResource( 5 )
+script = ExtResource( 8 )
 
+<<<<<<< HEAD:scenes/game/Town.tscn
 [node name="Shotgun" parent="Player" instance=ExtResource( 8 )]
+=======
+[node name="Shotgun" parent="Player" instance=ExtResource( 13 )]
+>>>>>>> 346fbf24ddc09498a81a99b9221873df0d56fe51:scenes/game/Nightmare.tscn
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="GUI" parent="CanvasLayer" instance=ExtResource( 10 )]
+[node name="GUI" parent="CanvasLayer" instance=ExtResource( 14 )]
 margin_bottom = 68.0
 
 [node name="Pause Menu" type="CanvasLayer" parent="."]
 pause_mode = 2
 visible = false
-script = ExtResource( 2 )
+script = ExtResource( 6 )
 
 [node name="Background" type="ColorRect" parent="Pause Menu"]
 anchor_left = 0.5
@@ -256,7 +262,7 @@ margin_top = 134.0
 margin_right = 803.0
 margin_bottom = 452.0
 
-[node name="Volume Sliders" parent="Pause Menu/Grid" instance=ExtResource( 3 )]
+[node name="Volume Sliders" parent="Pause Menu/Grid" instance=ExtResource( 10 )]
 margin_left = 0.0
 margin_top = 0.0
 margin_right = 350.0
@@ -275,7 +281,7 @@ text = "Resume"
 
 [node name="Game Over Screen" type="CanvasLayer" parent="."]
 visible = false
-script = ExtResource( 13 )
+script = ExtResource( 9 )
 
 [node name="Background" type="ColorRect" parent="Game Over Screen"]
 anchor_right = 1.0
@@ -305,14 +311,199 @@ custom_fonts/font = SubResource( 2 )
 text = "Game Over"
 align = 1
 
+<<<<<<< HEAD:scenes/game/Town.tscn
+=======
+[node name="Survived" type="Label" parent="Game Over Screen"]
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_top = -68.0
+margin_bottom = -33.0
+custom_fonts/font = SubResource( 5 )
+text = "You Survived"
+align = 1
+
+[node name="Name" type="TextEdit" parent="Game Over Screen"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -144.0
+margin_top = -11.0
+margin_right = 12.0
+margin_bottom = 34.0
+custom_fonts/font = SubResource( 6 )
+text = "Gun Smith"
+script = ExtResource( 3 )
+
+[node name="Submit Score" type="Button" parent="Game Over Screen"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 33.0
+margin_top = -10.0
+margin_right = 126.0
+margin_bottom = 34.0
+custom_fonts/font = SubResource( 7 )
+text = "Add Score"
+script = ExtResource( 2 )
+
+[node name="Retry" type="Button" parent="Game Over Screen"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -57.0
+margin_top = -85.0
+margin_right = 57.0
+margin_bottom = -44.0
+custom_fonts/font = SubResource( 1 )
+text = "Try Again?"
+
+[node name="High Scores" type="VBoxContainer" parent="Game Over Screen"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -163.0
+margin_top = 58.0
+margin_right = 173.0
+margin_bottom = 187.0
+
+[node name="1" type="NinePatchRect" parent="Game Over Screen/High Scores"]
+margin_right = 336.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 0, 20 )
+
+[node name="Name" type="Label" parent="Game Over Screen/High Scores/1"]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_top = -7.0
+margin_bottom = 7.0
+text = "Gun Smith"
+
+[node name="Score" type="Label" parent="Game Over Screen/High Scores/1"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -161.0
+margin_top = -7.0
+margin_bottom = 7.0
+text = "0 minutes and 0 seconds"
+align = 2
+
+[node name="2" type="NinePatchRect" parent="Game Over Screen/High Scores"]
+margin_top = 24.0
+margin_right = 336.0
+margin_bottom = 44.0
+rect_min_size = Vector2( 0, 20 )
+
+[node name="Name" type="Label" parent="Game Over Screen/High Scores/2"]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_top = -7.0
+margin_bottom = 7.0
+text = "Gun Smith"
+
+[node name="Score" type="Label" parent="Game Over Screen/High Scores/2"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -161.0
+margin_top = -7.0
+margin_bottom = 7.0
+text = "0 minutes and 0 seconds"
+align = 2
+
+[node name="3" type="NinePatchRect" parent="Game Over Screen/High Scores"]
+margin_top = 48.0
+margin_right = 336.0
+margin_bottom = 68.0
+rect_min_size = Vector2( 0, 20 )
+
+[node name="Name" type="Label" parent="Game Over Screen/High Scores/3"]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_top = -7.0
+margin_bottom = 7.0
+text = "Gun Smith"
+
+[node name="Score" type="Label" parent="Game Over Screen/High Scores/3"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -161.0
+margin_top = -7.0
+margin_bottom = 7.0
+text = "0 minutes and 0 seconds"
+align = 2
+
+[node name="4" type="NinePatchRect" parent="Game Over Screen/High Scores"]
+margin_top = 72.0
+margin_right = 336.0
+margin_bottom = 92.0
+rect_min_size = Vector2( 0, 20 )
+
+[node name="Name" type="Label" parent="Game Over Screen/High Scores/4"]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_top = -7.0
+margin_bottom = 7.0
+text = "Gun Smith"
+
+[node name="Score" type="Label" parent="Game Over Screen/High Scores/4"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -161.0
+margin_top = -7.0
+margin_bottom = 7.0
+text = "0 minutes and 0 seconds"
+align = 2
+
+[node name="5" type="NinePatchRect" parent="Game Over Screen/High Scores"]
+margin_top = 96.0
+margin_right = 336.0
+margin_bottom = 116.0
+rect_min_size = Vector2( 0, 20 )
+
+[node name="Name" type="Label" parent="Game Over Screen/High Scores/5"]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_top = -7.0
+margin_bottom = 7.0
+text = "Gun Smith"
+
+[node name="Score" type="Label" parent="Game Over Screen/High Scores/5"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -161.0
+margin_top = -7.0
+margin_bottom = 7.0
+text = "0 minutes and 0 seconds"
+align = 2
+
+>>>>>>> 346fbf24ddc09498a81a99b9221873df0d56fe51:scenes/game/Nightmare.tscn
 [node name="BG Music" type="AudioStreamPlayer" parent="."]
 pause_mode = 2
-stream = ExtResource( 1 )
+stream = ExtResource( 5 )
 autoplay = true
 bus = "Music"
 
+<<<<<<< HEAD:scenes/game/Town.tscn
 [node name="Sprite3" type="Sprite" parent="."]
 position = Vector2( 192, 210 )
 texture = ExtResource( 12 )
 offset = Vector2( 2, 3 )
 hframes = 6
+=======
+[node name="ItemSpawner" type="Node2D" parent="."]
+script = ExtResource( 16 )
+>>>>>>> 346fbf24ddc09498a81a99b9221873df0d56fe51:scenes/game/Nightmare.tscn
