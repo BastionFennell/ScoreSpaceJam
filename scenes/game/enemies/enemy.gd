@@ -6,7 +6,7 @@ var drops = [Heart, Speed]
 var weights = [10, 80]
 
 export (int) var speed = 300
-export (int) var health = 50
+export (int) var health = 5
 
 var player
 var dead = false

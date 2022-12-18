@@ -13,7 +13,6 @@ var original_reload_time = 1
 func _ready():
 	player = get_node("/root/World/Player")
 	gun = player.find_node("Shotgun")
-	print(" Got node " + gun.name)
 	
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
