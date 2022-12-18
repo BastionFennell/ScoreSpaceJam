@@ -6,7 +6,7 @@ export (int) var damage = 5
 func _ready():
 		var timer = Timer.new()
 		timer.one_shot = true
-		timer.wait_time = 10
+		timer.wait_time = .6 + .3 * randf()
 		timer.connect("timeout", self, "_destroy") 
 		add_child(timer)
 		timer.start()
