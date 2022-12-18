@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/town.png-63fa61d263ba3cfa8fb68e09abc185bb.stex"
+path="res://.import/extraWater.png-9392c46781c505e5819651659fefede5.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/town.png"
-dest_files=[ "res://.import/town.png-63fa61d263ba3cfa8fb68e09abc185bb.stex" ]
+source_file="res://assets/sprites/extraWater.png"
+dest_files=[ "res://.import/extraWater.png-9392c46781c505e5819651659fefede5.stex" ]
 
 [params]
 
