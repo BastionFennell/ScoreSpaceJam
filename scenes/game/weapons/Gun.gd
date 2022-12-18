@@ -36,6 +36,13 @@ func _temp_speed_buff():
 	reload_multiplier = 0.1
 	reload_buff_remaining = 1
 
+func _damage_upgrade():
+	damage_add = damage_add + 1
+	print("damage upgraded to ", damage_add)
+
+func _speed_upgrade():
+	reload_time *= 0.8
+
 func _on_shoot():
 	if (!reloading):
 		reloading = true
@@ -43,7 +50,6 @@ func _on_shoot():
 		get_node("Gun").play("shoot")
 		_spawn_bullet()
 		_shake_camera()
-
 		remaining_reload_time = reload_time * reload_multiplier
 
 func _reload():
