@@ -54,6 +54,7 @@ func reset():
 	selling = default_selling.duplicate(true)
 	upgrades = default_upgrades.duplicate(true)
 	inventory = default_inventory.duplicate(true)
+	days = 0
 
 func add_item(item, amount):
 	var new_amount = inventory[item] + amount if inventory[item] else amount
@@ -70,3 +71,6 @@ func on_buy(item):
 		selling[item].price[i] += selling[item].increase
 	emit_signal("bought", item, selling[item])
 	emit_signal("inventory_updated")
+
+func round_complete():
+	days += 1

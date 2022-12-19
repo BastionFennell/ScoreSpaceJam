@@ -7,6 +7,10 @@ export (int) var speed = 300
 export (int) var health = 5
 export (int) var damage = 10
 
+export (int) var speed_inc = 5
+export (int) var health_inc = 0
+export (int) var damage_inc = 5
+
 var player
 var hit_box
 var dead = false
@@ -26,6 +30,11 @@ func _ready():
 
 	self.connect("spawn_item", itemSpawner, "_on_spawn_item")
 	self.connect("damage_player", player, "_on_damage")
+
+	var days = get_node("/root/Globals").days
+	speed = speed + speed_inc * days
+	health = health + health_inc * days
+	damage = damage + damage_inc * days
 
 func _explode():
 	var p = get_node("Blood").duplicate()

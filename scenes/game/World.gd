@@ -26,4 +26,5 @@ func _process(delta):
 	
 	if time > round_length && !time_stopped:
 		stop_time()
+		get_node("/root/Globals").round_complete()
 		emit_signal("round_finished")
