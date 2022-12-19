@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scenes/game/weapons/Shotgun Bullet.gd" type="Script" id=1]
-[ext_resource path="res://assets/sprites/weapons/axgun_bullet.png" type="Texture" id=2]
+[ext_resource path="res://assets/sprites/weapons/HammerGun.png" type="Texture" id=2]
 
 [sub_resource type="Animation" id=2]
 resource_name = "Spinning"
@@ -35,10 +35,9 @@ playback_speed = 2.0
 anims/Spinning = SubResource( 2 )
 
 [node name="ShotgunBullet" type="Sprite" parent="."]
-rotation = 3.45769
 texture = ExtResource( 2 )
 region_enabled = true
-region_rect = Rect2( 0, 0, 10, 9 )
+region_rect = Rect2( 65, 2, 16, 16 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
