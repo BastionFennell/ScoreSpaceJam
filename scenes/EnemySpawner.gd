@@ -1,6 +1,6 @@
 extends Node2D
 
-var safe_radius = 150
+var safe_radius = 170
 var enemies = {
 	"zombie": { 
 		"node": preload("res://scenes/game/enemies/zombie/Zombie.tscn"),
