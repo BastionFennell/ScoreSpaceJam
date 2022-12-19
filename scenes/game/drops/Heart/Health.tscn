@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scenes/game/drops/Heart/Heart.gd" type="Script" id=1]
+[ext_resource path="res://assets/sprites/resources/spritesheet.png" type="Texture" id=2]
 [ext_resource path="res://assets/audio/sfx/zombie_hit.wav" type="AudioStream" id=4]
 [ext_resource path="res://assets/audio/sfx/zombie_die.wav" type="AudioStream" id=5]
 
@@ -44,8 +45,14 @@ scale_amount_random = 0.3
 color = Color( 0.858824, 0.0823529, 0.0823529, 1 )
 
 [node name="ColorRect" type="ColorRect" parent="."]
+visible = false
 margin_left = -5.0
 margin_top = -5.0
 margin_right = 5.0
 margin_bottom = 5.0
 color = Color( 0.839216, 0.0901961, 0.0901961, 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 192, 0, 32, 32 )

@@ -8,7 +8,3 @@ func _init():
 	drops = [Heart]
 	weights = [10]
 	damage = 10
-
-	speed_inc = 5
-	health_inc = 0
-	damage_inc = 5

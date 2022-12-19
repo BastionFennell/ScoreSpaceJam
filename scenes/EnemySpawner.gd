@@ -28,6 +28,15 @@ var enemies = {
 		"difficulty_timer": 2.00,
 		"min_respawn_time": 0.3,
 		"wave_difficulty_ramp": 0.8
+	},
+	"ranger": {
+		"node": preload("res://scenes/game/enemies/ranger/Ranger.tscn"),
+		"delay": 45,
+		"respawn_timer": 4,
+		"decay": 0.1,
+		"difficulty_timer": 2.00,
+		"min_respawn_time": 0.3,
+		"wave_difficulty_ramp": 0.8
 	}
 }
 

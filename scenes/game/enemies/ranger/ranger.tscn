@@ -1,0 +1,111 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://assets/sprites/enemies/ranger.png" type="Texture" id=1]
+[ext_resource path="res://scenes/game/enemies/ranger/ranger.gd" type="Script" id=2]
+[ext_resource path="res://assets/audio/sfx/zombie_hit.wav" type="AudioStream" id=4]
+[ext_resource path="res://assets/audio/sfx/zombie_die.wav" type="AudioStream" id=5]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 0.734375, 0.734375 )
+
+[sub_resource type="Animation" id=2]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Zombie:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "death"
+length = 0.42
+step = 0.14
+tracks/0/type = "value"
+tracks/0/path = NodePath("Zombie:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.14, 0.28 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 3, 4, 5 ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "walking"
+length = 0.42
+loop = true
+step = 0.14
+tracks/0/type = "value"
+tracks/0/path = NodePath("Zombie:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.14, 0.28 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2 ]
+}
+
+[node name="Ranger" type="KinematicBody2D"]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource( 2 )
+
+[node name="Hit Box" type="Area2D" parent="."]
+position = Vector2( 0, 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hit Box"]
+scale = Vector2( 8, 8 )
+shape = SubResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 2 )
+scale = Vector2( 8, 8 )
+shape = SubResource( 1 )
+
+[node name="Zombie" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+hframes = 5
+
+[node name="Oof" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+bus = "SFX"
+
+[node name="Ded" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+volume_db = -6.0
+bus = "SFX"
+
+[node name="Blood" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 5
+lifetime = 2.0
+one_shot = true
+speed_scale = 3.0
+explosiveness = 1.0
+randomness = 1.0
+direction = Vector2( 0, -1 )
+spread = 90.0
+gravity = Vector2( 0, 10 )
+initial_velocity = 20.0
+initial_velocity_random = 0.2
+scale_amount = 4.0
+scale_amount_random = 0.3
+color = Color( 0.858824, 0.0823529, 0.0823529, 1 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 2 )
+anims/death = SubResource( 3 )
+anims/walking = SubResource( 4 )
