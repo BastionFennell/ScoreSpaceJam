@@ -19,8 +19,8 @@ func _ready():
 	player = get_node("/root/World/Player")
 	hit_box = get_node("Hit Box")
 
-	if ($AnimationPlayer):
-		$AnimationPlayer.play("walking")
+	if (has_node("AnimationPlayer")):
+		get_node("AnimationPlayer").play("walking")
 
 	var itemSpawner = get_node("/root/World/ItemSpawner")
 

@@ -157,7 +157,7 @@ margin_top = -11.0
 margin_right = 12.0
 margin_bottom = 34.0
 custom_fonts/font = SubResource( 6 )
-text = "Gun Smith"
+text = "Gun Monk"
 
 [node name="Submit Score" type="Button" parent="Game Over Screen"]
 anchor_left = 0.5

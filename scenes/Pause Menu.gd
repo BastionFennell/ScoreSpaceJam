@@ -20,6 +20,3 @@ func _process(_delta):
 			_unpause()
 		else:
 			_pause()
-
-	if get_tree().paused && Input.is_action_just_pressed("ui_cancel"):
-		_unpause()
