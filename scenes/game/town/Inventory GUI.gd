@@ -12,7 +12,7 @@ func _ready():
 
 func _update_inventory_text():
 	for i in items:
-		get_node("%s GUI/Amount" % i).text = str(items[i])
+		get_node("%s GUI/Amount" % i).text = "x %s" % items[i]
 
 func _on_inventory_updated():
 	for i in items:

@@ -4,8 +4,8 @@ export (float) var spawn_rate = 0.2
 
 var Tree = preload("res://scenes/game/resources/tree/Tree.tscn") 
 
-var tree_height = 20
-var tree_width = 24
+var tree_height = 15
+var tree_width = 12
 
 func _ready():
 	var area_node = get_node("Area2D")

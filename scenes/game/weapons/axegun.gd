@@ -1,7 +1,7 @@
 extends "res://scenes/game/weapons/Gun.gd"
 
 func _ready():
-	reload_time = 2
+	reload_time = 1
 	spread = 0
 	screen_shake = 0.4
 	count = 1

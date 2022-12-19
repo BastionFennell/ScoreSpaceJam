@@ -4,8 +4,8 @@ export (float) var spawn_rate = 0.2
 
 var Stone = preload("res://scenes/game/resources/stone/Stone.tscn") 
 
-var stone_height = 25
-var stone_width = 36
+var stone_height = 8
+var stone_width = 12
 
 func _ready():
 	var area_node = get_node("Area2D")
