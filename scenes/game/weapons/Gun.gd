@@ -4,6 +4,8 @@ export (float) var screen_shake = 0.3
 export (float) var reload_multiplier = 1.0
 export (float) var reload_buff_remaining = null
 export (float) var damage_add = 0.0
+export (float) var reload_speed_upgrade = 0.8
+export (float) var damage_upgrade = 1
 export var reloading = false
 
 var remaining_reload_time = null
@@ -13,6 +15,12 @@ var count = 10
 
 var Bullet = preload("res://scenes/game/weapons/Shotgun Bullet.tscn") 
 	
+func _ready():
+	var upgrades = get_node("/root/Globals").upgrades
+
+	reload_time *= pow(reload_speed_upgrade, upgrades.reload)
+	damage_add += damage_upgrade * upgrades.damage
+
 func _spawn_single_bullet(rotation, position):
 	var bullet = Bullet.instance()
 	bullet.damage = bullet.damage + damage_add
@@ -37,11 +45,10 @@ func _temp_speed_buff():
 	reload_buff_remaining = 1
 
 func _damage_upgrade():
-	damage_add = damage_add + 1
-	print("damage upgraded to ", damage_add)
+	damage_add = damage_add + damage_upgrade
 
 func _speed_upgrade():
-	reload_time *= 0.8
+	reload_time *= reload_speed_upgrade
 
 func _on_shoot():
 	if (!reloading):

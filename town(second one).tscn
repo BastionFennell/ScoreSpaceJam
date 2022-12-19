@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=37 format=2]
 
 [ext_resource path="res://scenes/game/characters/player/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/sprites/town.png" type="Texture" id=2]
@@ -6,9 +6,51 @@
 [ext_resource path="res://scenes/game/weapons/Axegun.tscn" type="PackedScene" id=4]
 [ext_resource path="res://town(second one).gd" type="Script" id=5]
 [ext_resource path="res://assets/sprites/extraWater.png" type="Texture" id=6]
+[ext_resource path="res://assets/sprites/interact bubble.png" type="Texture" id=7]
+[ext_resource path="res://assets/sprites/resources/wood.png" type="Texture" id=8]
+[ext_resource path="res://assets/sprites/resources/stone.png" type="Texture" id=9]
+[ext_resource path="res://assets/fonts/contrite_in_spirit.ttf" type="DynamicFontData" id=10]
+[ext_resource path="res://How to Interact.gd" type="Script" id=11]
+[ext_resource path="res://scenes/game/town/Inventory GUI.gd" type="Script" id=12]
+[ext_resource path="res://Shrine.gd" type="Script" id=13]
+[ext_resource path="res://Vendor.gd" type="Script" id=14]
+[ext_resource path="res://Prices.gd" type="Script" id=15]
+[ext_resource path="res://Prices.gd" type="Script" id=16]
+[ext_resource path="res://Vendor.gd" type="Script" id=17]
+[ext_resource path="res://Vendor.gd" type="Script" id=18]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 1.5, 26 )
+
+[sub_resource type="Animation" id=16]
+resource_name = "Fade in"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=14]
+resource_name = "Fade out"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 6, 2 )
@@ -71,6 +113,18 @@ extents = Vector2( 4.5, 3.5 )
 extents = Vector2( 2, 5.75 )
 
 [sub_resource type="RectangleShape2D" id=13]
+extents = Vector2( 8.5, 7.5 )
+
+[sub_resource type="DynamicFont" id=15]
+font_data = ExtResource( 10 )
+
+[sub_resource type="DynamicFont" id=17]
+size = 30
+font_data = ExtResource( 10 )
+
+[sub_resource type="DynamicFont" id=18]
+size = 30
+font_data = ExtResource( 10 )
 
 [node name="World" type="Node2D"]
 script = ExtResource( 5 )
@@ -117,8 +171,22 @@ rotation = 1.5708
 shape = SubResource( 1 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 25, 55 )
+position = Vector2( 26, 19 )
 collision_mask = 1
+
+[node name="How to Interact" type="Node2D" parent="Player"]
+position = Vector2( -25, -55 )
+script = ExtResource( 11 )
+
+[node name="Fader" type="AnimationPlayer" parent="Player/How to Interact"]
+root_node = NodePath("../Pop Up")
+"anims/Fade in" = SubResource( 16 )
+"anims/Fade out" = SubResource( 14 )
+
+[node name="Pop Up" type="Sprite" parent="Player/How to Interact"]
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 26, 36 )
+texture = ExtResource( 7 )
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 current = true
@@ -282,16 +350,28 @@ anims/animations = SubResource( 5 )
 [node name="npcs" type="KinematicBody2D" parent="."]
 collision_layer = 8
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="npcs"]
-position = Vector2( 20, 4 )
+[node name="Health" type="Area2D" parent="npcs"]
+script = ExtResource( 18 )
+selling = "health"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="npcs/Health"]
+position = Vector2( 20, 7 )
 shape = SubResource( 6 )
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="npcs"]
-position = Vector2( -28, -7 )
+[node name="Damage" type="Area2D" parent="npcs"]
+script = ExtResource( 14 )
+selling = "damage"
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="npcs/Damage"]
+position = Vector2( 83, 8 )
 shape = SubResource( 6 )
 
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="npcs"]
-position = Vector2( 83, 5 )
+[node name="Reload" type="Area2D" parent="npcs"]
+script = ExtResource( 17 )
+selling = "reload"
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="npcs/Reload"]
+position = Vector2( -28, -4 )
 shape = SubResource( 6 )
 
 [node name="tent" type="KinematicBody2D" parent="."]
@@ -335,11 +415,12 @@ shape = SubResource( 12 )
 position = Vector2( 81, -9 )
 shape = SubResource( 12 )
 
-[node name="Shrine" type="KinematicBody2D" parent="."]
+[node name="Shrine" type="Area2D" parent="."]
 collision_layer = 8
+script = ExtResource( 13 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Shrine"]
-position = Vector2( -25, -17 )
+position = Vector2( 25.5, 59.5 )
 shape = SubResource( 13 )
 
 [node name="extrawater" type="Node2D" parent="."]
@@ -375,3 +456,131 @@ texture = ExtResource( 6 )
 [node name="ExtraWater8" type="Sprite" parent="extrawater"]
 position = Vector2( -183, -104 )
 texture = ExtResource( 6 )
+
+[node name="Buy Health" type="Node2D" parent="."]
+
+[node name="Sprite" type="Sprite" parent="Buy Health"]
+
+[node name="Prices" type="Node2D" parent="."]
+
+[node name="Damage" type="NinePatchRect" parent="Prices"]
+margin_left = 67.0
+margin_right = 107.0
+margin_bottom = 40.0
+script = ExtResource( 15 )
+item = "damage"
+
+[node name="Sprite" type="Sprite" parent="Prices/Damage"]
+position = Vector2( 21, -37 )
+texture = ExtResource( 9 )
+
+[node name="stone" type="Label" parent="Prices/Damage"]
+margin_left = 29.0
+margin_top = -47.0
+margin_right = 69.0
+margin_bottom = -28.0
+custom_fonts/font = SubResource( 15 )
+text = "x2"
+
+[node name="Health" type="NinePatchRect" parent="Prices"]
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 16 )
+item = "health"
+
+[node name="Sprite" type="Sprite" parent="Prices/Health"]
+position = Vector2( 21, -36 )
+texture = ExtResource( 8 )
+
+[node name="wood" type="Label" parent="Prices/Health"]
+margin_left = 29.0
+margin_top = -47.0
+margin_right = 69.0
+margin_bottom = -28.0
+custom_fonts/font = SubResource( 15 )
+text = "x2"
+
+[node name="Reload" type="NinePatchRect" parent="Prices"]
+margin_left = -49.0
+margin_right = -9.0
+margin_bottom = 40.0
+script = ExtResource( 16 )
+item = "reload"
+
+[node name="Stone Sprite" type="Sprite" parent="Prices/Reload"]
+position = Vector2( 21, -37 )
+texture = ExtResource( 9 )
+
+[node name="stone" type="Label" parent="Prices/Reload"]
+margin_left = 29.0
+margin_top = -47.0
+margin_right = 69.0
+margin_bottom = -28.0
+custom_fonts/font = SubResource( 15 )
+text = "x2"
+
+[node name="Wood Sprite" type="Sprite" parent="Prices/Reload"]
+position = Vector2( -13, -36 )
+texture = ExtResource( 8 )
+
+[node name="wood" type="Label" parent="Prices/Reload"]
+margin_left = -5.0
+margin_top = -47.0
+margin_right = 35.0
+margin_bottom = -28.0
+custom_fonts/font = SubResource( 15 )
+text = "x2"
+
+[node name="Inventory GUI" type="CanvasLayer" parent="."]
+script = ExtResource( 12 )
+
+[node name="ColorRect" type="ColorRect" parent="Inventory GUI"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="wood GUI" type="HBoxContainer" parent="Inventory GUI"]
+margin_left = 761.0
+margin_top = 13.0
+margin_right = 833.0
+margin_bottom = 53.0
+
+[node name="Wood Text" type="Label" parent="Inventory GUI/wood GUI"]
+margin_top = 2.0
+margin_right = 56.0
+margin_bottom = 37.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 17 )
+text = "Wood:"
+
+[node name="Amount" type="Label" parent="Inventory GUI/wood GUI"]
+margin_left = 60.0
+margin_top = 2.0
+margin_right = 72.0
+margin_bottom = 37.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 17 )
+text = "0"
+
+[node name="stone GUI" type="HBoxContainer" parent="Inventory GUI"]
+margin_left = 868.0
+margin_top = 13.0
+margin_right = 930.0
+margin_bottom = 53.0
+
+[node name="Stone Text" type="Label" parent="Inventory GUI/stone GUI"]
+margin_top = 2.0
+margin_right = 59.0
+margin_bottom = 37.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 18 )
+text = "Stone:"
+
+[node name="Amount" type="Label" parent="Inventory GUI/stone GUI"]
+margin_left = 63.0
+margin_top = 2.0
+margin_right = 75.0
+margin_bottom = 37.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 18 )
+text = "0"
