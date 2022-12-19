@@ -6,7 +6,7 @@ var enemies = {
 		"node": preload("res://scenes/game/enemies/zombie/Zombie.tscn"),
 		"delay": 0,
 		"respawn_timer": 0.3,
-		"decay": 0.01,
+		"decay": 0.03,
 		"difficulty_timer": 1.00,
 		"min_respawn_time": 0.01,
 		"wave_difficulty_ramp": 0.8

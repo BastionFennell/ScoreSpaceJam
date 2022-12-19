@@ -16,7 +16,7 @@ func _physics_process(_delta):
 
 
 func _pickUp():
-	player._on_damage(-1)
+	player._on_damage(-5)
 	queue_free()
 	
 

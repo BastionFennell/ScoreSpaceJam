@@ -104,8 +104,9 @@ script = ExtResource( 11 )
 script = ExtResource( 7 )
 
 [node name="Player" parent="." instance=ExtResource( 12 )]
-position = Vector2( 250, 250 )
+position = Vector2( 248, 251 )
 collision_mask = 8
+health = 50.0
 
 [node name="Node2D" type="Node2D" parent="Player"]
 position = Vector2( -250, -250 )
