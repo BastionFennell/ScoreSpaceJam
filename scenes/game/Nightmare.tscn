@@ -1,7 +1,8 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://scenes/game/World.gd" type="Script" id=1]
 [ext_resource path="res://assets/audio/Nightmare BG.mp3" type="AudioStream" id=2]
+[ext_resource path="res://scenes/game/Transition.gd" type="Script" id=3]
 [ext_resource path="res://assets/fonts/contrite_in_spirit.ttf" type="DynamicFontData" id=4]
 [ext_resource path="res://scenes/Pause Menu.gd" type="Script" id=6]
 [ext_resource path="res://scenes/EnemySpawner.gd" type="Script" id=7]
@@ -38,8 +39,40 @@ font_data = ExtResource( 4 )
 size = 25
 font_data = ExtResource( 4 )
 
+[sub_resource type="Animation" id=9]
+resource_name = "Fade in"
+tracks/0/type = "value"
+tracks/0/path = NodePath("../Transition/Screen/Rect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=8]
+resource_name = "Fade out"
+tracks/0/type = "value"
+tracks/0/path = NodePath("../Transition/Screen/Rect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 1 ) ]
+}
+
 [node name="World" type="Node2D"]
+position = Vector2( -1, 0 )
 script = ExtResource( 1 )
+round_length = 60.0
 
 [node name="Terrain Generator" type="Node" parent="."]
 script = ExtResource( 11 )
@@ -320,3 +353,18 @@ bus = "Music"
 
 [node name="ItemSpawner" type="Node2D" parent="."]
 script = ExtResource( 16 )
+
+[node name="Transition" type="AnimationPlayer" parent="."]
+pause_mode = 2
+root_node = NodePath("../ItemSpawner")
+"anims/Fade in" = SubResource( 9 )
+"anims/Fade out" = SubResource( 8 )
+script = ExtResource( 3 )
+
+[node name="Screen" type="CanvasLayer" parent="Transition"]
+layer = 2
+
+[node name="Rect" type="ColorRect" parent="Transition/Screen"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 1 )

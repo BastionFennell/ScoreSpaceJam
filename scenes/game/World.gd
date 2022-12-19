@@ -1,8 +1,12 @@
 extends Node2D
 
+export (float) var round_length = 120.00
+
 var controller_mode = false
 var time = 0;
 var time_stopped = false;
+
+signal round_finished
 
 func _ready():
 	get_node("/root/World/Player").set_health()
@@ -19,3 +23,7 @@ func _process(delta):
 
 	if !time_stopped:
 		time += delta
+	
+	if time > round_length && !time_stopped:
+		stop_time()
+		emit_signal("round_finished")

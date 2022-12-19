@@ -11,4 +11,4 @@ func _ready():
 
 func _process(delta):
 	if overlaps_body(player) && Input.is_action_just_pressed("ui_accept"):
-		get_tree().change_scene("res://scenes/game/Nightmare.tscn")
+		get_node("/root/World").leave_twilight()
