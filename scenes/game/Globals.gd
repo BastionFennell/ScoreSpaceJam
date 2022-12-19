@@ -4,7 +4,7 @@ signal inventory_updated
 signal has_interacted
 signal bought
 
-var selling = {
+var default_selling = {
 	"health": {
 		"price": {
 			"wood": 1
@@ -28,17 +28,20 @@ var selling = {
 		"upgrade": "damage"
 	}
 }
+var selling = default_selling.duplicate(true)
 
-var upgrades = {
+var default_upgrades = {
 	"damage": 0,
 	"health": 0,
 	"reload": 0
 }
+var upgrades = default_upgrades.duplicate(true)
 
-var inventory = {
+var default_inventory = {
 	"wood": 0,
 	"stone": 0
 }
+var inventory = default_inventory.duplicate(true)
 
 var days = 0
 var kills = 0
@@ -46,6 +49,11 @@ var has_interacted = false
 
 func _ready():
 	Engine.set_target_fps(Engine.get_iterations_per_second())
+
+func reset():
+	selling = default_selling.duplicate(true)
+	upgrades = default_upgrades.duplicate(true)
+	inventory = default_inventory.duplicate(true)
 
 func add_item(item, amount):
 	var new_amount = inventory[item] + amount if inventory[item] else amount

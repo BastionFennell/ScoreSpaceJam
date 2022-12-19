@@ -83,5 +83,6 @@ func _on_death():
 	get_tree().paused = true
 
 func _retry():
+	get_node("/root/Globals").reset()
 	get_tree().paused = false
-	get_tree().reload_current_scene()
+	get_tree().change_scene("res://Twilight.tscn")

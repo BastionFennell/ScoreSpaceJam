@@ -7,10 +7,8 @@ var items = { "wood": 0, "stone": 0 }
 func _ready():
 	globals = get_node("/root/Globals")
 
-	items["wood"] = globals.inventory.wood
-	items["stone"] = globals.inventory.stone
-
 	globals.connect("inventory_updated", self, "_on_inventory_updated")
+	_on_inventory_updated()
 
 func _update_inventory_text():
 	for i in items:
