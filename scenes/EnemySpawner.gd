@@ -8,7 +8,8 @@ var enemies = {
 		"respawn_timer": 0.3,
 		"decay": 0.01,
 		"difficulty_timer": 1.00,
-		"min_respawn_time": 0.01
+		"min_respawn_time": 0.01,
+		"wave_difficulty_ramp": 0.8
 	},
 	"demon": {
 		"node": preload("res://scenes/game/enemies/demon/Demon.tscn"),
@@ -16,7 +17,8 @@ var enemies = {
 		"respawn_timer": 1,
 		"decay": 0.1,
 		"difficulty_timer": 1.00,
-		"min_respawn_time": 0.1
+		"min_respawn_time": 0.1,
+		"wave_difficulty_ramp": 0.8
 	},
 	"oni": {
 		"node": preload("res://scenes/game/enemies/oni/Oni.tscn"),
@@ -24,14 +26,20 @@ var enemies = {
 		"respawn_timer": 2,
 		"decay": 0.1,
 		"difficulty_timer": 2.00,
-		"min_respawn_time": 0.3
+		"min_respawn_time": 0.3,
+		"wave_difficulty_ramp": 0.8
 	}
 }
 
 func _ready():
 	for i in enemies:
+		var days = get_node("/root/Globals").days
 		var enemy = enemies[i];
 		var timer = Timer.new()
+		enemy.min_respawn_time = max(enemy.min_respawn_time * pow(enemy.wave_difficulty_ramp, days), 0.01)
+		enemy.respawn_timer = max(enemy.respawn_timer * pow(enemy.wave_difficulty_ramp, days), 0.01)
+		enemy.delay = max(enemy.delay * pow(enemy.wave_difficulty_ramp, days), 0.01)
+
 		timer.one_shot = true
 		timer.wait_time = enemy.delay
 		timer.connect("timeout", self, "_spawn_enemy", [i]) 
