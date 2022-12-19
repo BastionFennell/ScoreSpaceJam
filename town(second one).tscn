@@ -81,6 +81,7 @@ texture = ExtResource( 2 )
 hframes = 7
 
 [node name="LongAroundIsland" type="KinematicBody2D" parent="."]
+collision_layer = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LongAroundIsland"]
 position = Vector2( -67, 8 )
@@ -117,7 +118,7 @@ shape = SubResource( 1 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 25, 55 )
-collision_mask = 12
+collision_mask = 1
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 current = true
@@ -131,8 +132,11 @@ limit_smoothed = true
 script = ExtResource( 3 )
 
 [node name="Axegun" parent="Player" instance=ExtResource( 4 )]
+collision_layer = 0
+collision_mask = 0
 
 [node name="smallAroundIsland" type="KinematicBody2D" parent="."]
+collision_layer = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="smallAroundIsland"]
 position = Vector2( 7, 30 )
@@ -265,6 +269,7 @@ position = Vector2( 32, 70 )
 shape = SubResource( 2 )
 
 [node name="HouseMiddle" type="KinematicBody2D" parent="."]
+collision_layer = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HouseMiddle"]
 position = Vector2( 36, -8 )
@@ -275,6 +280,7 @@ anims/RESET = SubResource( 4 )
 anims/animations = SubResource( 5 )
 
 [node name="npcs" type="KinematicBody2D" parent="."]
+collision_layer = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="npcs"]
 position = Vector2( 20, 4 )
@@ -289,6 +295,7 @@ position = Vector2( 83, 5 )
 shape = SubResource( 6 )
 
 [node name="tent" type="KinematicBody2D" parent="."]
+collision_layer = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="tent"]
 position = Vector2( 105.5, -7.5 )
@@ -303,6 +310,7 @@ position = Vector2( 105.5, -12 )
 shape = SubResource( 9 )
 
 [node name="anvil and healing pot" type="KinematicBody2D" parent="."]
+collision_layer = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="anvil and healing pot"]
 position = Vector2( 106, 15 )
@@ -313,6 +321,7 @@ position = Vector2( -52.5, 13.5 )
 shape = SubResource( 11 )
 
 [node name="flags" type="KinematicBody2D" parent="."]
+collision_layer = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="flags"]
 position = Vector2( -53, -8.25 )
@@ -327,6 +336,7 @@ position = Vector2( 81, -9 )
 shape = SubResource( 12 )
 
 [node name="Shrine" type="KinematicBody2D" parent="."]
+collision_layer = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Shrine"]
 position = Vector2( -25, -17 )

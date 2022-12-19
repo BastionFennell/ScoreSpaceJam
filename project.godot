@@ -149,6 +149,8 @@ controller_cancel={
 2d_physics/layer_1="Player"
 2d_physics/layer_2="Enemies"
 2d_physics/layer_3="Pickups"
+2d_physics/layer_4="Walls"
+2d_physics/layer_5="Weapons"
 
 [physics]
 
