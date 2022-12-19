@@ -473,7 +473,7 @@ script = ExtResource( 14 )
 item = "damage"
 
 [node name="Sprite" type="Sprite" parent="Prices/Damage"]
-position = Vector2( 21, -37 )
+position = Vector2( 21, -35 )
 texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 64, 0, 32, 32 )
@@ -514,7 +514,7 @@ script = ExtResource( 14 )
 item = "reload"
 
 [node name="Stone Sprite" type="Sprite" parent="Prices/Reload"]
-position = Vector2( 21, -37 )
+position = Vector2( 21, -35 )
 texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 64, 0, 32, 32 )
