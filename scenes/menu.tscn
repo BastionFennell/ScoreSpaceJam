@@ -31,6 +31,8 @@ margin_left = -222.0
 margin_top = 11.0
 margin_right = 222.0
 margin_bottom = 118.0
+focus_neighbour_bottom = NodePath("../Options")
+focus_next = NodePath("../Options")
 custom_fonts/font = SubResource( 3 )
 text = "Start Game"
 script = ExtResource( 3 )
@@ -44,6 +46,8 @@ margin_left = -222.0
 margin_top = 144.0
 margin_right = 222.0
 margin_bottom = 251.0
+focus_neighbour_top = NodePath("../Start Button")
+focus_previous = NodePath("../Start Button")
 custom_fonts/font = SubResource( 3 )
 text = "Options"
 script = ExtResource( 4 )
@@ -72,15 +76,21 @@ margin_top = -175.0
 margin_right = 108.0
 margin_bottom = 13.0
 
-[node name="Back" type="Button" parent="Options"]
+[node name="NinePatchRect" type="NinePatchRect" parent="Options/Volume Sliders"]
+margin_top = 192.0
+margin_right = 520.0
+margin_bottom = 292.0
+rect_min_size = Vector2( 520, 100 )
+
+[node name="Back" type="Button" parent="Options/Volume Sliders/NinePatchRect"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -132.0
-margin_top = 89.0
-margin_right = 132.0
-margin_bottom = 163.0
+margin_left = -175.0
+margin_top = -37.0
+margin_right = 175.0
+margin_bottom = 37.0
 custom_fonts/font = SubResource( 3 )
 text = "Back"
 script = ExtResource( 5 )

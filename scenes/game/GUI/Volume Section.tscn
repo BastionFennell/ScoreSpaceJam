@@ -33,5 +33,4 @@ margin_right = 506.0
 margin_bottom = 39.0
 rect_min_size = Vector2( 200, 0 )
 value = 100.0
-scrollable = false
 tick_count = 10

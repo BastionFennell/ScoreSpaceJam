@@ -28,7 +28,6 @@ window/stretch/aspect="keep"
 vim=false
 layer=false
 audio=false
-controller=false
 
 [gui]
 

@@ -592,6 +592,7 @@ custom_fonts/font = SubResource( 18 )
 text = "0"
 
 [node name="Pause Menu" parent="." instance=ExtResource( 10 )]
+visible = false
 
 [node name="Transition" type="AnimationPlayer" parent="."]
 pause_mode = 2
