@@ -12,24 +12,25 @@ margin_bottom = 202.0
 
 [node name="Main Volume Section" parent="." instance=ExtResource( 3 )]
 margin_right = 264.0
-rect_min_size = Vector2( 264, 28 )
+margin_bottom = 60.0
+rect_min_size = Vector2( 264, 60 )
 focus_neighbour_bottom = NodePath("../Music Volume Section")
 focus_next = NodePath("../Music Volume Section")
 audio_bus = "Master"
 
 [node name="Music Volume Section" parent="." instance=ExtResource( 2 )]
-margin_top = 32.0
-margin_bottom = 60.0
+margin_top = 64.0
+margin_bottom = 124.0
 focus_neighbour_top = NodePath("../Main Volume Section")
 focus_neighbour_bottom = NodePath("../SFX Volume Section")
 focus_next = NodePath("../SFX Volume Section")
 focus_previous = NodePath("../Main Volume Section")
 
 [node name="SFX Volume Section" parent="." instance=ExtResource( 4 )]
-margin_top = 64.0
+margin_top = 128.0
 margin_right = 264.0
-margin_bottom = 92.0
-rect_min_size = Vector2( 264, 28 )
+margin_bottom = 188.0
+rect_min_size = Vector2( 264, 60 )
 focus_neighbour_top = NodePath("../Music Volume Section")
 focus_previous = NodePath("../Music Volume Section")
 audio_bus = "SFX"

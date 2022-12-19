@@ -4,7 +4,7 @@
 [ext_resource path="res://assets/fonts/contrite_in_spirit.ttf" type="DynamicFontData" id=2]
 
 [sub_resource type="DynamicFont" id=2]
-size = 24
+size = 50
 outline_size = 5
 outline_color = Color( 0.352941, 0.0352941, 0.0352941, 1 )
 font_data = ExtResource( 2 )
@@ -12,7 +12,7 @@ font_data = ExtResource( 2 )
 [node name="Volume Section" type="NinePatchRect"]
 margin_right = 350.0
 margin_bottom = 28.0
-rect_min_size = Vector2( 350, 28 )
+rect_min_size = Vector2( 350, 60 )
 size_flags_horizontal = 2
 size_flags_vertical = 2
 script = ExtResource( 1 )
@@ -27,10 +27,10 @@ text = "Music Volume"
 [node name="Volume Slider" type="HSlider" parent="."]
 anchor_top = 0.5
 anchor_bottom = 0.5
-margin_left = 132.0
-margin_top = -8.0
-margin_right = 332.0
-margin_bottom = 8.0
+margin_left = 248.0
+margin_top = -30.0
+margin_right = 506.0
+margin_bottom = 39.0
 rect_min_size = Vector2( 200, 0 )
 value = 100.0
 scrollable = false

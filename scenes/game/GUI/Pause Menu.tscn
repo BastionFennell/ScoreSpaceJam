@@ -10,7 +10,6 @@ font_data = ExtResource( 2 )
 
 [node name="Pause Menu" type="CanvasLayer"]
 pause_mode = 2
-visible = false
 script = ExtResource( 1 )
 
 [node name="Background" type="ColorRect" parent="."]
@@ -30,9 +29,11 @@ margin_top = 134.0
 margin_right = 803.0
 margin_bottom = 452.0
 
-[node name="Volume Sliders" type="VBoxContainer" parent="Grid" instance=ExtResource( 3 )]
-margin_right = 350.0
-margin_bottom = 92.0
+[node name="Volume Sliders" parent="Grid" instance=ExtResource( 3 )]
+margin_left = 39.0
+margin_top = 41.0
+margin_right = 389.0
+margin_bottom = 229.0
 
 [node name="Resume" type="Button" parent="Grid"]
 anchor_left = 0.5

@@ -51,16 +51,26 @@ script = ExtResource( 4 )
 [node name="Options" type="CanvasLayer" parent="."]
 visible = false
 
+[node name="ColorRect" type="ColorRect" parent="Options"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -356.0
+margin_top = -208.5
+margin_right = 356.0
+margin_bottom = 208.5
+color = Color( 0.14902, 0.00784314, 0.00784314, 1 )
+
 [node name="Volume Sliders" parent="Options" instance=ExtResource( 1 )]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -313.0
-margin_top = -157.0
-margin_right = -49.0
-margin_bottom = -65.0
-rect_scale = Vector2( 2, 2 )
+margin_left = -242.0
+margin_top = -175.0
+margin_right = 108.0
+margin_bottom = 13.0
 
 [node name="Back" type="Button" parent="Options"]
 anchor_left = 0.5

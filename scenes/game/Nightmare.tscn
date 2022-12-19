@@ -134,6 +134,7 @@ script = ExtResource( 8 )
 margin_bottom = 68.0
 
 [node name="Pause Menu" parent="." instance=ExtResource( 5 )]
+visible = false
 
 [node name="Game Over Screen" type="CanvasLayer" parent="."]
 pause_mode = 2
