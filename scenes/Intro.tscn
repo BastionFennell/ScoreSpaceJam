@@ -38,7 +38,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 4, 8, 12, 16, 20, 24, 28, 32, 34, 36 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ "Long ago, in a now forgotten temple", "There lived a set of monks who trained every day", "To fight nightmares that never came to be", "One by one, they all gave up", "Believing that the prophecy had been false", "When the prophecy did come to be", "There was no one left to save the world", "No one...", "Except you!", "And this gun you found!", "" ]
+"values": [ "Long ago, in a now forgotten temple", "There lived a sect of monks who trained every day", "To fight nightmares that never came to be", "One by one, they all gave up", "Believing that the prophecy had been false", "When the prophecy did finally come true", "There was no one left to save the world", "No one...", "Except you!", "And this gun you found!", "" ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("CanvasLayer/Fade:color")
@@ -158,7 +158,7 @@ align = 1
 [node name="Fade" type="ColorRect" parent="CanvasLayer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color( 0, 0, 0, 1 )
+color = Color( 0, 0, 0, 0 )
 
 [node name="Text Fade" type="ColorRect" parent="CanvasLayer"]
 margin_left = -41.0
