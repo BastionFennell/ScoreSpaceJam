@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=2]
+[gd_scene load_steps=42 format=2]
 
 [ext_resource path="res://assets/sprites/resources/wood.png" type="Texture" id=1]
 [ext_resource path="res://assets/sprites/resources/stone.png" type="Texture" id=2]
@@ -12,11 +12,15 @@
 [ext_resource path="res://scenes/game/GUI/Pause Menu.tscn" type="PackedScene" id=10]
 [ext_resource path="res://assets/sprites/interact bubble.png" type="Texture" id=11]
 [ext_resource path="res://scenes/game/weapons/Axegun.tscn" type="PackedScene" id=12]
+[ext_resource path="res://assets/sprites/resource area.png" type="Texture" id=13]
 [ext_resource path="res://Prices.gd" type="Script" id=14]
 [ext_resource path="res://scenes/Camera2D.gd" type="Script" id=15]
 [ext_resource path="res://assets/sprites/extraWater.png" type="Texture" id=16]
 [ext_resource path="res://Vendor.gd" type="Script" id=17]
 [ext_resource path="res://scenes/game/characters/player/player.tscn" type="PackedScene" id=18]
+[ext_resource path="res://scenes/game/town/Stone Spawner.gd" type="Script" id=19]
+[ext_resource path="res://scenes/game/town/Tree Spawner.gd" type="Script" id=20]
+[ext_resource path="res://scenes/game/drops/ItemSpawner.gd" type="Script" id=21]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 1.5, 26 )
@@ -102,12 +106,6 @@ extents = Vector2( 5.5, 1.5 )
 [sub_resource type="RectangleShape2D" id=9]
 extents = Vector2( 2.5, 1.5 )
 
-[sub_resource type="RectangleShape2D" id=10]
-extents = Vector2( 7.25, 5 )
-
-[sub_resource type="RectangleShape2D" id=11]
-extents = Vector2( 4.5, 3.5 )
-
 [sub_resource type="RectangleShape2D" id=12]
 extents = Vector2( 2, 5.75 )
 
@@ -155,6 +153,12 @@ tracks/0/keys = {
 "values": [ Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 1 ) ]
 }
 
+[sub_resource type="RectangleShape2D" id=21]
+extents = Vector2( 42.5, 37.5 )
+
+[sub_resource type="RectangleShape2D" id=22]
+extents = Vector2( 45.5938, 38 )
+
 [node name="World" type="Node2D"]
 script = ExtResource( 7 )
 
@@ -162,6 +166,18 @@ script = ExtResource( 7 )
 position = Vector2( 23, 68 )
 texture = ExtResource( 8 )
 hframes = 7
+
+[node name="Resources2" type="Sprite" parent="."]
+position = Vector2( 142, 83 )
+texture = ExtResource( 13 )
+region_enabled = true
+region_rect = Rect2( 107, 0, 107, 108 )
+
+[node name="Resources" type="Sprite" parent="."]
+position = Vector2( -88, 83 )
+texture = ExtResource( 13 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 107, 108 )
 
 [node name="LongAroundIsland" type="KinematicBody2D" parent="."]
 collision_layer = 8
@@ -189,15 +205,12 @@ position = Vector2( 93, -20 )
 rotation = 1.5708
 shape = SubResource( 1 )
 
-[node name="CollisionShape2D6" type="CollisionShape2D" parent="LongAroundIsland"]
-position = Vector2( -39, 30 )
-rotation = 1.5708
-shape = SubResource( 1 )
+[node name="CollisionShape2D8" type="CollisionPolygon2D" parent="LongAroundIsland"]
+position = Vector2( -230, 0 )
+polygon = PoolVector2Array( 67, 33, 166, 33, 166, 46, 88, 47, 88, 134, 196, 134, 196, 47, 189, 47, 189, 33, 219, 33, 207, 154, 67, 154 )
 
-[node name="CollisionShape2D7" type="CollisionShape2D" parent="LongAroundIsland"]
-position = Vector2( 93, 30 )
-rotation = 1.5708
-shape = SubResource( 1 )
+[node name="CollisionShape2D7" type="CollisionPolygon2D" parent="LongAroundIsland"]
+polygon = PoolVector2Array( 66, 33, 98, 33, 98, 47, 88, 47, 88, 134, 196, 134, 196, 47, 116, 47, 116, 33, 208, 33, 207, 154, 67, 154 )
 
 [node name="Player" parent="." instance=ExtResource( 18 )]
 position = Vector2( 26, 19 )
@@ -229,8 +242,6 @@ limit_smoothed = true
 script = ExtResource( 15 )
 
 [node name="Axegun" parent="Player" instance=ExtResource( 12 )]
-collision_layer = 0
-collision_mask = 0
 
 [node name="smallAroundIsland" type="KinematicBody2D" parent="."]
 collision_layer = 8
@@ -418,17 +429,6 @@ shape = SubResource( 8 )
 position = Vector2( 105.5, -12 )
 shape = SubResource( 9 )
 
-[node name="anvil and healing pot" type="KinematicBody2D" parent="."]
-collision_layer = 8
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="anvil and healing pot"]
-position = Vector2( 106, 15 )
-shape = SubResource( 10 )
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="anvil and healing pot"]
-position = Vector2( -52.5, 13.5 )
-shape = SubResource( 11 )
-
 [node name="flags" type="KinematicBody2D" parent="."]
 collision_layer = 8
 
@@ -455,35 +455,9 @@ shape = SubResource( 13 )
 [node name="extrawater" type="Node2D" parent="."]
 
 [node name="ExtraWater" type="Sprite" parent="extrawater"]
-position = Vector2( 216, 113 )
-texture = ExtResource( 16 )
-
-[node name="ExtraWater2" type="Sprite" parent="extrawater"]
-position = Vector2( 216, 9 )
-texture = ExtResource( 16 )
-
-[node name="ExtraWater3" type="Sprite" parent="extrawater"]
-position = Vector2( 212, -128 )
-texture = ExtResource( 16 )
-
-[node name="ExtraWater4" type="Sprite" parent="extrawater"]
-position = Vector2( 94, -121 )
-texture = ExtResource( 16 )
-
-[node name="ExtraWater5" type="Sprite" parent="extrawater"]
-position = Vector2( -39, -126 )
-texture = ExtResource( 16 )
-
-[node name="ExtraWater6" type="Sprite" parent="extrawater"]
-position = Vector2( -170, 121 )
-texture = ExtResource( 16 )
-
-[node name="ExtraWater7" type="Sprite" parent="extrawater"]
-position = Vector2( -170, 7 )
-texture = ExtResource( 16 )
-
-[node name="ExtraWater8" type="Sprite" parent="extrawater"]
-position = Vector2( -183, -104 )
+position = Vector2( 43, 66 )
+scale = Vector2( 4.57333, 4.46 )
+z_index = -1000
 texture = ExtResource( 16 )
 
 [node name="Buy Health" type="Node2D" parent="."]
@@ -624,8 +598,34 @@ script = ExtResource( 5 )
 
 [node name="Screen" type="CanvasLayer" parent="Transition"]
 layer = 7
+visible = false
 
 [node name="Rect" type="ColorRect" parent="Transition/Screen"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 0, 0, 0, 1 )
+
+[node name="Stone Spawner" type="Node2D" parent="."]
+position = Vector2( 99, 51 )
+script = ExtResource( 19 )
+
+[node name="Area2D" type="Area2D" parent="Stone Spawner"]
+position = Vector2( 0, 5 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Stone Spawner/Area2D"]
+position = Vector2( 43.5, 37.5 )
+shape = SubResource( 21 )
+
+[node name="Tree Spawner" type="Node2D" parent="."]
+position = Vector2( 82, 15 )
+script = ExtResource( 20 )
+
+[node name="Area2D" type="Area2D" parent="Tree Spawner"]
+position = Vector2( -217, 40 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Tree Spawner/Area2D"]
+position = Vector2( 45.4062, 38 )
+shape = SubResource( 22 )
+
+[node name="ItemSpawner" type="Node2D" parent="."]
+script = ExtResource( 21 )
