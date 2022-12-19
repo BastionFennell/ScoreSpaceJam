@@ -3,7 +3,10 @@ extends Node2D
 func _ready():
 	var animator = get_node("Animator")
 	animator.play("Intro")
-	animator.connect("animation_finished", self, "_go_to_menu")
+	animator.connect("animation_finished", self, "_on_animation_finished")
+
+func _on_animation_finished(_unused):
+	_go_to_menu()
 
 func _go_to_menu():
 	get_tree().change_scene("res://scenes/menu.tscn")
