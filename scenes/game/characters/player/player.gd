@@ -2,7 +2,7 @@ extends KinematicBody2D
 
 export (int) var speed = 1000
 export (float) var health = 100.00
-export (int) var health_upgrade = 0
+export (int) var health_upgrade = 10
 
 signal health_change
 signal player_death 
@@ -12,6 +12,9 @@ var touching = 0;
 var playing = true;
 
 func _ready():
+	set_health()
+
+func set_health():
 	var upgrades = get_node("/root/Globals").upgrades
 
 	health += health_upgrade * upgrades.health

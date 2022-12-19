@@ -9,4 +9,4 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	if overlaps_body(player):
-		get_tree().change_scene("res://scenes/game/Nightmare.tscn")
+		get_tree().change_scene("res://Twilight.tscn")

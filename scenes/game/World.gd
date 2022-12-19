@@ -4,6 +4,9 @@ var controller_mode = false
 var time = 0;
 var time_stopped = false;
 
+func _ready():
+	get_node("/root/World/Player").set_health()
+
 func stop_time():
 	time_stopped = true
 
