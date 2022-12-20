@@ -1,42 +1,42 @@
 [gd_scene load_steps=21 format=2]
 
-[ext_resource path="res://scenes/game/World.gd" type="Script" id=1]
-[ext_resource path="res://assets/audio/Nightmare BG.mp3" type="AudioStream" id=2]
-[ext_resource path="res://scenes/game/Transition.gd" type="Script" id=3]
-[ext_resource path="res://assets/fonts/contrite_in_spirit.ttf" type="DynamicFontData" id=4]
-[ext_resource path="res://scenes/game/GUI/Pause Menu.tscn" type="PackedScene" id=5]
-[ext_resource path="res://scenes/EnemySpawner.gd" type="Script" id=7]
-[ext_resource path="res://scenes/Camera2D.gd" type="Script" id=8]
-[ext_resource path="res://scenes/game over.gd" type="Script" id=9]
-[ext_resource path="res://scenes/game/Terrain Generator.gd" type="Script" id=11]
-[ext_resource path="res://scenes/game/characters/player/player.tscn" type="PackedScene" id=12]
+[ext_resource path="res://scenes/Camera2D.gd" type="Script" id=1]
+[ext_resource path="res://scenes/game/nightmare/game over.gd" type="Script" id=2]
+[ext_resource path="res://scenes/game/nightmare/Terrain Generator.gd" type="Script" id=3]
+[ext_resource path="res://scenes/game/drops/ItemSpawner.gd" type="Script" id=4]
+[ext_resource path="res://assets/audio/songs/Nightmare BG.mp3" type="AudioStream" id=5]
+[ext_resource path="res://scenes/game/characters/player/player.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/game/GUI/GUI.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scenes/game/GUI/Pause Menu.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/game/nightmare/EnemySpawner.gd" type="Script" id=9]
+[ext_resource path="res://assets/fonts/contrite_in_spirit.ttf" type="DynamicFontData" id=10]
+[ext_resource path="res://scenes/game/Transition.gd" type="Script" id=11]
+[ext_resource path="res://scenes/game/nightmare/Nightmare.gd" type="Script" id=12]
 [ext_resource path="res://scenes/game/weapons/Shotgun.tscn" type="PackedScene" id=13]
-[ext_resource path="res://scenes/game/GUI/GUI.tscn" type="PackedScene" id=14]
-[ext_resource path="res://scenes/game/drops/ItemSpawner.gd" type="Script" id=16]
 
 [sub_resource type="DynamicFont" id=2]
 size = 50
 outline_size = 5
 outline_color = Color( 0.352941, 0.0352941, 0.0352941, 1 )
-font_data = ExtResource( 4 )
+font_data = ExtResource( 10 )
 
 [sub_resource type="DynamicFont" id=5]
 size = 30
 outline_size = 5
 outline_color = Color( 0.352941, 0.0352941, 0.0352941, 1 )
-font_data = ExtResource( 4 )
+font_data = ExtResource( 10 )
 
 [sub_resource type="DynamicFont" id=6]
 size = 25
-font_data = ExtResource( 4 )
+font_data = ExtResource( 10 )
 
 [sub_resource type="DynamicFont" id=7]
 size = 25
-font_data = ExtResource( 4 )
+font_data = ExtResource( 10 )
 
 [sub_resource type="DynamicFont" id=1]
 size = 30
-font_data = ExtResource( 4 )
+font_data = ExtResource( 10 )
 
 [sub_resource type="Animation" id=9]
 resource_name = "Fade in"
@@ -94,16 +94,16 @@ tracks/1/keys = {
 
 [node name="World" type="Node2D"]
 position = Vector2( -1, 0 )
-script = ExtResource( 1 )
+script = ExtResource( 12 )
 round_length = 60.0
 
 [node name="Terrain Generator" type="Node" parent="."]
-script = ExtResource( 11 )
+script = ExtResource( 3 )
 
 [node name="EnemySpawner" type="Node2D" parent="."]
-script = ExtResource( 7 )
+script = ExtResource( 9 )
 
-[node name="Player" parent="." instance=ExtResource( 12 )]
+[node name="Player" parent="." instance=ExtResource( 6 )]
 position = Vector2( 248, 251 )
 collision_mask = 8
 health = 50.0
@@ -125,22 +125,22 @@ zoom = Vector2( 0.25, 0.25 )
 process_mode = 0
 limit_smoothed = true
 smoothing_enabled = true
-script = ExtResource( 8 )
+script = ExtResource( 1 )
 
 [node name="Shotgun" parent="Player" instance=ExtResource( 13 )]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="GUI" parent="CanvasLayer" instance=ExtResource( 14 )]
+[node name="GUI" parent="CanvasLayer" instance=ExtResource( 7 )]
 margin_bottom = 68.0
 
-[node name="Pause Menu" parent="." instance=ExtResource( 5 )]
+[node name="Pause Menu" parent="." instance=ExtResource( 8 )]
 visible = false
 
 [node name="Game Over Screen" type="CanvasLayer" parent="."]
 pause_mode = 2
 visible = false
-script = ExtResource( 9 )
+script = ExtResource( 2 )
 
 [node name="Background" type="ColorRect" parent="Game Over Screen"]
 anchor_right = 1.0
@@ -335,19 +335,19 @@ align = 2
 
 [node name="BG Music" type="AudioStreamPlayer" parent="."]
 pause_mode = 2
-stream = ExtResource( 2 )
+stream = ExtResource( 5 )
 autoplay = true
 bus = "Music"
 
 [node name="ItemSpawner" type="Node2D" parent="."]
-script = ExtResource( 16 )
+script = ExtResource( 4 )
 
 [node name="Transition" type="AnimationPlayer" parent="."]
 pause_mode = 2
 root_node = NodePath("../ItemSpawner")
 "anims/Fade in" = SubResource( 9 )
 "anims/Fade out" = SubResource( 8 )
-script = ExtResource( 3 )
+script = ExtResource( 11 )
 
 [node name="Screen" type="CanvasLayer" parent="Transition"]
 layer = 2

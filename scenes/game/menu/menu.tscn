@@ -1,13 +1,13 @@
 [gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://scenes/game/GUI/Volume Sliders.tscn" type="PackedScene" id=1]
-[ext_resource path="res://assets/audio/Title.wav" type="AudioStream" id=2]
-[ext_resource path="res://scenes/Start Button.gd" type="Script" id=3]
-[ext_resource path="res://scenes/Options.gd" type="Script" id=4]
-[ext_resource path="res://scenes/Back.gd" type="Script" id=5]
+[ext_resource path="res://assets/audio/songs/Title.wav" type="AudioStream" id=2]
+[ext_resource path="res://scenes/game/menu/Start Button.gd" type="Script" id=3]
+[ext_resource path="res://scenes/game/menu/Options.gd" type="Script" id=4]
+[ext_resource path="res://scenes/game/menu/Back.gd" type="Script" id=5]
 [ext_resource path="res://assets/fonts/contrite_in_spirit.ttf" type="DynamicFontData" id=6]
 [ext_resource path="res://assets/sprites/Intro/intro27.png" type="Texture" id=7]
-[ext_resource path="res://assets/audio/menu.wav" type="AudioStream" id=8]
+[ext_resource path="res://assets/audio/songs/menu.wav" type="AudioStream" id=8]
 
 [sub_resource type="DynamicFont" id=3]
 size = 60

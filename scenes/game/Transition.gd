@@ -20,7 +20,7 @@ func _on_round_finished():
 func _on_animation_finished(name):
 	if name == "Fade out":
 		get_tree().paused = false
-		get_tree().change_scene("res://Twilight.tscn")
+		get_tree().change_scene("res://scenes/game/town/Twilight.tscn")
 
 func _on_leave_twilight():
 	get_tree().paused = true
@@ -29,4 +29,4 @@ func _on_leave_twilight():
 func _on_twilight_animation_finished(name):
 	if name == "Fade out":
 		get_tree().paused = false
-		get_tree().change_scene("res://scenes/game/Nightmare.tscn")
+		get_tree().change_scene("res://scenes/game/nightmare/Nightmare.tscn")

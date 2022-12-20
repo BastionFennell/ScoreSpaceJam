@@ -1,26 +1,26 @@
 [gd_scene load_steps=42 format=2]
 
-[ext_resource path="res://assets/sprites/resources/spritesheet.png" type="Texture" id=1]
-[ext_resource path="res://assets/audio/songs/Town.wav" type="AudioStream" id=2]
-[ext_resource path="res://Shrine.gd" type="Script" id=3]
-[ext_resource path="res://How to Interact.gd" type="Script" id=4]
-[ext_resource path="res://scenes/game/Transition.gd" type="Script" id=5]
+[ext_resource path="res://assets/sprites/town.png" type="Texture" id=1]
+[ext_resource path="res://scenes/Camera2D.gd" type="Script" id=2]
+[ext_resource path="res://scenes/game/drops/ItemSpawner.gd" type="Script" id=3]
+[ext_resource path="res://scenes/game/town/Twilight.gd" type="Script" id=4]
+[ext_resource path="res://assets/sprites/resources/spritesheet.png" type="Texture" id=5]
 [ext_resource path="res://scenes/game/town/Inventory GUI.gd" type="Script" id=6]
-[ext_resource path="res://Twilight.gd" type="Script" id=7]
-[ext_resource path="res://assets/sprites/town.png" type="Texture" id=8]
-[ext_resource path="res://assets/fonts/contrite_in_spirit.ttf" type="DynamicFontData" id=9]
-[ext_resource path="res://scenes/game/GUI/Pause Menu.tscn" type="PackedScene" id=10]
-[ext_resource path="res://assets/sprites/interact bubble.png" type="Texture" id=11]
-[ext_resource path="res://scenes/game/weapons/Axegun.tscn" type="PackedScene" id=12]
-[ext_resource path="res://assets/sprites/resource area.png" type="Texture" id=13]
-[ext_resource path="res://Prices.gd" type="Script" id=14]
-[ext_resource path="res://scenes/Camera2D.gd" type="Script" id=15]
+[ext_resource path="res://scenes/game/town/Shrine.gd" type="Script" id=7]
+[ext_resource path="res://scenes/game/characters/player/player.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/game/town/How to Interact.gd" type="Script" id=9]
+[ext_resource path="res://assets/fonts/contrite_in_spirit.ttf" type="DynamicFontData" id=10]
+[ext_resource path="res://scenes/game/Transition.gd" type="Script" id=11]
+[ext_resource path="res://scenes/game/town/Tree Spawner.gd" type="Script" id=12]
+[ext_resource path="res://assets/sprites/interact bubble.png" type="Texture" id=13]
+[ext_resource path="res://assets/sprites/resource area.png" type="Texture" id=14]
+[ext_resource path="res://scenes/game/town/Prices.gd" type="Script" id=15]
 [ext_resource path="res://assets/sprites/extraWater.png" type="Texture" id=16]
-[ext_resource path="res://Vendor.gd" type="Script" id=17]
-[ext_resource path="res://scenes/game/characters/player/player.tscn" type="PackedScene" id=18]
-[ext_resource path="res://scenes/game/town/Stone Spawner.gd" type="Script" id=19]
-[ext_resource path="res://scenes/game/town/Tree Spawner.gd" type="Script" id=20]
-[ext_resource path="res://scenes/game/drops/ItemSpawner.gd" type="Script" id=21]
+[ext_resource path="res://scenes/game/town/Vendor.gd" type="Script" id=17]
+[ext_resource path="res://scenes/game/town/Stone Spawner.gd" type="Script" id=18]
+[ext_resource path="res://scenes/game/GUI/Pause Menu.tscn" type="PackedScene" id=19]
+[ext_resource path="res://assets/audio/songs/Town.wav" type="AudioStream" id=20]
+[ext_resource path="res://scenes/game/weapons/Axegun.tscn" type="PackedScene" id=21]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 1.5, 26 )
@@ -113,15 +113,15 @@ extents = Vector2( 2, 5.75 )
 extents = Vector2( 8.5, 7.5 )
 
 [sub_resource type="DynamicFont" id=15]
-font_data = ExtResource( 9 )
+font_data = ExtResource( 10 )
 
 [sub_resource type="DynamicFont" id=17]
 size = 30
-font_data = ExtResource( 9 )
+font_data = ExtResource( 10 )
 
 [sub_resource type="DynamicFont" id=18]
 size = 30
-font_data = ExtResource( 9 )
+font_data = ExtResource( 10 )
 
 [sub_resource type="Animation" id=20]
 resource_name = "Fade in"
@@ -160,22 +160,22 @@ extents = Vector2( 42.5, 37.5 )
 extents = Vector2( 45.5938, 38 )
 
 [node name="World" type="Node2D"]
-script = ExtResource( 7 )
+script = ExtResource( 4 )
 
 [node name="TownSprite" type="Sprite" parent="."]
 position = Vector2( 23, 68 )
-texture = ExtResource( 8 )
+texture = ExtResource( 1 )
 hframes = 7
 
 [node name="Resources2" type="Sprite" parent="."]
 position = Vector2( 142, 83 )
-texture = ExtResource( 13 )
+texture = ExtResource( 14 )
 region_enabled = true
 region_rect = Rect2( 107, 0, 107, 108 )
 
 [node name="Resources" type="Sprite" parent="."]
 position = Vector2( -88, 83 )
-texture = ExtResource( 13 )
+texture = ExtResource( 14 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 107, 108 )
 
@@ -212,13 +212,13 @@ polygon = PoolVector2Array( 67, 33, 166, 33, 166, 46, 88, 47, 88, 134, 196, 134,
 [node name="CollisionShape2D7" type="CollisionPolygon2D" parent="LongAroundIsland"]
 polygon = PoolVector2Array( 66, 33, 98, 33, 98, 47, 88, 47, 88, 134, 196, 134, 196, 47, 116, 47, 116, 33, 208, 33, 207, 154, 67, 154 )
 
-[node name="Player" parent="." instance=ExtResource( 18 )]
+[node name="Player" parent="." instance=ExtResource( 8 )]
 position = Vector2( 26, 19 )
 collision_mask = 1
 
 [node name="How to Interact" type="Node2D" parent="Player"]
 position = Vector2( -25, -55 )
-script = ExtResource( 4 )
+script = ExtResource( 9 )
 
 [node name="Fader" type="AnimationPlayer" parent="Player/How to Interact"]
 root_node = NodePath("../Pop Up")
@@ -228,7 +228,7 @@ root_node = NodePath("../Pop Up")
 [node name="Pop Up" type="Sprite" parent="Player/How to Interact"]
 modulate = Color( 1, 1, 1, 0 )
 position = Vector2( 26, 36 )
-texture = ExtResource( 11 )
+texture = ExtResource( 13 )
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 current = true
@@ -239,9 +239,9 @@ limit_top = -228
 limit_right = 296
 limit_bottom = 275
 limit_smoothed = true
-script = ExtResource( 15 )
+script = ExtResource( 2 )
 
-[node name="Axegun" parent="Player" instance=ExtResource( 12 )]
+[node name="Axegun" parent="Player" instance=ExtResource( 21 )]
 
 [node name="smallAroundIsland" type="KinematicBody2D" parent="."]
 collision_layer = 8
@@ -446,7 +446,7 @@ shape = SubResource( 12 )
 
 [node name="Shrine" type="Area2D" parent="."]
 collision_layer = 8
-script = ExtResource( 3 )
+script = ExtResource( 7 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Shrine"]
 position = Vector2( 25.5, 59.5 )
@@ -470,12 +470,12 @@ texture = ExtResource( 16 )
 margin_left = 67.0
 margin_right = 107.0
 margin_bottom = 40.0
-script = ExtResource( 14 )
+script = ExtResource( 15 )
 item = "damage"
 
 [node name="Sprite" type="Sprite" parent="Prices/Damage"]
 position = Vector2( 21, -35 )
-texture = ExtResource( 1 )
+texture = ExtResource( 5 )
 region_enabled = true
 region_rect = Rect2( 64, 0, 32, 32 )
 
@@ -490,12 +490,12 @@ text = "x2"
 [node name="Health" type="NinePatchRect" parent="Prices"]
 margin_right = 40.0
 margin_bottom = 40.0
-script = ExtResource( 14 )
+script = ExtResource( 15 )
 item = "health"
 
 [node name="Sprite" type="Sprite" parent="Prices/Health"]
 position = Vector2( 21, -36 )
-texture = ExtResource( 1 )
+texture = ExtResource( 5 )
 region_enabled = true
 region_rect = Rect2( 256, 0, 32, 32 )
 
@@ -511,12 +511,12 @@ text = "x2"
 margin_left = -49.0
 margin_right = -9.0
 margin_bottom = 40.0
-script = ExtResource( 14 )
+script = ExtResource( 15 )
 item = "reload"
 
 [node name="Stone Sprite" type="Sprite" parent="Prices/Reload"]
 position = Vector2( 21, -35 )
-texture = ExtResource( 1 )
+texture = ExtResource( 5 )
 region_enabled = true
 region_rect = Rect2( 64, 0, 32, 32 )
 
@@ -530,7 +530,7 @@ text = "x2"
 
 [node name="Wood Sprite" type="Sprite" parent="Prices/Reload"]
 position = Vector2( -13, -36 )
-texture = ExtResource( 1 )
+texture = ExtResource( 5 )
 region_enabled = true
 region_rect = Rect2( 256, 0, 32, 32 )
 
@@ -559,7 +559,7 @@ margin_bottom = 85.0
 [node name="Wood Sprite" type="Sprite" parent="Inventory GUI/wood GUI"]
 position = Vector2( -13, 23 )
 scale = Vector2( 2, 2 )
-texture = ExtResource( 1 )
+texture = ExtResource( 5 )
 region_enabled = true
 region_rect = Rect2( 256, 0, 32, 32 )
 
@@ -580,7 +580,7 @@ margin_bottom = 53.0
 [node name="Stone Sprite" type="Sprite" parent="Inventory GUI/stone GUI"]
 position = Vector2( -13, 24 )
 scale = Vector2( 2, 2 )
-texture = ExtResource( 1 )
+texture = ExtResource( 5 )
 region_enabled = true
 region_rect = Rect2( 64, 0, 32, 32 )
 
@@ -592,14 +592,14 @@ custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_fonts/font = SubResource( 18 )
 text = "0"
 
-[node name="Pause Menu" parent="." instance=ExtResource( 10 )]
+[node name="Pause Menu" parent="." instance=ExtResource( 19 )]
 visible = false
 
 [node name="Transition" type="AnimationPlayer" parent="."]
 pause_mode = 2
 "anims/Fade in" = SubResource( 20 )
 "anims/Fade out" = SubResource( 19 )
-script = ExtResource( 5 )
+script = ExtResource( 11 )
 
 [node name="Screen" type="CanvasLayer" parent="Transition"]
 layer = 7
@@ -612,7 +612,7 @@ color = Color( 0, 0, 0, 1 )
 
 [node name="Stone Spawner" type="Node2D" parent="."]
 position = Vector2( 99, 51 )
-script = ExtResource( 19 )
+script = ExtResource( 18 )
 
 [node name="Area2D" type="Area2D" parent="Stone Spawner"]
 position = Vector2( 0, 5 )
@@ -623,7 +623,7 @@ shape = SubResource( 21 )
 
 [node name="Tree Spawner" type="Node2D" parent="."]
 position = Vector2( 82, 15 )
-script = ExtResource( 20 )
+script = ExtResource( 12 )
 
 [node name="Area2D" type="Area2D" parent="Tree Spawner"]
 position = Vector2( -217, 40 )
@@ -633,8 +633,8 @@ position = Vector2( 45.4062, 38 )
 shape = SubResource( 22 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 2 )
+stream = ExtResource( 20 )
 autoplay = true
 
 [node name="ItemSpawner" type="Node2D" parent="."]
-script = ExtResource( 21 )
+script = ExtResource( 3 )
