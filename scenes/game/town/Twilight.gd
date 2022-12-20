@@ -5,8 +5,6 @@ var controller_mode = false
 var time = 0;
 var time_stopped = false;
 
-signal leave_twilight
-
 func _ready():
 	$AnimationPlayer.play("animations")
 
@@ -24,4 +22,4 @@ func _process(delta):
 		time += delta
 
 func leave_twilight():
-	emit_signal("leave_twilight")
+	get_node("/root/World/Transition").transition_to("res://scenes/game/nightmare/Nightmare.tscn")
