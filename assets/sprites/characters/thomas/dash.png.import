@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/ninja.png-60f06f10e018c8498e87806126fa2866.stex"
+path="res://.import/dash.png-982d89ea2ecbafaa51e6afbe71d878e2.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/game/characters/player/ninja.png"
-dest_files=[ "res://.import/ninja.png-60f06f10e018c8498e87806126fa2866.stex" ]
+source_file="res://assets/sprites/characters/thomas/dash.png"
+dest_files=[ "res://.import/dash.png-982d89ea2ecbafaa51e6afbe71d878e2.stex" ]
 
 [params]
 
