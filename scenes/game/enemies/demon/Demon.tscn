@@ -6,7 +6,7 @@
 [ext_resource path="res://assets/audio/sfx/zombie_die.wav" type="AudioStream" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 0.734375, 0.734375 )
+extents = Vector2( 0.679688, 0.617188 )
 
 [sub_resource type="Animation" id=2]
 length = 0.001
@@ -60,7 +60,7 @@ tracks/0/keys = {
 
 [node name="Demon" type="KinematicBody2D"]
 collision_layer = 2
-collision_mask = 0
+collision_mask = 2
 script = ExtResource( 2 )
 
 [node name="Hit Box" type="Area2D" parent="."]
