@@ -27,5 +27,7 @@ func _process(delta):
 	var collision = move_and_collide(velocity.rotated(self.rotation) * speed)
 	if collision && collision.collider.has_method("damage"):
 		collision.collider.call("damage", damage)
-		_explode()
-		queue_free()
+		damage -= collision.collider.health
+		if damage <= 0:
+			_explode()
+			queue_free()

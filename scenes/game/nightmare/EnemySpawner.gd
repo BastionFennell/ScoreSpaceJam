@@ -5,10 +5,10 @@ var enemies = {
 	"zombie": { 
 		"node": preload("res://scenes/game/enemies/zombie/Zombie.tscn"),
 		"delay": 0,
-		"respawn_timer": 0.3,
+		"respawn_timer": 0.1,
 		"decay": 0.03,
 		"difficulty_timer": 1.00,
-		"min_respawn_time": 0.01,
+		"min_respawn_time": 0.001,
 		"wave_difficulty_ramp": 0.8
 	},
 	"demon": {
@@ -45,9 +45,9 @@ func _ready():
 		var days = get_node("/root/Globals").days
 		var enemy = enemies[i];
 		var timer = Timer.new()
-		enemy.min_respawn_time = max(enemy.min_respawn_time * pow(enemy.wave_difficulty_ramp, days), 0.01)
-		enemy.respawn_timer = max(enemy.respawn_timer * pow(enemy.wave_difficulty_ramp, days), 0.01)
-		enemy.delay = max(enemy.delay * pow(enemy.wave_difficulty_ramp, days), 0.01)
+		enemy.min_respawn_time = max(enemy.min_respawn_time * pow(enemy.wave_difficulty_ramp, days), 0.001)
+		enemy.respawn_timer = max(enemy.respawn_timer * pow(enemy.wave_difficulty_ramp, days), 0.001)
+		enemy.delay = max(enemy.delay * pow(enemy.wave_difficulty_ramp, days), 0.001)
 
 		timer.one_shot = true
 		timer.wait_time = enemy.delay
