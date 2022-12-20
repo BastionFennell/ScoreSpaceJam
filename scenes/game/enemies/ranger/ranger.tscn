@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://assets/sprites/enemies/ranger.png" type="Texture" id=1]
-[ext_resource path="res://scenes/game/enemies/ranger/ranger.gd" type="Script" id=2]
+[ext_resource path="res://scenes/game/enemies/ranger/Ranger.gd" type="Script" id=2]
 [ext_resource path="res://assets/audio/sfx/zombie_hit.wav" type="AudioStream" id=4]
 [ext_resource path="res://assets/audio/sfx/zombie_die.wav" type="AudioStream" id=5]
 
@@ -81,11 +81,12 @@ hframes = 5
 
 [node name="Oof" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
+volume_db = -10.0
 bus = "SFX"
 
 [node name="Ded" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 5 )
-volume_db = -6.0
+volume_db = -10.0
 bus = "SFX"
 
 [node name="Blood" type="CPUParticles2D" parent="."]

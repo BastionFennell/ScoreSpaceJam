@@ -226,7 +226,6 @@ root_node = NodePath("../Pop Up")
 "anims/Fade out" = SubResource( 14 )
 
 [node name="Pop Up" type="Sprite" parent="Player/How to Interact"]
-modulate = Color( 1, 1, 1, 0 )
 position = Vector2( 26, 36 )
 texture = ExtResource( 13 )
 

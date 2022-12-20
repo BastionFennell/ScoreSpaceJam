@@ -47,12 +47,12 @@ color = Color( 0.364706, 0.12549, 0.0117647, 1 )
 
 [node name="Oof" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
-volume_db = 5.681
+volume_db = -10.0
 bus = "SFX"
 
 [node name="Ded" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
-volume_db = 2.622
+volume_db = -10.0
 bus = "SFX"
 
 [node name="Hit Box" type="Area2D" parent="."]

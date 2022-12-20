@@ -143,7 +143,7 @@ anims/Intro = SubResource( 1 )
 [node name="Sprite" type="Sprite" parent="CanvasLayer"]
 position = Vector2( 511.987, 300.25 )
 scale = Vector2( 4.0001, 3.99667 )
-texture = ExtResource( 3 )
+texture = ExtResource( 7 )
 
 [node name="Label" type="Label" parent="CanvasLayer"]
 anchor_top = 1.0
@@ -153,13 +153,13 @@ margin_top = -97.0
 margin_bottom = -40.0
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_fonts/font = SubResource( 2 )
-text = "Long ago, in a now forgotten temple"
+text = "When the prophecy did finally come true"
 align = 1
 
 [node name="Fade" type="ColorRect" parent="CanvasLayer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color( 0, 0, 0, 1 )
+color = Color( 0, 0, 0, 0 )
 
 [node name="Text Fade" type="ColorRect" parent="CanvasLayer"]
 margin_left = -41.0
