@@ -13,6 +13,7 @@ custom_constants/separation = 10
 
 [node name="Main Volume Section" parent="." instance=ExtResource( 3 )]
 margin_bottom = 60.0
+audio_bus = "Master"
 
 [node name="Volume Section" parent="." instance=ExtResource( 2 )]
 margin_top = 70.0
@@ -21,3 +22,4 @@ margin_bottom = 130.0
 [node name="SFX Volume Section" parent="." instance=ExtResource( 4 )]
 margin_top = 140.0
 margin_bottom = 200.0
+audio_bus = "SFX"

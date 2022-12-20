@@ -38,12 +38,13 @@ func _on_submit():
 
 	score_submitted = true
 
+	var data = {}
+	var high_scores = []
 
 	var save_game = File.new()
 	if save_game.file_exists("user://savegame.save"):
 		save_game.open("user://savegame.save", File.READ)
-		var data = parse_json(save_game.get_as_text())
-		var high_scores = []
+		data = parse_json(save_game.get_as_text())
 		var submitIndex = 5
 
 		if data.has("high_scores"):
@@ -66,10 +67,13 @@ func _on_submit():
 
 				_set_high_scores(high_scores)
 				data.high_scores = high_scores
+		else:
+			high_scores = [{ "name": get_node("Name").text, "score": time, "days": days}]
+			data = {"high_scores": high_scores}
 
-				save_game.open("user://savegame.save", File.WRITE)
-				save_game.store_string(to_json(data))
 		
+		save_game.open("user://savegame.save", File.WRITE)
+		save_game.store_string(to_json(data))
 		save_game.close()
 
 func _on_death():
