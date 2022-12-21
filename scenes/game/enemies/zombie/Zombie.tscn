@@ -11,7 +11,7 @@ extents = Vector2( 0.5625, 0.625 )
 [sub_resource type="Animation" id=2]
 length = 0.001
 tracks/0/type = "value"
-tracks/0/path = NodePath("Zombie:frame")
+tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -28,7 +28,7 @@ resource_name = "death"
 length = 0.42
 step = 0.14
 tracks/0/type = "value"
-tracks/0/path = NodePath("Zombie:frame")
+tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -46,7 +46,7 @@ length = 0.42
 loop = true
 step = 0.14
 tracks/0/type = "value"
-tracks/0/path = NodePath("Zombie:frame")
+tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -75,7 +75,7 @@ position = Vector2( -0.5, 2 )
 scale = Vector2( 8, 8 )
 shape = SubResource( 1 )
 
-[node name="Zombie" type="Sprite" parent="."]
+[node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )
 hframes = 6
 

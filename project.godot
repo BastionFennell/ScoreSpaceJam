@@ -33,6 +33,15 @@ Globals="*res://scenes/game/Globals.gd"
 window/stretch/mode="viewport"
 window/stretch/aspect="keep"
 
+[editor]
+
+version_control_autoload_on_startup=true
+version_control_plugin_name="GitAPI"
+
+[gdnative]
+
+singletons=[  ]
+
 [global]
 
 vim=false

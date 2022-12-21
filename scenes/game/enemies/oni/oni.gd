@@ -16,7 +16,7 @@ func _init():
 	damage_inc = 5
 
 func _process(delta):
-	var safe_radius = get_node("/root/Globals").get_main_node().get_node("/EnemySpawner").safe_radius
+	var safe_radius = get_node("/root/Globals").get_main_node().get_node("EnemySpawner").safe_radius
 
 	if self.global_position.distance_to(player.global_position) > safe_radius:
 		var x_diff = player.global_position.x - self.global_position.x

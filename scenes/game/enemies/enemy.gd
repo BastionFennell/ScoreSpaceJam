@@ -74,6 +74,11 @@ func _physics_process(_delta):
 		velocity += position.direction_to(player.position)
 		move_and_slide(velocity * speed)
 
+	if(velocity.x < 0):
+		$Sprite.flip_h = false
+	elif(velocity.x > 0):
+		$Sprite.flip_h = true
+
 func _process(delta):
 	if hit_box.overlaps_body(player) && !dead:
 		emit_signal("damage_player", damage * delta)
