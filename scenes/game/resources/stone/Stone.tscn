@@ -12,24 +12,23 @@ extents = Vector2( 6.125, 2 )
 extents = Vector2( 0.734375, 0.734375 )
 
 [node name="Rock" type="KinematicBody2D"]
-position = Vector2( 9, 0 )
 collision_layer = 12
 collision_mask = 17
 script = ExtResource( 2 )
 health = 10
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( -9.125, -2 )
+position = Vector2( -0.125, -2 )
 shape = SubResource( 1 )
 
 [node name="Rock" type="Sprite" parent="."]
-position = Vector2( -9, -5 )
+position = Vector2( 0, -5 )
 texture = ExtResource( 1 )
 region_enabled = true
-region_rect = Rect2( 96, 0, 32, 32 )
+region_rect = Rect2( 96, 11, 32, 10 )
 
 [node name="Blood" type="CPUParticles2D" parent="."]
-position = Vector2( 0, -8 )
+position = Vector2( 9, -8 )
 emitting = false
 amount = 5
 lifetime = 2.0
@@ -57,7 +56,7 @@ volume_db = -10.0
 bus = "SFX"
 
 [node name="Hit Box" type="Area2D" parent="."]
-position = Vector2( -9, -5 )
+position = Vector2( 0, -5 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hit Box"]
 scale = Vector2( 8, 8 )
