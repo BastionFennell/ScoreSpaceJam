@@ -67,7 +67,7 @@ tracks/1/keys = {
 "values": [ true, true ]
 }
 
-[node name="Town" type="Node2D"]
+[node name="Town" type="YSort"]
 script = ExtResource( 9 )
 round_length = 15.0
 

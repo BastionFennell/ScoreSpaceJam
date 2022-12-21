@@ -11,9 +11,10 @@ extents = Vector2( 6.125, 2 )
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 0.734375, 0.734375 )
 
-[node name="Rock" type="KinematicBody2D"]
+[node name="Rock" type="RigidBody2D"]
 collision_layer = 12
 collision_mask = 17
+mode = 1
 script = ExtResource( 2 )
 health = 10
 
@@ -21,7 +22,7 @@ health = 10
 position = Vector2( -0.125, -2 )
 shape = SubResource( 1 )
 
-[node name="Rock" type="Sprite" parent="."]
+[node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0, -5 )
 texture = ExtResource( 1 )
 region_enabled = true

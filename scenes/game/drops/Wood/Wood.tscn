@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://scenes/game/drops/Wood/Wood.gd" type="Script" id=1]
-[ext_resource path="res://assets/sprites/resources/wood.png" type="Texture" id=2]
+[ext_resource path="res://assets/sprites/resources/spritesheet.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 0.804688, 0.617188 )
@@ -18,3 +18,5 @@ shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )
+hframes = 9
+frame = 8
