@@ -7,8 +7,8 @@ var globals
 
 func _ready():
 	globals = get_node("/root/Globals")
-	var how_to = get_node("/root/World/Player/How to Interact")
-	player = get_node("/root/World/Player")
+	player = globals.get_player()
+	var how_to = player.get_node("How to Interact")
 
 	self.connect("body_exited", how_to, "area_exited")
 	self.connect("body_entered", how_to, "area_entered")

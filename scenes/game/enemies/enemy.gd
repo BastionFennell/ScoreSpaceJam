@@ -12,6 +12,7 @@ export (int) var health_inc = 0
 export (int) var damage_inc = 5
 
 var player
+var world;
 var hit_box
 var dead = false
 signal spawn_item
@@ -20,13 +21,14 @@ signal damage_player
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	player = get_node("/root/World/Player")
+	world = get_node("/root/Globals").get_main_node()
+	player = world.get_node("Player")
 	hit_box = get_node("Hit Box")
 
 	if (has_node("AnimationPlayer")):
 		get_node("AnimationPlayer").play("walking")
 
-	var itemSpawner = get_node("/root/World/ItemSpawner")
+	var itemSpawner = world.get_node("ItemSpawner")
 
 	self.connect("spawn_item", itemSpawner, "_on_spawn_item")
 	self.connect("damage_player", player, "_on_damage")
@@ -40,7 +42,7 @@ func _explode():
 	var p = get_node("Blood").duplicate()
 	p.position = self.global_position
 
-	get_node("/root/World").add_child(p)
+	world.add_child(p)
 	p.emitting = true
 
 func damage(amount):

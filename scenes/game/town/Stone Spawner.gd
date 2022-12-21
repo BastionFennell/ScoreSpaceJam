@@ -21,7 +21,7 @@ func _ready():
 				var node = Stone.instance()
 				node.set_position(Vector2(origin.x + stone_x, origin.y + stone_y))
 
-				get_node("/root/World").call_deferred("add_child", node)
+				get_node("/root/Globals").get_main_node().call_deferred("add_child", node)
 			stone_y += stone_height
 		stone_x += stone_width 
 		stone_y = 0

@@ -10,6 +10,8 @@ extents = Vector2( 0.679688, 0.617188 )
 
 [sub_resource type="Animation" id=2]
 length = 0.001
+loop = true
+step = 0.15
 tracks/0/type = "value"
 tracks/0/path = NodePath("Demon:frame")
 tracks/0/interp = 1
@@ -42,9 +44,9 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id=4]
 resource_name = "walking"
-length = 0.42
+length = 0.6
 loop = true
-step = 0.14
+step = 0.15
 tracks/0/type = "value"
 tracks/0/path = NodePath("Demon:frame")
 tracks/0/interp = 1
@@ -52,10 +54,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0, 0.15, 0.3, 0.45 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 0 ]
+"values": [ 0, 1, 0, 2 ]
 }
 
 [node name="Demon" type="KinematicBody2D"]
@@ -78,6 +80,7 @@ shape = SubResource( 1 )
 [node name="Demon" type="Sprite" parent="."]
 position = Vector2( 1, 2 )
 texture = ExtResource( 1 )
+hframes = 3
 
 [node name="Oof" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )

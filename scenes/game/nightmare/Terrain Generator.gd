@@ -4,7 +4,9 @@ export (int) var radius = 200
 var tile_size = 10
 var rounded_radius = stepify(radius, tile_size)
 var steps = floor(rounded_radius / tile_size)
-var last_update_pos;
+var last_update_pos
+var world
+var player
 
 var tilemap = [
 	{ "img": preload("res://assets/sprites/tiles/tile 1.png"), "chance": 0.6},
@@ -17,6 +19,7 @@ var tilemap = [
 var current_map = [[]]
 
 func _ready():
+	world = get_node("/root/Globals").get_main_node()
 	_initialize()
 
 func _get_tile():
@@ -29,7 +32,7 @@ func _get_tile():
 			return tile
 
 func _initialize():
-	var player = get_node("/root/World/Player")
+	player = world.get_node("Player")
 
 	# center
 	var c = Vector2(stepify(player.global_position.x, tile_size), stepify(player.global_position.y, tile_size))
@@ -68,7 +71,6 @@ func _initialize():
 	_draw_tiles()
 
 func _draw_tile(i, j):
-	var world = get_node("/root/World")
 	var node = current_map[i][j]
 	var tile_sprite = Sprite.new()
 	tile_sprite.texture = node.tile.img
@@ -79,8 +81,6 @@ func _draw_tile(i, j):
 	current_map[i][j].node = tile_sprite
 
 func _draw_tiles():
-	var world = get_node("/root/World")
-
 	for i in current_map.size():
 		for j in current_map[i].size():
 			_draw_tile(i, j)
@@ -143,8 +143,6 @@ func _update_tiles(c):
 
 
 func _process(delta):
-	var player = get_node("/root/World/Player")
-
 	# center
 	var c = Vector2(stepify(player.global_position.x, tile_size), stepify(player.global_position.y, tile_size))
 	if c.x <= last_update_pos.x - tile_size || c.x >= last_update_pos.x + tile_size || c.y <= last_update_pos.y - tile_size || c.y >= last_update_pos.y + tile_size:

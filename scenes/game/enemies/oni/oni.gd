@@ -16,7 +16,6 @@ func _init():
 	damage_inc = 5
 
 func _process(delta):
-	var player = get_node("/root/World/Player")
 	var safe_radius = get_node("/root/World/EnemySpawner").safe_radius
 
 	if self.global_position.distance_to(player.global_position) > safe_radius:

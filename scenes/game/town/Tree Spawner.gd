@@ -21,7 +21,7 @@ func _ready():
 				var node = Tree.instance()
 				node.set_position(Vector2(origin.x + tree_x, origin.y + tree_y))
 
-				get_node("/root/World").call_deferred("add_child", node)
+				get_node("/root/Globals").get_main_node().call_deferred("add_child", node)
 			tree_y += tree_height
 		tree_x += tree_width 
 		tree_y = 0

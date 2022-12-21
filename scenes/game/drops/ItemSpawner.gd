@@ -11,5 +11,5 @@ func _on_spawn_item(items, weights, node):
 		if chance <= 0:
 			var item = items[i].instance();
 			item.set_position(node.position)
-			get_node("/root/World").call_deferred("add_child", item)
+			get_node("/root/Globals").get_main_node().call_deferred("add_child", item)
 			break

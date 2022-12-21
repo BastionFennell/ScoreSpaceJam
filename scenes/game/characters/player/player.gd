@@ -24,6 +24,9 @@ func _ready():
 	invincible = false
 	set_health()
 
+func get_gun():
+	return get_node("Gun").get_child(0)
+
 func set_health():
 	var upgrades = get_node("/root/Globals").upgrades
 
@@ -78,6 +81,7 @@ func _on_animation_finished(animation):
 		timer.start()
 
 func _refresh_dash():
+	$"Effect Player".play("Dash Refresh")
 	can_dash = true
 
 func _process(delta):

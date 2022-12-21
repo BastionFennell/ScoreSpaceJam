@@ -2,12 +2,14 @@ extends CanvasLayer
 
 var score_submitted = false
 var globals
+var world
 
 func _ready():
+	globals = get_node("/root/Globals")
+	world = globals.get_main_node()
 	var button = get_node("./Retry")
 	var add_highscore = get_node("Submit Score")
-	var player = get_node("/root/World/Player")
-	globals = get_node("/root/Globals")
+	var player = world.get_node("Player")
 
 	button.connect("pressed", self, "_retry")
 	add_highscore.connect("pressed", self, "_on_submit")
@@ -30,7 +32,6 @@ func _set_high_scores(high_scores):
 		node.get_node("Score").text = _parse_time(int(high_scores[i].score), hdays)
 
 func _on_submit():
-	var world = get_node("/root/World")
 	var days = globals.days
 	var time = _parse_time(world.time, days)
 	if score_submitted:
@@ -77,7 +78,6 @@ func _on_submit():
 		save_game.close()
 
 func _on_death():
-	var world = get_node("/root/World")
 	var days = globals.days
 	world.stop_time()
 	var time = _parse_time(world.time, days)

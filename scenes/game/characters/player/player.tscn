@@ -1,11 +1,30 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://assets/sprites/characters/thomas/thomas.png" type="Texture" id=1]
 [ext_resource path="res://scenes/game/characters/player/player.gd" type="Script" id=2]
 [ext_resource path="res://assets/sprites/characters/thomas/dash.png" type="Texture" id=3]
+[ext_resource path="res://scenes/game/town/How to Interact.gd" type="Script" id=4]
+[ext_resource path="res://assets/sprites/interact bubble.png" type="Texture" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4, 3 )
+
+[sub_resource type="Animation" id=7]
+resource_name = "Dash Refresh"
+length = 0.15
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("../Thomas:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1, 0.15 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Color( 5, 5, 5, 0.5 ), Color( 1, 1, 1, 1 ), Color( 5, 5, 5, 0.5 ), Color( 1, 1, 1, 1 ) ]
+}
 
 [sub_resource type="Animation" id=4]
 resource_name = "Dash"
@@ -79,6 +98,36 @@ tracks/0/keys = {
 "values": [ 0, 1 ]
 }
 
+[sub_resource type="Animation" id=5]
+resource_name = "Fade in"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "Fade out"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
 [node name="Player" type="KinematicBody2D"]
 collision_mask = 0
 script = ExtResource( 2 )
@@ -89,12 +138,31 @@ position = Vector2( 0, 2 )
 shape = SubResource( 1 )
 
 [node name="Thomas" type="Sprite" parent="."]
+modulate = Color( 5, 5, 5, 0.5 )
 position = Vector2( 0.5, 0 )
-texture = ExtResource( 1 )
-hframes = 3
+texture = ExtResource( 3 )
+hframes = 4
 region_rect = Rect2( 2, 2, 11, 12 )
+
+[node name="Effect Player" type="AnimationPlayer" parent="."]
+root_node = NodePath("../AnimationPlayer")
+"anims/Dash Refresh" = SubResource( 7 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Dash = SubResource( 4 )
 anims/RESET = SubResource( 2 )
 anims/walking = SubResource( 3 )
+
+[node name="How to Interact" type="Node2D" parent="."]
+position = Vector2( -25, -55 )
+script = ExtResource( 4 )
+
+[node name="Fader" type="AnimationPlayer" parent="How to Interact"]
+root_node = NodePath("../Pop Up")
+"anims/Fade in" = SubResource( 5 )
+"anims/Fade out" = SubResource( 6 )
+
+[node name="Pop Up" type="Sprite" parent="How to Interact"]
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 26, 36 )
+texture = ExtResource( 5 )

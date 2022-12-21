@@ -5,7 +5,7 @@ var is_faded_in = false
 var player
 
 func _ready():
-	player = get_node("/root/World/Player")
+	player = get_parent()
 
 	var globals = get_node("/root/Globals")
 	has_interacted = globals.has_interacted

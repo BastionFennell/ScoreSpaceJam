@@ -4,7 +4,7 @@ var max_time
 var world
 
 func _ready():
-	world = get_node("/root/World")
+	world = get_node("/root/Globals").get_main_node()
 	max_time = world.round_length
 
 func _parse_time(elapsed):

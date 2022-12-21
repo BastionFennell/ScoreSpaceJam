@@ -28,7 +28,7 @@ func _spawn_single_bullet(rotation, position):
 	bullet.set_rotation(rotation)
 	bullet.set_position(position)
 
-	get_node('/root/World').add_child(bullet)
+	get_node('/root').add_child(bullet)
 
 func _spawn_bullet():
 	var spawner = get_node('./Bullet Spawner')
@@ -37,7 +37,7 @@ func _spawn_bullet():
 		_spawn_single_bullet(spawner.global_rotation + (randf() * spread - spread/2), spawner.global_position)
 
 func _shake_camera():
-	get_node("/root/World/Player/Camera2D").add_trauma(screen_shake)
+	var test = get_node("/root/Globals").get_main_node().get_node("Player/Camera2D").add_trauma(screen_shake)
 
 func _temp_speed_buff():
 	reloading = false
@@ -63,7 +63,7 @@ func _reload():
 	reloading = false
 
 func _process(_delta):
-	var controller_mode = get_node("/root/World/").controller_mode
+	var controller_mode = get_node("/root/Globals").controller_mode
 
 	if !controller_mode:
 		look_at(get_global_mouse_position())

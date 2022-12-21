@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/zombie.png-6a2ca8a996d8822ec393271bc3453988.stex"
+path="res://.import/temple outline - backup.png-1ba07b40e40e48c4a251e871917a982b.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/enemies/zombie.png"
-dest_files=[ "res://.import/zombie.png-6a2ca8a996d8822ec393271bc3453988.stex" ]
+source_file="res://assets/sprites/village/temple outline - backup.png"
+dest_files=[ "res://.import/temple outline - backup.png-1ba07b40e40e48c4a251e871917a982b.stex" ]
 
 [params]
 

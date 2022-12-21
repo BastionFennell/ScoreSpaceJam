@@ -4,6 +4,10 @@ signal inventory_updated
 signal has_interacted
 signal bought
 
+var controller_mode = false
+
+var time_stopped = false
+
 var default_selling = {
 	"health": {
 		"price": {
@@ -74,3 +78,19 @@ func on_buy(item):
 
 func round_complete():
 	days += 1
+
+func stop_time():
+	time_stopped = true
+
+func get_main_node():
+	return get_node("/root").get_children()[1]
+
+func get_player():
+	return get_main_node().get_node("Player")
+
+func _process(delta):
+	if Input.is_action_pressed("controller_mode"):
+		controller_mode = true
+	if Input.is_action_pressed("non_controller_mode"):
+		controller_mode = false
+
