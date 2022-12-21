@@ -18,4 +18,4 @@ func _process(delta):
 	if time > round_length && !globals.time_stopped:
 		globals.stop_time()
 		globals.round_complete()
-		globals.get_main_node().get_node("Transition").transition_to("res://scenes/game/monastery/Town.tscn")
+		globals.get_main_node().get_node("Transition").transition_to("res://scenes/game/town/Twilight.tscn")
