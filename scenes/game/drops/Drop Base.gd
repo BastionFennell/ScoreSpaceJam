@@ -5,7 +5,6 @@ var collected = false
 
 func _ready():
 	player = get_node("/root/Globals").get_player()
-	self.connect("picked up", self, "_picked_up")
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(_delta):

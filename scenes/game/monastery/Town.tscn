@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://scenes/Camera2D.gd" type="Script" id=1]
 [ext_resource path="res://scenes/game/town/How to Interact.gd" type="Script" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://scenes/game/weapons/Axegun.tscn" type="PackedScene" id=5]
 [ext_resource path="res://assets/sprites/interact bubble.png" type="Texture" id=6]
 [ext_resource path="res://scenes/game/monastery/Resource Spawner.gd" type="Script" id=7]
+[ext_resource path="res://scenes/game/drops/ItemSpawner.gd" type="Script" id=8]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Fade in"
@@ -62,10 +63,10 @@ collision_mask = 1
 current = true
 zoom = Vector2( 0.25, 0.25 )
 process_mode = 0
-limit_left = -210
-limit_top = -228
-limit_right = 296
-limit_bottom = 275
+limit_left = -251
+limit_top = 56
+limit_right = 250
+limit_bottom = 660
 limit_smoothed = true
 script = ExtResource( 1 )
 
@@ -95,3 +96,6 @@ script = ExtResource( 7 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Resource Spawner/Area2D"]
 position = Vector2( 214.5, 236 )
 shape = SubResource( 3 )
+
+[node name="ItemSpawner" type="Node2D" parent="."]
+script = ExtResource( 8 )
