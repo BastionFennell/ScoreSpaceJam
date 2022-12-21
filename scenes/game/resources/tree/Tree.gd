@@ -7,3 +7,4 @@ func _ready():
 	speed = 0
 	drops = [Wood]
 	weights = [100]
+	damage = 0

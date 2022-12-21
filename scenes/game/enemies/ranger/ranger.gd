@@ -1,7 +1,7 @@
 extends "res://scenes/game/enemies/enemy.gd"
 
 var Heart = preload("res://scenes/game/drops/Heart/Health.tscn")
-var jump_distance = 100
+var jump_distance = 50
 var jumping = false
 var jumping_to
 

@@ -88,7 +88,7 @@ func get_main_node():
 func get_player():
 	return get_main_node().get_node("Player")
 
-func _process(delta):
+func _process(_delta):
 	if Input.is_action_pressed("controller_mode"):
 		controller_mode = true
 	if Input.is_action_pressed("non_controller_mode"):

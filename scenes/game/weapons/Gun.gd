@@ -12,10 +12,12 @@ var remaining_reload_time = null
 var reload_time = 2
 var spread = 8
 var count = 10
+var world
 
 var Bullet = preload("res://scenes/game/weapons/Shotgun Bullet.tscn") 
 	
 func _ready():
+	world = get_node("/root/Globals").get_main_node()
 	var upgrades = get_node("/root/Globals").upgrades
 
 	reload_time *= pow(reload_speed_upgrade, upgrades.reload)
@@ -28,7 +30,7 @@ func _spawn_single_bullet(rotation, position):
 	bullet.set_rotation(rotation)
 	bullet.set_position(position)
 
-	get_node('/root').add_child(bullet)
+	world.add_child(bullet)
 
 func _spawn_bullet():
 	var spawner = get_node('./Bullet Spawner')
