@@ -47,6 +47,32 @@ var default_inventory = {
 }
 var inventory = default_inventory.duplicate(true)
 
+# Gunsmithing
+var parts_data = {
+	"stock": {
+		"price": 2
+	},
+	"barrel": {
+		"price": 2
+	}
+}
+var parts_inventory = {}
+var unlocked_parts = ["stock", "barrel"]
+
+var guns_data = {
+	"shotgun": {
+		"parts": {
+			"stock": 1,
+			"barrel": 2
+		}
+	}
+}
+var unlocked_guns = ["shotgun"]
+
+var current_parts = []
+var current_guns = []
+
+
 var days = 0
 var kills = 0
 var has_interacted = false
