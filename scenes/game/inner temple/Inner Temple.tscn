@@ -11,17 +11,16 @@
 [sub_resource type="RectangleShape2D" id=1]
 
 [node name="Inner Temple" type="Node2D"]
-position = Vector2( 38, 19 )
 
 [node name="ColorRect" type="ColorRect" parent="."]
-margin_left = -137.0
-margin_top = -134.0
-margin_right = 62.0
-margin_bottom = 31.0
+margin_left = -99.0
+margin_top = -94.0
+margin_right = 100.0
+margin_bottom = 71.0
 color = Color( 0.901961, 0.882353, 0.905882, 1 )
 
 [node name="Buddha" type="Node2D" parent="."]
-position = Vector2( -38, 39 )
+position = Vector2( 0, 79 )
 
 [node name="ColorRect" type="ColorRect" parent="Buddha"]
 margin_left = -17.0
@@ -39,7 +38,7 @@ custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Buddha Statue"
 
 [node name="Levels" type="Node2D" parent="."]
-position = Vector2( 0, 48 )
+position = Vector2( 38, 88 )
 
 [node name="Room 1" type="Node2D" parent="Levels"]
 position = Vector2( 32, -257 )
@@ -118,7 +117,7 @@ rect_scale = Vector2( 0.5, 0.5 )
 text = "Monk Room 4"
 
 [node name="Vendors" type="Node2D" parent="."]
-position = Vector2( -38, 0 )
+position = Vector2( 0, 40 )
 
 [node name="Room 1" type="Node2D" parent="Vendors"]
 position = Vector2( 92, 45 )
@@ -168,7 +167,7 @@ rect_scale = Vector2( 0.5, 0.5 )
 text = "Old master"
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
-position = Vector2( -38, 7 )
+position = Vector2( 0, 47 )
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 current = true

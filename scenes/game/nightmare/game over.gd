@@ -79,7 +79,6 @@ func _on_submit():
 
 func _on_death():
 	var days = globals.days
-	world.stop_time()
 	var time = _parse_time(world.time, days)
 	get_node("Survived").text = "You survived for: " + time
 
@@ -100,4 +99,5 @@ func _on_death():
 func _retry():
 	get_node("/root/Globals").reset()
 	get_tree().paused = false
-	get_tree().change_scene("res://Twilight.tscn")
+	get_tree().change_scene("res://scenes/game/town/Twilight.tscn")
+

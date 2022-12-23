@@ -93,7 +93,7 @@ tracks/1/keys = {
 }
 
 [node name="Nightmare" type="Node2D"]
-position = Vector2( -1, 0 )
+position = Vector2( -2, -2 )
 script = ExtResource( 12 )
 round_length = 60.0
 
@@ -355,7 +355,6 @@ script = ExtResource( 11 )
 layer = 2
 
 [node name="Rect" type="ColorRect" parent="Transition/Screen"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color( 0, 0, 0, 0 )
+color = Color( 0, 0, 0, 1 )
