@@ -6,4 +6,4 @@ func _init():
 	screen_shake = 0.3
 	count = 10
 
-	Bullet = preload("res://scenes/game/weapons/Shotgun Bullet.tscn")
+	bullet_type = "shotgun"

@@ -1,6 +1,7 @@
 extends Node2D
 
 var Player = preload("res://scenes/game/characters/player/player.tscn")
+var Camera = preload("res://scenes/Camera.tscn")
 export (int) var SERVER_PORT = 31337
 export (int) var MAX_PLAYERS = 2
 export (bool) var IS_CLIENT = true
@@ -23,15 +24,13 @@ func _ready():
 		peer.create_server(SERVER_PORT, MAX_PLAYERS)
 		get_tree().network_peer = peer
 
-	self_peer_id =  get_tree().get_network_unique_id()
+	self_peer_id = get_tree().get_network_unique_id()
 	globals.self_peer_id = self_peer_id
 	var my_player = Player.instance()
 	my_player.set_network_master(self_peer_id)
 	my_player.set_name(str(self_peer_id))
 	
-	var camera = Camera2D.new()
-	camera.zoom = Vector2(0.5, 0.5)
-	camera.current = true
+	var camera = Camera.instance()
 	my_player.add_child(camera)
 
 	globals.get_main_node().get_node("Players").add_child(my_player)

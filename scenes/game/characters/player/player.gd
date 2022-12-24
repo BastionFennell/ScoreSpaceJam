@@ -1,10 +1,11 @@
 extends KinematicBody2D
 
 puppet var puppet_position = Vector2(0, 0) setget puppet_position_set
-puppet var puppet_rotation = 0
 puppet var puppet_velocity = Vector2(0, 0) setget puppet_velocity_set
 
 var tween
+var globals
+var world
 
 export (int) var speed = 1000
 export (float) var health = 100.00
@@ -25,11 +26,20 @@ var is_dashing = false
 var can_dash = true
 var dash_direction
 
+var current_gun = preload("res://scenes/game/weapons/Shotgun.tscn")
+
 func _ready():
+	globals = get_node("/root/Globals")
+	world = globals.get_main_node()
+	tween = get_node("Tween")
 	get_node("AnimationPlayer").connect("animation_finished", self, "_on_animation_finished")
 	invincible = false
 	set_health()
-	tween = get_node("Tween")
+
+	var gun = current_gun.instance();
+	gun.set_network_master(get_network_master())
+
+	call_deferred("add_child", gun)
 
 func get_gun():
 	return get_node("Gun").get_child(0)
@@ -112,6 +122,16 @@ func network_tick():
 
 func _is_master():
 	return !get_tree().network_peer || is_network_master()
+
+remotesync func shoot(rotation, position, damage_add, bullet_type, master_id):
+	var bullet = globals.bullet_types[bullet_type].instance()
+
+	bullet.damage = bullet.damage + damage_add
+	bullet.set_network_master(master_id)
+	bullet.set_rotation(rotation)
+	bullet.set_position(position)
+
+	world.add_child(bullet)
 
 func _process(delta):
 	if(playing && _is_master()):

@@ -1,11 +1,14 @@
 extends KinematicBody2D
 
+puppet var puppet_rotation = 0
+
 export (float) var screen_shake = 0.3
 export (float) var reload_multiplier = 1.0
 export (float) var reload_buff_remaining = null
 export (float) var damage_add = 0.0
 export (float) var reload_speed_upgrade = 0.8
 export (float) var damage_upgrade = 1
+export (String) var bullet_type = "shotgun"
 export var reloading = false
 
 var remaining_reload_time = null
@@ -13,10 +16,10 @@ var reload_time = 2
 var spread = 8
 var count = 10
 var world
+var player
 
-var Bullet = preload("res://scenes/game/weapons/Shotgun Bullet.tscn") 
-	
 func _ready():
+	player = get_parent()
 	world = get_node("/root/Globals").get_main_node()
 	var upgrades = get_node("/root/Globals").upgrades
 
@@ -24,12 +27,10 @@ func _ready():
 	damage_add += damage_upgrade * upgrades.damage
 
 func _spawn_single_bullet(rotation, position):
-	var bullet = Bullet.instance()
-	bullet.damage = bullet.damage + damage_add
+	for p in world.get_node("Players").get_children():
+		p.rpc("shoot", rotation, position, damage_add, bullet_type, get_network_master())
 
-	bullet.set_rotation(rotation)
-	bullet.set_position(position)
-
+remote func shoot(bullet):
 	world.add_child(bullet)
 
 func _spawn_bullet():
@@ -39,7 +40,7 @@ func _spawn_bullet():
 		_spawn_single_bullet(spawner.global_rotation + (randf() * spread - spread/2), spawner.global_position)
 
 func _shake_camera():
-	var test = get_node("/root/Globals").get_player().get_node("Camera2D").add_trauma(screen_shake)
+	get_node("/root/Globals").get_player().get_node("Camera").add_trauma(screen_shake)
 
 func _temp_speed_buff():
 	reloading = false
@@ -64,40 +65,48 @@ func _on_shoot():
 func _reload():
 	reloading = false
 
-func _process(_delta):
-	var controller_mode = get_node("/root/Globals").controller_mode
+func network_tick():
+	if player._is_master():
+		rset_unreliable("puppet_rotation", rotation)
 
-	if !controller_mode:
-		look_at(get_global_mouse_position())
+func _process(delta):
+	if(player.playing && player._is_master()):
+		var controller_mode = get_node("/root/Globals").controller_mode
+
+		if !controller_mode:
+			look_at(get_global_mouse_position())
+		else:
+			var deadzone = 0.1
+			var controllerangle = Vector2.ZERO
+			var xAxisRL = Input.get_joy_axis(0, JOY_AXIS_2)
+			var yAxisUD = Input.get_joy_axis(0 ,JOY_AXIS_3)
+
+			if abs(xAxisRL) > deadzone || abs(yAxisUD) > deadzone:
+				controllerangle = Vector2(xAxisRL, yAxisUD).angle()
+				self.rotation = controllerangle
+
+		if reloading:
+			remaining_reload_time = remaining_reload_time - delta
+			if remaining_reload_time <=0:
+				reloading = false
+				remaining_reload_time = null
+		else:
+			if Input.is_action_pressed("shoot"):
+				_on_shoot()
+
+		if reload_buff_remaining != null:
+			var remaining = reload_buff_remaining - delta
+			if  remaining <= 0:
+				reload_multiplier = 1.0
+				remaining = null
+			reload_buff_remaining = remaining
 	else:
-		var deadzone = 0.1
-		var controllerangle = Vector2.ZERO
-		var xAxisRL = Input.get_joy_axis(0, JOY_AXIS_2)
-		var yAxisUD = Input.get_joy_axis(0 ,JOY_AXIS_3)
-
-		if abs(xAxisRL) > deadzone || abs(yAxisUD) > deadzone:
-			controllerangle = Vector2(xAxisRL, yAxisUD).angle()
-			self.rotation = controllerangle
-
+		rotation = lerp_angle(rotation, puppet_rotation, delta * 8)
+	
 	var rotation = abs(fmod(self.rotation_degrees, 360))
 	if rotation > 90 && rotation < 270: 
 		get_node("Gun").set_flip_v(true)
 	else:
 		get_node("Gun").set_flip_v(false)
 	
-	if reloading:
-		remaining_reload_time = remaining_reload_time - _delta
-		if remaining_reload_time <=0:
-			reloading = false
-			remaining_reload_time = null
-	else:
-		if Input.is_action_pressed("shoot"):
-			_on_shoot()
-
-	if reload_buff_remaining != null:
-		var remaining = reload_buff_remaining - _delta
-		if  remaining <= 0:
-			reload_multiplier = 1.0
-			remaining = null
-		reload_buff_remaining = remaining
-
+	network_tick()
