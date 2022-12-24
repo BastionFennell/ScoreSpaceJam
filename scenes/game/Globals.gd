@@ -180,6 +180,7 @@ func _player_connected(player_id):
 	var player = Player.instance()
 	player.set_network_master(player_id)
 	player.set_name(str(player_id))
+	player.pause_mode = Node.PAUSE_MODE_PROCESS
 	get_main_node().get_node("Players").add_child(player)
 
 remote func set_players(players):
@@ -188,6 +189,7 @@ remote func set_players(players):
 		current_player.global_position.x = players[p].position.x
 		current_player.global_position.y = players[p].position.y
 		current_player.set_name(p)
+		current_player.pause_mode = Node.PAUSE_MODE_PROCESS
 		get_player().get_parent().add_child(current_player)
 
 

@@ -142,6 +142,8 @@ remotesync func shoot(rotation, position, damage_add, bullet_type, master_id):
 	bullet.set_network_master(master_id)
 	bullet.set_rotation(rotation)
 	bullet.set_position(position)
+	if globals.networked:
+		bullet.pause_mode = Node.PAUSE_MODE_PROCESS
 
 	world.add_child(bullet)
 
