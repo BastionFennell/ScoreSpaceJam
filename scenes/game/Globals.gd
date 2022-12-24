@@ -5,6 +5,12 @@ signal has_interacted
 signal bought
 
 var self_peer_id = 0
+export (int) var SERVER_PORT = 31337
+export (int) var MAX_PLAYERS = 2
+export (bool) var IS_CLIENT = true
+export (String) var SERVER_IP = "127.0.0.1"
+var Player = preload("res://scenes/game/characters/player/player.tscn")
+var networked = false
 
 var controller_mode = false
 
@@ -120,6 +126,70 @@ func get_main_node():
 
 func get_player():
 	return get_main_node().get_node("Players/%s" % self_peer_id)
+
+func start_server():
+	if networked:
+		return
+
+	get_tree().connect("network_peer_connected", self, "_player_connected")
+	networked = true
+
+	var peer = NetworkedMultiplayerENet.new()
+	peer.create_server(SERVER_PORT, MAX_PLAYERS)
+	get_tree().network_peer = peer
+	
+	var new_peer_id = get_tree().get_network_unique_id()
+	var player = get_player()
+
+	player.set_name(str(new_peer_id))
+	player.set_network_master(new_peer_id)
+	self_peer_id = new_peer_id
+
+func connect_to_server(ip_address):
+	if networked:
+		return
+
+	networked = true
+	var peer = NetworkedMultiplayerENet.new()
+	peer.create_client(ip_address, SERVER_PORT)
+	get_tree().network_peer = peer
+
+	var new_peer_id = get_tree().get_network_unique_id()
+	var player = get_player()
+
+	player.set_name(str(new_peer_id))
+	player.set_network_master(new_peer_id)
+	self_peer_id = new_peer_id
+
+func get_player_data():
+	var data = {}
+	var player_list = get_main_node().get_node("Players").get_children()
+	for p in player_list:
+		data[p.name] = {
+			"position": {
+				"x": p.global_position.x,
+				"y": p.global_position.y
+			}
+		}
+
+	return data
+
+func _player_connected(player_id):
+	rpc_id(player_id, "set_players", get_player_data())
+
+	var player = Player.instance()
+	player.set_network_master(player_id)
+	player.set_name(str(player_id))
+	get_main_node().get_node("Players").add_child(player)
+
+remote func set_players(players):
+	for p in players:
+		var current_player = Player.instance();
+		current_player.global_position.x = players[p].position.x
+		current_player.global_position.y = players[p].position.y
+		current_player.set_name(p)
+		get_player().get_parent().add_child(current_player)
+
 
 func _process(_delta):
 	if Input.is_action_pressed("controller_mode"):

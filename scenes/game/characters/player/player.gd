@@ -116,12 +116,24 @@ func puppet_velocity_set(vel):
 		puppet_velocity = vel
 
 func network_tick():
-	if _is_master():
+	if should_broadcast():
 		rset_unreliable("puppet_position", global_position)
 		rset_unreliable("puppet_velocity", velocity)
 
-func _is_master():
-	return !get_tree().network_peer || is_network_master()
+func is_master():
+	return get_tree().network_peer && is_network_master()
+
+func should_broadcast():
+	if !globals.networked:
+		return false
+	else:
+		return is_master()
+
+func in_control():
+	if !globals.networked:
+		return true
+	else:
+		return is_master()
 
 remotesync func shoot(rotation, position, damage_add, bullet_type, master_id):
 	var bullet = globals.bullet_types[bullet_type].instance()
@@ -134,7 +146,7 @@ remotesync func shoot(rotation, position, damage_add, bullet_type, master_id):
 	world.add_child(bullet)
 
 func _process(delta):
-	if(playing && _is_master()):
+	if(playing && in_control()):
 		get_input()
 
 		if Input.is_action_just_pressed("dash") && can_dash:

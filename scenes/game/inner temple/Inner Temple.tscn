@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scenes/game/inner temple/Inner Temple.gd" type="Script" id=1]
-[ext_resource path="res://scenes/game/inner temple/Bullets.gd" type="Script" id=2]
+[ext_resource path="res://scenes/game/GUI/Pause Menu.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/sprites/bed.png" type="Texture" id=4]
 [ext_resource path="res://scenes/game/inner temple/Anvil.gd" type="Script" id=5]
 [ext_resource path="res://assets/sprites/village/anvil.png" type="Texture" id=6]
@@ -281,5 +281,5 @@ margin_right = 479.0
 margin_bottom = 31.0
 text = "Smith It!"
 
-[node name="Bullets" type="Node2D" parent="."]
-script = ExtResource( 2 )
+[node name="Pause Menu" parent="." instance=ExtResource( 2 )]
+visible = false

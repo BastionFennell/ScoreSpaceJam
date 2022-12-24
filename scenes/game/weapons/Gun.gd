@@ -27,8 +27,11 @@ func _ready():
 	damage_add += damage_upgrade * upgrades.damage
 
 func _spawn_single_bullet(rotation, position):
-	for p in world.get_node("Players").get_children():
-		p.rpc("shoot", rotation, position, damage_add, bullet_type, get_network_master())
+	if (player.should_broadcast()):
+		for p in world.get_node("Players").get_children():
+			p.rpc("shoot", rotation, position, damage_add, bullet_type, get_network_master())
+	else:
+		get_parent().shoot(rotation, position, damage_add, bullet_type, get_network_master())
 
 remote func shoot(bullet):
 	world.add_child(bullet)
@@ -66,11 +69,11 @@ func _reload():
 	reloading = false
 
 func network_tick():
-	if player._is_master():
+	if player.should_broadcast():
 		rset_unreliable("puppet_rotation", rotation)
 
 func _process(delta):
-	if(player.playing && player._is_master()):
+	if(player.playing && player.in_control()):
 		var controller_mode = get_node("/root/Globals").controller_mode
 
 		if !controller_mode:
