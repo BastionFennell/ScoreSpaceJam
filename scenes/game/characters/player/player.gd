@@ -1,5 +1,11 @@
 extends KinematicBody2D
 
+puppet var puppet_position = Vector2(0, 0) setget puppet_position_set
+puppet var puppet_rotation = 0
+puppet var puppet_velocity = Vector2(0, 0) setget puppet_velocity_set
+
+var tween
+
 export (int) var speed = 1000
 export (float) var health = 100.00
 export (int) var health_upgrade = 10
@@ -23,6 +29,7 @@ func _ready():
 	get_node("AnimationPlayer").connect("animation_finished", self, "_on_animation_finished")
 	invincible = false
 	set_health()
+	tween = get_node("Tween")
 
 func get_gun():
 	return get_node("Gun").get_child(0)
@@ -84,8 +91,30 @@ func _refresh_dash():
 	$"Effect Player".play("Dash Refresh")
 	can_dash = true
 
+func puppet_position_set(pos):
+	# We could be smarter about the sanity check here. Ideally we'd have a timer and if someone is
+	# sending updated positions but is out of bounds for x seconds we just update their position
+	if puppet_position != pos && puppet_position.distance_to(pos) < 500:
+		puppet_position = pos
+		tween.interpolate_property(self, "global_position", global_position, puppet_position, 0.1)
+		tween.start()
+
+func puppet_velocity_set(vel):
+	# We could be smarter about the sanity check here. Ideally we'd have a timer and if someone is
+	# sending updated positions but is out of bounds for x seconds we just update their position
+	if abs(vel.x) < 500 && abs(vel.y) < 500:
+		puppet_velocity = vel
+
+func network_tick():
+	if _is_master():
+		rset_unreliable("puppet_position", global_position)
+		rset_unreliable("puppet_velocity", velocity)
+
+func _is_master():
+	return !get_tree().network_peer || is_network_master()
+
 func _process(delta):
-	if(playing):
+	if(playing && _is_master()):
 		get_input()
 
 		if Input.is_action_just_pressed("dash") && can_dash:
@@ -100,9 +129,24 @@ func _process(delta):
 			if velocity.x or velocity.y != 0:
 				$AnimationPlayer.play("walking")
 			else:
-				$Thomas.frame = 0
+				$Sprite.frame = 0
 		
 			if(velocity.x < 0):
-				$Thomas.flip_h = true
+				$Sprite.flip_h = true
 			elif(velocity.x > 0):
-				$Thomas.flip_h = false
+				$Sprite.flip_h = false
+	else:
+		if !tween.is_active():
+			move_and_slide(puppet_velocity * speed)
+
+		if tween.is_active() or puppet_velocity.x != 0 or puppet_velocity.y != 0:
+			$AnimationPlayer.play("walking")
+		else:
+			$Sprite.frame = 0
+		
+		if(puppet_velocity.x < 0):
+			$Sprite.flip_h = true
+		elif(puppet_velocity.x > 0):
+			$Sprite.flip_h = false
+
+	network_tick()

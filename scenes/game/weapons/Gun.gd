@@ -39,7 +39,7 @@ func _spawn_bullet():
 		_spawn_single_bullet(spawner.global_rotation + (randf() * spread - spread/2), spawner.global_position)
 
 func _shake_camera():
-	var test = get_node("/root/Globals").get_main_node().get_node("Player/Camera2D").add_trauma(screen_shake)
+	var test = get_node("/root/Globals").get_player().get_node("Camera2D").add_trauma(screen_shake)
 
 func _temp_speed_buff():
 	reloading = false

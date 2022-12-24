@@ -4,6 +4,8 @@ signal inventory_updated
 signal has_interacted
 signal bought
 
+var self_peer_id = 0
+
 var controller_mode = false
 
 var time_stopped = false
@@ -112,7 +114,10 @@ func get_main_node():
 	return get_node("/root").get_children()[1]
 
 func get_player():
-	return get_main_node().get_node("Player")
+	if self_peer_id:
+		return get_main_node().get_node("Players/%s" % self_peer_id)
+	else:
+		return get_main_node().get_node("Players/Self")
 
 func _process(_delta):
 	if Input.is_action_pressed("controller_mode"):
