@@ -1,4 +1,4 @@
-extends MarginContainer
+extends CanvasLayer
 
 var health_label
 
@@ -7,8 +7,8 @@ func _on_health_change(health):
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	var player = get_node("/root/Globals").get_main_node().get_node("Player")
-	player.connect("health_change", self, "_on_health_change")
-
 	health_label = get_node("Top Bar/Status/Health/Label")
+
+func connect_to_player(player):
+	player.connect("health_change", self, "_on_health_change")
 	_on_health_change(player.health)

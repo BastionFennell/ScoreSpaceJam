@@ -11,6 +11,7 @@ export (bool) var IS_CLIENT = true
 export (String) var SERVER_IP = "127.0.0.1"
 var Player = preload("res://scenes/game/characters/player/player.tscn")
 var networked = false
+var player_list = []
 
 var controller_mode = false
 
@@ -19,6 +20,10 @@ var time_stopped = false
 var bullet_types = {
 	"shotgun": preload("res://scenes/game/weapons/Shotgun Bullet.tscn"),
 	"axegun": preload("res://scenes/game/weapons/Axegun Bullet.tscn")
+}
+
+var zone_list = {
+	"nightmare": "res://scenes/game/nightmare/Nightmare.tscn"
 }
 
 var default_selling = {
@@ -161,6 +166,8 @@ func connect_to_server(ip_address):
 	player.set_network_master(new_peer_id)
 	self_peer_id = new_peer_id
 
+	player_list = [1]
+
 func get_player_data():
 	var data = {}
 	var player_list = get_main_node().get_node("Players").get_children()
@@ -182,6 +189,7 @@ func _player_connected(player_id):
 	player.set_name(str(player_id))
 	player.pause_mode = Node.PAUSE_MODE_PROCESS
 	get_main_node().get_node("Players").add_child(player)
+	player_list.append(player_id)
 
 remote func set_players(players):
 	for p in players:
@@ -191,6 +199,25 @@ remote func set_players(players):
 		current_player.set_name(p)
 		current_player.pause_mode = Node.PAUSE_MODE_PROCESS
 		get_player().get_parent().add_child(current_player)
+
+remotesync func reset_players():
+	for p in player_list:
+		if p != self_peer_id:
+			var current_player = Player.instance();
+			current_player.global_position.x = 0
+			current_player.global_position.y = 0
+			current_player.set_name(str(p))
+			current_player.pause_mode = Node.PAUSE_MODE_PROCESS
+			current_player.set_network_master(p)
+			get_main_node().get_node("Players").add_child(current_player)
+
+mastersync func transition_to(zone):
+	get_tree().change_scene(zone_list[zone])
+
+	rpc("on_transition_to", zone)
+
+puppetsync func on_transition_to(zone):
+	get_tree().change_scene(zone_list[zone])
 
 
 func _process(_delta):

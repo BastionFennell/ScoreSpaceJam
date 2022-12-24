@@ -1,18 +1,15 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=18 format=2]
 
-[ext_resource path="res://scenes/Camera.gd" type="Script" id=1]
 [ext_resource path="res://scenes/game/nightmare/game over.gd" type="Script" id=2]
 [ext_resource path="res://scenes/game/nightmare/Terrain Generator.gd" type="Script" id=3]
 [ext_resource path="res://scenes/game/drops/ItemSpawner.gd" type="Script" id=4]
 [ext_resource path="res://assets/audio/songs/Nightmare BG.mp3" type="AudioStream" id=5]
-[ext_resource path="res://scenes/game/characters/player/player.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/game/GUI/GUI.tscn" type="PackedScene" id=7]
 [ext_resource path="res://scenes/game/GUI/Pause Menu.tscn" type="PackedScene" id=8]
 [ext_resource path="res://scenes/game/nightmare/EnemySpawner.gd" type="Script" id=9]
 [ext_resource path="res://assets/fonts/contrite_in_spirit.ttf" type="DynamicFontData" id=10]
 [ext_resource path="res://scenes/game/Transition.gd" type="Script" id=11]
 [ext_resource path="res://scenes/game/nightmare/Nightmare.gd" type="Script" id=12]
-[ext_resource path="res://scenes/game/weapons/Shotgun.tscn" type="PackedScene" id=13]
 
 [sub_resource type="DynamicFont" id=2]
 size = 50
@@ -103,38 +100,7 @@ script = ExtResource( 3 )
 [node name="EnemySpawner" type="Node2D" parent="."]
 script = ExtResource( 9 )
 
-[node name="Player" parent="." instance=ExtResource( 6 )]
-position = Vector2( 248, 251 )
-collision_mask = 8
-health = 50.0
-
-[node name="Node2D" type="Node2D" parent="Player"]
-position = Vector2( -250, -250 )
-z_index = -1000
-
-[node name="ColorRect" type="ColorRect" parent="Player/Node2D"]
-margin_left = 7.0
-margin_top = 18.0
-margin_right = 507.0
-margin_bottom = 518.0
-color = Color( 0.270588, 0.156863, 0.235294, 1 )
-
-[node name="Camera2D" type="Camera2D" parent="Player"]
-current = true
-zoom = Vector2( 0.25, 0.25 )
-process_mode = 0
-limit_smoothed = true
-smoothing_enabled = true
-script = ExtResource( 1 )
-
-[node name="Gun" type="Node2D" parent="Player"]
-
-[node name="Shotgun" parent="Player/Gun" instance=ExtResource( 13 )]
-
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="GUI" parent="CanvasLayer" instance=ExtResource( 7 )]
-margin_bottom = 68.0
+[node name="GUI2" parent="." instance=ExtResource( 7 )]
 
 [node name="Pause Menu" parent="." instance=ExtResource( 8 )]
 visible = false
@@ -343,6 +309,8 @@ bus = "Music"
 
 [node name="ItemSpawner" type="Node2D" parent="."]
 script = ExtResource( 4 )
+
+[node name="Players" type="YSort" parent="."]
 
 [node name="Transition" type="AnimationPlayer" parent="."]
 pause_mode = 2

@@ -12,7 +12,8 @@ export (int) var health_inc = 0
 export (int) var damage_inc = 5
 
 var player
-var world;
+var world
+var globals
 var hit_box
 var dead = false
 signal spawn_item
@@ -21,8 +22,9 @@ signal damage_player
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	world = get_node("/root/Globals").get_main_node()
-	player = world.get_node("Player")
+	globals = get_node("/root/Globals")
+	world = globals.get_main_node()
+	player = globals.get_player()
 	hit_box = get_node("Hit Box")
 
 	if (has_node("AnimationPlayer")):

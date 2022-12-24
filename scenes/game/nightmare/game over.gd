@@ -9,10 +9,11 @@ func _ready():
 	world = globals.get_main_node()
 	var button = get_node("./Retry")
 	var add_highscore = get_node("Submit Score")
-	var player = world.get_node("Player")
 
 	button.connect("pressed", self, "_retry")
 	add_highscore.connect("pressed", self, "_on_submit")
+
+func connect_to_player(player):
 	player.connect("player_death", self, "_on_death")
 
 func _parse_time(time, days):

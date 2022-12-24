@@ -39,10 +39,12 @@ var enemies = {
 		"wave_difficulty_ramp": 0.8
 	}
 }
-var world;
+var world
+var globals
 
 func _ready():
-	world = get_node("/root/Globals").get_main_node()
+	globals = get_node("/root/Globals")
+	world = globals.get_main_node()
 	for i in enemies:
 		var days = get_node("/root/Globals").days
 		var enemy = enemies[i];
@@ -58,7 +60,7 @@ func _ready():
 		timer.start()
 
 func _get_spawn_position():
-	var player = world.get_node("Player")
+	var player = globals.get_player()
 
 	var distance = randf() * 100 + safe_radius
 	var direction = randf() * 2 * PI

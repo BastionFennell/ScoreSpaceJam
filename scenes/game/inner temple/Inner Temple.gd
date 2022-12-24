@@ -23,10 +23,3 @@ func _ready():
 	for child in get_children():
 		if child.has_method("connect_to_player"):
 			child.connect_to_player(my_player)
-
-remote func register_player(info):
-	# Get the id of the RPC sender.
-	var id = get_tree().get_rpc_sender_id()
-	# Store the info
-	player_info[id] = info
-	print(player_info)

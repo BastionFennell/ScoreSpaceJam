@@ -1,11 +1,15 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://scenes/game/inner temple/Inner Temple.gd" type="Script" id=1]
 [ext_resource path="res://scenes/game/GUI/Pause Menu.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/game/inner temple/Bed.gd" type="Script" id=3]
 [ext_resource path="res://assets/sprites/bed.png" type="Texture" id=4]
 [ext_resource path="res://scenes/game/inner temple/Anvil.gd" type="Script" id=5]
 [ext_resource path="res://assets/sprites/village/anvil.png" type="Texture" id=6]
 [ext_resource path="res://scenes/game/inner temple/Gunsmithing.gd" type="Script" id=7]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 10, 11.5 )
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -54,6 +58,13 @@ color = Color( 0.270588, 0.156863, 0.235294, 1 )
 [node name="Bed" type="Sprite" parent="Levels/Room 1"]
 position = Vector2( -155, 103 )
 texture = ExtResource( 4 )
+script = ExtResource( 3 )
+
+[node name="Area2D" type="Area2D" parent="Levels/Room 1/Bed"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Levels/Room 1/Bed/Area2D"]
+position = Vector2( 0, -1 )
+shape = SubResource( 2 )
 
 [node name="Label" type="Label" parent="Levels/Room 1"]
 margin_left = -165.0
