@@ -23,7 +23,8 @@ var bullet_types = {
 }
 
 var zone_list = {
-	"nightmare": "res://scenes/game/nightmare/Nightmare.tscn"
+	"nightmare": "res://scenes/game/nightmare/Nightmare.tscn",
+	"inner temple": "res://scenes/game/inner temple/Inner Temple.tscn"
 }
 
 var default_selling = {
@@ -214,7 +215,8 @@ remotesync func reset_players():
 mastersync func transition_to(zone):
 	get_tree().change_scene(zone_list[zone])
 
-	rpc("on_transition_to", zone)
+	if networked:
+		rpc("on_transition_to", zone)
 
 puppetsync func on_transition_to(zone):
 	get_tree().change_scene(zone_list[zone])

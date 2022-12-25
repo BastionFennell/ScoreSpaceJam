@@ -20,6 +20,8 @@ func _ready():
 
 	globals.get_main_node().get_node("Players").add_child(my_player)
 
+	globals.reset_players()
+
 	for child in get_children():
 		if child.has_method("connect_to_player"):
 			child.connect_to_player(my_player)

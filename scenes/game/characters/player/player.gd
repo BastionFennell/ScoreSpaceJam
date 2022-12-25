@@ -37,12 +37,13 @@ func _ready():
 	set_health()
 
 	var gun = current_gun.instance();
+	gun.name = "Gun"
 	gun.set_network_master(get_network_master())
 
 	call_deferred("add_child", gun)
 
 func get_gun():
-	return get_node("Gun").get_child(0)
+	return get_node("Gun")
 
 func set_health():
 	var upgrades = get_node("/root/Globals").upgrades

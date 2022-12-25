@@ -135,6 +135,7 @@ tracks/0/keys = {
 collision_mask = 0
 script = ExtResource( 2 )
 speed = 100
+health = 1e+06
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 2 )

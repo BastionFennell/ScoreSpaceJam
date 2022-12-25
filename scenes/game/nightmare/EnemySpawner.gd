@@ -1,6 +1,9 @@
 extends Node2D
 
+var is_server = false
 var safe_radius = 170
+var enemy_id = 0
+var enemies_node
 var enemies = {
 	"zombie": { 
 		"node": preload("res://scenes/game/enemies/zombie/Zombie.tscn"),
@@ -45,22 +48,27 @@ var globals
 func _ready():
 	globals = get_node("/root/Globals")
 	world = globals.get_main_node()
-	for i in enemies:
-		var days = get_node("/root/Globals").days
-		var enemy = enemies[i];
-		var timer = Timer.new()
-		enemy.min_respawn_time = max(enemy.min_respawn_time * pow(enemy.wave_difficulty_ramp, days), 0.001)
-		enemy.respawn_timer = max(enemy.respawn_timer * pow(enemy.wave_difficulty_ramp, days), 0.001)
-		enemy.delay = max(enemy.delay * pow(enemy.wave_difficulty_ramp, days), 0.001)
+	enemies_node = world.get_node("Enemies")
+	is_server = get_tree().is_network_server()
+	if !globals.networked || is_server:
+		for i in enemies:
+			var days = get_node("/root/Globals").days
+			var enemy = enemies[i];
+			var timer = Timer.new()
+			enemy.min_respawn_time = max(enemy.min_respawn_time * pow(enemy.wave_difficulty_ramp, days), 0.001)
+			enemy.respawn_timer = max(enemy.respawn_timer * pow(enemy.wave_difficulty_ramp, days), 0.001)
+			enemy.delay = max(enemy.delay * pow(enemy.wave_difficulty_ramp, days), 0.001)
 
-		timer.one_shot = true
-		timer.wait_time = enemy.delay
-		timer.connect("timeout", self, "_spawn_enemy", [i]) 
-		add_child(timer)
-		timer.start()
+			timer.one_shot = true
+			timer.wait_time = enemy.delay
+			timer.connect("timeout", self, "_spawn_enemy", [i]) 
+			add_child(timer)
+			timer.start()
 
 func _get_spawn_position():
-	var player = globals.get_player()
+	var players = world.get_node("Players").get_children()
+	var player_index = randi() % players.size()
+	var player = players[player_index]
 
 	var distance = randf() * 100 + safe_radius
 	var direction = randf() * 2 * PI
@@ -90,9 +98,12 @@ func _ramp_difficulty(enemy_type):
 func _spawn_enemy(enemy_type):
 	var coords = _get_spawn_position()
 
-	var enemy = enemies[enemy_type].node.instance();
-	enemy.set_position(coords)
-	world.call_deferred("add_child", enemy)
+	if(globals.networked):
+		rpc("_add_enemy", enemy_type, coords, enemy_id)
+	else:
+		_add_enemy(enemy_type, coords, enemy_id)
+
+	enemy_id += 1
 
 	var timer = Timer.new()
 	timer.one_shot = true
@@ -100,3 +111,27 @@ func _spawn_enemy(enemy_type):
 	timer.connect("timeout", self, "_spawn_enemy", [enemy_type]) 
 	add_child(timer)
 	timer.start()
+
+
+remotesync func _add_enemy(enemy_type, coords, id):
+	var enemy = enemies[enemy_type].node.instance();
+	enemy.set_position(coords)
+	enemy.set_name(str(id))
+	enemies_node.call_deferred("add_child", enemy)
+
+remote func update_enemies(enemy_list):
+	for e in enemies_node.get_children():
+		if enemy_list.has(e.name):
+			e.puppet_position = enemy_list[e.name].global_position
+			e.puppet_velocity = enemy_list[e.name].velocity
+
+func _process(_delta):
+	if globals.networked && is_server:
+		var enemy_list = {}
+		for e in enemies_node.get_children():
+			enemy_list[e.name] = {
+				"global_position": e.global_position,
+				"velocity": e.velocity
+			}
+	
+		rpc("update_enemies", enemy_list)

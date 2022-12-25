@@ -92,7 +92,7 @@ tracks/1/keys = {
 [node name="Nightmare" type="Node2D"]
 position = Vector2( -2, -2 )
 script = ExtResource( 12 )
-round_length = 60.0
+round_length = 1.0
 
 [node name="Terrain Generator" type="Node" parent="."]
 script = ExtResource( 3 )
@@ -309,6 +309,8 @@ bus = "Music"
 
 [node name="ItemSpawner" type="Node2D" parent="."]
 script = ExtResource( 4 )
+
+[node name="Enemies" type="YSort" parent="."]
 
 [node name="Players" type="YSort" parent="."]
 

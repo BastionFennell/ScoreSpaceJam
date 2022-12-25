@@ -14,4 +14,4 @@ func transition_to(to):
 func _on_animation_finished(name):
 	if name == "Fade out":
 		get_tree().paused = false
-		get_tree().change_scene(scene)
+		get_node("/root/Globals").transition_to(scene)
