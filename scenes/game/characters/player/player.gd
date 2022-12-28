@@ -153,10 +153,12 @@ func in_control():
 	else:
 		return is_master()
 
-remotesync func shoot(rotation, position, damage, bullet_type, master_id):
+remotesync func shoot(rotation, position, damage, bullet_speed, lifetime, bullet_type, master_id):
 	var bullet = gun_man.bullet_types[bullet_type].instance()
 
 	bullet.damage = damage
+	bullet.speed = bullet_speed
+	bullet.lifetime = lifetime
 	bullet.set_network_master(master_id)
 	bullet.set_rotation(rotation)
 	bullet.set_position(position)

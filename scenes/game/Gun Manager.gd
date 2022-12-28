@@ -4,10 +4,12 @@ signal on_set_current_guns
 signal change_current_gun
 
 var gun_scripts = {
-	"shotgun": preload("res://scenes/game/weapons/shotgun.gd")
+	"shotgun": preload("res://scenes/game/weapons/shotgun.gd"),
+	"rifle": preload("res://scenes/game/weapons/rifle.gd")
 }
 var gun_types = {
-	"shotgun": preload("res://scenes/game/weapons/Shotgun.tscn")
+	"shotgun": preload("res://scenes/game/weapons/Shotgun.tscn"),
+	"rifle": preload("res://scenes/game/weapons/Rifle.tscn")
 }
 
 var bullet_types = {
@@ -31,11 +33,21 @@ var guns_data = {
 	"shotgun": {
 		"icon": preload("res://assets/sprites/weapons/Shotgun Icon.png"),
 		"parts": 2
+	},
+	"rifle": {
+		"icon": preload("res://assets/sprites/weapons/Rifle Icon.png"),
+		"parts": 2
 	}
 }
-var unlocked_guns = ["shotgun"]
+var unlocked_guns = ["rifle", "shotgun"]
 
-var current_guns = [{ "type": "shotgun", "parts": { "junk": 3}}]
+var current_guns = [{
+	"type": "shotgun",
+	"parts": { "junk": 2}
+	}, {
+	"type": "rifle",
+	"parts": { "junk": 2}
+	}]
 var current_gun = 0 setget set_current_gun
 
 func get_upgrade_text(parts, type):

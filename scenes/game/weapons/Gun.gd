@@ -1,15 +1,17 @@
-extends KinematicBody2D
+extends Node2D
 
 puppet var puppet_rotation = 0
 
-export (float) var damage = 5
+export (float) var damage = 5.0
 export (float) var screen_shake = 0.3
 export (float) var reload_multiplier = 1.0
 export (float) var reload_buff_remaining = null
 export (float) var damage_add = 0.0
 export (float) var reload_speed_upgrade = 0.8
-export (float) var damage_upgrade = 1
+export (float) var damage_upgrade = 1.0
+export (float) var lifetime = 0.6
 export (String) var bullet_type = "shotgun"
+export (int) var speed = 100
 export var reloading = false
 
 var remaining_reload_time = null
@@ -37,9 +39,9 @@ func get_damage():
 func _spawn_single_bullet(rotation, position):
 	if (player.should_broadcast()):
 		for p in world.get_node("Players").get_children():
-			p.rpc("shoot", rotation, position, get_damage(), bullet_type, get_network_master())
+			p.rpc("shoot", rotation, position, get_damage(), speed, lifetime, bullet_type, get_network_master())
 	else:
-		get_parent().shoot(rotation, position, get_damage(), bullet_type, get_network_master())
+		get_parent().shoot(rotation, position, get_damage(), speed, lifetime, bullet_type, get_network_master())
 
 func _spawn_bullet():
 	var spawner = get_node('./Bullet Spawner')

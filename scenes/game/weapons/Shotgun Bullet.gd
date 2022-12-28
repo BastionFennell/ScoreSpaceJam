@@ -2,6 +2,7 @@ extends Area2D
 
 export (int) var speed = 100
 export (int) var damage = 1
+export (float) var lifetime = 0.6
 
 var globals
 
@@ -9,7 +10,7 @@ func _ready():
 	globals = get_node("/root/Globals")
 	var timer = Timer.new()
 	timer.one_shot = true
-	timer.wait_time = .6 + .3 * randf()
+	timer.wait_time = lifetime + lifetime / 2 * randf()
 	timer.connect("timeout", self, "_destroy") 
 	add_child(timer)
 	timer.start()

@@ -38,4 +38,4 @@ static func get_stats(parts):
 	if parts.has("stone"):
 		damage += 3 * parts["stone"]
 	
-	return { "damage": damage, "reload_time": reload_time, "count": count}
+	return { "name": "Shotgun", "damage": damage, "reload_time": reload_time, "count": count}
