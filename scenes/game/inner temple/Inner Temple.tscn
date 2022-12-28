@@ -251,6 +251,7 @@ text = "Old master"
 
 [node name="Gunsmithing" type="CanvasLayer" parent="."]
 pause_mode = 2
+visible = false
 follow_viewport_scale = 4.0
 script = ExtResource( 7 )
 
