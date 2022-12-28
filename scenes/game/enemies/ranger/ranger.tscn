@@ -61,9 +61,10 @@ tracks/0/keys = {
 "values": [ 0, 1, 2 ]
 }
 
-[node name="Ranger" type="KinematicBody2D"]
+[node name="Ranger" type="RigidBody2D"]
 collision_layer = 2
 collision_mask = 2
+mode = 2
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
