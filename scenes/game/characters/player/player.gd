@@ -97,6 +97,7 @@ func dash():
 	dash_direction = get_input_vector()
 	invincible = true
 	is_dashing = true
+	get_node("CollisionShape2D").set_deferred("disabled", true)
 
 	get_node("AnimationPlayer").play("Dash")
 
@@ -105,6 +106,7 @@ func _on_animation_finished(animation):
 		invincible = false
 		is_dashing = false
 		dash_time = 0
+		get_node("CollisionShape2D").set_deferred("disabled", false)
 
 		var timer = Timer.new()
 		timer.one_shot = true

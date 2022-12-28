@@ -89,7 +89,7 @@ tracks/1/keys = {
 "values": [ true, true ]
 }
 
-[node name="Nightmare" type="Node2D"]
+[node name="Nightmare" type="YSort"]
 position = Vector2( -2, -2 )
 script = ExtResource( 12 )
 
