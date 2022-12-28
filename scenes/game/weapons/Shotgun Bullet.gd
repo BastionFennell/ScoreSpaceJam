@@ -1,6 +1,6 @@
-extends KinematicBody2D
+extends Area2D
 
-export (int) var speed = 25
+export (int) var speed = 100
 export (int) var damage = 1
 
 var globals
@@ -14,6 +14,9 @@ func _ready():
 	add_child(timer)
 	timer.start()
 
+	self.connect("body_entered", self, "_on_body_entered")
+
+
 func _destroy():
 	queue_free()
 
@@ -25,15 +28,17 @@ func _explode():
 	get_node("/root/Globals").get_main_node().add_child(p)
 	p.emitting = true
 
-func _process(delta):
-	var velocity = Vector2(1, 0)
-	var collision = move_and_collide(velocity.rotated(self.rotation) * speed)
+func _on_body_entered(node):
 	if !globals.networked || is_network_master():
-		if collision && collision.collider.has_method("damage"):
-			var c_health = collision.collider.health
-			collision.collider.call("damage", damage)
+		if node.has_method("damage"):
+			var c_health = node.health
+			node.call("damage", damage)
 			damage -= c_health
 
 			if damage <= 0:
 				_explode()
 				queue_free()
+
+func _process(delta):
+	var velocity = Vector2(1, 0)
+	position += velocity.rotated(self.rotation) * delta * speed

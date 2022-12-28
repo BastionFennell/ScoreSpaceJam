@@ -1,4 +1,4 @@
-extends KinematicBody2D
+extends RigidBody2D
 
 puppet var puppet_position = Vector2(0, 0) setget puppet_position_set
 puppet var puppet_velocity = Vector2(0, 0) setget puppet_velocity_set
@@ -108,13 +108,15 @@ func get_closest_player(players):
 
 	return closest_player
 
-func _physics_process(_delta):
+func _integrate_forces(_delta):
 	if !globals.networked || is_server:
 		var closest_player = get_closest_player(world.get_node("Players").get_children())
 		velocity = Vector2.ZERO
 		if (global_position.distance_to(closest_player.global_position) > 10 && !dead):
 			velocity += position.direction_to(closest_player.global_position)
-			move_and_slide(velocity * speed)
+			self.linear_velocity = velocity * speed 
+		else:
+			self.linear_velocity = Vector2.ZERO
 
 		if(velocity.x < 0):
 			$Sprite.flip_h = false
@@ -123,7 +125,7 @@ func _physics_process(_delta):
 
 	else:
 		if !tween.is_active():
-			move_and_slide(puppet_velocity * speed)
+			linear_velocity = puppet_velocity * speed
 
 		if(puppet_velocity.x < 0):
 			$Sprite.flip_h = true

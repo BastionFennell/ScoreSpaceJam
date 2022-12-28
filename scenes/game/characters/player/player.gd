@@ -1,4 +1,4 @@
-extends KinematicBody2D
+extends RigidBody2D
 
 puppet var puppet_position = Vector2(0, 0) setget puppet_position_set
 puppet var puppet_velocity = Vector2(0, 0) setget puppet_velocity_set
@@ -163,7 +163,7 @@ remotesync func shoot(rotation, position, damage, bullet_type, master_id):
 
 	world.add_child(bullet)
 
-func _physics_process(delta):
+func _integrate_forces(state):
 	if(playing && in_control()):
 		get_input()
 
@@ -171,10 +171,9 @@ func _physics_process(delta):
 			dash()
 			velocity += dash_direction * dash_speed
 		elif is_dashing:
-			dash_time += delta
 			velocity += dash_direction * dash_speed * pow((1 - dash_time * 2), 3)
 
-		velocity = move_and_slide(velocity)
+		linear_velocity = velocity
 		if !is_dashing:
 			if velocity.x or velocity.y != 0:
 				$AnimationPlayer.play("walking")
@@ -187,7 +186,7 @@ func _physics_process(delta):
 				$Sprite.flip_h = false
 	else:
 		if !tween.is_active():
-			move_and_slide(puppet_velocity * speed)
+			linear_velocity = puppet_velocity * speed
 
 		if tween.is_active() or puppet_velocity.x != 0 or puppet_velocity.y != 0:
 			$AnimationPlayer.play("walking")
@@ -200,3 +199,7 @@ func _physics_process(delta):
 			$Sprite.flip_h = false
 
 	network_tick()
+
+func _process(delta):
+	if is_dashing:
+		dash_time += delta

@@ -33,12 +33,12 @@ func _wind_up(delta):
 	var norm = (jumping_to - self.global_position).normalized()
 	var wind_up =  norm * 10
 
-	move_and_slide(-wind_up - norm * speed )
+	#move_and_slide(-wind_up - norm * speed )
 
 func pounce(delta):
 	var norm = (jumping_to - self.global_position)
 
-	move_and_slide((norm / pouncing_time) * 3)
+	#move_and_slide((norm / pouncing_time) * 3)
 
 func _reset_pounce():
 	wound_up = 0

@@ -25,7 +25,7 @@ var enemies = {
 	},
 	"oni": {
 		"node": preload("res://scenes/game/enemies/oni/Oni.tscn"),
-		"delay": 60,
+		"delay": 0,
 		"respawn_timer": 2,
 		"decay": 0.1,
 		"difficulty_timer": 2.00,

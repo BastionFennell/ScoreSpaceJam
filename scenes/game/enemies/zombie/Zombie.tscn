@@ -61,9 +61,12 @@ tracks/0/keys = {
 "values": [ 0, 1, 2 ]
 }
 
-[node name="Zombie" type="KinematicBody2D"]
+[node name="Zombie" type="RigidBody2D"]
 collision_layer = 2
 collision_mask = 2
+mode = 2
+gravity_scale = 0.0
+contact_monitor = true
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
@@ -72,6 +75,8 @@ hframes = 6
 
 [node name="Hit Box" type="Area2D" parent="."]
 position = Vector2( 0, 2 )
+space_override = 4
+linear_damp = 10.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hit Box"]
 scale = Vector2( 8, 8 )
