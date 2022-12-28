@@ -5,6 +5,7 @@ puppet var puppet_velocity = Vector2(0, 0) setget puppet_velocity_set
 
 var tween
 var globals
+var gun_man
 var world
 
 export (int) var speed = 1000
@@ -30,14 +31,15 @@ var current_gun = preload("res://scenes/game/weapons/Shotgun.tscn")
 
 func _ready():
 	globals = get_node("/root/Globals")
+	gun_man = get_node("/root/GunManager")
 	world = globals.get_main_node()
 	tween = get_node("Tween")
 	get_node("AnimationPlayer").connect("animation_finished", self, "_on_animation_finished")
 	invincible = false
 	set_health()
 
-	current_gun = globals.current_guns[-1]
-	var gun_node = globals.gun_types[current_gun.type].instance()
+	current_gun = gun_man.current_guns[-1]
+	var gun_node = gun_man.gun_types[current_gun.type].instance()
 	gun_node.set_network_master(get_network_master())
 	gun_node.name = "Gun"
 	gun_node.parts = current_gun.parts
@@ -53,8 +55,8 @@ func update_gun():
 	self.remove_child(old_gun)
 	old_gun.queue_free()
 
-	current_gun = globals.current_guns[-1]
-	var gun_node = globals.gun_types[current_gun.type].instance()
+	current_gun = gun_man.current_guns[-1]
+	var gun_node = gun_man.gun_types[current_gun.type].instance()
 	gun_node.set_network_master(get_network_master())
 	gun_node.name = "Gun"
 	gun_node.parts = current_gun.parts
@@ -154,7 +156,7 @@ func in_control():
 		return is_master()
 
 remotesync func shoot(rotation, position, damage, bullet_type, master_id):
-	var bullet = globals.bullet_types[bullet_type].instance()
+	var bullet = gun_man.bullet_types[bullet_type].instance()
 
 	bullet.damage = damage
 	bullet.set_network_master(master_id)

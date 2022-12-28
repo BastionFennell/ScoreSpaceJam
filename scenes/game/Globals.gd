@@ -17,15 +17,6 @@ var controller_mode = false
 
 var time_stopped = false
 
-var gun_types = {
-	"shotgun": preload("res://scenes/game/weapons/Shotgun.tscn")
-}
-
-var bullet_types = {
-	"shotgun": preload("res://scenes/game/weapons/Shotgun Bullet.tscn"),
-	"axegun": preload("res://scenes/game/weapons/Axegun Bullet.tscn")
-}
-
 var zone_list = {
 	"nightmare": "res://scenes/game/nightmare/Nightmare.tscn",
 	"inner temple": "res://scenes/game/inner temple/Inner Temple.tscn"
@@ -70,33 +61,9 @@ var inventory_icons = {
 }
 var default_inventory = {
 	"wood": 100,
-	"stone": 0
+	"stone": 100
 }
 var inventory = default_inventory.duplicate(true) setget set_inventory
-
-# Gunsmithing
-var parts_data = {
-	"stock": {
-		"price": 2
-	},
-	"barrel": {
-		"price": 2
-	}
-}
-var parts_inventory = {}
-var unlocked_parts = ["stock", "barrel"]
-
-var guns_data = {
-	"shotgun": {
-		"icon": preload("res://assets/sprites/weapons/Shotgun Icon.png"),
-		"parts": 2
-	}
-}
-var unlocked_guns = ["shotgun"]
-
-var current_parts = []
-var current_guns = [{ "type": "shotgun", "parts": { "junk": 3}}]
-
 
 var days = 0
 var kills = 0
@@ -137,7 +104,7 @@ func stop_time():
 	time_stopped = true
 
 func get_main_node():
-	return get_node("/root").get_children()[1]
+	return get_node("/root").get_children()[2]
 
 func get_player():
 	return get_main_node().get_node("Players/%s" % self_peer_id)

@@ -24,8 +24,8 @@ bg_color = Color( 0.941176, 0.913725, 0.913725, 0.337255 )
 [node name="Menu" type="CanvasLayer" parent="."]
 
 [node name="Sprite" type="Sprite" parent="Menu"]
-position = Vector2( 960, 531 )
-scale = Vector2( 7.5, 7.5 )
+position = Vector2( 640, 350 )
+scale = Vector2( 5, 5 )
 texture = ExtResource( 7 )
 
 [node name="Start Button" type="Button" parent="Menu"]

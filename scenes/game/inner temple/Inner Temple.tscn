@@ -206,7 +206,6 @@ text = "Old master"
 
 [node name="Gunsmithing" type="CanvasLayer" parent="."]
 pause_mode = 2
-visible = false
 follow_viewport_scale = 4.0
 script = ExtResource( 7 )
 
@@ -216,33 +215,31 @@ anchor_bottom = 1.0
 color = Color( 0.113725, 0.141176, 0.172549, 1 )
 
 [node name="Inv Label" type="Label" parent="Gunsmithing"]
-margin_left = 20.0
-margin_top = 10.0
-margin_right = 81.0
-margin_bottom = 24.0
-custom_colors/font_color = Color( 0, 0, 0, 1 )
+margin_left = 65.0
+margin_top = 84.0
+margin_right = 126.0
+margin_bottom = 98.0
 text = "Inventory"
 
 [node name="Inventory" type="HBoxContainer" parent="Gunsmithing"]
-margin_left = 20.0
-margin_top = 33.0
-margin_right = 36.0
-margin_bottom = 49.0
+margin_left = 65.0
+margin_top = 107.0
+margin_right = 81.0
+margin_bottom = 123.0
 rect_scale = Vector2( 4, 4 )
 
 [node name="Schematics Label" type="Label" parent="Gunsmithing"]
-margin_left = 20.0
-margin_top = 131.0
-margin_right = 93.0
-margin_bottom = 145.0
-custom_colors/font_color = Color( 0, 0, 0, 1 )
+margin_left = 65.0
+margin_top = 205.0
+margin_right = 138.0
+margin_bottom = 219.0
 text = "Schematics"
 
 [node name="Schematics" type="HBoxContainer" parent="Gunsmithing"]
-margin_left = 20.0
-margin_top = 152.0
-margin_right = 36.0
-margin_bottom = 168.0
+margin_left = 65.0
+margin_top = 226.0
+margin_right = 81.0
+margin_bottom = 242.0
 rect_scale = Vector2( 4, 4 )
 
 [node name="Schematic Base" type="Button" parent="Gunsmithing/Schematics"]
@@ -275,11 +272,10 @@ align = 1
 position = Vector2( 8, 8 )
 
 [node name="Selected Schematics Label" type="Label" parent="Gunsmithing"]
-margin_left = 20.0
-margin_top = 280.0
-margin_right = 149.0
-margin_bottom = 294.0
-custom_colors/font_color = Color( 0, 0, 0, 1 )
+margin_left = 65.0
+margin_top = 354.0
+margin_right = 194.0
+margin_bottom = 368.0
 text = "Selected Schematic:"
 
 [node name="Component Base" type="ColorRect" parent="Gunsmithing"]
@@ -335,11 +331,32 @@ align = 2
 position = Vector2( 8, 8 )
 
 [node name="Components" type="HBoxContainer" parent="Gunsmithing"]
-margin_left = 20.0
-margin_top = 307.0
-margin_right = 36.0
-margin_bottom = 323.0
+margin_left = 65.0
+margin_top = 381.0
+margin_right = 81.0
+margin_bottom = 397.0
 rect_scale = Vector2( 4, 4 )
+
+[node name="Close Button" type="Button" parent="Gunsmithing"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -101.0
+margin_top = 74.0
+margin_right = -54.0
+margin_bottom = 94.0
+text = "Close"
+
+[node name="Upgrade Info" type="Label" parent="Gunsmithing"]
+visible = false
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -66.0
+margin_top = -245.0
+margin_right = 66.0
+margin_bottom = -231.0
+text = "Upgrade Information"
 
 [node name="Make Button" type="Button" parent="Gunsmithing"]
 visible = false
@@ -353,12 +370,6 @@ margin_right = 125.0
 margin_bottom = -64.0
 custom_fonts/font = SubResource( 8 )
 text = "MAKE"
-
-[node name="Close Button" type="Button" parent="Gunsmithing"]
-margin_left = 975.0
-margin_right = 1022.0
-margin_bottom = 20.0
-text = "Close"
 
 [node name="Pause Menu" parent="." instance=ExtResource( 2 )]
 visible = false

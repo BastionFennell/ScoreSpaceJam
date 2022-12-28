@@ -141,8 +141,8 @@ anims/Intro = SubResource( 1 )
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Sprite" type="Sprite" parent="CanvasLayer"]
-position = Vector2( 960, 531 )
-scale = Vector2( 7.5, 7.5 )
+position = Vector2( 640, 350 )
+scale = Vector2( 5, 5 )
 texture = ExtResource( 3 )
 
 [node name="Label" type="Label" parent="CanvasLayer"]
@@ -157,56 +157,57 @@ text = "Long ago, in a now forgotten temple"
 align = 1
 
 [node name="Fade" type="ColorRect" parent="CanvasLayer"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 0, 0, 0, 1 )
 
 [node name="Text Fade" type="ColorRect" parent="CanvasLayer"]
-margin_left = 457.0
-margin_top = 953.0
-margin_right = 1526.0
-margin_bottom = 1059.0
+margin_left = 107.0
+margin_top = 601.0
+margin_right = 1176.0
+margin_bottom = 707.0
 color = Color( 0, 0, 0, 0 )
 
 [node name="Character Faders" type="Node" parent="CanvasLayer"]
 
 [node name="Second" type="ColorRect" parent="CanvasLayer/Character Faders"]
-margin_left = 889.0
-margin_top = 155.0
+margin_left = 984.0
+margin_top = 189.0
 margin_right = 1240.0
 margin_bottom = 469.0
 rect_pivot_offset = Vector2( -2037, 49 )
 color = Color( 0, 0, 0, 0 )
 
 [node name="First" type="ColorRect" parent="CanvasLayer/Character Faders"]
-margin_left = 104.0
-margin_top = 246.0
-margin_right = 425.0
-margin_bottom = 614.0
+margin_left = 55.0
+margin_top = 184.0
+margin_right = 241.0
+margin_bottom = 390.0
 rect_pivot_offset = Vector2( -2037, 49 )
 color = Color( 0, 0, 0, 0 )
 
 [node name="Third" type="ColorRect" parent="CanvasLayer/Character Faders"]
-margin_left = 455.0
-margin_top = 480.0
-margin_right = 799.0
-margin_bottom = 838.0
+margin_left = 301.0
+margin_top = 316.0
+margin_right = 511.0
+margin_bottom = 560.0
 rect_pivot_offset = Vector2( -2037, 49 )
 color = Color( 0, 0, 0, 0 )
 
 [node name="Fourth" type="ColorRect" parent="CanvasLayer/Character Faders"]
-margin_left = 1494.0
-margin_top = 317.0
-margin_right = 1799.0
-margin_bottom = 654.0
+margin_left = 583.0
+margin_top = 62.0
+margin_right = 854.0
+margin_bottom = 317.0
 rect_pivot_offset = Vector2( -2037, 49 )
 color = Color( 0, 0, 0, 0 )
 
 [node name="Gun" type="ColorRect" parent="CanvasLayer/Character Faders"]
-margin_left = 1138.0
-margin_top = 126.0
-margin_right = 1824.0
-margin_bottom = 824.0
+margin_left = 731.0
+margin_top = 138.0
+margin_right = 1193.0
+margin_bottom = 504.0
 rect_pivot_offset = Vector2( -2037, 49 )
 color = Color( 0, 0, 0, 0 )
 
