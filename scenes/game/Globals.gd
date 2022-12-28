@@ -17,6 +17,10 @@ var controller_mode = false
 
 var time_stopped = false
 
+var gun_types = {
+	"shotgun": preload("res://scenes/game/weapons/Shotgun.tscn")
+}
+
 var bullet_types = {
 	"shotgun": preload("res://scenes/game/weapons/Shotgun Bullet.tscn"),
 	"axegun": preload("res://scenes/game/weapons/Axegun Bullet.tscn")
@@ -60,11 +64,15 @@ var default_upgrades = {
 }
 var upgrades = default_upgrades.duplicate(true)
 
+var inventory_icons = {
+	"wood": preload("res://assets/sprites/resources/wood.png"),
+	"stone": preload("res://assets/sprites/resources/stone.png"),
+}
 var default_inventory = {
-	"wood": 0,
+	"wood": 100,
 	"stone": 0
 }
-var inventory = default_inventory.duplicate(true)
+var inventory = default_inventory.duplicate(true) setget set_inventory
 
 # Gunsmithing
 var parts_data = {
@@ -80,16 +88,14 @@ var unlocked_parts = ["stock", "barrel"]
 
 var guns_data = {
 	"shotgun": {
-		"parts": {
-			"stock": 1,
-			"barrel": 2
-		}
+		"icon": preload("res://assets/sprites/weapons/Shotgun Icon.png"),
+		"parts": 2
 	}
 }
 var unlocked_guns = ["shotgun"]
 
 var current_parts = []
-var current_guns = []
+var current_guns = [{ "type": "shotgun", "parts": { "junk": 3}}]
 
 
 var days = 0
@@ -109,6 +115,9 @@ func add_item(item, amount):
 	var new_amount = inventory[item] + amount if inventory[item] else amount
 
 	inventory[item] = new_amount
+	emit_signal("inventory_updated")
+
+func set_inventory(new_inventory):
 	emit_signal("inventory_updated")
 
 func on_first_interact():

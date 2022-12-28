@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://scenes/game/inner temple/Inner Temple.gd" type="Script" id=1]
 [ext_resource path="res://scenes/game/GUI/Pause Menu.tscn" type="PackedScene" id=2]
@@ -7,11 +7,33 @@
 [ext_resource path="res://scenes/game/inner temple/Anvil.gd" type="Script" id=5]
 [ext_resource path="res://assets/sprites/village/anvil.png" type="Texture" id=6]
 [ext_resource path="res://scenes/game/inner temple/Gunsmithing.gd" type="Script" id=7]
+[ext_resource path="res://scenes/game/inner temple/Item Base.gd" type="Script" id=8]
+[ext_resource path="res://scenes/game/inner temple/Component Base.gd" type="Script" id=9]
+[ext_resource path="res://assets/fonts/contrite_in_spirit.ttf" type="DynamicFontData" id=10]
+
+[sub_resource type="RectangleShape2D" id=1]
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 10, 11.5 )
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="StyleBoxFlat" id=5]
+bg_color = Color( 0.333333, 0.333333, 0.333333, 1 )
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 0.2, 0.2, 0.2, 1 )
+
+[sub_resource type="StyleBoxFlat" id=6]
+bg_color = Color( 0.333333, 0.333333, 0.333333, 1 )
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0.266667, 0.266667, 0.266667, 1 )
+
+[sub_resource type="RectangleShape2D" id=7]
+extents = Vector2( 7, 7 )
+
+[sub_resource type="DynamicFont" id=8]
+size = 70
+font_data = ExtResource( 10 )
 
 [node name="Inner Temple" type="Node2D"]
 position = Vector2( 1, 0 )
@@ -41,6 +63,19 @@ margin_bottom = -73.0
 rect_scale = Vector2( 0.5, 0.5 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Buddha Statue"
+
+[node name="Anvil" type="Area2D" parent="."]
+position = Vector2( 92, 85 )
+z_index = 5
+script = ExtResource( 5 )
+
+[node name="Sprite" type="Sprite" parent="Anvil"]
+position = Vector2( -167, -41 )
+texture = ExtResource( 6 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Anvil"]
+position = Vector2( -167, -40 )
+shape = SubResource( 1 )
 
 [node name="Levels" type="Node2D" parent="."]
 position = Vector2( 38, 88 )
@@ -149,17 +184,6 @@ margin_bottom = -45.0
 rect_scale = Vector2( 0.5, 0.5 )
 text = "Gunsmith"
 
-[node name="Anvil" type="Area2D" parent="Vendors/Room 1"]
-script = ExtResource( 5 )
-
-[node name="Sprite" type="Sprite" parent="Vendors/Room 1/Anvil"]
-position = Vector2( -167, -41 )
-texture = ExtResource( 6 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Vendors/Room 1/Anvil"]
-position = Vector2( -167, -40 )
-shape = SubResource( 1 )
-
 [node name="Room 2" type="Node2D" parent="Vendors"]
 position = Vector2( 334, 44 )
 
@@ -181,7 +205,9 @@ text = "Old master"
 [node name="Players" type="YSort" parent="."]
 
 [node name="Gunsmithing" type="CanvasLayer" parent="."]
+pause_mode = 2
 visible = false
+follow_viewport_scale = 4.0
 script = ExtResource( 7 )
 
 [node name="ColorRect" type="ColorRect" parent="Gunsmithing"]
@@ -189,108 +215,150 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 0.113725, 0.141176, 0.172549, 1 )
 
-[node name="Parts List" type="VBoxContainer" parent="Gunsmithing"]
-margin_left = 204.0
-margin_top = 162.0
-margin_right = 244.0
-margin_bottom = 202.0
+[node name="Inv Label" type="Label" parent="Gunsmithing"]
+margin_left = 20.0
+margin_top = 10.0
+margin_right = 81.0
+margin_bottom = 24.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Inventory"
 
-[node name="Guns List" type="VBoxContainer" parent="Gunsmithing"]
-margin_left = 204.0
-margin_top = 428.0
-margin_right = 244.0
-margin_bottom = 428.0
+[node name="Inventory" type="HBoxContainer" parent="Gunsmithing"]
+margin_left = 20.0
+margin_top = 33.0
+margin_right = 36.0
+margin_bottom = 49.0
+rect_scale = Vector2( 4, 4 )
 
-[node name="Gun Parts List" type="VBoxContainer" parent="Gunsmithing"]
-margin_left = 378.0
-margin_top = 163.0
-margin_right = 418.0
-margin_bottom = 163.0
+[node name="Schematics Label" type="Label" parent="Gunsmithing"]
+margin_left = 20.0
+margin_top = 131.0
+margin_right = 93.0
+margin_bottom = 145.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Schematics"
 
-[node name="Materials List" type="VBoxContainer" parent="Gunsmithing"]
-margin_left = 603.0
-margin_top = 163.0
-margin_right = 643.0
-margin_bottom = 163.0
+[node name="Schematics" type="HBoxContainer" parent="Gunsmithing"]
+margin_left = 20.0
+margin_top = 152.0
+margin_right = 36.0
+margin_bottom = 168.0
+rect_scale = Vector2( 4, 4 )
 
-[node name="Parts Base" type="HBoxContainer" parent="Gunsmithing"]
+[node name="Schematic Base" type="Button" parent="Gunsmithing/Schematics"]
 visible = false
-margin_left = 206.0
-margin_top = 163.0
-margin_right = 365.0
-margin_bottom = 183.0
+margin_right = 16.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 16, 16 )
+mouse_default_cursor_shape = 2
+custom_styles/hover = SubResource( 5 )
+custom_styles/pressed = SubResource( 4 )
+custom_styles/focus = SubResource( 6 )
+custom_styles/normal = SubResource( 3 )
 
-[node name="Name" type="Label" parent="Gunsmithing/Parts Base"]
-margin_top = 3.0
-margin_right = 38.0
-margin_bottom = 17.0
-text = "Name"
+[node name="Label" type="Label" parent="Gunsmithing/Schematics/Schematic Base"]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -6.5
+margin_top = -2.0
+margin_right = 44.5
+margin_bottom = 12.0
+rect_scale = Vector2( 0.25, 0.25 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Shotgun"
+align = 1
 
-[node name="Price" type="Label" parent="Gunsmithing/Parts Base"]
-margin_left = 42.0
-margin_top = 3.0
-margin_right = 106.0
-margin_bottom = 17.0
-text = "2 Material"
+[node name="Sprite" type="Sprite" parent="Gunsmithing/Schematics/Schematic Base"]
+position = Vector2( 8, 8 )
 
-[node name="Make" type="Button" parent="Gunsmithing/Parts Base"]
-margin_left = 110.0
-margin_right = 225.0
+[node name="Selected Schematics Label" type="Label" parent="Gunsmithing"]
+margin_left = 20.0
+margin_top = 280.0
+margin_right = 149.0
+margin_bottom = 294.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Selected Schematic:"
+
+[node name="Component Base" type="ColorRect" parent="Gunsmithing"]
+visible = false
+margin_left = 20.0
+margin_top = 307.0
+margin_right = 36.0
+margin_bottom = 323.0
+rect_min_size = Vector2( 16, 16 )
+color = Color( 0.2, 0.2, 0.2, 1 )
+script = ExtResource( 9 )
+
+[node name="ColorRect" type="ColorRect" parent="Gunsmithing/Component Base"]
+margin_left = 1.0
+margin_top = 1.0
+margin_right = 15.0
+margin_bottom = 15.0
+rect_min_size = Vector2( 14, 14 )
+mouse_filter = 1
+
+[node name="Area" type="Area2D" parent="Gunsmithing/Component Base"]
+position = Vector2( 1, 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Gunsmithing/Component Base/Area"]
+position = Vector2( 7, 7 )
+shape = SubResource( 7 )
+
+[node name="Sprite" type="Sprite" parent="Gunsmithing/Component Base"]
+position = Vector2( 8, 8 )
+
+[node name="Item Base" type="ColorRect" parent="Gunsmithing"]
+visible = false
+margin_left = 20.0
+margin_top = 33.0
+margin_right = 36.0
+margin_bottom = 49.0
+rect_min_size = Vector2( 16, 16 )
+mouse_default_cursor_shape = 6
+color = Color( 0.266667, 0.266667, 0.266667, 1 )
+script = ExtResource( 8 )
+
+[node name="Amount" type="Label" parent="Gunsmithing/Item Base"]
+margin_left = 6.0
+margin_top = 12.5
+margin_right = 46.0
+margin_bottom = 26.5
+rect_scale = Vector2( 0.25, 0.25 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "100"
+align = 2
+
+[node name="Sprite" type="Sprite" parent="Gunsmithing/Item Base"]
+position = Vector2( 8, 8 )
+
+[node name="Components" type="HBoxContainer" parent="Gunsmithing"]
+margin_left = 20.0
+margin_top = 307.0
+margin_right = 36.0
+margin_bottom = 323.0
+rect_scale = Vector2( 4, 4 )
+
+[node name="Make Button" type="Button" parent="Gunsmithing"]
+visible = false
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -125.0
+margin_top = -164.0
+margin_right = 125.0
+margin_bottom = -64.0
+custom_fonts/font = SubResource( 8 )
+text = "MAKE"
+
+[node name="Close Button" type="Button" parent="Gunsmithing"]
+margin_left = 975.0
+margin_right = 1022.0
 margin_bottom = 20.0
-text = "Choose Material"
-
-[node name="Guns Base" type="HBoxContainer" parent="Gunsmithing"]
-visible = false
-margin_left = 206.0
-margin_top = 163.0
-margin_right = 365.0
-margin_bottom = 183.0
-
-[node name="Name" type="Label" parent="Gunsmithing/Guns Base"]
-margin_top = 3.0
-margin_right = 38.0
-margin_bottom = 17.0
-text = "Name"
-
-[node name="Make" type="Button" parent="Gunsmithing/Guns Base"]
-margin_left = 110.0
-margin_right = 225.0
-margin_bottom = 20.0
-text = "Choose Material"
-
-[node name="Materials Base" type="HBoxContainer" parent="Gunsmithing"]
-visible = false
-margin_left = 601.0
-margin_top = 164.0
-margin_right = 760.0
-margin_bottom = 184.0
-
-[node name="Name" type="Label" parent="Gunsmithing/Materials Base"]
-margin_top = 3.0
-margin_right = 38.0
-margin_bottom = 17.0
-text = "Name"
-
-[node name="Price" type="Label" parent="Gunsmithing/Materials Base"]
-margin_left = 42.0
-margin_top = 3.0
-margin_right = 106.0
-margin_bottom = 17.0
-text = "2 Material"
-
-[node name="Make" type="Button" parent="Gunsmithing/Materials Base"]
-margin_left = 110.0
-margin_right = 159.0
-margin_bottom = 20.0
-text = "Smith"
-
-[node name="Smith Button" type="Button" parent="Gunsmithing"]
-visible = false
-margin_left = 412.0
-margin_top = 11.0
-margin_right = 479.0
-margin_bottom = 31.0
-text = "Smith It!"
+text = "Close"
 
 [node name="Pause Menu" parent="." instance=ExtResource( 2 )]
 visible = false

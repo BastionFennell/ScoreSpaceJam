@@ -5,5 +5,4 @@ func _init():
 	spread = 0
 	screen_shake = 0.4
 	count = 1
-
-	Bullet = preload("res://scenes/game/weapons/Axegun Bullet.tscn")
+	damage = 5

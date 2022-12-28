@@ -36,14 +36,31 @@ func _ready():
 	invincible = false
 	set_health()
 
-	var gun = current_gun.instance();
-	gun.name = "Gun"
-	gun.set_network_master(get_network_master())
+	current_gun = globals.current_guns[-1]
+	var gun_node = globals.gun_types[current_gun.type].instance()
+	gun_node.set_network_master(get_network_master())
+	gun_node.name = "Gun"
+	gun_node.parts = current_gun.parts
+	gun_node.setup_components()
 
-	call_deferred("add_child", gun)
+	call_deferred("add_child", gun_node)
 
 func get_gun():
-	return get_node("Gun")
+	return get_node("Gun").get_child(0)
+
+func update_gun():
+	var old_gun = get_node("Gun")
+	self.remove_child(old_gun)
+	old_gun.queue_free()
+
+	current_gun = globals.current_guns[-1]
+	var gun_node = globals.gun_types[current_gun.type].instance()
+	gun_node.set_network_master(get_network_master())
+	gun_node.name = "Gun"
+	gun_node.parts = current_gun.parts
+	gun_node.setup_components()
+
+	self.add_child(gun_node)
 
 func set_health():
 	var upgrades = get_node("/root/Globals").upgrades
@@ -136,10 +153,10 @@ func in_control():
 	else:
 		return is_master()
 
-remotesync func shoot(rotation, position, damage_add, bullet_type, master_id):
+remotesync func shoot(rotation, position, damage, bullet_type, master_id):
 	var bullet = globals.bullet_types[bullet_type].instance()
 
-	bullet.damage = bullet.damage + damage_add
+	bullet.damage = damage
 	bullet.set_network_master(master_id)
 	bullet.set_rotation(rotation)
 	bullet.set_position(position)

@@ -1,7 +1,7 @@
 extends KinematicBody2D
 
 export (int) var speed = 25
-export (int) var damage = 5
+export (int) var damage = 1
 
 var globals
 

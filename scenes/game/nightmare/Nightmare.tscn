@@ -92,7 +92,6 @@ tracks/1/keys = {
 [node name="Nightmare" type="Node2D"]
 position = Vector2( -2, -2 )
 script = ExtResource( 12 )
-round_length = 1.0
 
 [node name="Terrain Generator" type="Node" parent="."]
 script = ExtResource( 3 )

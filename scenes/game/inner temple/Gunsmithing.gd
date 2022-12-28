@@ -1,136 +1,112 @@
 extends CanvasLayer
 
 var globals
-var selected_gun
+var selected_schematic
 var selected_parts = {}
 
 func _ready():
-	globals =get_node("/root/Globals")
-	_populate_parts()
-	_populate_guns()
+	globals = get_node("/root/Globals")
 
-func _populate_guns():
-	var unlocked_guns = globals.unlocked_guns
-	var gun_row = get_node("Guns Base")
-	var guns_column = get_node("Guns List")
+	get_node("Make Button").connect("pressed", self, "_on_make")
+	get_node("Close Button").connect("pressed", self, "_on_close")
 
-	for gun_name in unlocked_guns:
-		print(gun_name)
-		var new_row = gun_row.duplicate()
-		new_row.get_node("Name").text = gun_name
-		new_row.visible = true
-		
-		var button = new_row.get_node("Make")
-		button.connect("pressed", self, "_on_choose_gun", [gun_name])
+	_display_inventory()
+	_display_schematics()
 
-		guns_column.add_child(new_row)
-
-func _on_choose_gun(gun_name):
-	selected_gun = gun_name
-	var gun = globals.guns_data[gun_name]
-	var part_row = get_node("Parts Base")
-	var parts_column = get_node("Gun Parts List")
-
-	for n in parts_column.get_children():
-		parts_column.remove_child(n)
-		n.queue_free()
-
-	for part in gun.parts:
-		var new_row = part_row.duplicate()
-		new_row.get_node("Name").text = part
-		new_row.visible = true
-		
-		var button = new_row.get_node("Make")
-		button.connect("pressed", self, "_on_choose_gun_part", [gun_name, part])
-
-		parts_column.add_child(new_row)
-
-func _on_choose_gun_part(gun_name, part):
-	var material_row = get_node("Materials Base")
-	var materials_column = get_node("Materials List")
-
-	for n in materials_column.get_children():
-		materials_column.remove_child(n)
-		n.queue_free()
-
-	if !globals.parts_inventory.has(part):
-		return
-
-	var materials = globals.parts_inventory[part]
-	for material in materials:
-		var amount = materials[material]
-		var new_row = material_row.duplicate()
-		new_row.get_node("Name").text = material
-		new_row.get_node("Price").text = str(amount)
-		new_row.visible = true
-		
-		var button = new_row.get_node("Make")
-		button.connect("pressed", self, "_on_select_gun_part_material", [gun_name, part, material])
-
-		materials_column.add_child(new_row)
-
-func _on_select_gun_part_material(gun_name, part, material):
-	selected_parts[part] = material
-
-func _populate_parts():
-	var parts_data = globals.parts_data
-	var unlocked_parts = globals.unlocked_parts
-	var part_row = get_node("Parts Base")
-	var parts_column = get_node("Parts List")
-
-	for part_name in unlocked_parts:
-		var part = parts_data[part_name]
-		var new_row = part_row.duplicate()
-		new_row.get_node("Name").text = part_name
-		new_row.get_node("Price").text = str(part.price)
-		new_row.visible = true
-		
-		var button = new_row.get_node("Make")
-		button.connect("pressed", self, "_on_choose_part", [part_name])
-
-		parts_column.add_child(new_row)
-	
-func _on_choose_part(part_name):
-	_populate_materials(part_name)
-
-func _populate_materials(part_name):
-	var material_row = get_node("Materials Base")
-	var materials_column = get_node("Materials List")
-
-	for n in materials_column.get_children():
-		materials_column.remove_child(n)
-		n.queue_free()
-
-	var materials = globals.inventory
-	for material in materials:
-		var amount = materials[material]
-		var new_row = material_row.duplicate()
-		new_row.get_node("Name").text = material
-		new_row.get_node("Price").text = str(amount)
-		new_row.visible = true
-		
-		var button = new_row.get_node("Make")
-		button.connect("pressed", self, "_on_make", [part_name, material])
-
-		materials_column.add_child(new_row)
-
-func _on_make(part_name, material):
-	var part = globals.parts_data[part_name]
+func _display_inventory():
 	var inventory = globals.inventory
-	globals.inventory[material] -= part.price
+	var icons = globals.inventory_icons
+	var inv_disp = get_node("Inventory")
+	var base = get_node("Item Base")
 
-	if !globals.parts_inventory.has(part_name):
-		globals.parts_inventory[part_name] = {}
+	for i in inv_disp.get_children():
+		inv_disp.remove_child(i)
+		i.queue_free()
 
-	if !globals.parts_inventory[part_name].has(material):
-		globals.parts_inventory[part_name][material] =0
+	for i in inventory:
+		var node = base.duplicate()
+		node.visible = true
+		node.get_node("Sprite").texture = icons[i]
+		node.get_node("Amount").text = str(inventory[i])
+		node.item = i
 
-	globals.parts_inventory[part_name][material] += 1
+		inv_disp.call_deferred("add_child", node)
 
-func _process(delta):
-	if selected_gun:
-		var gun_data = globals.guns_data[selected_gun]
-		if selected_parts.size() == gun_data.parts.size():
-			get_node("Smith Button").visible = true
+func _display_schematics():
+	var guns = globals.unlocked_guns
+	var guns_disp = get_node("Schematics")
+	var base = get_node("Schematics/Schematic Base")
+
+	for i in guns:
+		var node = base.duplicate()
+		node.visible = true
+		node.get_node("Sprite").texture = globals.guns_data[i].icon
+		node.get_node("Label").text = i
+		node.connect("pressed", self, "_on_schematic_click", [i])
+
+		guns_disp.add_child(node)
+
+func _on_part_selected(part, i):
+	selected_parts[i] = part
+
+	_check_parts()
+
+func _display_selected_schematic():
+	var parts = globals.guns_data[selected_schematic].parts
+	var components_disp = get_node("Components")
+	var base = get_node("Component Base")
+
+	for i in components_disp.get_children():
+		components_disp.remove_child(i)
+		i.queue_free()
+
+	for i in parts:
+		var node = base.duplicate()
+		node.visible = true
+		node.connect("part_selected", self, "_on_part_selected", [i])
+
+		components_disp.add_child(node)
+
+	components_disp.visible = true
+
+func _on_schematic_click(schematic):
+	selected_schematic = schematic
+	selected_parts = {}
+	_display_selected_schematic()
+
+func _check_parts():
+	var parts = globals.guns_data[selected_schematic].parts
+
+	for i in parts:
+		if !selected_parts.has(i) || !selected_parts[i]:
+			get_node("Make Button").visible = false
+			return false
+
+	get_node("Make Button").visible = true
+
+func _on_make():
+	var new_gun = {
+		"type": selected_schematic,
+		"parts": {}
+	}
+
+	for i in selected_parts:
+		var part = selected_parts[i]
+		globals.inventory[part] -= 1
+		if new_gun.parts.has(part):
+			new_gun.parts[part] += 1
 		else:
-			get_node("Smith Button").visible = false
+			new_gun.parts[part] = 1
+
+	_display_selected_schematic()
+	_display_inventory()
+	globals.current_guns.append(new_gun)
+	globals.get_player().update_gun()
+
+func _on_close():
+	self.visible = false
+	get_tree().paused = false
+
+func open():
+	self.visible = true
+	get_tree().paused = true
