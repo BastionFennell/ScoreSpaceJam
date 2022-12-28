@@ -115,7 +115,7 @@ func _on_make():
 
 	_display_selected_schematic()
 	_display_inventory()
-	gun_man.current_guns.append(new_gun)
+	gun_man.add_gun(new_gun)
 	globals.get_player().update_gun()
 
 func _on_close():

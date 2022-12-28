@@ -26,3 +26,16 @@ static func get_upgrade_text(parts):
 		text += "Deals %s more damage per bullet\n" % (int(parts["stone"]) * 3)
 
 	return text
+
+static func get_stats(parts):
+	var reload_time = 2
+	var count = 10
+	var damage = 5
+
+	if parts.has("wood"):
+		reload_time -= 0.5 * parts["wood"]
+
+	if parts.has("stone"):
+		damage += 3 * parts["stone"]
+	
+	return { "damage": damage, "reload_time": reload_time, "count": count}

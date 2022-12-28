@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://scenes/game/inner temple/Inner Temple.gd" type="Script" id=1]
 [ext_resource path="res://scenes/game/GUI/Pause Menu.tscn" type="PackedScene" id=2]
@@ -10,6 +10,13 @@
 [ext_resource path="res://scenes/game/inner temple/Item Base.gd" type="Script" id=8]
 [ext_resource path="res://scenes/game/inner temple/Component Base.gd" type="Script" id=9]
 [ext_resource path="res://assets/fonts/contrite_in_spirit.ttf" type="DynamicFontData" id=10]
+[ext_resource path="res://assets/sprites/chest.png" type="Texture" id=11]
+[ext_resource path="res://scenes/game/inner temple/Gun Chest Screen.gd" type="Script" id=12]
+[ext_resource path="res://scenes/game/inner temple/Gun Chest.gd" type="Script" id=13]
+[ext_resource path="res://scenes/game/weapons/Gun Card.tscn" type="PackedScene" id=14]
+
+[sub_resource type="RectangleShape2D" id=9]
+extents = Vector2( 8.5, 6 )
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -63,6 +70,18 @@ margin_bottom = -73.0
 rect_scale = Vector2( 0.5, 0.5 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Buddha Statue"
+
+[node name="Gun Chest" type="Area2D" parent="."]
+position = Vector2( 3, 5 )
+script = ExtResource( 13 )
+
+[node name="Sprite" type="Sprite" parent="Gun Chest"]
+texture = ExtResource( 11 )
+hframes = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Gun Chest"]
+position = Vector2( -0.5, 0 )
+shape = SubResource( 9 )
 
 [node name="Anvil" type="Area2D" parent="."]
 position = Vector2( 92, 85 )
@@ -206,13 +225,14 @@ text = "Old master"
 
 [node name="Gunsmithing" type="CanvasLayer" parent="."]
 pause_mode = 2
+visible = false
 follow_viewport_scale = 4.0
 script = ExtResource( 7 )
 
 [node name="ColorRect" type="ColorRect" parent="Gunsmithing"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color( 0.113725, 0.141176, 0.172549, 1 )
+color = Color( 0.396078, 0.423529, 0.458824, 1 )
 
 [node name="Inv Label" type="Label" parent="Gunsmithing"]
 margin_left = 65.0
@@ -370,6 +390,35 @@ margin_right = 125.0
 margin_bottom = -64.0
 custom_fonts/font = SubResource( 8 )
 text = "MAKE"
+
+[node name="Gun Chest Screen" type="CanvasLayer" parent="."]
+pause_mode = 2
+visible = false
+script = ExtResource( 12 )
+
+[node name="ColorRect" type="ColorRect" parent="Gun Chest Screen"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.396078, 0.423529, 0.458824, 1 )
+
+[node name="Guns" type="HBoxContainer" parent="Gun Chest Screen"]
+margin_left = 50.0
+margin_top = 50.0
+margin_right = 66.0
+margin_bottom = 82.0
+rect_scale = Vector2( 6, 6 )
+
+[node name="Gun Card" parent="Gun Chest Screen" instance=ExtResource( 14 )]
+visible = false
+
+[node name="Close Button" type="Button" parent="Gun Chest Screen"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -101.0
+margin_top = 74.0
+margin_right = -54.0
+margin_bottom = 94.0
+text = "Close"
 
 [node name="Pause Menu" parent="." instance=ExtResource( 2 )]
 visible = false

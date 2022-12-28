@@ -38,7 +38,20 @@ func _ready():
 	invincible = false
 	set_health()
 
-	current_gun = gun_man.current_guns[-1]
+	gun_man.connect("change_current_gun", self, "update_gun")
+
+	update_gun()
+
+func get_gun():
+	return get_node("Gun").get_child(0)
+
+func update_gun():
+	if has_node("Gun"):
+		var old_gun = get_node("Gun")
+		self.remove_child(old_gun)
+		old_gun.queue_free()
+
+	current_gun = gun_man.current_guns[gun_man.current_gun]
 	var gun_node = gun_man.gun_types[current_gun.type].instance()
 	gun_node.set_network_master(get_network_master())
 	gun_node.name = "Gun"
@@ -46,23 +59,6 @@ func _ready():
 	gun_node.setup_components()
 
 	call_deferred("add_child", gun_node)
-
-func get_gun():
-	return get_node("Gun").get_child(0)
-
-func update_gun():
-	var old_gun = get_node("Gun")
-	self.remove_child(old_gun)
-	old_gun.queue_free()
-
-	current_gun = gun_man.current_guns[-1]
-	var gun_node = gun_man.gun_types[current_gun.type].instance()
-	gun_node.set_network_master(get_network_master())
-	gun_node.name = "Gun"
-	gun_node.parts = current_gun.parts
-	gun_node.setup_components()
-
-	self.add_child(gun_node)
 
 func set_health():
 	var upgrades = get_node("/root/Globals").upgrades

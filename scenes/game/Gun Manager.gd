@@ -1,7 +1,10 @@
 extends Node2D
 
+signal on_set_current_guns
+signal change_current_gun
+
 var gun_scripts = {
-    "shotgun": preload("res://scenes/game/weapons/shotgun.gd")
+	"shotgun": preload("res://scenes/game/weapons/shotgun.gd")
 }
 var gun_types = {
 	"shotgun": preload("res://scenes/game/weapons/Shotgun.tscn")
@@ -33,7 +36,19 @@ var guns_data = {
 var unlocked_guns = ["shotgun"]
 
 var current_guns = [{ "type": "shotgun", "parts": { "junk": 3}}]
+var current_gun = 0 setget set_current_gun
 
 func get_upgrade_text(parts, type):
-    print(gun_scripts[type].get_upgrade_text(parts))
-    return gun_scripts[type].get_upgrade_text(parts)
+	print(gun_scripts[type].get_upgrade_text(parts))
+	return gun_scripts[type].get_upgrade_text(parts)
+
+func add_gun(new_gun):
+	current_guns.append(new_gun)
+	emit_signal("on_set_current_guns")
+
+	current_gun = current_guns.size() - 1
+
+func set_current_gun(new_gun):
+	current_gun = new_gun
+
+	emit_signal("change_current_gun")
