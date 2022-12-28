@@ -6,8 +6,9 @@
 [ext_resource path="res://scenes/game/town/How to Interact.gd" type="Script" id=4]
 [ext_resource path="res://assets/sprites/interact bubble.png" type="Texture" id=5]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 4, 3 )
+[sub_resource type="CapsuleShape2D" id=9]
+radius = 4.0
+height = 2.0
 
 [sub_resource type="Animation" id=7]
 resource_name = "Dash Refresh"
@@ -132,14 +133,14 @@ tracks/0/keys = {
 }
 
 [node name="Player" type="KinematicBody2D"]
-collision_mask = 0
+collision_mask = 2
 script = ExtResource( 2 )
 speed = 100
 health = 1e+06
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, 2 )
-shape = SubResource( 1 )
+position = Vector2( 0, 1 )
+shape = SubResource( 9 )
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0.5, 0 )

@@ -163,7 +163,7 @@ remotesync func shoot(rotation, position, damage, bullet_type, master_id):
 
 	world.add_child(bullet)
 
-func _process(delta):
+func _physics_process(delta):
 	if(playing && in_control()):
 		get_input()
 
