@@ -16,8 +16,6 @@ func get_drag_data(position):
 		return null
 
 	var drag_preview = self.duplicate()
-	drag_preview.rect_scale.x = 4
-	drag_preview.rect_scale.y = 4
 	set_drag_preview(drag_preview)
 	return item
 

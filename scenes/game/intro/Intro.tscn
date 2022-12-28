@@ -133,6 +133,7 @@ outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 4 )
 
 [node name="Intro" type="Node2D"]
+position = Vector2( 0, -2 )
 script = ExtResource( 6 )
 
 [node name="Animator" type="AnimationPlayer" parent="."]

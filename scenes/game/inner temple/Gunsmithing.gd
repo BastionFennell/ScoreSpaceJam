@@ -18,7 +18,7 @@ func _ready():
 func _display_inventory():
 	var inventory = globals.inventory
 	var icons = globals.inventory_icons
-	var inv_disp = get_node("Inventory")
+	var inv_disp = get_node("Inventory Scroll/Inventory")
 	var base = get_node("Item Base")
 
 	for i in inv_disp.get_children():
@@ -36,8 +36,8 @@ func _display_inventory():
 
 func _display_schematics():
 	var guns = gun_man.unlocked_guns
-	var guns_disp = get_node("Schematics")
-	var base = get_node("Schematics/Schematic Base")
+	var guns_disp = get_node("Schematics Scroll/Schematics")
+	var base = get_node("Schematic Base")
 
 	for i in guns:
 		var node = base.duplicate()
@@ -117,6 +117,17 @@ func _on_make():
 	_display_inventory()
 	gun_man.add_gun(new_gun)
 	globals.get_player().update_gun()
+	
+	selected_schematic = null
+	selected_parts = {}
+	get_node("Upgrade Info").visible = false
+	get_node("Make Button").visible = false
+
+	var components_disp = get_node("Components")
+
+	for i in components_disp.get_children():
+		components_disp.remove_child(i)
+		i.queue_free()
 
 func _on_close():
 	self.visible = false

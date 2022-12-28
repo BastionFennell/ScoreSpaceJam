@@ -1,4 +1,4 @@
-extends Button
+extends TextureButton
 
 var gun = {
 	"reload_time": 0,
@@ -7,6 +7,6 @@ var gun = {
 }
 
 func _ready():
-	get_node("Damage/Amount").text = "%s s" % gun.damage
-	get_node("Reload/Amount").text = "%s s" % gun.reload_time
-	get_node("Bullets/Amount").text = "%s s" % gun.count
+	get_node("Damage/Amount").text = "%s" % gun.damage
+	get_node("Reload/Amount").text = "%ss" % gun.reload_time
+	get_node("Bullets/Amount").text = "%s" % gun.count
