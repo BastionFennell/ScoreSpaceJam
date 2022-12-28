@@ -1,7 +1,7 @@
 extends Node2D
 
 var is_server = false
-var safe_radius = 170
+var safe_radius = 300
 var enemy_id = 0
 var enemies_node
 var enemies = {
