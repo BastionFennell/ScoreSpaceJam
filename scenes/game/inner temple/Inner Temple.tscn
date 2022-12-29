@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=2]
+[gd_scene load_steps=65 format=2]
 
 [ext_resource path="res://scenes/game/inner temple/Inner Temple.gd" type="Script" id=1]
 [ext_resource path="res://scenes/game/GUI/Pause Menu.tscn" type="PackedScene" id=2]
@@ -18,8 +18,27 @@
 [ext_resource path="res://assets/fonts/8bitOperatorPlusSC-Regular.ttf" type="DynamicFontData" id=16]
 [ext_resource path="res://assets/fonts/8bitOperatorPlus8-Bold.ttf" type="DynamicFontData" id=17]
 [ext_resource path="res://assets/fonts/8bitOperatorPlus8-Regular.ttf" type="DynamicFontData" id=18]
+[ext_resource path="res://assets/sprites/cutscenes/temple - intro/Intro1.png" type="Texture" id=19]
 [ext_resource path="res://assets/sprites/village/holy tree.png" type="Texture" id=20]
 [ext_resource path="res://assets/sprites/Gun Chest Background.png" type="Texture" id=21]
+[ext_resource path="res://assets/sprites/cutscenes/temple - intro/Intro9.png" type="Texture" id=22]
+[ext_resource path="res://assets/sprites/cutscenes/temple - intro/Intro8.png" type="Texture" id=23]
+[ext_resource path="res://assets/sprites/cutscenes/temple - intro/Intro15.png" type="Texture" id=24]
+[ext_resource path="res://assets/sprites/cutscenes/temple - intro/Intro12.png" type="Texture" id=25]
+[ext_resource path="res://assets/sprites/cutscenes/temple - intro/Intro2.png" type="Texture" id=26]
+[ext_resource path="res://assets/sprites/cutscenes/temple - intro/Intro10.png" type="Texture" id=27]
+[ext_resource path="res://assets/sprites/cutscenes/temple - intro/Intro14.png" type="Texture" id=28]
+[ext_resource path="res://assets/sprites/cutscenes/temple - intro/Intro5.png" type="Texture" id=29]
+[ext_resource path="res://assets/sprites/cutscenes/temple - intro/Intro7.png" type="Texture" id=30]
+[ext_resource path="res://assets/sprites/cutscenes/temple - intro/Intro6.png" type="Texture" id=31]
+[ext_resource path="res://assets/sprites/cutscenes/temple - intro/Intro11.png" type="Texture" id=32]
+[ext_resource path="res://assets/sprites/cutscenes/temple - intro/Intro13.png" type="Texture" id=33]
+[ext_resource path="res://assets/sprites/cutscenes/dialogue box.png" type="Texture" id=34]
+[ext_resource path="res://scenes/game/cutscenes/Player - Dialog.tscn" type="PackedScene" id=35]
+[ext_resource path="res://assets/fonts/8bitOperatorPlus-Regular.ttf" type="DynamicFontData" id=36]
+[ext_resource path="res://assets/fonts/8bitOperatorPlus-Bold.ttf" type="DynamicFontData" id=37]
+[ext_resource path="res://scenes/game/Dialog.gd" type="Script" id=38]
+[ext_resource path="res://scenes/game/inner temple/Cutscene Manager.gd" type="Script" id=39]
 
 [sub_resource type="RectangleShape2D" id=9]
 extents = Vector2( 8.5, 6 )
@@ -79,6 +98,108 @@ extents = Vector2( 10, 127.5 )
 [sub_resource type="RectangleShape2D" id=20]
 extents = Vector2( 33.5, 32 )
 
+[sub_resource type="DynamicFont" id=26]
+size = 50
+font_data = ExtResource( 37 )
+
+[sub_resource type="DynamicFont" id=27]
+size = 40
+font_data = ExtResource( 36 )
+
+[sub_resource type="Animation" id=23]
+resource_name = "Character Waking Up"
+length = 10.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("../Cutscene Manager/Cutscene Animator/Player Animator:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("../Cutscene Manager/Cutscene Animator/Player Animator:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5, 1, 1.2, 1.4, 1.6, 2.3, 2.5, 2.7, 2.9, 3.1, 3.3, 3.5, 4, 4.2, 4.7, 4.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ ExtResource( 19 ), ExtResource( 26 ), ExtResource( 19 ), ExtResource( 26 ), ExtResource( 19 ), ExtResource( 26 ), ExtResource( 29 ), ExtResource( 31 ), ExtResource( 30 ), ExtResource( 23 ), ExtResource( 27 ), ExtResource( 22 ), ExtResource( 32 ), ExtResource( 25 ), ExtResource( 33 ), ExtResource( 28 ), ExtResource( 24 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("../Cutscene Manager/Cutscene Camera:current")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("../Cutscene Manager/Cutscene Camera:zoom")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 2.2, 3.5, 5.7, 6.8, 8.7, 10.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0.1, 0.1 ), Vector2( 0.1, 0.1 ), Vector2( 0.2, 0.2 ), Vector2( 0.25, 0.25 ), Vector2( 0.3, 0.3 ), Vector2( 0.3, 0.3 ), Vector2( 0.25, 0.25 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Cutscene Camera:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 5.7, 6.8, 8.7, 10.3 ),
+"transitions": PoolRealArray( 1, 0.435275, 1, 0.435275, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 81 ), Vector2( 1, 81 ), Vector2( -50, -80 ), Vector2( 50, -80 ), Vector2( 1, 81 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("../Players:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=24]
+resource_name = "Intro Cutscene"
+
+[sub_resource type="Animation" id=28]
+resource_name = "Statue Zoom"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Cutscene Camera:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 0.435275, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 81 ), Vector2( 1, -80 ) ]
+}
+
 [node name="Inner Temple" type="YSort"]
 position = Vector2( 1, 0 )
 script = ExtResource( 1 )
@@ -103,7 +224,7 @@ position = Vector2( 2, -20 )
 texture = ExtResource( 20 )
 
 [node name="Gun Chest" type="Area2D" parent="."]
-position = Vector2( -1, 45 )
+position = Vector2( 0, 45 )
 script = ExtResource( 13 )
 
 [node name="Sprite" type="Sprite" parent="Gun Chest"]
@@ -231,6 +352,7 @@ rect_scale = Vector2( 0.5, 0.5 )
 text = "Old master"
 
 [node name="Players" type="YSort" parent="."]
+visible = false
 position = Vector2( 0, 103 )
 
 [node name="Gunsmithing" type="CanvasLayer" parent="."]
@@ -484,3 +606,60 @@ collision_layer = 16
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/StaticBody2D4"]
 position = Vector2( 1.5, -4 )
 shape = SubResource( 20 )
+
+[node name="Cutscene Manager" type="Node2D" parent="."]
+pause_mode = 2
+script = ExtResource( 39 )
+
+[node name="Dialog" type="CanvasLayer" parent="Cutscene Manager"]
+visible = false
+script = ExtResource( 38 )
+
+[node name="TextureRect" type="TextureRect" parent="Cutscene Manager/Dialog"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 34 )
+expand = true
+
+[node name="Speaker" type="Node2D" parent="Cutscene Manager/Dialog"]
+position = Vector2( 181, 620 )
+scale = Vector2( 8, 8 )
+z_index = 5
+
+[node name="Player - Dialog" parent="Cutscene Manager/Dialog/Speaker" instance=ExtResource( 35 )]
+position = Vector2( -107, -12.25 )
+frame = 1
+offset = Vector2( 107, 12.25 )
+
+[node name="Speaker Name" type="Label" parent="Cutscene Manager/Dialog"]
+margin_left = 62.0
+margin_top = 477.0
+margin_right = 301.0
+margin_bottom = 554.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 26 )
+text = "Test"
+align = 1
+
+[node name="Text" type="RichTextLabel" parent="Cutscene Manager/Dialog"]
+margin_left = 302.0
+margin_top = 488.0
+margin_right = 1150.0
+margin_bottom = 649.0
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+custom_fonts/normal_font = SubResource( 27 )
+text = "Test Text"
+
+[node name="Cutscene Camera" type="Camera2D" parent="Cutscene Manager"]
+position = Vector2( 50, -80 )
+current = true
+zoom = Vector2( 0.3, 0.3 )
+
+[node name="Cutscene Animator" type="AnimationPlayer" parent="Cutscene Manager"]
+"anims/Character Waking Up" = SubResource( 23 )
+"anims/Intro Cutscene" = SubResource( 24 )
+"anims/Statue Zoom" = SubResource( 28 )
+
+[node name="Player Animator" type="Sprite" parent="Cutscene Manager/Cutscene Animator"]
+position = Vector2( 1, 80 )
+texture = ExtResource( 24 )
