@@ -79,11 +79,14 @@ extents = Vector2( 10, 127.5 )
 [sub_resource type="RectangleShape2D" id=20]
 extents = Vector2( 33.5, 32 )
 
-[node name="Inner Temple" type="Node2D"]
+[node name="Inner Temple" type="YSort"]
 position = Vector2( 1, 0 )
 script = ExtResource( 1 )
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="Node2D" type="Node2D" parent="."]
+z_index = -4096
+
+[node name="ColorRect" type="ColorRect" parent="Node2D"]
 margin_left = -1062.0
 margin_top = -700.0
 margin_right = 1198.0
@@ -92,6 +95,7 @@ color = Color( 0.0627451, 0.0980392, 0.12549, 1 )
 
 [node name="Main Floor" type="Sprite" parent="."]
 position = Vector2( 2, -5 )
+z_index = -100
 texture = ExtResource( 6 )
 
 [node name="Trees" type="Sprite" parent="."]

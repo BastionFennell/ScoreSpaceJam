@@ -107,7 +107,8 @@ margin_right = 545.0
 margin_bottom = 365.0
 color = Color( 0.270588, 0.156863, 0.235294, 1 )
 
-[node name="Terrain Generator" type="Node" parent="."]
+[node name="Terrain Generator" type="Node2D" parent="."]
+z_index = -100
 script = ExtResource( 3 )
 
 [node name="EnemySpawner" type="Node2D" parent="."]
@@ -321,6 +322,7 @@ autoplay = true
 bus = "Music"
 
 [node name="ItemSpawner" type="Node2D" parent="."]
+z_index = -10
 script = ExtResource( 4 )
 
 [node name="Enemies" type="YSort" parent="."]
