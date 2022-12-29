@@ -5,5 +5,5 @@ var gun
 func _ready():
 	gun = player.get_gun()
 	
-func _pickUp():
+#func _pickUp():
 	#gun._temp_speed_buff()
