@@ -40,13 +40,14 @@ func _display_schematics():
 	var base = get_node("Schematic Base")
 
 	for i in guns:
-		var node = base.duplicate()
-		node.visible = true
-		node.get_node("Sprite").texture = gun_man.guns_data[i].icon
-		node.get_node("Label").text = i
-		node.connect("pressed", self, "_on_schematic_click", [i])
+		if guns[i]:
+			var node = base.duplicate()
+			node.visible = true
+			node.get_node("Sprite").texture = gun_man.guns_data[i].icon
+			node.get_node("Label").text = i
+			node.connect("pressed", self, "_on_schematic_click", [i])
 
-		guns_disp.add_child(node)
+			guns_disp.add_child(node)
 
 func _on_part_selected(part, i):
 	selected_parts[i] = part

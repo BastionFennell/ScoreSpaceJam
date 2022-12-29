@@ -39,13 +39,13 @@ var guns_data = {
 		"parts": 2
 	}
 }
-var unlocked_guns = ["rifle", "shotgun"]
+var unlocked_guns = {
+    "rifle": false,
+    "shotgun": true 
+}
 
 var current_guns = [{
 	"type": "shotgun",
-	"parts": { "junk": 2}
-	}, {
-	"type": "rifle",
 	"parts": { "junk": 2}
 	}]
 var current_gun = 0 setget set_current_gun

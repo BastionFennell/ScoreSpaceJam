@@ -1,13 +1,12 @@
 extends "res://scenes/game/enemies/enemy.gd"
 
-var Heart = preload("res://scenes/game/drops/Heart/Health.tscn")
-var Speed = preload("res://scenes/game/drops/ShotSpeed/ShotSpeed.tscn")
+var RifleSchematic = preload("res://scenes/game/drops/schematics/Rifle Schematic.tscn")
 
 func _init():
 	speed = 70
 	health = 5
-	drops = [Speed]
-	weights = [30]
+	drops = [RifleSchematic]
+	weights = [100]
 	damage = 5
 
 	speed_inc = 5
