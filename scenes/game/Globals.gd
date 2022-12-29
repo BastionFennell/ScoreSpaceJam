@@ -58,10 +58,12 @@ var upgrades = default_upgrades.duplicate(true)
 var inventory_icons = {
 	"wood": preload("res://assets/sprites/resources/wood.png"),
 	"stone": preload("res://assets/sprites/resources/stone.png"),
+	"zombie arm": preload("res://assets/sprites/resources/zombie arm.png"),
 }
 var default_inventory = {
 	"wood": 100,
-	"stone": 100
+	"stone": 100,
+	"zombie arm": 10
 }
 var inventory = default_inventory.duplicate(true) setget set_inventory
 

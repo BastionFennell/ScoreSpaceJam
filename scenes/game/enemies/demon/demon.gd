@@ -6,7 +6,7 @@ func _init():
 	speed = 70
 	health = 5
 	drops = [RifleSchematic]
-	weights = [100]
+	weights = [5]
 	damage = 5
 
 	speed_inc = 5

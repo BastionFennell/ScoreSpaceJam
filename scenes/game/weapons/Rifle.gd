@@ -20,6 +20,9 @@ func setup_components():
 	if parts.has("stone"):
 		damage += 1 * parts["stone"]
 
+	if parts.has("zombie arm"):
+		count += parts["zombie arm"]
+
 static func get_upgrade_text(parts):
 	var text = ""
 
@@ -27,7 +30,10 @@ static func get_upgrade_text(parts):
 		text += "Reloads %s seconds faster\n" % (int(parts["wood"]) * 0.01)
 
 	if parts.has("stone"):
-		text += "Deals %s more damage per bullet\n" % (int(parts["stone"]) * 1)
+		text += "Deals %s more damage per bullet\n" % parts["stone"]
+
+	if parts.has("zombie arm"):
+		text += "Fires %s more bullets per shot\n" % parts["zombie arm"]
 
 	return text
 
@@ -40,6 +46,9 @@ static func get_stats(parts):
 		reload_time -= 0.01 * parts["wood"]
 
 	if parts.has("stone"):
-		damage += 1 * parts["stone"]
+		damage += parts["stone"]
+
+	if parts.has("zombie arm"):
+		damage += parts["zombie arm"]
 	
 	return { "name": "Rifle", "damage": damage, "reload_time": reload_time, "count": count}
