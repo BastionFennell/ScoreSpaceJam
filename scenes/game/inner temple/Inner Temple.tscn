@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=2]
+[gd_scene load_steps=40 format=2]
 
 [ext_resource path="res://scenes/game/inner temple/Inner Temple.gd" type="Script" id=1]
 [ext_resource path="res://scenes/game/GUI/Pause Menu.tscn" type="PackedScene" id=2]
@@ -20,6 +20,7 @@
 [ext_resource path="res://assets/fonts/8bitOperatorPlus8-Regular.ttf" type="DynamicFontData" id=18]
 [ext_resource path="res://assets/sprites/village/repair zone.png" type="Texture" id=19]
 [ext_resource path="res://assets/sprites/village/holy tree.png" type="Texture" id=20]
+[ext_resource path="res://assets/sprites/Gun Chest Background.png" type="Texture" id=21]
 
 [sub_resource type="RectangleShape2D" id=9]
 extents = Vector2( 8.5, 6 )
@@ -69,6 +70,9 @@ font_data = ExtResource( 16 )
 [sub_resource type="DynamicFont" id=8]
 size = 70
 font_data = ExtResource( 10 )
+
+[sub_resource type="AnimatedTexture" id=18]
+resource_local_to_scene = true
 
 [node name="Inner Temple" type="Node2D"]
 position = Vector2( 1, 0 )
@@ -395,29 +399,40 @@ pause_mode = 2
 visible = false
 script = ExtResource( 12 )
 
-[node name="ColorRect" type="ColorRect" parent="Gun Chest Screen"]
+[node name="ColorRect" type="TextureRect" parent="Gun Chest Screen"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color( 0.396078, 0.423529, 0.458824, 1 )
+texture = ExtResource( 21 )
+expand = true
 
 [node name="Guns" type="HBoxContainer" parent="Gun Chest Screen"]
-margin_left = 50.0
-margin_top = 50.0
-margin_right = 66.0
-margin_bottom = 82.0
+margin_left = 86.0
+margin_top = 83.0
+margin_right = 102.0
+margin_bottom = 115.0
 rect_scale = Vector2( 6, 6 )
-
-[node name="Gun Card" parent="Gun Chest Screen" instance=ExtResource( 14 )]
-visible = false
 
 [node name="Close Button" type="Button" parent="Gun Chest Screen"]
 anchor_left = 1.0
 anchor_right = 1.0
-margin_left = -101.0
-margin_top = 74.0
-margin_right = -54.0
-margin_bottom = 94.0
-text = "Close"
+margin_left = -94.0
+margin_top = 68.0
+margin_right = -47.0
+margin_bottom = 90.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_hover = Color( 0.333333, 0.333333, 0.333333, 1 )
+custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 11 )
+custom_styles/hover = SubResource( 12 )
+custom_styles/pressed = SubResource( 13 )
+custom_styles/focus = SubResource( 14 )
+custom_styles/disabled = SubResource( 15 )
+custom_styles/normal = SubResource( 16 )
+text = "X"
+
+[node name="Gun Card" parent="Gun Chest Screen" instance=ExtResource( 14 )]
+visible = false
+texture_hover = SubResource( 18 )
 
 [node name="Pause Menu" parent="." instance=ExtResource( 2 )]
 visible = false

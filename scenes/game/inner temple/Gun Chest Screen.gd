@@ -16,6 +16,7 @@ func _display_guns():
 	var guns = gun_man.current_guns
 	var gun_disp = get_node("Guns")
 	var base = get_node("Gun Card")
+	var current_gun = gun_man.current_gun
 
 	for g in gun_disp.get_children():
 		gun_disp.remove_child(g)
@@ -30,6 +31,7 @@ func _display_guns():
 		var node = base.duplicate()
 		node.gun = stats
 		node.visible = true
+		node.disabled = i == current_gun
 		node.get_node("Sprite").texture = icon
 		node.connect("pressed", self, "_on_gun_click", [i])
 
@@ -39,6 +41,7 @@ func _display_guns():
 
 func _on_gun_click(index):
 	gun_man.current_gun = index
+	_display_guns()
 
 func _on_close():
 	self.visible = false
@@ -47,3 +50,4 @@ func _on_close():
 func open():
 	self.visible = true
 	get_tree().paused = true
+	_display_guns()

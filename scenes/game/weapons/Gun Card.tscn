@@ -1,9 +1,28 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://assets/sprites/weapons/Shotgun Icon.png" type="Texture" id=1]
 [ext_resource path="res://scenes/game/weapons/Gun Card.gd" type="Script" id=2]
-[ext_resource path="res://assets/sprites/gun card.png" type="Texture" id=3]
+[ext_resource path="res://assets/sprites/gun card3.png" type="Texture" id=3]
 [ext_resource path="res://assets/fonts/8bitOperatorPlus8-Regular.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://assets/sprites/gun card - selected.png" type="Texture" id=5]
+[ext_resource path="res://assets/sprites/gun card4.png" type="Texture" id=6]
+[ext_resource path="res://assets/sprites/gun card5.png" type="Texture" id=7]
+[ext_resource path="res://assets/sprites/gun card2.png" type="Texture" id=8]
+[ext_resource path="res://assets/sprites/gun card6.png" type="Texture" id=9]
+[ext_resource path="res://assets/sprites/gun card1.png" type="Texture" id=10]
+
+[sub_resource type="SpriteFrames" id=8]
+animations = [ {
+"frames": [ ExtResource( 10 ) ],
+"loop": false,
+"name": "default",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 10 ), ExtResource( 8 ), ExtResource( 3 ), ExtResource( 3 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 9 ), ExtResource( 7 ), ExtResource( 9 ) ],
+"loop": false,
+"name": "hover",
+"speed": 12.0
+} ]
 
 [sub_resource type="DynamicFont" id=1]
 size = 12
@@ -43,8 +62,16 @@ margin_right = 32.0
 margin_bottom = 48.0
 rect_min_size = Vector2( 16, 32 )
 mouse_default_cursor_shape = 2
-texture_normal = ExtResource( 3 )
+texture_normal = ExtResource( 10 )
+texture_pressed = ExtResource( 5 )
+texture_disabled = ExtResource( 5 )
 script = ExtResource( 2 )
+
+[node name="Hover" type="AnimatedSprite" parent="."]
+visible = false
+position = Vector2( 16, 24 )
+frames = SubResource( 8 )
+playing = true
 
 [node name="Label" type="Label" parent="."]
 margin_left = 4.0
