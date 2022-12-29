@@ -5,7 +5,7 @@
 [ext_resource path="res://scenes/game/inner temple/Bed.gd" type="Script" id=3]
 [ext_resource path="res://assets/sprites/bed.png" type="Texture" id=4]
 [ext_resource path="res://scenes/game/inner temple/Anvil.gd" type="Script" id=5]
-[ext_resource path="res://assets/sprites/village/anvil.png" type="Texture" id=6]
+[ext_resource path="res://assets/sprites/village/main temple room.png" type="Texture" id=6]
 [ext_resource path="res://scenes/game/inner temple/Gunsmithing.gd" type="Script" id=7]
 [ext_resource path="res://scenes/game/inner temple/Item Base.gd" type="Script" id=8]
 [ext_resource path="res://scenes/game/inner temple/Component Base.gd" type="Script" id=9]
@@ -72,30 +72,9 @@ font_data = ExtResource( 10 )
 position = Vector2( 1, 0 )
 script = ExtResource( 1 )
 
-[node name="ColorRect" type="ColorRect" parent="."]
-margin_left = -99.0
-margin_top = -94.0
-margin_right = 100.0
-margin_bottom = 71.0
-color = Color( 0.901961, 0.882353, 0.905882, 1 )
-
-[node name="Buddha" type="Node2D" parent="."]
-position = Vector2( 0, 79 )
-
-[node name="ColorRect" type="ColorRect" parent="Buddha"]
-margin_left = -17.0
-margin_top = -104.0
-margin_right = 23.0
-margin_bottom = -64.0
-
-[node name="Label" type="Label" parent="Buddha"]
-margin_left = -21.0
-margin_top = -87.0
-margin_right = 71.0
-margin_bottom = -73.0
-rect_scale = Vector2( 0.5, 0.5 )
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "Buddha Statue"
+[node name="Main Floor" type="Sprite" parent="."]
+position = Vector2( 2, -5 )
+texture = ExtResource( 6 )
 
 [node name="Gun Chest" type="Area2D" parent="."]
 position = Vector2( 3, 5 )
@@ -110,20 +89,27 @@ position = Vector2( -0.5, 0 )
 shape = SubResource( 9 )
 
 [node name="Anvil" type="Area2D" parent="."]
-position = Vector2( 92, 85 )
+position = Vector2( 132, 80 )
 z_index = 5
 script = ExtResource( 5 )
-
-[node name="Sprite" type="Sprite" parent="Anvil"]
-position = Vector2( -167, -41 )
-texture = ExtResource( 6 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Anvil"]
 position = Vector2( -167, -40 )
 shape = SubResource( 1 )
 
+[node name="Bed" type="Sprite" parent="."]
+position = Vector2( -32, -36 )
+texture = ExtResource( 4 )
+script = ExtResource( 3 )
+
+[node name="Area2D" type="Area2D" parent="Bed"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bed/Area2D"]
+position = Vector2( 0, -1 )
+shape = SubResource( 2 )
+
 [node name="Levels" type="Node2D" parent="."]
-position = Vector2( 38, 88 )
+position = Vector2( 43, 29 )
 
 [node name="Room 1" type="Node2D" parent="Levels"]
 position = Vector2( 32, -257 )
@@ -134,17 +120,6 @@ margin_top = 75.0
 margin_right = -119.0
 margin_bottom = 125.0
 color = Color( 0.270588, 0.156863, 0.235294, 1 )
-
-[node name="Bed" type="Sprite" parent="Levels/Room 1"]
-position = Vector2( -155, 103 )
-texture = ExtResource( 4 )
-script = ExtResource( 3 )
-
-[node name="Area2D" type="Area2D" parent="Levels/Room 1/Bed"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Levels/Room 1/Bed/Area2D"]
-position = Vector2( 0, -1 )
-shape = SubResource( 2 )
 
 [node name="Label" type="Label" parent="Levels/Room 1"]
 margin_left = -165.0
@@ -209,25 +184,7 @@ rect_scale = Vector2( 0.5, 0.5 )
 text = "Monk Room 4"
 
 [node name="Vendors" type="Node2D" parent="."]
-position = Vector2( 0, 40 )
-
-[node name="Room 1" type="Node2D" parent="Vendors"]
-position = Vector2( 92, 45 )
-
-[node name="ColorRect" type="ColorRect" parent="Vendors/Room 1"]
-margin_left = -191.0
-margin_top = -64.0
-margin_right = -141.0
-margin_bottom = -14.0
-color = Color( 0.270588, 0.156863, 0.235294, 1 )
-
-[node name="Label" type="Label" parent="Vendors/Room 1"]
-margin_left = -184.0
-margin_top = -59.0
-margin_right = -96.0
-margin_bottom = -45.0
-rect_scale = Vector2( 0.5, 0.5 )
-text = "Gunsmith"
+position = Vector2( 77, 4 )
 
 [node name="Room 2" type="Node2D" parent="Vendors"]
 position = Vector2( 334, 44 )

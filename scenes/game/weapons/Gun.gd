@@ -10,14 +10,19 @@ export (float) var damage_add = 0.0
 export (float) var reload_speed_upgrade = 0.8
 export (float) var damage_upgrade = 1.0
 export (float) var lifetime = 0.6
+export (float) var fire_delay = 0.5
+export (float) var reload_time = 2.0
 export (String) var bullet_type = "shotgun"
+export (int) var max_ammo = 2
 export (int) var speed = 100
-export var reloading = false
 
+var reloading = false
+var is_fire_delay = false
+var remaining_fire_delay = null
 var remaining_reload_time = null
-var reload_time = 2
 var spread = 8
 var count = 10
+var ammo
 var world
 var player
 var parts
@@ -26,6 +31,7 @@ func _ready():
 	player = get_parent()
 	world = get_node("/root/Globals").get_main_node()
 	var upgrades = get_node("/root/Globals").upgrades
+	ammo = max_ammo
 
 	reload_time *= pow(reload_speed_upgrade, upgrades.reload)
 	damage_add += damage_upgrade * upgrades.damage
@@ -64,13 +70,18 @@ func _speed_upgrade():
 	reload_time *= reload_speed_upgrade
 
 func _on_shoot():
-	if (!reloading):
-		reloading = true
+	if (!reloading && !is_fire_delay):
+		ammo -= 1
+		if ammo <= 0:
+			reloading = true
+			remaining_reload_time = reload_time * reload_multiplier
+		else:
+			is_fire_delay = true
+			remaining_fire_delay = fire_delay
 		get_node("SFX").playing = true
 		get_node("Gun").play("shoot")
 		_spawn_bullet()
 		_shake_camera()
-		remaining_reload_time = reload_time * reload_multiplier
 
 func _reload():
 	reloading = false
@@ -100,6 +111,12 @@ func _process(delta):
 			if remaining_reload_time <=0:
 				reloading = false
 				remaining_reload_time = null
+				ammo = max_ammo
+		elif is_fire_delay:
+			remaining_fire_delay = remaining_fire_delay - delta
+			if remaining_fire_delay <= 0:
+				is_fire_delay = false
+				remaining_fire_delay = null
 		else:
 			if Input.is_action_pressed("shoot"):
 				_on_shoot()

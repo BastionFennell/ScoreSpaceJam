@@ -6,6 +6,10 @@
 
 [node name="Rifle" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
+reload_speed_upgrade = 1.0
+fire_delay = 0.03
+reload_time = 0.3
+max_ammo = 10
 speed = 200
 
 [node name="Bullet Spawner" parent="." index="0"]
