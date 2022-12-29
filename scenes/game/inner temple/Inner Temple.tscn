@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=2]
+[gd_scene load_steps=41 format=2]
 
 [ext_resource path="res://scenes/game/inner temple/Inner Temple.gd" type="Script" id=1]
 [ext_resource path="res://scenes/game/GUI/Pause Menu.tscn" type="PackedScene" id=2]
@@ -75,6 +75,9 @@ resource_local_to_scene = true
 
 [sub_resource type="RectangleShape2D" id=19]
 extents = Vector2( 10, 127.5 )
+
+[sub_resource type="RectangleShape2D" id=20]
+extents = Vector2( 33.5, 32 )
 
 [node name="Inner Temple" type="Node2D"]
 position = Vector2( 1, 0 )
@@ -470,3 +473,10 @@ collision_layer = 16
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Walls/StaticBody2D5"]
 polygon = PoolVector2Array( -156, -72, -114, -72, -114, -85, -121, -85, -121, -118, -75, -118, -75, -85, -80, -85, -80, -72, -63, -72, -63, -85, -70, -85, -70, -118, -25, -118, -25, -85, -31, -85, -31, -72, -20, -72, -20, -118, 24, -118, 24, -72, 35, -72, 35, -85, 29, -85, 29, -118, 74, -118, 74, -85, 67, -85, 67, -72, 84, -72, 84, -85, 79, -85, 79, -118, 125, -118, 125, -85, 117, -85, 117, -72, 141, -72, 141, -188, -157, -184 )
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="Walls"]
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/StaticBody2D4"]
+position = Vector2( 1.5, -4 )
+shape = SubResource( 20 )
