@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=2]
+[gd_scene load_steps=41 format=2]
 
 [ext_resource path="res://scenes/game/inner temple/Inner Temple.gd" type="Script" id=1]
 [ext_resource path="res://scenes/game/GUI/Pause Menu.tscn" type="PackedScene" id=2]
@@ -18,7 +18,6 @@
 [ext_resource path="res://assets/fonts/8bitOperatorPlusSC-Regular.ttf" type="DynamicFontData" id=16]
 [ext_resource path="res://assets/fonts/8bitOperatorPlus8-Bold.ttf" type="DynamicFontData" id=17]
 [ext_resource path="res://assets/fonts/8bitOperatorPlus8-Regular.ttf" type="DynamicFontData" id=18]
-[ext_resource path="res://assets/sprites/village/repair zone.png" type="Texture" id=19]
 [ext_resource path="res://assets/sprites/village/holy tree.png" type="Texture" id=20]
 [ext_resource path="res://assets/sprites/Gun Chest Background.png" type="Texture" id=21]
 
@@ -74,24 +73,33 @@ font_data = ExtResource( 10 )
 [sub_resource type="AnimatedTexture" id=18]
 resource_local_to_scene = true
 
+[sub_resource type="RectangleShape2D" id=19]
+extents = Vector2( 10, 127.5 )
+
+[sub_resource type="RectangleShape2D" id=20]
+extents = Vector2( 144, 10 )
+
 [node name="Inner Temple" type="Node2D"]
 position = Vector2( 1, 0 )
 script = ExtResource( 1 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_left = -1062.0
+margin_top = -700.0
+margin_right = 1198.0
+margin_bottom = 866.0
+color = Color( 0.0627451, 0.0980392, 0.12549, 1 )
 
 [node name="Main Floor" type="Sprite" parent="."]
 position = Vector2( 2, -5 )
 texture = ExtResource( 6 )
 
-[node name="Side Room" type="Sprite" parent="."]
-position = Vector2( -110, -5 )
-texture = ExtResource( 19 )
-
 [node name="Trees" type="Sprite" parent="."]
-position = Vector2( -108, -18 )
+position = Vector2( 2, -20 )
 texture = ExtResource( 20 )
 
 [node name="Gun Chest" type="Area2D" parent="."]
-position = Vector2( 3, 5 )
+position = Vector2( -1, 45 )
 script = ExtResource( 13 )
 
 [node name="Sprite" type="Sprite" parent="Gun Chest"]
@@ -103,7 +111,7 @@ position = Vector2( -0.5, 0 )
 shape = SubResource( 9 )
 
 [node name="Anvil" type="Area2D" parent="."]
-position = Vector2( 132, 80 )
+position = Vector2( 63, 146 )
 z_index = 5
 script = ExtResource( 5 )
 
@@ -112,7 +120,7 @@ position = Vector2( -167, -40 )
 shape = SubResource( 1 )
 
 [node name="Bed" type="Sprite" parent="."]
-position = Vector2( -32, -36 )
+position = Vector2( -111, -100 )
 texture = ExtResource( 4 )
 script = ExtResource( 3 )
 
@@ -123,7 +131,7 @@ position = Vector2( 0, -1 )
 shape = SubResource( 2 )
 
 [node name="Levels" type="Node2D" parent="."]
-position = Vector2( 43, 29 )
+position = Vector2( 45, -11 )
 
 [node name="Room 1" type="Node2D" parent="Levels"]
 position = Vector2( 32, -257 )
@@ -198,7 +206,7 @@ rect_scale = Vector2( 0.5, 0.5 )
 text = "Monk Room 4"
 
 [node name="Vendors" type="Node2D" parent="."]
-position = Vector2( 77, 4 )
+position = Vector2( 135, 21 )
 
 [node name="Room 2" type="Node2D" parent="Vendors"]
 position = Vector2( 334, 44 )
@@ -219,6 +227,7 @@ rect_scale = Vector2( 0.5, 0.5 )
 text = "Old master"
 
 [node name="Players" type="YSort" parent="."]
+position = Vector2( 0, 103 )
 
 [node name="Gunsmithing" type="CanvasLayer" parent="."]
 pause_mode = 2
@@ -436,3 +445,39 @@ texture_hover = SubResource( 18 )
 
 [node name="Pause Menu" parent="." instance=ExtResource( 2 )]
 visible = false
+
+[node name="Walls" type="Node2D" parent="."]
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="Walls"]
+position = Vector2( -268, 0 )
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/StaticBody2D2"]
+position = Vector2( 136, -5.5 )
+shape = SubResource( 19 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Walls"]
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/StaticBody2D"]
+position = Vector2( 136, -5.5 )
+shape = SubResource( 19 )
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="Walls"]
+position = Vector2( 0, -256 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/StaticBody2D4"]
+position = Vector2( 2, 128 )
+shape = SubResource( 20 )
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="Walls"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/StaticBody2D3"]
+position = Vector2( 2, 128 )
+shape = SubResource( 20 )
+
+[node name="StaticBody2D5" type="StaticBody2D" parent="Walls"]
+collision_layer = 16
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Walls/StaticBody2D5"]
+polygon = PoolVector2Array( -156, -70, -114, -70, -114, -85, -121, -85, -121, -128, -75, -128, -75, -85, -79, -85, -79, -71, -63, -71, -63, -85, -70, -85, -70, -125, -25, -125, -25, -85, -31, -85, -31, -71, -20, -71, -20, -125, 24, -125, 24, -72, 35, -72, 35, -85, 29, -85, 29, -124, 74, -123, 74, -85, 67, -85, 67, -72, 84, -72, 84, -85, 79, -85, 79, -123, 125, -123, 125, -85, 117, -85, 117, -72, 141, -72, 139, -189, -157, -184 )
