@@ -7,9 +7,14 @@ var speaker_name
 signal next
 
 var speaker_data = {
+	"ki": {
+		"color": "#967337",
+		"name": "Ki",
+		"sprite": preload("res://scenes/game/cutscenes/Ki - Dialog.tscn")
+	},
 	"player": {
 		"color": "#000000",
-		"name": "Player",
+		"name": "Haiiro",
 		"sprite": preload("res://scenes/game/cutscenes/Player - Dialog.tscn")
 	}
 }
@@ -28,9 +33,9 @@ func update_dialog_box(speaker, new_text):
 		i.queue_free()
 
 	speaker_sprite.add_child(speaker_data[speaker].sprite.instance())
-	text.text = new_text
+	text.bbcode_text = new_text
 
 func _process(_delta):
 	if self.visible:
-		if Input.is_action_just_pressed("ui_accept"):
+		if Input.is_action_just_pressed("ui_accept") || Input.is_action_just_pressed("shoot"):
 			emit_signal("next")
