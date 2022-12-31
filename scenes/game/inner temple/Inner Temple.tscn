@@ -1,4 +1,4 @@
-[gd_scene load_steps=76 format=2]
+[gd_scene load_steps=80 format=2]
 
 [ext_resource path="res://scenes/game/inner temple/Inner Temple.gd" type="Script" id=1]
 [ext_resource path="res://scenes/game/GUI/Pause Menu.tscn" type="PackedScene" id=2]
@@ -41,6 +41,40 @@
 [ext_resource path="res://scenes/game/inner temple/Cutscene Manager.gd" type="Script" id=39]
 [ext_resource path="res://assets/audio/songs/Town.wav" type="AudioStream" id=40]
 [ext_resource path="res://assets/sprites/characters/Ki/Ki - Walking.png" type="Texture" id=41]
+[ext_resource path="res://assets/sprites/weapons/HammerGun.png" type="Texture" id=42]
+[ext_resource path="res://scenes/game/inner temple/Ki.gd" type="Script" id=43]
+
+[sub_resource type="Animation" id=38]
+resource_name = "Default"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=39]
+resource_name = "Walking"
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
 
 [sub_resource type="RectangleShape2D" id=9]
 extents = Vector2( 8.5, 6 )
@@ -199,6 +233,44 @@ tracks/6/keys = {
 "update": 1,
 "values": [ false ]
 }
+tracks/7/type = "method"
+tracks/7/path = NodePath(".")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 2.3, 2.5, 3.1, 4.2, 4.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "play_footstep"
+}, {
+"args": [  ],
+"method": "play_jump"
+}, {
+"args": [  ],
+"method": "play_footstep"
+}, {
+"args": [  ],
+"method": "play_footstep"
+}, {
+"args": [  ],
+"method": "play_footstep"
+} ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("Cutscene Animator/Hammergun Animator:visible")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
 
 [sub_resource type="Animation" id=33]
 resource_name = "10 - First Quest"
@@ -255,7 +327,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2, 2.1 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 0, 1, 2, 3, 0, 1, 2, 3, 0, 1, 2, 3 ]
+"values": [ 0, 1, 2, 3, 0, 1, 2, 3, 0, 1, 2, 2 ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Cutscene Animator/Ki Animator:position")
@@ -292,6 +364,35 @@ tracks/3/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ true ]
+}
+tracks/4/type = "method"
+tracks/4/path = NodePath(".")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 1, 1.2, 1.4, 1.6, 1.8, 2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "play_footstep"
+}, {
+"args": [  ],
+"method": "play_footstep"
+}, {
+"args": [  ],
+"method": "play_footstep"
+}, {
+"args": [  ],
+"method": "play_footstep"
+}, {
+"args": [  ],
+"method": "play_footstep"
+}, {
+"args": [  ],
+"method": "play_footstep"
+} ]
 }
 
 [sub_resource type="Animation" id=31]
@@ -381,6 +482,68 @@ tracks/1/keys = {
 "update": 0,
 "values": [ Vector2( 0.25, 0.25 ), Vector2( 0.05, 0.05 ) ]
 }
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.4 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "play_pickup"
+} ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Cutscene Animator/Hammergun Animator:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.4 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Cutscene Animator/Hammergun Animator:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0.4, 0.9 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0.5, 0.5 ), Vector2( 1, 1 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Cutscene Animator/Hammergun Animator:rotation_degrees")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0.4, 0.9 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ -146.4, 30.0 ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Cutscene Animator/Hammergun Animator:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0.4, 0.9 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( -16, 79 ), Vector2( -28, 79 ) ]
+}
 
 [sub_resource type="Animation" id=34]
 resource_name = "9 - First Things First"
@@ -430,6 +593,19 @@ color = Color( 0.0627451, 0.0980392, 0.12549, 1 )
 position = Vector2( 2, -5 )
 z_index = -100
 texture = ExtResource( 6 )
+
+[node name="NPCs" type="Node2D" parent="."]
+
+[node name="Ki" type="Sprite" parent="NPCs"]
+position = Vector2( -14, 79 )
+texture = ExtResource( 41 )
+hframes = 4
+frame = 3
+script = ExtResource( 43 )
+
+[node name="Ki Animator" type="AnimationPlayer" parent="NPCs/Ki"]
+anims/Default = SubResource( 38 )
+anims/Walking = SubResource( 39 )
 
 [node name="Trees" type="Sprite" parent="."]
 position = Vector2( 2, -20 )
@@ -823,6 +999,9 @@ shape = SubResource( 20 )
 pause_mode = 2
 script = ExtResource( 39 )
 
+[node name="SFX" type="AudioStreamPlayer" parent="Cutscene Manager"]
+bus = "SFX"
+
 [node name="Dialog" type="CanvasLayer" parent="Cutscene Manager"]
 visible = false
 script = ExtResource( 38 )
@@ -840,6 +1019,7 @@ z_index = 5
 
 [node name="Player - Dialog" parent="Cutscene Manager/Dialog/Speaker" instance=ExtResource( 35 )]
 position = Vector2( -107, -12.25 )
+frame = 0
 offset = Vector2( 107, 12.25 )
 
 [node name="Speaker Name" type="Label" parent="Cutscene Manager/Dialog"]
@@ -869,9 +1049,9 @@ aoe
 aoeu"
 
 [node name="Cutscene Camera" type="Camera2D" parent="Cutscene Manager"]
-position = Vector2( -6.59813, 83.763 )
+position = Vector2( 1, 81 )
 current = true
-zoom = Vector2( 0.0654631, 0.0654631 )
+zoom = Vector2( 0.1, 0.1 )
 
 [node name="Cutscene Animator" type="AnimationPlayer" parent="Cutscene Manager"]
 "anims/1 - Character Waking Up" = SubResource( 23 )
@@ -888,13 +1068,24 @@ zoom = Vector2( 0.0654631, 0.0654631 )
 
 [node name="Player Animator" type="Sprite" parent="Cutscene Manager/Cutscene Animator"]
 position = Vector2( 1, 80 )
-texture = ExtResource( 19 )
+texture = ExtResource( 26 )
+
+[node name="Hammergun Animator" type="Sprite" parent="Cutscene Manager/Cutscene Animator"]
+visible = false
+position = Vector2( -28, 79 )
+rotation = 0.523599
+texture = ExtResource( 42 )
+flip_h = true
+region_enabled = true
+region_rect = Rect2( 1, 2, 16, 16 )
 
 [node name="Ki Animator" type="Sprite" parent="Cutscene Manager/Cutscene Animator"]
 visible = false
-position = Vector2( 1, 113 )
+position = Vector2( -15, 80 )
+z_index = 2
 texture = ExtResource( 41 )
 hframes = 4
+frame = 2
 
 [node name="BG Music" type="AudioStreamPlayer" parent="."]
 pause_mode = 2

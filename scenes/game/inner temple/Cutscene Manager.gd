@@ -27,7 +27,7 @@ var dialog = {
 		{
 			"text": "Wot 'n tarnation?",
 			"character": "ki",
-			"method": "ki_theme"
+			"method": "ki_entrance"
 		},
 		{
 			"animation": "3 - Ki Entrance"
@@ -182,6 +182,10 @@ var dialog = {
 	],
 	"10 - First Quest": [
 		{
+			"text": "I'll be waitin for ya over on by the ol' prophecy chamber when yer ready.",
+			"character": "ki",
+		},
+		{
 			"end": true
 		},
 	]
@@ -215,6 +219,13 @@ func _dialog_continue():
 		get_node("/root/Globals").get_player().global_position.x = player_pos.x
 		get_node("/root/Globals").get_player().global_position.y = player_pos.y
 
+		var ki = get_node("../NPCs/Ki")
+		var ki_pos = get_node("Cutscene Animator/Ki Animator").global_position
+		ki.global_position.x = ki_pos.x
+		ki.global_position.y = ki_pos.y
+		ki.visible = true
+		ki.on_intro_animation_end()
+
 		get_node("Cutscene Camera").current = false
 		get_node("../Players").visible = true
 		get_tree().paused = false
@@ -231,6 +242,9 @@ func _dialog_continue():
 	if next_dialog.has("method"):
 		self.call(next_dialog.method)
 
+func ki_entrance():
+	play_door()
+	ki_theme()
 
 func ki_theme():
 	get_parent().get_node("BG Music").stream = load("res://assets/audio/Ki Theme.wav")
@@ -239,3 +253,21 @@ func ki_theme():
 func normal_theme():
 	get_parent().get_node("BG Music").stream = load("res://assets/audio/songs/Town.wav")
 	get_parent().get_node("BG Music").play()
+
+func _play_sfx(sfx):
+	var SFX = get_node("SFX")
+	SFX.stream = load("res://assets/audio/%s" % sfx)
+	SFX.pitch_scale = rand_range(0.8, 1.2)
+	SFX.play()
+
+func play_footstep():
+	_play_sfx("footstep 1.wav")
+
+func play_jump():
+	_play_sfx("jump.wav")
+
+func play_pickup():
+	_play_sfx("item pickup.wav")
+
+func play_door():
+	_play_sfx("door.wav")

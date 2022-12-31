@@ -20,4 +20,5 @@ animations = [ {
 
 [node name="Player - Dialog" type="AnimatedSprite"]
 frames = SubResource( 3 )
+frame = 3
 playing = true

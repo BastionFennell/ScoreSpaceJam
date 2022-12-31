@@ -167,6 +167,11 @@ remotesync func shoot(rotation, position, damage, bullet_speed, lifetime, bullet
 
 	world.add_child(bullet)
 
+func play_footstep():
+	var footsteps = get_node("Footsteps")
+	footsteps.pitch_scale = rand_range(0.8, 1.2)
+	footsteps.play()
+
 func _integrate_forces(state):
 	if(playing && in_control()):
 		get_input()

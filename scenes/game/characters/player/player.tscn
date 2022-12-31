@@ -1,10 +1,11 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://assets/sprites/characters/thomas/thomas.png" type="Texture" id=1]
 [ext_resource path="res://scenes/game/characters/player/player.gd" type="Script" id=2]
 [ext_resource path="res://assets/sprites/characters/thomas/dash.png" type="Texture" id=3]
 [ext_resource path="res://scenes/game/town/How to Interact.gd" type="Script" id=4]
 [ext_resource path="res://assets/sprites/interact bubble.png" type="Texture" id=5]
+[ext_resource path="res://assets/audio/footstep 1.wav" type="AudioStream" id=6]
 
 [sub_resource type="PhysicsMaterial" id=10]
 friction = 0.0
@@ -32,6 +33,18 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id=8]
 resource_name = "default"
+tracks/0/type = "value"
+tracks/0/path = NodePath("../Sprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
 
 [sub_resource type="Animation" id=4]
 resource_name = "Dash"
@@ -103,6 +116,20 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ 0, 1 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "play_footstep"
+} ]
 }
 
 [sub_resource type="Animation" id=5]
@@ -180,3 +207,8 @@ position = Vector2( 26, 36 )
 texture = ExtResource( 5 )
 
 [node name="Tween" type="Tween" parent="."]
+
+[node name="Footsteps" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+volume_db = -3.0
+bus = "SFX"
