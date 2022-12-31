@@ -4,17 +4,19 @@ signal on_set_current_guns
 signal change_current_gun
 
 var gun_scripts = {
+	"hammergun": preload("res://scenes/game/weapons/hammergun.gd"),
 	"shotgun": preload("res://scenes/game/weapons/shotgun.gd"),
 	"rifle": preload("res://scenes/game/weapons/rifle.gd")
 }
 var gun_types = {
+	"hammergun": preload("res://scenes/game/weapons/Hammergun.tscn"),
 	"shotgun": preload("res://scenes/game/weapons/Shotgun.tscn"),
 	"rifle": preload("res://scenes/game/weapons/Rifle.tscn")
 }
 
 var bullet_types = {
 	"shotgun": preload("res://scenes/game/weapons/Shotgun Bullet.tscn"),
-	"axegun": preload("res://scenes/game/weapons/Axegun Bullet.tscn")
+	"hammer": preload("res://scenes/game/weapons/Hammergun Bullet.tscn")
 }
 
 # Gunsmithing
@@ -30,6 +32,10 @@ var parts_inventory = {}
 var unlocked_parts = ["stock", "barrel"]
 
 var guns_data = {
+	"hammergun": {
+		"icon": preload("res://assets/sprites/weapons/Shotgun Icon.png"),
+		"parts": 2
+	},
 	"shotgun": {
 		"icon": preload("res://assets/sprites/weapons/Shotgun Icon.png"),
 		"parts": 2
@@ -40,11 +46,17 @@ var guns_data = {
 	}
 }
 var unlocked_guns = {
+	"hammergun": false,
     "rifle": false,
     "shotgun": true 
 }
 
-var current_guns = [{
+var current_guns = [
+	{
+		"type": "hammergun",
+		"parts": { "junk": 2}
+	},
+	{
 	"type": "shotgun",
 	"parts": { "junk": 2}
 	}]

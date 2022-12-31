@@ -4,7 +4,7 @@
 [ext_resource path="res://scenes/Camera.gd" type="Script" id=2]
 [ext_resource path="res://assets/sprites/village/temple outline.png" type="Texture" id=3]
 [ext_resource path="res://scenes/game/drops/ItemSpawner.gd" type="Script" id=4]
-[ext_resource path="res://scenes/game/weapons/Axegun.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/game/weapons/Hammergun.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/game/outside/Resource Spawner.gd" type="Script" id=6]
 [ext_resource path="res://scenes/game/characters/player/player.tscn" type="PackedScene" id=7]
 [ext_resource path="res://scenes/game/Transition.gd" type="Script" id=8]

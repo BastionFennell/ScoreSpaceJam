@@ -594,9 +594,10 @@ position = Vector2( 2, -5 )
 z_index = -100
 texture = ExtResource( 6 )
 
-[node name="NPCs" type="Node2D" parent="."]
+[node name="NPCs" type="YSort" parent="."]
 
 [node name="Ki" type="Sprite" parent="NPCs"]
+visible = false
 position = Vector2( -14, 79 )
 texture = ExtResource( 41 )
 hframes = 4
