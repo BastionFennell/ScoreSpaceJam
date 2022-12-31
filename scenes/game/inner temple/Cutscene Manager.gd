@@ -2,6 +2,7 @@ extends Node2D
 
 var animator
 var dialog_man
+var globals
 
 var dialog_i
 var last_anim
@@ -186,6 +187,38 @@ var dialog = {
 			"character": "ki",
 		},
 		{
+			"end": true,
+			"method": "intro_end"
+		},
+	],
+	"11 - Tree Killed": [
+		{
+			"text": "[b]OH MY GOSH, DID YOU JUST SHOOT DOWN THE HOLY TREE!?!?[/b]",
+			"character": "ki",
+			"method": "ki_theme"
+		},
+		{
+			"text": "[b]THAT THERE TREE WAS O'ER A THOUSAND YEARS OLD![/b]",
+			"character": "ki",
+		},
+		{
+			"text": "I thought you said you needed some wood?",
+			"character": "player",
+		},
+		{
+			"text": "[b]FROM OUTSIDE! WHAT KIND OF MANIAC SHOOTS DOWN A SACRED TREE?!?[/b]",
+			"character": "ki",
+		},
+		{
+			"text": "Maybe using it to fix the prophecy room will make the room extra holy?",
+			"character": "player",
+		},
+		{
+			"text": "Gosh darn it... I can't let that wood go to waste. Gimme a moment here and the room will be good as new...",
+			"character": "ki",
+			"method": "normal_theme"
+		},
+		{
 			"end": true
 		},
 	]
@@ -194,12 +227,32 @@ var dialog = {
 func _ready():
 	dialog_man = get_node("Dialog")
 	animator = get_node("Cutscene Animator")
+	globals = get_node("/root/Globals")
 
 	dialog_man.connect("next", self, "_dialog_continue")
 	animator.connect("animation_finished", self, "_animation_finished")
 
-	animator.play("1 - Character Waking Up")
-	get_tree().paused = true
+	if !globals.cutscenes.intro:
+		get_node("Cutscene Camera").current = true
+		get_node("../Players").visible = false
+		get_node("../NPCs").visible = false
+		self.visible = true
+
+		animator.play("1 - Character Waking Up")
+		get_tree().paused = true
+
+func tree_killed():
+		var curr_cam = globals.get_player().get_node("Camera")
+		print(curr_cam.global_position)
+		get_node("Cutscene Camera").global_position = curr_cam.global_position
+		get_node("Cutscene Camera").zoom = curr_cam.zoom
+		get_node("Cutscene Camera").current = true
+		get_node("../Players").visible = false
+		get_node("../NPCs").visible = false
+		self.visible = true
+
+		animator.play("11 - Tree Killed")
+		get_tree().paused = true
 
 
 func _animation_finished(anim):
@@ -212,26 +265,19 @@ func _animation_finished(anim):
 func _dialog_continue():
 	var next_dialog = dialog[last_anim][dialog_i + 1]
 	if next_dialog.has("end"):
+		normal_theme()
 		dialog_man.visible = false
 		self.visible = false
-
-		var player_pos = get_node("Cutscene Animator/Player Animator").global_position
-		get_node("/root/Globals").get_player().global_position.x = player_pos.x
-		get_node("/root/Globals").get_player().global_position.y = player_pos.y
-
-		var ki = get_node("../NPCs/Ki")
-		var ki_pos = get_node("Cutscene Animator/Ki Animator").global_position
-		ki.global_position.x = ki_pos.x
-		ki.global_position.y = ki_pos.y
-		ki.visible = true
-		ki.on_intro_animation_end()
+		
+		get_node("../NPCs").visible = true
 
 		get_node("Cutscene Camera").current = false
 		get_node("../Players").visible = true
 		get_tree().paused = false
-		get_node("/root/Globals").get_player().get_node("Camera").current = true
+		globals.get_player().get_node("Camera").current = true
+		self.visible = false
 
-		queue_free()
+		globals.cutscenes.intro = true
 	elif next_dialog.has("animation"):
 		dialog_man.visible = false
 		animator.play(next_dialog.animation)
@@ -241,6 +287,17 @@ func _dialog_continue():
 
 	if next_dialog.has("method"):
 		self.call(next_dialog.method)
+
+func intro_end():
+	var player_pos = get_node("Sprites/Player Animator").global_position
+	globals.get_player().global_position.x = player_pos.x
+	globals.get_player().global_position.y = player_pos.y
+
+	var ki = get_node("../NPCs/Ki")
+	var ki_pos = get_node("Sprites/Ki Animator").global_position
+	ki.global_position.x = ki_pos.x
+	ki.global_position.y = ki_pos.y
+	ki.on_intro_animation_end()
 
 func ki_entrance():
 	play_door()

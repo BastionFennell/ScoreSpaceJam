@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/holy tree.png-10d814cd1e976557c3988bb263a4d5b7.stex"
+path="res://.import/bed - murasaki - broken.png-6ade27e83343f4cceb2d89e36191d316.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/game/weapons/holy tree.png"
-dest_files=[ "res://.import/holy tree.png-10d814cd1e976557c3988bb263a4d5b7.stex" ]
+source_file="res://assets/sprites/bed - murasaki - broken.png"
+dest_files=[ "res://.import/bed - murasaki - broken.png-6ade27e83343f4cceb2d89e36191d316.stex" ]
 
 [params]
 

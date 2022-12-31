@@ -16,9 +16,6 @@ func _ready():
     world = globals.get_main_node()
     player = globals.get_player()
 
-    if (has_node("AnimationPlayer")):
-        get_node("AnimationPlayer").play("walking")
-
     var itemSpawner = world.get_node("ItemSpawner")
 
     self.connect("spawn_item", itemSpawner, "_on_spawn_item")

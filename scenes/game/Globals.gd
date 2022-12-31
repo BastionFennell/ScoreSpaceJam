@@ -17,6 +17,10 @@ var controller_mode = false
 
 var time_stopped = false
 
+var cutscenes = {
+	"intro": true
+}
+
 var zone_list = {
 	"nightmare": "res://scenes/game/nightmare/Nightmare.tscn",
 	"inner temple": "res://scenes/game/inner temple/Inner Temple.tscn"
