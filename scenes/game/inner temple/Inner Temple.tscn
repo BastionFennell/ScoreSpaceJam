@@ -1,4 +1,4 @@
-[gd_scene load_steps=87 format=2]
+[gd_scene load_steps=88 format=2]
 
 [ext_resource path="res://scenes/game/inner temple/Inner Temple.gd" type="Script" id=1]
 [ext_resource path="res://scenes/game/GUI/Pause Menu.tscn" type="PackedScene" id=2]
@@ -48,6 +48,7 @@
 [ext_resource path="res://assets/sprites/bed - aoi - broken.png" type="Texture" id=46]
 [ext_resource path="res://assets/sprites/bed - aka - broken.png" type="Texture" id=47]
 [ext_resource path="res://scenes/game/resources/holy tree/Holy Tree.tscn" type="PackedScene" id=48]
+[ext_resource path="res://scenes/game/Dialog Text.gd" type="Script" id=49]
 
 [sub_resource type="Animation" id=38]
 resource_name = "Default"
@@ -1109,6 +1110,7 @@ shape = SubResource( 20 )
 
 [node name="Cutscene Manager" type="Node2D" parent="."]
 pause_mode = 2
+visible = false
 script = ExtResource( 39 )
 
 [node name="SFX" type="AudioStreamPlayer" parent="Cutscene Manager"]
@@ -1131,7 +1133,7 @@ z_index = 5
 
 [node name="Player - Dialog" parent="Cutscene Manager/Dialog/Speaker" instance=ExtResource( 35 )]
 position = Vector2( -107, -12.25 )
-frame = 1
+frame = 0
 offset = Vector2( 107, 12.25 )
 
 [node name="Speaker Name" type="Label" parent="Cutscene Manager/Dialog"]
@@ -1159,6 +1161,10 @@ aoeu"
 text = "Test Text
 aoe
 aoeu"
+script = ExtResource( 49 )
+
+[node name="Dialog SFX" type="AudioStreamPlayer" parent="Cutscene Manager/Dialog"]
+bus = "SFX"
 
 [node name="Cutscene Camera" type="Camera2D" parent="Cutscene Manager"]
 position = Vector2( 0, -15 )

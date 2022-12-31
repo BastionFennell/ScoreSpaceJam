@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Banjo.mp3-f898dd65d30fdf388f1c80a9592a8097.mp3str"
+
+[deps]
+
+source_file="res://assets/audio/dialog/ki/Banjo.mp3"
+dest_files=[ "res://.import/Banjo.mp3-f898dd65d30fdf388f1c80a9592a8097.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

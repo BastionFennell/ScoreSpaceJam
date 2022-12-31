@@ -18,7 +18,7 @@ var controller_mode = false
 var time_stopped = false
 
 var cutscenes = {
-	"intro": true
+	"intro": false
 }
 
 var zone_list = {

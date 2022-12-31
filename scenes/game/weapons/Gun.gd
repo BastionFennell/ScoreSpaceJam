@@ -97,7 +97,7 @@ func _process(delta):
 		if !controller_mode:
 			look_at(get_global_mouse_position())
 		else:
-			var deadzone = 0.1
+			var deadzone = 0.2
 			var controllerangle = Vector2.ZERO
 			var xAxisRL = Input.get_joy_axis(0, JOY_AXIS_2)
 			var yAxisUD = Input.get_joy_axis(0 ,JOY_AXIS_3)

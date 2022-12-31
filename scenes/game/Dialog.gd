@@ -3,19 +3,34 @@ extends CanvasLayer
 var speaker_sprite
 var text
 var speaker_name
+var current_speaker
+var is_speaking
 
 signal next
+signal interrupt_dialog
 
 var speaker_data = {
 	"ki": {
 		"color": "#967337",
 		"name": "Ki",
-		"sprite": preload("res://scenes/game/cutscenes/Ki - Dialog.tscn")
+		"sprite": preload("res://scenes/game/cutscenes/Ki - Dialog.tscn"),
+		"sounds": [
+			"res://assets/audio/dialog/ki/Banjo 1.wav",
+			"res://assets/audio/dialog/ki/Banjo 2.wav",
+			"res://assets/audio/dialog/ki/Banjo 3.wav",
+			"res://assets/audio/dialog/ki/Banjo 4.wav",
+		]
 	},
 	"player": {
 		"color": "#000000",
 		"name": "Haiiro",
-		"sprite": preload("res://scenes/game/cutscenes/Player - Dialog.tscn")
+		"sprite": preload("res://scenes/game/cutscenes/Player - Dialog.tscn"),
+		"sounds": [
+			"res://assets/audio/dialog/haiiro/Shamisen 1.wav",
+			"res://assets/audio/dialog/haiiro/Shamisen 2.wav",
+			"res://assets/audio/dialog/haiiro/Shamisen 3.wav",
+			"res://assets/audio/dialog/haiiro/Shamisen 4.wav",
+		]
 	}
 }
 
@@ -24,7 +39,11 @@ func _ready():
 	speaker_sprite = get_node("Speaker")
 	text = get_node("Text")
 
+	get_node("Text").connect("dialog_complete", self, "_on_dialog_complete")
+	self.connect("interrupt_dialog", get_node("Text"), "_on_interrupt_dialog")
+
 func update_dialog_box(speaker, new_text):
+	current_speaker = speaker
 	speaker_name.text = speaker_data[speaker].name
 	speaker_name.add_color_override("font_color", speaker_data[speaker].color)
 
@@ -33,9 +52,16 @@ func update_dialog_box(speaker, new_text):
 		i.queue_free()
 
 	speaker_sprite.add_child(speaker_data[speaker].sprite.instance())
-	text.bbcode_text = new_text
+	text.new_message = new_text
+	is_speaking = true
+
+func _on_dialog_complete():
+	is_speaking = false
 
 func _process(_delta):
 	if self.visible:
 		if Input.is_action_just_pressed("ui_accept") || Input.is_action_just_pressed("shoot"):
-			emit_signal("next")
+			if is_speaking:
+				emit_signal("interrupt_dialog")
+			else:
+				emit_signal("next")
