@@ -1,5 +1,6 @@
 extends Node2D
 
+var bg_music_base_vol
 var animator
 var dialog_man
 var globals
@@ -231,6 +232,8 @@ func _ready():
 
 	dialog_man.connect("next", self, "_dialog_continue")
 	animator.connect("animation_finished", self, "_animation_finished")
+
+	bg_music_base_vol = get_parent().get_node("BG Music").volume_db
 
 	if !globals.cutscenes.intro:
 		get_node("Cutscene Camera").current = true

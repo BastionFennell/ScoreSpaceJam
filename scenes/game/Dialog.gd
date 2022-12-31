@@ -5,6 +5,7 @@ var text
 var speaker_name
 var current_speaker
 var is_speaking
+var bg_music_base_vol
 
 signal next
 signal interrupt_dialog
@@ -39,10 +40,14 @@ func _ready():
 	speaker_sprite = get_node("Speaker")
 	text = get_node("Text")
 
+	bg_music_base_vol = get_node("../../BG Music").volume_db
+
 	get_node("Text").connect("dialog_complete", self, "_on_dialog_complete")
 	self.connect("interrupt_dialog", get_node("Text"), "_on_interrupt_dialog")
 
 func update_dialog_box(speaker, new_text):
+	get_node("../../BG Music").volume_db = bg_music_base_vol - 6
+
 	current_speaker = speaker
 	speaker_name.text = speaker_data[speaker].name
 	speaker_name.add_color_override("font_color", speaker_data[speaker].color)
@@ -56,6 +61,7 @@ func update_dialog_box(speaker, new_text):
 	is_speaking = true
 
 func _on_dialog_complete():
+	get_node("../../BG Music").volume_db = bg_music_base_vol
 	is_speaking = false
 
 func _process(_delta):
