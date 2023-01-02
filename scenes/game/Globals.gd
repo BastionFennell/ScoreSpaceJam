@@ -18,7 +18,11 @@ var controller_mode = false
 var time_stopped = false
 
 var cutscenes = {
-	"intro": false
+	"intro": true
+}
+
+var triggers = {
+	"holy_tree_destroyed": false
 }
 
 var zone_list = {

@@ -1,20 +1,6 @@
 extends Area2D
 
-var globals 
-var player
+var is_interactive = true
 
-func _ready():
-	globals = get_node("/root/Globals")
-
-func connect_to_player(p):
-	player = p
-	var how_to = player.get_node("How to Interact")
-	self.connect("body_exited", how_to, "area_exited")
-	self.connect("body_entered", how_to, "area_entered")
-
-func _process(delta):
-	if player && overlaps_body(player) && Input.is_action_just_pressed("ui_accept"):
-		if !globals.has_interacted:
-			globals.on_first_interact()
-
-		get_parent().get_node("Gunsmithing").open()
+func on_interact():
+	get_parent().get_node("Gunsmithing").open()

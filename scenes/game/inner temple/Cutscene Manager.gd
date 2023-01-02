@@ -184,6 +184,10 @@ var dialog = {
 	],
 	"10 - First Quest": [
 		{
+			"text": "Just use [b]left mouse click[/b] or [b]RT[/b] to shoot!",
+			"character": "ki",
+		},
+		{
 			"text": "I'll be waitin for ya over on by the ol' prophecy chamber when yer ready.",
 			"character": "ki",
 		},
@@ -215,14 +219,47 @@ var dialog = {
 			"character": "player",
 		},
 		{
-			"text": "Gosh darn it... I can't let that wood go to waste. Gimme a moment here and the room will be good as new...",
+			"text": "Gosh darn it... I can't let that wood go to waste. Just gimme a sec to mourn...",
 			"character": "ki",
 			"method": "normal_theme"
 		},
 		{
-			"end": true
+			"text": "...",
+			"character": "ki",
 		},
-	]
+		{
+			"text": "...",
+			"character": "ki",
+		},
+		{
+			"text": "...",
+			"character": "ki",
+		},
+		{
+			"text": "Alright, lets see if that there wood is any good for construction, I suppose...",
+			"character": "ki",
+		},
+		{
+			"animation": "12 - Fix Prophecy Chamber"
+		},
+	],
+	"12 - Fix Prophecy Chamber": [
+		{
+			"text": "There we go, good as new!",
+			"character": "ki",
+		},
+		{
+			"text": "Why dontcha go check on the prophecy then?",
+			"character": "ki",
+		},
+		{
+			"text": "Just get close to it and hit [b]E[/b] or [b]A/X[/b] if you're on controller.",
+			"character": "ki",
+		},
+		{
+			"end": true
+		}
+	]	
 }
 
 func _ready():
@@ -232,8 +269,6 @@ func _ready():
 
 	dialog_man.connect("next", self, "_dialog_continue")
 	animator.connect("animation_finished", self, "_animation_finished")
-
-	bg_music_base_vol = get_parent().get_node("BG Music").volume_db
 
 	if !globals.cutscenes.intro:
 		get_node("Cutscene Camera").current = true

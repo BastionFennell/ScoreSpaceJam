@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://assets/sprites/characters/thomas/thomas.png" type="Texture" id=1]
 [ext_resource path="res://scenes/game/characters/player/player.gd" type="Script" id=2]
@@ -162,6 +162,9 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 
+[sub_resource type="CircleShape2D" id=11]
+radius = 13.0
+
 [node name="Player" type="RigidBody2D"]
 collision_mask = 2
 mode = 2
@@ -192,7 +195,7 @@ anims/Dash = SubResource( 4 )
 anims/RESET = SubResource( 2 )
 anims/walking = SubResource( 3 )
 
-[node name="How to Interact" type="Node2D" parent="."]
+[node name="How to Interact" type="Area2D" parent="."]
 position = Vector2( -25, -55 )
 script = ExtResource( 4 )
 
@@ -205,6 +208,10 @@ root_node = NodePath("../Pop Up")
 modulate = Color( 1, 1, 1, 0 )
 position = Vector2( 26, 36 )
 texture = ExtResource( 5 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="How to Interact"]
+position = Vector2( 25, 55 )
+shape = SubResource( 11 )
 
 [node name="Tween" type="Tween" parent="."]
 

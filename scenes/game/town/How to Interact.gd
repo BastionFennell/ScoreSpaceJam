@@ -1,14 +1,18 @@
-extends Node2D
+extends Area2D
 
 var has_interacted = false
 var is_faded_in = false
 var player
+var globals
 
 func _ready():
 	player = get_parent()
+	globals = get_node("/root/Globals")
 
 	var globals = get_node("/root/Globals")
 	has_interacted = globals.has_interacted
+	self.connect("area_entered", self, "_on_area_entered")
+	self.connect("area_exited", self, "_on_area_exited")
 
 	if !has_interacted:
 		globals.connect("has_interacted", self, "_on_first_interaction")
@@ -29,10 +33,16 @@ func fade_in():
 		get_node("Fader").play("Fade in")
 		is_faded_in = true
 
-func area_entered(body):
-	if body == player:
+func _on_area_entered(body):
+	if body.is_interactive:
 		fade_in()
 
-func area_exited(body):
-	if body == player:
+func _on_area_exited(body):
+	if body.is_interactive:
 		fade_out()
+
+func _process(_delta):
+	if Input.is_action_just_pressed("ui_accept"):
+		for a in get_overlapping_areas():
+			if a.has_method("on_interact"):
+				a.on_interact()
