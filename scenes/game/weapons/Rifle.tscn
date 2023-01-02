@@ -1,16 +1,11 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://scenes/game/weapons/Gun.tscn" type="PackedScene" id=1]
-[ext_resource path="res://scenes/game/weapons/Rifle.gd" type="Script" id=2]
+[ext_resource path="res://scenes/game/weapons/rifle.gd" type="Script" id=2]
 [ext_resource path="res://assets/sprites/weapons/rifle.png" type="Texture" id=3]
 
 [node name="Rifle" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
-reload_speed_upgrade = 1.0
-fire_delay = 0.03
-reload_time = 0.3
-max_ammo = 10
-speed = 200
 
 [node name="Bullet Spawner" parent="." index="0"]
 position = Vector2( 20, 0 )

@@ -23,6 +23,10 @@ animations = [ {
 
 [node name="Hammergun" instance=ExtResource( 2 )]
 script = ExtResource( 3 )
+lifetime = 1.0
+reload_time = 0.5
+bullet_type = "hammer"
+max_ammo = 1
 
 [node name="Bullet Spawner" parent="." index="0"]
 position = Vector2( 17, 0 )

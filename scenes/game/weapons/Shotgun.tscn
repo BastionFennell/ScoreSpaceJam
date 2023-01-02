@@ -28,6 +28,8 @@ animations = [ {
 
 [node name="Shotgun" type="Node2D"]
 script = ExtResource( 2 )
+reload_speed_upgrade = 1.0
+damage_upgrade = 0.0
 
 [node name="Bullet Spawner" type="Position2D" parent="."]
 position = Vector2( 18, 0 )
