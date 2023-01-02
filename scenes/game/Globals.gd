@@ -22,7 +22,8 @@ var cutscenes = {
 }
 
 var triggers = {
-	"holy_tree_destroyed": false
+	"holy_tree_destroyed": false,
+	"prophecy_chamber_rebuilt": false
 }
 
 var zone_list = {

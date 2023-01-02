@@ -25,3 +25,6 @@ func _ready():
 	for child in get_children():
 		if child.has_method("connect_to_player"):
 			child.connect_to_player(my_player)
+
+		if child.has_method("setup"):
+			child.setup()

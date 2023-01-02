@@ -1,4 +1,4 @@
-[gd_scene load_steps=99 format=2]
+[gd_scene load_steps=100 format=2]
 
 [ext_resource path="res://scenes/game/inner temple/Inner Temple.gd" type="Script" id=1]
 [ext_resource path="res://scenes/game/GUI/Pause Menu.tscn" type="PackedScene" id=2]
@@ -57,6 +57,7 @@
 [ext_resource path="res://assets/sprites/Prophecy.png" type="Texture" id=55]
 [ext_resource path="res://assets/sprites/Prophecy Stand.png" type="Texture" id=56]
 [ext_resource path="res://scenes/game/inner temple/Prophecy Area.gd" type="Script" id=57]
+[ext_resource path="res://scenes/game/inner temple/Props.gd" type="Script" id=58]
 
 [sub_resource type="RectangleShape2D" id=43]
 extents = Vector2( 18.5, 12.5 )
@@ -470,6 +471,54 @@ tracks/6/keys = {
 "update": 0,
 "values": [ 0.0, -18.0, -18.0, 0.0 ]
 }
+tracks/7/type = "value"
+tracks/7/path = NodePath("../Props/Prophecy Stand:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 5.09834 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("../Props/Prophecy Stand:modulate")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 5.1, 7 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("../Props/Prophecy Stand/Prophecy Area/Collider:disabled")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 5.1 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("../Props/Prophecy Stand/Prophecy Wall/Collider:disabled")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 5.09834 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
 
 [sub_resource type="Animation" id=28]
 resource_name = "2 - Statue Zoom"
@@ -835,6 +884,7 @@ z_index = -100
 texture = ExtResource( 50 )
 
 [node name="Props" type="YSort" parent="."]
+script = ExtResource( 58 )
 
 [node name="YumeStatue-Broken" type="Sprite" parent="Props"]
 position = Vector2( 2, -111 )
@@ -853,6 +903,7 @@ position = Vector2( 94, -111 )
 texture = ExtResource( 45 )
 
 [node name="Prophecy Stand" type="Node2D" parent="Props"]
+modulate = Color( 1, 1, 1, 0 )
 position = Vector2( 2, -67 )
 
 [node name="ProphecyStand" type="Sprite" parent="Props/Prophecy Stand"]
@@ -866,13 +917,13 @@ texture = ExtResource( 55 )
 [node name="Prophecy Area" type="Area2D" parent="Props/Prophecy Stand"]
 script = ExtResource( 57 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/Prophecy Stand/Prophecy Area"]
+[node name="Collider" type="CollisionShape2D" parent="Props/Prophecy Stand/Prophecy Area"]
 position = Vector2( -186.5, 41.5 )
 shape = SubResource( 43 )
 
 [node name="Prophecy Wall" type="StaticBody2D" parent="Props/Prophecy Stand"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/Prophecy Stand/Prophecy Wall"]
+[node name="Collider" type="CollisionShape2D" parent="Props/Prophecy Stand/Prophecy Wall"]
 position = Vector2( -187, 32 )
 shape = SubResource( 44 )
 
@@ -1359,27 +1410,26 @@ modulate = Color( 1, 1, 1, 0 )
 
 [node name="Smoke 1" parent="Cutscene Manager/Construction Effects" instance=ExtResource( 53 )]
 position = Vector2( -240, 23 )
-frame = 1
 
 [node name="Smoke 2" parent="Cutscene Manager/Construction Effects" instance=ExtResource( 52 )]
 position = Vector2( -142, 28 )
-frame = 7
+frame = 9
 
 [node name="Smoke 3" parent="Cutscene Manager/Construction Effects" instance=ExtResource( 51 )]
 position = Vector2( -191, -24 )
-frame = 5
+frame = 7
 
 [node name="Smoke 4" parent="Cutscene Manager/Construction Effects" instance=ExtResource( 53 )]
 position = Vector2( -158, -34 )
-frame = 5
+frame = 7
 
 [node name="Smoke 5" parent="Cutscene Manager/Construction Effects" instance=ExtResource( 52 )]
 position = Vector2( -228, -20 )
-frame = 0
+frame = 2
 
 [node name="Smoke 6" parent="Cutscene Manager/Construction Effects" instance=ExtResource( 51 )]
 position = Vector2( -198, 51 )
-frame = 8
+frame = 0
 
 [node name="Cutscene Animator" type="AnimationPlayer" parent="Cutscene Manager"]
 "anims/1 - Character Waking Up" = SubResource( 23 )
@@ -1405,6 +1455,5 @@ script = ExtResource( 20 )
 [node name="BG Music" type="AudioStreamPlayer" parent="."]
 pause_mode = 2
 stream = ExtResource( 40 )
-volume_db = -2.76923
 autoplay = true
 bus = "Music"

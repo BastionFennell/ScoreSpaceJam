@@ -247,6 +247,7 @@ var dialog = {
 		{
 			"text": "There we go, good as new!",
 			"character": "ki",
+			"method": "prophecy_chamber_rebuilt"
 		},
 		{
 			"text": "Why dontcha go check on the prophecy then?",
@@ -336,6 +337,9 @@ func intro_end():
 	ki.global_position.x = ki_pos.x
 	ki.global_position.y = ki_pos.y
 	ki.on_intro_animation_end()
+
+func prophecy_chamber_rebuilt():
+	globals.triggers.prophecy_chamber_rebuilt = true
 
 func ki_entrance():
 	play_door()
