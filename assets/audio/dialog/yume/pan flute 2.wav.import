@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/pan flute 2.wav-bb5e7c36edf07e69dce2b44a1686621a.sample"
+path="res://.import/Pan Flute 2.wav-176a425bf1c6eae816fd474d53797a2a.sample"
 
 [deps]
 
-source_file="res://assets/audio/dialog/yume/pan flute 2.wav"
-dest_files=[ "res://.import/pan flute 2.wav-bb5e7c36edf07e69dce2b44a1686621a.sample" ]
+source_file="res://assets/audio/dialog/yume/Pan Flute 2.wav"
+dest_files=[ "res://.import/Pan Flute 2.wav-176a425bf1c6eae816fd474d53797a2a.sample" ]
 
 [params]
 

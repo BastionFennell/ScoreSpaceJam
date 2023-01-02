@@ -488,6 +488,8 @@ func intro_end():
 	var player_pos = get_node("Sprites/Player Animator").global_position
 	globals.get_player().global_position.x = player_pos.x
 	globals.get_player().global_position.y = player_pos.y
+	
+	get_node("Sprites/Player Animator").visible = false
 
 	var ki = get_node("../NPCs/Ki")
 	var ki_pos = get_node("Sprites/Ki Animator").global_position
@@ -557,7 +559,6 @@ func start_cutscene(cutscene):
 	globals.get_player().get_node("How to Interact/Pop Up").modulate = "#00000000"
 
 	var curr_cam = globals.get_player().get_node("Camera")
-	print(curr_cam.global_position)
 	get_node("Cutscene Camera").global_position = curr_cam.global_position
 	get_node("Cutscene Camera").zoom = curr_cam.zoom
 	get_node("Cutscene Camera").current = true

@@ -19,9 +19,9 @@ var controller_mode = false
 var time_stopped = false
 
 var cutscenes = {
-	"intro": false,
-	"prophecy": false,
-	"on_first_dive": false
+	"intro": true,
+	"prophecy": true,
+	"on_first_dive": true
 }
 
 var _triggers = {
@@ -29,7 +29,7 @@ var _triggers = {
 	"prophecy_chamber_rebuilt": false,
 	"bed_unlocked_midori": false,
 	"gunsmithing_unlocked": false,
-	"yume_unlocked": false,
+	"yume_unlocked": true,
 	"has_shotgun": false
 }
 

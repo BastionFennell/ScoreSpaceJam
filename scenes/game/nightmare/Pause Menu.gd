@@ -9,10 +9,11 @@ func _ready():
 	get_node("Grid/Join Server").connect("pressed", self, "_join_server")
 
 func _pause():
-	get_tree().paused = true
-	self.visible = true
+	if !get_tree().paused:
+		get_tree().paused = true
+		self.visible = true
 
-	get_node("Grid/Volume Sliders/Main Volume Section/Volume Slider").grab_focus()
+		get_node("Grid/Volume Sliders/Main Volume Section/Volume Slider").grab_focus()
 	
 func _unpause():
 	self.visible = false
