@@ -13,11 +13,14 @@ func _ready():
 	globals.connect("triggers_updated", self, "_on_triggers_updated")
 
 func on_interact():
-	if globals.networked:
-		if self.is_network_master():
-			globals.transition_to(destination)
+	if !globals.get_trigger("has_shotgun"):
+		globals.get_main_node().get_node("Cutscene Manager").on_first_dive()
 	else:
-		globals.transition_to(destination)
+		if globals.networked:
+			if self.is_network_master():
+				globals.transition_to(destination)
+		else:
+			globals.transition_to(destination)
 
 func _on_triggers_updated(updated_trigger, value):
 	if updated_trigger == trigger:

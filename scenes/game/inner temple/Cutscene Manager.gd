@@ -260,7 +260,173 @@ var dialog = {
 		{
 			"end": true
 		}
-	]	
+	],
+	"13 - Read Prophecy": [
+		{
+			"text": "Great, so I'm supposed to sleep in these monks' rooms and somehow rescue them from a nightmare?",
+			"character": "player",
+		},
+		{
+			"text": "I made them beds m'self, they're right comfortable, trust me!",
+			"character": "ki",
+		},
+		{
+			"text": "How comfortable they are isn't the issue here...",
+			"character": "player",
+		},
+		{
+			"text": "What's yer problem then?",
+			"character": "ki",
+		},
+		{
+			"text": "It's just weird, okay?",
+			"character": "player",
+		},
+		{
+			"text": "Well, you don't havta do it. Just means you'll probably never get home, what a darn shame...",
+			"character": "ki",
+		},
+		{
+			"text": "Fine, I get it... I'll give it a shot.",
+			"character": "player",
+		},
+		{
+			"text": "Great!",
+			"character": "ki",
+		},
+		{
+			"animation": "14 - Midori Bed Zoom"
+		}
+	],
+	"14 - Midori Bed Zoom": [ 
+		{
+			"text": "Midori's bed here is the only one I've got fixed up so far. Why dontcha start with him?",
+			"character": "ki",
+		},
+		{
+			"text": "Seems as good a place to start as any...",
+			"character": "player",
+		},
+		{
+			"text": "Great! Just walk up to that there bed and [b]interact[/b] with it, lets see what happens!",
+			"character": "ki",
+		},
+		{
+			"end": true,
+			"method": "unlock_midori_bed"
+		}
+	],
+	"15 - On First Dive": [ 
+		{
+			"text": "Oh, right, I reckon you should probably pray to Yume before your first dreamwalk. Just in case, y'know?",
+			"character": "ki",
+		},
+		{
+			"end": true,
+			"method": "reset_ki_position"
+		}
+	],
+	"16 - Meet Yume": [ 
+		{
+			"text": "Well... I've never really prayed like this before, so I'm not quite sure what to do.",
+			"character": "player",
+		},
+		{
+			"text": "Yume, if you're still alive... And listening, I guess... I could really use some help and guidance...",
+			"character": "player",
+		},
+		{
+			"text": "Worry not, my child. I am listening. I am too weak right now to offer you much.",
+			"character": "yume",
+		},
+		{
+			"text": "Wait, you're real!?",
+			"character": "player",
+		},
+		{
+			"text": "Of course I am. Who did you think brought you here in the first place?",
+			"character": "yume",
+		},
+		{
+			"text": "Honestly, I'm still kind of assuming this is all a dream... If it's not, how can I make you stronger?",
+			"character": "player",
+		},
+		{
+			"text": "As you defeat the nightmares and rescue the monks, my powers will grow.",
+			"character": "yume",
+		},
+		{
+			"text": "For now, all I have to offer you is this gun.",
+			"character": "yume",
+		},
+		{
+			"animation": "17 - Get Shotgun"
+		}
+	],
+	"17 - Get Shotgun": [ 
+		{
+			"text": "Oh my god! Er, oh my [color=#1b5c84]Yume[/color]? Is this a friggen shotgun?",
+			"character": "player",
+		},
+		{
+			"text": "Yes. I grant you this holy shotgun, may it serve you well in your fight against the nightmares.",
+			"character": "yume",
+		},
+		{
+			"text": "But how do I bring it with me into the nightmare?",
+			"character": "player",
+		},
+		{
+			"text": "You should be strong enough already to bring [b]one gun[/b] with you when you dreamwalk.",
+			"character": "yume",
+		},
+		{
+			"text": "As your power grows, you may be able to take more.",
+			"character": "yume",
+		},
+		{
+			"text": "This is amazing! There's no way I'll lose with this bad boy at my side!",
+			"character": "player",
+		},
+		{
+			"text": "Temper your overconfidence child, the nightmares you are about to face are both powerful and dangerous.",
+			"character": "yume",
+		},
+		{
+			"text": "You may not defeat them on your first try.",
+			"character": "yume",
+		},
+		{
+			"text": "What do you mean by first try?",
+			"character": "player",
+		},
+		{
+			"text": "I'm sorry, I am already losing connection to the mortal realm.",
+			"character": "yume",
+		},
+		{
+			"text": "Rescue Midori, defeat his nightmare, then I will be able to return.",
+			"character": "yume",
+		},
+		{
+			"text": "[color=#1b5c84]Yume[/color]? [color=#1b5c84]Yume[/color]?",
+			"character": "player",
+		},
+		{
+			"text": "Of course... [color=#1b5c84]She[/color] conveniently runs out of power before having to actually explain anything to me...",
+			"character": "player",
+		},
+		{
+			"text": "Well, best get started trying to free Midori then...",
+			"character": "player",
+		},
+		{
+			"end": true,
+			"method": "on_meet_yume"
+		}
+	]
+
+
 }
 
 func _ready():
@@ -279,20 +445,11 @@ func _ready():
 
 		animator.play("1 - Character Waking Up")
 		get_tree().paused = true
+	else:
+		self.visible = false
 
 func tree_killed():
-		var curr_cam = globals.get_player().get_node("Camera")
-		print(curr_cam.global_position)
-		get_node("Cutscene Camera").global_position = curr_cam.global_position
-		get_node("Cutscene Camera").zoom = curr_cam.zoom
-		get_node("Cutscene Camera").current = true
-		get_node("../Players").visible = false
-		get_node("../NPCs").visible = false
-		self.visible = true
-
-		animator.play("11 - Tree Killed")
-		get_tree().paused = true
-
+	start_cutscene("11 - Tree Killed")
 
 func _animation_finished(anim):
 	if dialog.has(anim):
@@ -339,7 +496,32 @@ func intro_end():
 	ki.on_intro_animation_end()
 
 func prophecy_chamber_rebuilt():
-	globals.triggers.prophecy_chamber_rebuilt = true
+	globals.set_trigger("prophecy_chamber_rebuilt", true)
+
+func unlock_midori_bed():
+	reset_ki_position()
+	globals.set_trigger("bed_unlocked_midori", true)
+
+func on_meet_yume():
+	globals.set_trigger("has_shotgun", true)
+	var gun_man = get_node("/root/GunManager")
+	gun_man.current_gun = 1
+
+func on_prophecy_read():
+	globals.cutscenes.prophecy = true
+	start_cutscene("13 - Read Prophecy")
+
+func on_first_dive():
+	globals.cutscenes.on_first_dive = true
+	globals.set_trigger("yume_unlocked", true)
+	start_cutscene("15 - On First Dive")
+
+func on_first_yume_interaction():
+	start_cutscene("16 - Meet Yume")
+
+func reset_ki_position():
+	var ki = get_node("../NPCs/Ki")
+	ki.on_intro_animation_end()
 
 func ki_entrance():
 	play_door()
@@ -370,3 +552,16 @@ func play_pickup():
 
 func play_door():
 	_play_sfx("door.wav")
+
+func start_cutscene(cutscene):
+	globals.get_player().get_node("How to Interact/Pop Up").modulate = "#00000000"
+
+	var curr_cam = globals.get_player().get_node("Camera")
+	print(curr_cam.global_position)
+	get_node("Cutscene Camera").global_position = curr_cam.global_position
+	get_node("Cutscene Camera").zoom = curr_cam.zoom
+	get_node("Cutscene Camera").current = true
+	self.visible = true
+
+	animator.play(cutscene)
+	get_tree().paused = true

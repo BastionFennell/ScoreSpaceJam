@@ -34,15 +34,16 @@ func fade_in():
 		is_faded_in = true
 
 func _on_area_entered(body):
-	if body.is_interactive:
+	if "is_interactive" in body && body.is_interactive:
+		print("Foding in")
 		fade_in()
 
 func _on_area_exited(body):
-	if body.is_interactive:
+	if "is_interactive" in body && body.is_interactive:
 		fade_out()
 
 func _process(_delta):
 	if Input.is_action_just_pressed("ui_accept"):
 		for a in get_overlapping_areas():
-			if a.has_method("on_interact"):
+			if "is_interactive" in a && a.is_interactive && a.has_method("on_interact"):
 				a.on_interact()

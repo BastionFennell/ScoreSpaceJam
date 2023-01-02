@@ -32,7 +32,18 @@ var speaker_data = {
 			"res://assets/audio/dialog/haiiro/Shamisen 3.wav",
 			"res://assets/audio/dialog/haiiro/Shamisen 4.wav",
 		]
-	}
+	},
+	"yume": {
+		"color": "#1b5c84",
+		"name": "Yume",
+		"sprite": preload("res://scenes/game/cutscenes/Yume - Dialog.tscn"),
+		"sounds": [
+			"res://assets/audio/dialog/yume/Pan Flute 1.wav",
+			"res://assets/audio/dialog/yume/Pan Flute 2.wav",
+			"res://assets/audio/dialog/yume/Pan Flute 3.wav",
+			"res://assets/audio/dialog/yume/Pan Flute 4.wav",
+		]
+	},
 }
 
 func _ready():

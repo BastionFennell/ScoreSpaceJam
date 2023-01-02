@@ -3,6 +3,7 @@ extends Node2D
 signal inventory_updated
 signal has_interacted
 signal bought
+signal triggers_updated
 
 var self_peer_id = 0
 export (int) var SERVER_PORT = 31337
@@ -18,12 +19,18 @@ var controller_mode = false
 var time_stopped = false
 
 var cutscenes = {
-	"intro": true
+	"intro": false,
+	"prophecy": false,
+	"on_first_dive": false
 }
 
-var triggers = {
+var _triggers = {
 	"holy_tree_destroyed": false,
-	"prophecy_chamber_rebuilt": false
+	"prophecy_chamber_rebuilt": false,
+	"bed_unlocked_midori": false,
+	"gunsmithing_unlocked": false,
+	"yume_unlocked": false,
+	"has_shotgun": false
 }
 
 var zone_list = {
@@ -97,6 +104,13 @@ func add_item(item, amount):
 
 func set_inventory(new_inventory):
 	emit_signal("inventory_updated")
+
+func get_trigger(trigger):
+	return _triggers[trigger]
+
+func set_trigger(trigger, value):
+	_triggers[trigger] = value
+	emit_signal("triggers_updated", trigger, value)
 
 func on_first_interact():
 	has_interacted = true

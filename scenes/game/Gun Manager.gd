@@ -57,8 +57,8 @@ var current_guns = [
 		"parts": { "junk": 2}
 	},
 	{
-	"type": "shotgun",
-	"parts": { "junk": 2}
+		"type": "shotgun",
+		"parts": { "junk": 2}
 	}]
 var current_gun = 0 setget set_current_gun
 

@@ -98,7 +98,6 @@ func _on_death():
 	get_tree().paused = true
 
 func _retry():
-	get_node("/root/Globals").reset()
 	get_tree().paused = false
-	get_tree().change_scene("res://scenes/game/town/Twilight.tscn")
+	get_node("/root/Globals").transition_to("inner temple")
 
