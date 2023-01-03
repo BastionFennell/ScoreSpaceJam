@@ -47,4 +47,4 @@ static func get_stats(parts):
 	if parts.has("zombie arm"):
 		count += 1 * parts["zombie arm"]
 	
-	return { "name": "Hammergun", "damage": damage, "reload_time": reload_time, "count": count}
+	return { "name": "Hammer", "damage": damage, "reload_time": reload_time, "count": count}

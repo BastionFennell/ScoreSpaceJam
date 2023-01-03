@@ -1,14 +1,23 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
-[ext_resource path="res://scenes/game/outside/Town.gd" type="Script" id=1]
-[ext_resource path="res://scenes/Camera.gd" type="Script" id=2]
+[ext_resource path="res://scenes/game/outside/Outside.gd" type="Script" id=1]
 [ext_resource path="res://assets/sprites/village/temple outline.png" type="Texture" id=3]
 [ext_resource path="res://scenes/game/drops/ItemSpawner.gd" type="Script" id=4]
-[ext_resource path="res://scenes/game/weapons/Hammergun.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/game/outside/Resource Spawner.gd" type="Script" id=6]
-[ext_resource path="res://scenes/game/characters/player/player.tscn" type="PackedScene" id=7]
 [ext_resource path="res://scenes/game/Transition.gd" type="Script" id=8]
 [ext_resource path="res://scenes/game/GUI/GUI.tscn" type="PackedScene" id=9]
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 313.5, 57 )
+
+[sub_resource type="RectangleShape2D" id=7]
+extents = Vector2( 64, 377.5 )
+
+[sub_resource type="RectangleShape2D" id=8]
+extents = Vector2( 47.5, 473.5 )
+
+[sub_resource type="RectangleShape2D" id=9]
+extents = Vector2( 409.5, 66.5 )
 
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 213.5, 236 )
@@ -67,19 +76,15 @@ tracks/1/keys = {
 "values": [ true, true ]
 }
 
-[node name="Town" type="YSort"]
+[node name="Outside" type="YSort"]
 script = ExtResource( 1 )
 round_length = 15.0
 
-[node name="Temple" type="Sprite" parent="."]
-position = Vector2( 4, -13 )
-texture = ExtResource( 3 )
-
-[node name="Node2D" type="Node2D" parent="."]
+[node name="Ground" type="Node2D" parent="."]
 position = Vector2( -250, 1000 )
 z_index = -100
 
-[node name="ColorRect" type="ColorRect" parent="Node2D"]
+[node name="ColorRect" type="ColorRect" parent="Ground"]
 anchor_bottom = 1.0
 margin_left = 1.0
 margin_top = -1001.0
@@ -87,24 +92,42 @@ margin_right = 501.0
 margin_bottom = -1.0
 color = Color( 0.568627, 0.843137, 0.65098, 1 )
 
-[node name="Player" parent="." instance=ExtResource( 7 )]
-position = Vector2( 3, 155 )
-collision_mask = 1
+[node name="Temple" type="Sprite" parent="."]
+position = Vector2( 4, -13 )
+texture = ExtResource( 3 )
 
-[node name="Camera2D" type="Camera2D" parent="Player"]
-current = true
-zoom = Vector2( 0.25, 0.25 )
-process_mode = 0
-limit_left = -251
-limit_top = 56
-limit_right = 250
-limit_bottom = 660
-limit_smoothed = true
-script = ExtResource( 2 )
+[node name="Players" type="YSort" parent="."]
+position = Vector2( 0, 128 )
 
-[node name="Gun" type="Node2D" parent="Player"]
+[node name="Walls" type="Node2D" parent="."]
 
-[node name="Axegun" parent="Player/Gun" instance=ExtResource( 5 )]
+[node name="StaticBody2D" type="StaticBody2D" parent="Walls"]
+collision_layer = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/StaticBody2D"]
+position = Vector2( 28.5, 47 )
+shape = SubResource( 6 )
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="Walls"]
+collision_layer = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/StaticBody2D2"]
+position = Vector2( -299, 370.5 )
+shape = SubResource( 7 )
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="Walls"]
+collision_layer = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/StaticBody2D3"]
+position = Vector2( 290.5, 474.5 )
+shape = SubResource( 8 )
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="Walls"]
+collision_layer = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/StaticBody2D4"]
+position = Vector2( -53.5, 784.5 )
+shape = SubResource( 9 )
 
 [node name="Resource Spawner" type="YSort" parent="."]
 position = Vector2( -206, 189 )
@@ -138,4 +161,3 @@ color = Color( 0, 0, 0, 0 )
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="GUI" parent="CanvasLayer" instance=ExtResource( 9 )]
-margin_bottom = 68.0

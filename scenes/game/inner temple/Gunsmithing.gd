@@ -59,6 +59,9 @@ func _display_selected_schematic():
 	var components_disp = get_node("Components")
 	var base = get_node("Component Base")
 
+	get_node("Helper - Schematic").visible = false
+	get_node("Helper - Parts").visible = true
+
 	for i in components_disp.get_children():
 		components_disp.remove_child(i)
 		i.queue_free()
@@ -129,6 +132,9 @@ func _on_make():
 	for i in components_disp.get_children():
 		components_disp.remove_child(i)
 		i.queue_free()
+
+	get_node("Helper - Schematic").visible = true
+	get_node("Helper - Parts").visible = false
 
 func _on_close():
 	self.visible = false

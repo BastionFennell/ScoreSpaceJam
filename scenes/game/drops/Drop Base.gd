@@ -9,7 +9,7 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(_delta):
 	var velocity = Vector2.ZERO
-	if (position.distance_to(player.position) < 10  && !collected):
+	if (global_position.distance_to(player.global_position) < 10  && !collected):
 		collected = true
 		_pickUp()
 		queue_free()

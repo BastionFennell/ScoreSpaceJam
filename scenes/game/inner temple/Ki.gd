@@ -5,9 +5,9 @@ var speed = 30
 var animator
 
 func _ready():
-	on_intro_animation_end()
+	on_animation_end()
 
-func on_intro_animation_end():
+func on_animation_end():
 	animator = get_node("Ki Animator")
 	target_pos = Vector2(-104, 9)
 

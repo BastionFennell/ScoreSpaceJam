@@ -4,6 +4,7 @@ var bg_music_base_vol
 var animator
 var dialog_man
 var globals
+var player
 
 var dialog_i
 var last_anim
@@ -243,6 +244,19 @@ var dialog = {
 			"animation": "12 - Fix Prophecy Chamber"
 		},
 	],
+	"11 - Got Wood": [
+		{
+			"text": "Well I'll be, ya already found some wood!",
+			"character": "ki",
+		},
+		{
+			"text": "Gimme a piece of that and I'll get this prophecy chamber fixed up in a jiffy!",
+			"character": "ki",
+		},
+		{
+			"animation": "12 - Fix Prophecy Chamber"
+		}
+	],
 	"12 - Fix Prophecy Chamber": [
 		{
 			"text": "There we go, good as new!",
@@ -258,7 +272,7 @@ var dialog = {
 			"character": "ki",
 		},
 		{
-			"end": true
+			"end": true,
 		}
 	],
 	"13 - Read Prophecy": [
@@ -323,7 +337,6 @@ var dialog = {
 		},
 		{
 			"end": true,
-			"method": "reset_ki_position"
 		}
 	],
 	"16 - Meet Yume": [ 
@@ -459,7 +472,21 @@ var dialog = {
 			"character": "ki",
 		},
 		{
-			"text": "Alright, makes sense. Where am I supposed to get these materials? I can't get anymore wood from the sacred tree...",
+			"animation": "Zoom to Gunforge",
+			"skip": {
+				"A": false,
+				"B": true,
+				"triggers": ["has_gone_outside"],
+				"null_triggers": []
+			},
+		},
+		{
+			"text": {
+				"A": "Alright, makes sense. Where am I supposed to get these materials? I can't get anymore wood from the sacred tree...",
+				"B": "Alright, makes sense. Where am I supposed to get these materials?",
+				"triggers": ["holy_tree_destroyed"],
+				"null_triggers": []
+			},
 			"character": "player",
 		},
 		{
@@ -468,12 +495,23 @@ var dialog = {
 	],
 	"Zoom to Exit": [
 		{
-			"text": "People who aren't [b]MANIACS[/b] get there materials out in front of the temple.",
-			"character": "player",
+			"text": {
+				"A": "People who aren't [b]MANIACS[/b] get there materials out in front of the temple.",
+				"B": "You can get more materials from the forest in front of the temple.",
+				"triggers": ["holy_tree_destroyed"],
+				"null_triggers": []
+			},
+			"character": "ki",
 		},
 		{
 			"text": "Look, you said you needed wood, and I-",
 			"character": "player",
+			"skip": {
+				"A": false,
+				"B": true,
+				"triggers": ["holy_tree_destroyed"],
+				"null_triggers": []
+			}
 		},
 		{
 			"text": "In here, [color=#1b5c84]Yume's[/color] blessin' keeps time standin' still.",
@@ -502,7 +540,8 @@ var dialog = {
 			"character": "ki",
 		},
 		{
-			"end": true
+			"end": true,
+			"method": "on_offer_to_fix"
 		}
 	],
 	"Build Gunforge": [
@@ -551,7 +590,8 @@ var dialog = {
 	]
 }
 
-func _ready():
+func connect_to_player(curr_player):
+	player = curr_player
 	dialog_man = get_node("Dialog")
 	animator = get_node("Cutscene Animator")
 	globals = get_node("/root/Globals")
@@ -567,8 +607,12 @@ func _ready():
 
 		animator.play("1 - Character Waking Up")
 		get_tree().paused = true
-	elif globals.get_trigger("entered_midori_dream") && !globals.cutscene("offer_to_fix"):
+	elif globals.get_trigger("entered_midori_dream") && !globals.cutscenes.offer_to_fix:
+		get_node("../Players").visible = false
 		start_cutscene("Offer to Fix")
+	elif globals.get_trigger("has_gone_outside") && !globals.get_trigger("built-prophecy_chamber") && globals.inventory.wood >= 1:
+		globals.inventory.wood -= 1
+		start_cutscene("11 - Got Wood")
 	else:
 		self.visible = false
 
@@ -584,7 +628,15 @@ func _animation_finished(anim):
 
 func _dialog_continue():
 	var next_dialog = dialog[last_anim][dialog_i + 1]
-	if next_dialog.has("end"):
+	for v in next_dialog:
+		if typeof(next_dialog[v]) == TYPE_DICTIONARY:
+			var dict = next_dialog[v]
+			next_dialog[v] = _select_trigger(dict.A, dict.B, dict.triggers, dict.null_triggers)
+
+	if next_dialog.has("skip") && next_dialog.skip:
+		dialog_i +=1
+		_dialog_continue()
+	elif next_dialog.has("end") && next_dialog.end:
 		normal_theme()
 		dialog_man.visible = false
 		self.visible = false
@@ -594,7 +646,7 @@ func _dialog_continue():
 		get_node("Cutscene Camera").current = false
 		get_node("../Players").visible = true
 		get_tree().paused = false
-		globals.get_player().get_node("Camera").current = true
+		player.get_node("Camera").current = true
 		self.visible = false
 
 		globals.cutscenes.intro = true
@@ -602,11 +654,26 @@ func _dialog_continue():
 		dialog_man.visible = false
 		animator.play(next_dialog.animation)
 	else:
+		print(next_dialog)
 		dialog_man.update_dialog_box(next_dialog.character, next_dialog.text)
 		dialog_i += 1
 
 	if next_dialog.has("method"):
 		self.call(next_dialog.method)
+
+func _select_trigger(A, B, triggers = [], null_triggers = []):
+	var return_option = A
+	if len(triggers):
+		for t in triggers:
+			if !globals.get_trigger(t):
+				return_option = B
+
+	if len(null_triggers):
+		for t in null_triggers:
+			if globals.get_trigger(t):
+				return_option = B
+	
+	return return_option
 
 func on_build(building):
 	match building:
@@ -615,22 +682,18 @@ func on_build(building):
 
 func intro_end():
 	var player_pos = get_node("Sprites/Player Animator").global_position
-	globals.get_player().global_position.x = player_pos.x
-	globals.get_player().global_position.y = player_pos.y
+	player.global_position.x = player_pos.x
+	player.global_position.y = player_pos.y
 	
 	get_node("Sprites/Player Animator").visible = false
 
 	var ki = get_node("../NPCs/Ki")
-	var ki_pos = get_node("Sprites/Ki Animator").global_position
-	ki.global_position.x = ki_pos.x
-	ki.global_position.y = ki_pos.y
 	ki.on_intro_animation_end()
 
 func prophecy_chamber_rebuilt():
 	globals.set_trigger("built-prophecy_chamber", true)
 
 func unlock_midori_bed():
-	reset_ki_position()
 	globals.set_trigger("bed_unlocked-midori", true)
 
 func on_meet_yume():
@@ -650,13 +713,17 @@ func on_first_dive():
 func on_first_yume_interaction():
 	start_cutscene("16 - Meet Yume")
 
-func reset_ki_position():
-	var ki = get_node("../NPCs/Ki")
-	ki.on_intro_animation_end()
+func on_offer_to_fix():
+	globals.cutscenes.offer_to_fix = true
+
+	var player_pos = get_node("Sprites/Player Animator").global_position
+	player.global_position.x = player_pos.x
+	player.global_position.y = player_pos.y
+	
+	get_node("Sprites/Player Animator").visible = false
 
 func on_unlock_gunsmithing():
 	globals.set_trigger("gunsmithing_unlocked", true)
-
 
 func ki_entrance():
 	play_door()
@@ -689,13 +756,14 @@ func play_door():
 	_play_sfx("door.wav")
 
 func start_cutscene(cutscene):
-	globals.get_player().get_node("How to Interact/Pop Up").modulate = "#00000000"
+	player.get_node("How to Interact/Pop Up").modulate = "#00000000"
 
-	var curr_cam = globals.get_player().get_node("Camera")
+	var curr_cam = player.get_node("Camera")
 	get_node("Cutscene Camera").global_position = curr_cam.global_position
 	get_node("Cutscene Camera").zoom = curr_cam.zoom
 	get_node("Cutscene Camera").current = true
+
 	self.visible = true
 
-	animator.play(cutscene)
 	get_tree().paused = true
+	animator.play(cutscene)

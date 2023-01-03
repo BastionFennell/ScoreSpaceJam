@@ -23,7 +23,6 @@ func on_interact():
 		globals.get_main_node().get_node("Cutscene Manager").on_build("gunforge")
 
 func on_player_entered():
-	print("entered")
 	var x = self.global_position.x - 32
 	var y = self.global_position.y
 	get_node("../Price Display").display(price, Vector2(x, y))

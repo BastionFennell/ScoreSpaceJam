@@ -16,7 +16,8 @@ func on_interact():
 	if !globals.get_trigger("has_shotgun"):
 		globals.get_main_node().get_node("Cutscene Manager").on_first_dive()
 	else:
-		globals.set_trigger("entered_midori_dream")
+		globals.set_trigger("entered_midori_dream", true)
+		globals.set_trigger("built-signs", true)
 		if globals.networked:
 			if self.is_network_master():
 				globals.transition_to(destination)

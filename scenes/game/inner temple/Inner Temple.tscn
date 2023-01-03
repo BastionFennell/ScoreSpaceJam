@@ -1,4 +1,4 @@
-[gd_scene load_steps=136 format=2]
+[gd_scene load_steps=143 format=2]
 
 [ext_resource path="res://scenes/game/inner temple/Inner Temple.gd" type="Script" id=1]
 [ext_resource path="res://scenes/game/GUI/Pause Menu.tscn" type="PackedScene" id=2]
@@ -9,7 +9,7 @@
 [ext_resource path="res://scenes/game/inner temple/Gunsmithing.gd" type="Script" id=7]
 [ext_resource path="res://scenes/game/inner temple/Item Base.gd" type="Script" id=8]
 [ext_resource path="res://scenes/game/inner temple/Component Base.gd" type="Script" id=9]
-[ext_resource path="res://assets/fonts/contrite_in_spirit.ttf" type="DynamicFontData" id=10]
+[ext_resource path="res://scenes/game/Transition.gd" type="Script" id=10]
 [ext_resource path="res://assets/sprites/chest.png" type="Texture" id=11]
 [ext_resource path="res://scenes/game/inner temple/Gun Chest Screen.gd" type="Script" id=12]
 [ext_resource path="res://scenes/game/inner temple/Gun Chest.gd" type="Script" id=13]
@@ -72,6 +72,10 @@
 [ext_resource path="res://assets/sprites/characters/Kajiya/Kajiya - Walking.png" type="Texture" id=70]
 [ext_resource path="res://assets/audio/door.wav" type="AudioStream" id=71]
 [ext_resource path="res://scenes/game/inner temple/Kajiya.gd" type="Script" id=72]
+[ext_resource path="res://scenes/game/inner temple/Outside.gd" type="Script" id=73]
+
+[sub_resource type="RectangleShape2D" id=73]
+extents = Vector2( 78.5, 10 )
 
 [sub_resource type="RectangleShape2D" id=52]
 extents = Vector2( 20, 15 )
@@ -293,6 +297,10 @@ extents = Vector2( 8.5, 6 )
 
 [sub_resource type="RectangleShape2D" id=1]
 
+[sub_resource type="DynamicFont" id=68]
+size = 20
+font_data = ExtResource( 36 )
+
 [sub_resource type="StyleBoxFlat" id=5]
 bg_color = Color( 0.333333, 0.333333, 0.333333, 1 )
 
@@ -331,11 +339,12 @@ size = 20
 font_data = ExtResource( 16 )
 
 [sub_resource type="DynamicFont" id=8]
-size = 70
-font_data = ExtResource( 10 )
+size = 60
+font_data = ExtResource( 37 )
 
-[sub_resource type="AnimatedTexture" id=18]
-resource_local_to_scene = true
+[sub_resource type="DynamicFont" id=69]
+size = 36
+font_data = ExtResource( 36 )
 
 [sub_resource type="RectangleShape2D" id=19]
 extents = Vector2( 73, 127.5 )
@@ -430,25 +439,13 @@ tracks/5/keys = {
 "update": 1,
 "values": [ false ]
 }
-tracks/6/type = "value"
-tracks/6/path = NodePath("Sprites/Ki Animator:visible")
+tracks/6/type = "method"
+tracks/6/path = NodePath(".")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/imported = false
 tracks/6/enabled = true
 tracks/6/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ false ]
-}
-tracks/7/type = "method"
-tracks/7/path = NodePath(".")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/keys = {
 "times": PoolRealArray( 2.3, 2.5, 3.1, 4.2, 4.9 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "values": [ {
@@ -468,8 +465,20 @@ tracks/7/keys = {
 "method": "play_footstep"
 } ]
 }
+tracks/7/type = "value"
+tracks/7/path = NodePath("Sprites/Hammergun Animator:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
 tracks/8/type = "value"
-tracks/8/path = NodePath("Sprites/Hammergun Animator:visible")
+tracks/8/path = NodePath("Sprites/Player Animator:position")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/imported = false
@@ -477,8 +486,8 @@ tracks/8/enabled = true
 tracks/8/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ false ]
+"update": 0,
+"values": [ Vector2( 1, 81 ) ]
 }
 
 [sub_resource type="Animation" id=33]
@@ -506,6 +515,75 @@ tracks/1/keys = {
 "transitions": PoolRealArray( 0.435275, 0.435275 ),
 "update": 0,
 "values": [ Vector2( 0.1, 0.1 ), Vector2( 0.25, 0.25 ) ]
+}
+
+[sub_resource type="Animation" id=74]
+resource_name = "11 - Got Wood"
+length = 2.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Cutscene Camera:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 110 ) ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "play_footstep"
+}, {
+"args": [  ],
+"method": "play_footstep"
+}, {
+"args": [  ],
+"method": "play_footstep"
+}, {
+"args": [  ],
+"method": "play_footstep"
+}, {
+"args": [  ],
+"method": "play_footstep"
+}, {
+"args": [  ],
+"method": "play_footstep"
+} ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("../NPCs/Ki:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 0, 1, 2, 3, 0, 1, 2, 0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("../NPCs/Ki:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 1 ),
+"transitions": PoolRealArray( 1 ),
+"update": 3,
+"values": [ Vector2( -20, 69 ) ]
 }
 
 [sub_resource type="Animation" id=40]
@@ -1048,60 +1126,24 @@ tracks/0/keys = {
 resource_name = "3 - Ki Entrance"
 length = 2.1
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprites/Ki Animator:frame")
+tracks/0/path = NodePath("Cutscene Camera:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2, 2.1 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 0, 1, 2, 3, 0, 1, 2, 3, 0, 1, 2, 2 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Sprites/Ki Animator:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 1, 2.1 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ Vector2( 1, 113 ), Vector2( 1, 113 ), Vector2( -15, 80 ) ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("Cutscene Camera:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
 "times": PoolRealArray( 0, 0.6 ),
 "transitions": PoolRealArray( 0.176777, 1 ),
 "update": 0,
 "values": [ Vector2( 1, -80 ), Vector2( 1, 80 ) ]
 }
-tracks/3/type = "value"
-tracks/3/path = NodePath("Sprites/Ki Animator:visible")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
-tracks/4/type = "method"
-tracks/4/path = NodePath(".")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
 "times": PoolRealArray( 1, 1.2, 1.4, 1.6, 1.8, 2 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
 "values": [ {
@@ -1123,6 +1165,30 @@ tracks/4/keys = {
 "args": [  ],
 "method": "play_footstep"
 } ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("../NPCs/Ki:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2, 2.1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 0, 1, 2, 3, 0, 1, 2, 0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("../NPCs/Ki:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 1, 2.1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 113 ), Vector2( 1, 113 ), Vector2( -15, 80 ) ]
 }
 
 [sub_resource type="Animation" id=31]
@@ -1428,8 +1494,8 @@ tracks/1/keys = {
 "update": 3,
 "values": [ Vector2( 0.15, 0.15 ) ]
 }
-tracks/2/type = "value"
-tracks/2/path = NodePath("Sprites/Kajiya Animator:visible")
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -1437,11 +1503,13 @@ tracks/2/enabled = true
 tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
+"values": [ {
+"args": [  ],
+"method": "play_door"
+} ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("Sprites/Kajiya Animator:position")
+tracks/3/path = NodePath("../NPCs/Kajiya:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -1449,11 +1517,11 @@ tracks/3/enabled = true
 tracks/3/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 0, 114 ) ]
+"update": 1,
+"values": [ true ]
 }
 tracks/4/type = "value"
-tracks/4/path = NodePath("Sprites/Kajiya Animator:frame")
+tracks/4/path = NodePath("../NPCs/Kajiya:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
@@ -1461,11 +1529,11 @@ tracks/4/enabled = true
 tracks/4/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ 0 ]
+"update": 0,
+"values": [ Vector2( 0, 114 ) ]
 }
-tracks/5/type = "method"
-tracks/5/path = NodePath(".")
+tracks/5/type = "value"
+tracks/5/path = NodePath("../NPCs/Kajiya:frame")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/imported = false
@@ -1473,10 +1541,8 @@ tracks/5/enabled = true
 tracks/5/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [  ],
-"method": "play_door"
-} ]
+"update": 1,
+"values": [ 0 ]
 }
 
 [sub_resource type="Animation" id=65]
@@ -1505,49 +1571,13 @@ tracks/1/keys = {
 "update": 0,
 "values": [ Vector2( 0.15, 0.15 ) ]
 }
-tracks/2/type = "value"
-tracks/2/path = NodePath("Sprites/Kajiya Animator:visible")
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath("Sprites/Kajiya Animator:position")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector2( -1, 112 ), Vector2( -77, 81 ) ]
-}
-tracks/4/type = "value"
-tracks/4/path = NodePath("Sprites/Kajiya Animator:frame")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 0, 1, 2, 3, 0, 1, 2, 3, 0, 1, 2 ]
-}
-tracks/5/type = "method"
-tracks/5/path = NodePath(".")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/keys = {
 "times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
 "values": [ {
@@ -1569,6 +1599,42 @@ tracks/5/keys = {
 "args": [  ],
 "method": "play_footstep"
 } ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("../NPCs/Kajiya:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("../NPCs/Kajiya:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( -1, 112 ), Vector2( -77, 81 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("../NPCs/Kajiya:frame")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 0, 1, 2, 3, 0, 1, 2 ]
 }
 
 [sub_resource type="Animation" id=55]
@@ -1604,10 +1670,10 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 1 ),
-"transitions": PoolRealArray( 1 ),
-"update": 3,
-"values": [ Vector2( -80, -59 ) ]
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( -111, -113 ), Vector2( -88, -72 ) ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("Cutscene Camera:zoom")
@@ -1616,10 +1682,10 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 1 ),
-"transitions": PoolRealArray( 1 ),
-"update": 3,
-"values": [ Vector2( 0.25, 0.25 ) ]
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 2.14355, 1 ),
+"update": 0,
+"values": [ Vector2( 0.1, 0.1 ), Vector2( 0.25, 0.25 ) ]
 }
 tracks/4/type = "method"
 tracks/4/path = NodePath(".")
@@ -1646,6 +1712,42 @@ tracks/4/keys = {
 "args": [  ],
 "method": "play_footstep"
 } ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Sprites/Player Animator:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Sprites/Player Animator:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.6, 0.7, 0.8, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -112, -114 ), Vector2( -112, -114 ), Vector2( -109, -116 ), Vector2( -107, -114 ), Vector2( -107, -108 ) ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("Sprites/Player Animator:texture")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.5, 0.6, 0.7, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ ExtResource( 19 ), ExtResource( 26 ), ExtResource( 29 ), ExtResource( 31 ), ExtResource( 30 ), ExtResource( 23 ), ExtResource( 22 ) ]
 }
 
 [sub_resource type="Animation" id=41]
@@ -1783,7 +1885,7 @@ tracks/10/keys = {
 "values": [ Vector2( 0, 120 ) ]
 }
 tracks/11/type = "value"
-tracks/11/path = NodePath("Sprites/Kajiya Animator:visible")
+tracks/11/path = NodePath("../NPCs/Ki:position")
 tracks/11/interp = 1
 tracks/11/loop_wrap = true
 tracks/11/imported = false
@@ -1792,7 +1894,7 @@ tracks/11/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ false ]
+"values": [ Vector2( -104, 9 ) ]
 }
 
 [sub_resource type="Animation" id=56]
@@ -1849,6 +1951,89 @@ tracks/1/keys = {
 "values": [ Vector2( 0.1, 0.1 ) ]
 }
 
+[sub_resource type="Animation" id=70]
+resource_name = "Fade in"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath("../Transition/Screen/Rect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("../Transition/Screen:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[sub_resource type="Animation" id=71]
+resource_name = "Fade out"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath("../Transition/Screen/Rect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("../Transition/Screen:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=72]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("../Transition/Screen/Rect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("../Transition/Screen:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
 [node name="Inner Temple" type="YSort"]
 position = Vector2( 1, 0 )
 script = ExtResource( 1 )
@@ -1867,6 +2052,14 @@ color = Color( 0.0627451, 0.0980392, 0.12549, 1 )
 position = Vector2( 2, -5 )
 z_index = -100
 texture = ExtResource( 6 )
+
+[node name="Outside" type="Area2D" parent="."]
+position = Vector2( -185, 7 )
+script = ExtResource( 73 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Outside"]
+position = Vector2( 187.5, 112 )
+shape = SubResource( 73 )
 
 [node name="OlProphecyChamber" type="Sprite" parent="."]
 position = Vector2( -185, 7 )
@@ -2052,9 +2245,10 @@ text = "x10"
 [node name="NPCs" type="YSort" parent="."]
 
 [node name="Ki" type="Sprite" parent="NPCs"]
-position = Vector2( -104, -2 )
+position = Vector2( -10.6364, 89 )
 texture = ExtResource( 41 )
 hframes = 4
+frame = 3
 script = ExtResource( 43 )
 
 [node name="Ki Animator" type="AnimationPlayer" parent="NPCs/Ki"]
@@ -2062,9 +2256,10 @@ anims/Default = SubResource( 38 )
 anims/Walking = SubResource( 39 )
 
 [node name="Kajiya" type="Sprite" parent="NPCs"]
-position = Vector2( -90, 82 )
+position = Vector2( -61.8, 87.2 )
 texture = ExtResource( 70 )
 hframes = 4
+frame = 3
 script = ExtResource( 72 )
 
 [node name="Kajiya Animator" type="AnimationPlayer" parent="NPCs/Kajiya"]
@@ -2122,17 +2317,35 @@ visible = false
 follow_viewport_scale = 4.0
 script = ExtResource( 7 )
 
-[node name="ColorRect" type="TextureRect" parent="Gunsmithing"]
+[node name="Background" type="TextureRect" parent="Gunsmithing"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 texture = ExtResource( 15 )
 expand = true
 
+[node name="Parts Label" type="Label" parent="Gunsmithing/Background"]
+margin_left = 133.0
+margin_top = 270.0
+margin_right = 253.0
+margin_bottom = 299.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 68 )
+text = "Parts"
+
+[node name="Schematics Label" type="Label" parent="Gunsmithing/Background"]
+margin_left = 89.0
+margin_top = 38.0
+margin_right = 209.0
+margin_bottom = 67.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 68 )
+text = "Schematics"
+
 [node name="Inventory Scroll" type="ScrollContainer" parent="Gunsmithing"]
 margin_left = 98.0
-margin_top = 291.0
+margin_top = 309.0
 margin_right = 254.0
-margin_bottom = 665.0
+margin_bottom = 662.0
 
 [node name="Inventory" type="GridContainer" parent="Gunsmithing/Inventory Scroll"]
 custom_constants/vseparation = 15
@@ -2288,7 +2501,26 @@ margin_top = -165.0
 margin_right = 547.0
 margin_bottom = -65.0
 custom_fonts/font = SubResource( 8 )
-text = "MAKE"
+text = "SMITH"
+
+[node name="Helper - Parts" type="Label" parent="Gunsmithing"]
+visible = false
+margin_left = 578.0
+margin_top = 318.0
+margin_right = 900.0
+margin_bottom = 369.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 69 )
+text = "Pick Your Parts"
+
+[node name="Helper - Schematic" type="Label" parent="Gunsmithing"]
+margin_left = 569.0
+margin_top = 430.0
+margin_right = 891.0
+margin_bottom = 481.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 69 )
+text = "Pick a Schematic"
 
 [node name="Gun Chest Screen" type="CanvasLayer" parent="."]
 pause_mode = 2
@@ -2328,7 +2560,7 @@ text = "X"
 
 [node name="Gun Card" parent="Gun Chest Screen" instance=ExtResource( 14 )]
 visible = false
-texture_hover = SubResource( 18 )
+shortcut_in_tooltip = false
 
 [node name="Pause Menu" parent="." instance=ExtResource( 2 )]
 visible = false
@@ -2385,7 +2617,7 @@ z_index = 5
 
 [node name="Player - Dialog" parent="Cutscene Manager/Dialog/Speaker" instance=ExtResource( 35 )]
 position = Vector2( -107, -12.25 )
-frame = 0
+frame = 2
 offset = Vector2( 107, 12.25 )
 
 [node name="Speaker Name" type="Label" parent="Cutscene Manager/Dialog"]
@@ -2426,25 +2658,18 @@ zoom = Vector2( 0.25, 0.25 )
 [node name="Sprites" type="Node2D" parent="Cutscene Manager"]
 
 [node name="Player Animator" type="Sprite" parent="Cutscene Manager/Sprites"]
-position = Vector2( 0, 81 )
-texture = ExtResource( 19 )
+position = Vector2( 1, 81 )
+texture = ExtResource( 26 )
 
 [node name="Hammergun Animator" type="Sprite" parent="Cutscene Manager/Sprites"]
 visible = false
-position = Vector2( -30, -2 )
-rotation = 0.523599
+position = Vector2( -25.6, 79 )
+rotation = -0.0921531
+scale = Vector2( 0.9, 0.9 )
 texture = ExtResource( 42 )
 flip_h = true
 region_enabled = true
 region_rect = Rect2( 1, 2, 16, 16 )
-
-[node name="Ki Animator" type="Sprite" parent="Cutscene Manager/Sprites"]
-visible = false
-position = Vector2( 1, 113 )
-z_index = 2
-texture = ExtResource( 41 )
-hframes = 4
-frame = 2
 
 [node name="Shotgun" type="Sprite" parent="Cutscene Manager/Sprites"]
 visible = false
@@ -2458,44 +2683,38 @@ position = Vector2( -1, -122 )
 scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 61 )
 
-[node name="Kajiya Animator" type="Sprite" parent="Cutscene Manager/Sprites"]
-visible = false
-position = Vector2( 0, 114 )
-texture = ExtResource( 70 )
-flip_h = true
-hframes = 4
-
 [node name="Construction Effects" type="Node2D" parent="Cutscene Manager"]
 modulate = Color( 1, 1, 1, 0 )
 position = Vector2( 83, 87 )
 
 [node name="Smoke 1" parent="Cutscene Manager/Construction Effects" instance=ExtResource( 53 )]
 position = Vector2( -240, 23 )
-frame = 4
+frame = 8
 
 [node name="Smoke 2" parent="Cutscene Manager/Construction Effects" instance=ExtResource( 52 )]
 position = Vector2( -142, 28 )
-frame = 0
+frame = 4
 
 [node name="Smoke 3" parent="Cutscene Manager/Construction Effects" instance=ExtResource( 51 )]
 position = Vector2( -191, -24 )
-frame = 8
+frame = 2
 
 [node name="Smoke 4" parent="Cutscene Manager/Construction Effects" instance=ExtResource( 53 )]
 position = Vector2( -158, -34 )
-frame = 8
+frame = 2
 
 [node name="Smoke 5" parent="Cutscene Manager/Construction Effects" instance=ExtResource( 52 )]
 position = Vector2( -228, -20 )
-frame = 3
+frame = 7
 
 [node name="Smoke 6" parent="Cutscene Manager/Construction Effects" instance=ExtResource( 51 )]
 position = Vector2( -198, 51 )
-frame = 1
+frame = 5
 
 [node name="Cutscene Animator" type="AnimationPlayer" parent="Cutscene Manager"]
 "anims/1 - Character Waking Up" = SubResource( 23 )
 "anims/10 - First Quest" = SubResource( 33 )
+"anims/11 - Got Wood" = SubResource( 74 )
 "anims/11 - Tree Killed" = SubResource( 40 )
 "anims/12 - Fix Prophecy Chamber" = SubResource( 42 )
 "anims/13 - Read Prophecy" = SubResource( 49 )
@@ -2523,6 +2742,22 @@ anims/RESET = SubResource( 41 )
 position = Vector2( -1, 0 )
 z_index = -10
 script = ExtResource( 20 )
+
+[node name="Transition" type="AnimationPlayer" parent="."]
+pause_mode = 2
+root_node = NodePath("../ItemSpawner")
+"anims/Fade in" = SubResource( 70 )
+"anims/Fade out" = SubResource( 71 )
+anims/RESET = SubResource( 72 )
+script = ExtResource( 10 )
+
+[node name="Screen" type="CanvasLayer" parent="Transition"]
+layer = 2
+
+[node name="Rect" type="ColorRect" parent="Transition/Screen"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 1 )
 
 [node name="BG Music" type="AudioStreamPlayer" parent="."]
 pause_mode = 2

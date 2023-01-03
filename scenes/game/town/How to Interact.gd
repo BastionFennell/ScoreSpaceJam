@@ -5,6 +5,8 @@ var is_faded_in = false
 var player
 var globals
 var is_visible
+var interact_timer
+var can_interact = false
 
 func _ready():
 	player = get_parent()
@@ -15,10 +17,22 @@ func _ready():
 	self.connect("area_entered", self, "_on_area_entered")
 	self.connect("area_exited", self, "_on_area_exited")
 
+	interact_timer = Timer.new()
+	interact_timer.set_wait_time(0.5)
+	interact_timer.connect("timeout", self, "_can_interact")
+	add_child(interact_timer)
+
+	interact_timer.start()
+
 	if !has_interacted:
 		globals.connect("has_interacted", self, "_on_first_interaction")
 	else:
 		self.visible = false
+
+func _can_interact():
+	can_interact = true
+	remove_child(interact_timer)
+	interact_timer.queue_free()
 
 func _on_first_interaction():
 	# Commenting this out for now, since this makes it way more obvious what you can or can't interact with
@@ -42,7 +56,7 @@ func _on_area_entered(body):
 		is_visible = true
 
 func _on_area_exited(body):
-	if "is_interactive" in body:
+	if  "is_interactive" in body:
 		if body.is_interactive && body.has_method("on_player_exited"):
 			body.on_player_exited()
 
@@ -54,7 +68,7 @@ func _on_area_exited(body):
 		fade_out()
 
 func _process(_delta):
-	if Input.is_action_just_pressed("ui_accept") && !get_tree().paused:
+	if can_interact && Input.is_action_just_pressed("ui_accept") && !get_tree().paused:
 		for a in get_overlapping_areas():
 			if "is_interactive" in a && a.is_interactive && a.has_method("on_interact"):
 				a.on_interact()

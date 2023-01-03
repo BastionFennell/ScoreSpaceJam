@@ -19,26 +19,29 @@ var controller_mode = false
 var time_stopped = false
 
 var cutscenes = {
-	"intro": true,
-	"prophecy": true,
-	"on_first_dive": true
+	"intro": false,
+	"prophecy": false,
+	"on_first_dive": false,
+	"offer_to_fix": false
 }
 
 var _triggers = {
 	"holy_tree_destroyed": false,
 	"built-prophecy_chamber": false,
 	"built-gunforge": false,
-	"built-signs": true,
+	"built-signs": false,
 	"bed_unlocked-midori": false,
 	"gunsmithing_unlocked": false,
 	"yume_unlocked": false,
 	"has_shotgun": false,
 	"entered_midori_dream": false,
+	"has_gone_outside": false
 }
 
 var zone_list = {
 	"nightmare": "res://scenes/game/nightmare/Nightmare.tscn",
-	"inner temple": "res://scenes/game/inner temple/Inner Temple.tscn"
+	"inner temple": "res://scenes/game/inner temple/Inner Temple.tscn",
+	"outside": "res://scenes/game/outside/Outside.tscn"
 }
 
 var default_selling = {
@@ -239,7 +242,10 @@ remotesync func reset_players():
 			get_main_node().get_node("Players").add_child(current_player)
 
 mastersync func transition_to(zone):
-	get_tree().change_scene(zone_list[zone])
+	if get_main_node().has_node("Transition"):
+		get_main_node().get_node("Transition").transition_to(zone_list[zone])
+	else:
+		get_tree().change_scene(zone_list[zone])
 
 	if networked:
 		rpc("on_transition_to", zone)
