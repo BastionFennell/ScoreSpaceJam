@@ -424,9 +424,131 @@ var dialog = {
 			"end": true,
 			"method": "on_meet_yume"
 		}
+	],
+	"Offer to Fix": [
+		{
+			"text": "Welcome back kiddo! How was the first dive?",
+			"character": "ki",
+		},
+		{
+			"text": "To be honest, I feel a bit nauseous...",
+			"character": "player",
+		},
+		{
+			"text": "Well, I got something that'll perk ya right up!",
+			"character": "ki",
+		},
+		{
+			"text": "While you was sleepin', I put up some signs around the temple with the materials I'll need to fixerup!",
+			"character": "ki",
+		},
+		{
+			"text": "Couldn't you have used that wood to actually fix something instead of making signs?",
+			"character": "player",
+		},
+		{
+			"text": "Sign craftin is an age old tradition, gotta keep that skill nice 'n sharp, y'know?",
+			"character": "ki",
+		},
+		{
+			"text": "Sure...",
+			"character": "player",
+		},
+		{
+			"text": "Once you got the materials ya need, just interact with one of them signs and I'll fix it up in a jiffy!",
+			"character": "ki",
+		},
+		{
+			"text": "Alright, makes sense. Where am I supposed to get these materials? I can't get anymore wood from the sacred tree...",
+			"character": "player",
+		},
+		{
+			"animation": "Zoom to Exit"
+		}
+	],
+	"Zoom to Exit": [
+		{
+			"text": "People who aren't [b]MANIACS[/b] get there materials out in front of the temple.",
+			"character": "player",
+		},
+		{
+			"text": "Look, you said you needed wood, and I-",
+			"character": "player",
+		},
+		{
+			"text": "In here, [color=#1b5c84]Yume's[/color] blessin' keeps time standin' still.",
+			"character": "ki",
+		},
+		{
+			"text": "Once you go out the front doors, you'll only have a limited amounta daylight to getcher goodies.",
+			"character": "ki",
+		},
+		{
+			"text": "So make sure you move quickly, got it? You want to be back at the temple by nightfall, before the nightmares get here.",
+			"character": "ki",
+		},
+		{
+			"text": "Got it. Move quickly, get back before nightfall.",
+			"character": "player",
+		},
+		{
+			"animation": "Zoom to Gunforge"
+		}
+
+	],
+	"Zoom to Gunforge": [
+		{
+			"text": "I reckon the first thing ya should fix up is the old Gunforge. Once the Gunsmith smells the forge, he'll come back.",
+			"character": "ki",
+		},
+		{
+			"end": true
+		}
+	],
+	"Build Gunforge": [
+		{
+			"text": "IS THAT THE RED HOT COALS OF A GUNFORGE THAT I SMELL?!",
+			"character": "kajiya",
+		},
+		{
+			"animation": "Kajiya Entrance"
+		}
+	],
+	"Kajiya Entrance": [
+		{
+			"text": "SOMEONE ACTUALLY MANAGED TO FIX THE GUNFORGE?! INCREDIBLE!",
+			"character": "kajiya",
+		},
+		{
+			"text": "AH, IT'S BEEN SO LONG SINCE I LAST FORGED! YOUNG APPRENTICE, ARE YOU READY TO LEARN THE WAYS OF THE FORGE?",
+			"character": "kajiya",
+		},
+		{
+			"animation": "Kajiya Walk to Forge"
+		}
+	],
+	"Kajiya Walk to Forge": [
+		{
+			"text": "Wait, me? I already have a lot on my plate, so-",
+			"character": "player",
+		},
+		{
+			"text": "WE BEGIN IMMEDIATELY! FETCH ME TWO MATERIALS SO WE CAN FIX YOUR AWFUL SHOTGUN ASAP!",
+			"character": "kajiya",
+		},
+		{
+			"text": "I reckon you best do what he says. He's quite excitable..",
+			"character": "ki",
+		},
+		{
+			"text": "COME INTERACT WITH THE ANVIL WHEN YOU'RE READY APPRENTICE!",
+			"character": "kajiya",
+		},
+		{
+			"end": true,
+			"method": "on_unlock_gunsmithing"
+		}
 	]
-
-
 }
 
 func _ready():
@@ -445,6 +567,8 @@ func _ready():
 
 		animator.play("1 - Character Waking Up")
 		get_tree().paused = true
+	elif globals.get_trigger("entered_midori_dream") && !globals.cutscene("offer_to_fix"):
+		start_cutscene("Offer to Fix")
 	else:
 		self.visible = false
 
@@ -484,6 +608,11 @@ func _dialog_continue():
 	if next_dialog.has("method"):
 		self.call(next_dialog.method)
 
+func on_build(building):
+	match building:
+		"gunforge":
+			start_cutscene("Build Gunforge")
+
 func intro_end():
 	var player_pos = get_node("Sprites/Player Animator").global_position
 	globals.get_player().global_position.x = player_pos.x
@@ -498,11 +627,11 @@ func intro_end():
 	ki.on_intro_animation_end()
 
 func prophecy_chamber_rebuilt():
-	globals.set_trigger("prophecy_chamber_rebuilt", true)
+	globals.set_trigger("built-prophecy_chamber", true)
 
 func unlock_midori_bed():
 	reset_ki_position()
-	globals.set_trigger("bed_unlocked_midori", true)
+	globals.set_trigger("bed_unlocked-midori", true)
 
 func on_meet_yume():
 	globals.set_trigger("has_shotgun", true)
@@ -524,6 +653,10 @@ func on_first_yume_interaction():
 func reset_ki_position():
 	var ki = get_node("../NPCs/Ki")
 	ki.on_intro_animation_end()
+
+func on_unlock_gunsmithing():
+	globals.set_trigger("gunsmithing_unlocked", true)
+
 
 func ki_entrance():
 	play_door()

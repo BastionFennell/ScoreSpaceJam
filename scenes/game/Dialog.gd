@@ -44,6 +44,17 @@ var speaker_data = {
 			"res://assets/audio/dialog/yume/Pan Flute 4.wav",
 		]
 	},
+	"kajiya": {
+		"color": "#323836",
+		"name": "Kajiya",
+		"sprite": preload("res://scenes/game/cutscenes/Kajiya - Dialog.tscn"),
+		"sounds": [
+			"res://assets/audio/dialog/kajiya/drums 1.wav",
+			"res://assets/audio/dialog/kajiya/drums 2.wav",
+			"res://assets/audio/dialog/kajiya/drums 3.wav",
+			"res://assets/audio/dialog/kajiya/drums 4.wav",
+		]
+	},
 }
 
 func _ready():

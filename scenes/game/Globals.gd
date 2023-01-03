@@ -19,18 +19,21 @@ var controller_mode = false
 var time_stopped = false
 
 var cutscenes = {
-	"intro": false,
-	"prophecy": false,
-	"on_first_dive": false
+	"intro": true,
+	"prophecy": true,
+	"on_first_dive": true
 }
 
 var _triggers = {
 	"holy_tree_destroyed": false,
-	"prophecy_chamber_rebuilt": false,
-	"bed_unlocked_midori": false,
+	"built-prophecy_chamber": false,
+	"built-gunforge": false,
+	"built-signs": true,
+	"bed_unlocked-midori": false,
 	"gunsmithing_unlocked": false,
 	"yume_unlocked": false,
-	"has_shotgun": false
+	"has_shotgun": false,
+	"entered_midori_dream": false,
 }
 
 var zone_list = {
@@ -134,6 +137,28 @@ func get_main_node():
 func get_player():
 	return get_main_node().get_node("Players/%s" % self_peer_id)
 
+func can_afford(price):
+	for p in price:
+		if inventory[p] < price[p]:
+			return false
+
+	return true
+
+func pay(price):
+	# This assumes that you have already made sure the player can afford paying this price
+	for p in price:
+		inventory[p] -= price[p]
+
+func _process(_delta):
+	if Input.is_action_pressed("controller_mode"):
+		controller_mode = true
+	if Input.is_action_pressed("non_controller_mode"):
+		controller_mode = false
+
+
+
+# Networking
+
 func start_server():
 	if networked:
 		return
@@ -221,11 +246,3 @@ mastersync func transition_to(zone):
 
 puppetsync func on_transition_to(zone):
 	get_tree().change_scene(zone_list[zone])
-
-
-func _process(_delta):
-	if Input.is_action_pressed("controller_mode"):
-		controller_mode = true
-	if Input.is_action_pressed("non_controller_mode"):
-		controller_mode = false
-

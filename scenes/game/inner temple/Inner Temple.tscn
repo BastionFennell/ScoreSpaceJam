@@ -1,4 +1,4 @@
-[gd_scene load_steps=115 format=2]
+[gd_scene load_steps=136 format=2]
 
 [ext_resource path="res://scenes/game/inner temple/Inner Temple.gd" type="Script" id=1]
 [ext_resource path="res://scenes/game/GUI/Pause Menu.tscn" type="PackedScene" id=2]
@@ -63,6 +63,15 @@
 [ext_resource path="res://assets/sprites/effects/Holy Light.png" type="Texture" id=61]
 [ext_resource path="res://assets/sprites/weapons/Shotgun Icon.png" type="Texture" id=62]
 [ext_resource path="res://scenes/game/inner temple/Yume Statue.gd" type="Script" id=63]
+[ext_resource path="res://assets/sprites/Sign.png" type="Texture" id=64]
+[ext_resource path="res://scenes/game/inner temple/Signs.gd" type="Script" id=65]
+[ext_resource path="res://scenes/game/inner temple/Sign - Gunforge.gd" type="Script" id=66]
+[ext_resource path="res://scenes/game/inner temple/Price Display.gd" type="Script" id=67]
+[ext_resource path="res://assets/sprites/Price Box.png" type="Texture" id=68]
+[ext_resource path="res://assets/sprites/resources/stone.png" type="Texture" id=69]
+[ext_resource path="res://assets/sprites/characters/Kajiya/Kajiya - Walking.png" type="Texture" id=70]
+[ext_resource path="res://assets/audio/door.wav" type="AudioStream" id=71]
+[ext_resource path="res://scenes/game/inner temple/Kajiya.gd" type="Script" id=72]
 
 [sub_resource type="RectangleShape2D" id=52]
 extents = Vector2( 20, 15 )
@@ -161,6 +170,60 @@ tracks/1/keys = {
 "values": [ Color( 1, 1, 1, 0 ) ]
 }
 
+[sub_resource type="RectangleShape2D" id=58]
+
+[sub_resource type="DynamicFont" id=62]
+size = 10
+use_mipmaps = true
+font_data = ExtResource( 36 )
+
+[sub_resource type="Animation" id=59]
+resource_name = "Fade In"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.5 ),
+"transitions": PoolRealArray( 1 ),
+"update": 3,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=60]
+resource_name = "Fade Out"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.5 ),
+"transitions": PoolRealArray( 1 ),
+"update": 3,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=61]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+
 [sub_resource type="Animation" id=38]
 resource_name = "Default"
 tracks/0/type = "value"
@@ -177,6 +240,38 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id=39]
+resource_name = "Walking"
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+
+[sub_resource type="Animation" id=66]
+resource_name = "Default"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=67]
 resource_name = "Walking"
 length = 0.4
 loop = true
@@ -611,6 +706,18 @@ tracks/10/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ false ]
+}
+tracks/11/type = "value"
+tracks/11/path = NodePath("Construction Effects:position")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
 }
 
 [sub_resource type="Animation" id=49]
@@ -1195,8 +1302,351 @@ tracks/1/keys = {
 "values": [ Vector2( 0.05, 0.05 ), Vector2( 0.1, 0.1 ) ]
 }
 
-[sub_resource type="Animation" id=24]
-resource_name = "Intro Cutscene"
+[sub_resource type="Animation" id=63]
+resource_name = "Build Gunforge"
+length = 7.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Cutscene Camera:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.5 ),
+"transitions": PoolRealArray( 1 ),
+"update": 3,
+"values": [ Vector2( -105, 84 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Construction Effects:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 7 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Construction Effects:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.5, 5.1, 7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("SFX:stream")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 54 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("SFX:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Cutscene Camera:zoom")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0.5 ),
+"transitions": PoolRealArray( 1 ),
+"update": 3,
+"values": [ Vector2( 0.15, 0.15 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("../BG Music:volume_db")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.5, 6, 7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, -18.0, -18.0, 0.0 ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("Construction Effects:position")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 83, 87 ) ]
+}
+
+[sub_resource type="Animation" id=64]
+resource_name = "Kajiya Entrance"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Cutscene Camera:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.3 ),
+"transitions": PoolRealArray( 1 ),
+"update": 3,
+"values": [ Vector2( 0, 120 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Cutscene Camera:zoom")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.3 ),
+"transitions": PoolRealArray( 1 ),
+"update": 3,
+"values": [ Vector2( 0.15, 0.15 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprites/Kajiya Animator:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprites/Kajiya Animator:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 114 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Sprites/Kajiya Animator:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+tracks/5/type = "method"
+tracks/5/path = NodePath(".")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "play_door"
+} ]
+}
+
+[sub_resource type="Animation" id=65]
+resource_name = "Kajiya Walk to Forge"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Cutscene Camera:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 120 ), Vector2( -83, 107 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Cutscene Camera:zoom")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0.15, 0.15 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprites/Kajiya Animator:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprites/Kajiya Animator:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( -1, 112 ), Vector2( -77, 81 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Sprites/Kajiya Animator:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 0, 1, 2, 3, 0, 1, 2 ]
+}
+tracks/5/type = "method"
+tracks/5/path = NodePath(".")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "play_footstep"
+}, {
+"args": [  ],
+"method": "play_footstep"
+}, {
+"args": [  ],
+"method": "play_footstep"
+}, {
+"args": [  ],
+"method": "play_footstep"
+}, {
+"args": [  ],
+"method": "play_footstep"
+}, {
+"args": [  ],
+"method": "play_footstep"
+} ]
+}
+
+[sub_resource type="Animation" id=55]
+resource_name = "Offer to Fix"
+tracks/0/type = "value"
+tracks/0/path = NodePath("../NPCs/Ki:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 0, 1, 2, 3, 0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("../NPCs/Ki:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 1 ),
+"transitions": PoolRealArray( 1 ),
+"update": 3,
+"values": [ Vector2( -89, -61 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Cutscene Camera:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 1 ),
+"transitions": PoolRealArray( 1 ),
+"update": 3,
+"values": [ Vector2( -80, -59 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Cutscene Camera:zoom")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 1 ),
+"transitions": PoolRealArray( 1 ),
+"update": 3,
+"values": [ Vector2( 0.25, 0.25 ) ]
+}
+tracks/4/type = "method"
+tracks/4/path = NodePath(".")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0.1, 0.3, 0.5, 0.7, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "play_footstep"
+}, {
+"args": [  ],
+"method": "play_footstep"
+}, {
+"args": [  ],
+"method": "play_footstep"
+}, {
+"args": [  ],
+"method": "play_footstep"
+}, {
+"args": [  ],
+"method": "play_footstep"
+} ]
+}
 
 [sub_resource type="Animation" id=41]
 length = 0.001
@@ -1246,7 +1696,7 @@ tracks/3/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ false ]
+"values": [ true ]
 }
 tracks/4/type = "value"
 tracks/4/path = NodePath("Construction Effects:modulate")
@@ -1307,6 +1757,96 @@ tracks/8/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ false ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("../Players:visible")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("Cutscene Camera:position")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 120 ) ]
+}
+tracks/11/type = "value"
+tracks/11/path = NodePath("Sprites/Kajiya Animator:visible")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=56]
+resource_name = "Zoom to Exit"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Cutscene Camera:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 1 ),
+"transitions": PoolRealArray( 1 ),
+"update": 3,
+"values": [ Vector2( 1, 104 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Cutscene Camera:zoom")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 1 ),
+"transitions": PoolRealArray( 1 ),
+"update": 3,
+"values": [ Vector2( 0.2, 0.2 ) ]
+}
+
+[sub_resource type="Animation" id=57]
+resource_name = "Zoom to Gunforge"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Cutscene Camera:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 1 ),
+"transitions": PoolRealArray( 1 ),
+"update": 3,
+"values": [ Vector2( -104, 104 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Cutscene Camera:zoom")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 1 ),
+"transitions": PoolRealArray( 1 ),
+"update": 3,
+"values": [ Vector2( 0.1, 0.1 ) ]
 }
 
 [node name="Inner Temple" type="YSort"]
@@ -1438,10 +1978,81 @@ anims/RESET = SubResource( 48 )
 [node name="Holy Tree" parent="Props" instance=ExtResource( 48 )]
 position = Vector2( -1, 3 )
 
+[node name="Signs" type="YSort" parent="."]
+script = ExtResource( 65 )
+
+[node name="Sign - Gunforge" type="Area2D" parent="Signs"]
+position = Vector2( -112, 82 )
+script = ExtResource( 66 )
+
+[node name="Sprite" type="Sprite" parent="Signs/Sign - Gunforge"]
+texture = ExtResource( 64 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Signs/Sign - Gunforge"]
+shape = SubResource( 58 )
+
+[node name="Price Display" type="Node2D" parent="Signs"]
+modulate = Color( 1, 1, 1, 0 )
+script = ExtResource( 67 )
+
+[node name="Display Box" type="Sprite" parent="Signs/Price Display"]
+z_index = 10
+texture = ExtResource( 68 )
+
+[node name="Price List" type="VBoxContainer" parent="Signs/Price Display/Display Box"]
+margin_left = -18.0
+margin_top = -25.0
+margin_right = 32.0
+margin_bottom = 25.0
+rect_min_size = Vector2( 50, 50 )
+custom_constants/separation = 0
+
+[node name="Item Display Base3" type="NinePatchRect" parent="Signs/Price Display/Display Box/Price List"]
+margin_right = 50.0
+margin_bottom = 12.0
+rect_min_size = Vector2( 50, 12 )
+
+[node name="Item" type="Sprite" parent="Signs/Price Display/Display Box/Price List/Item Display Base3"]
+position = Vector2( 7, 7 )
+texture = ExtResource( 69 )
+
+[node name="Price" type="Label" parent="Signs/Price Display/Display Box/Price List/Item Display Base3"]
+margin_left = 13.0
+margin_top = -3.0
+margin_right = 53.0
+margin_bottom = 12.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 62 )
+text = "x10"
+
+[node name="Fader" type="AnimationPlayer" parent="Signs/Price Display"]
+"anims/Fade In" = SubResource( 59 )
+"anims/Fade Out" = SubResource( 60 )
+anims/RESET = SubResource( 61 )
+
+[node name="Item Display Base" type="NinePatchRect" parent="Signs/Price Display"]
+visible = false
+margin_right = 50.0
+margin_bottom = 12.0
+rect_min_size = Vector2( 50, 12 )
+
+[node name="Item" type="Sprite" parent="Signs/Price Display/Item Display Base"]
+position = Vector2( 7, 7 )
+texture = ExtResource( 69 )
+
+[node name="Price" type="Label" parent="Signs/Price Display/Item Display Base"]
+margin_left = 13.0
+margin_top = -3.0
+margin_right = 53.0
+margin_bottom = 12.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 62 )
+text = "x10"
+
 [node name="NPCs" type="YSort" parent="."]
 
 [node name="Ki" type="Sprite" parent="NPCs"]
-position = Vector2( -89, -61 )
+position = Vector2( -104, -2 )
 texture = ExtResource( 41 )
 hframes = 4
 script = ExtResource( 43 )
@@ -1449,6 +2060,16 @@ script = ExtResource( 43 )
 [node name="Ki Animator" type="AnimationPlayer" parent="NPCs/Ki"]
 anims/Default = SubResource( 38 )
 anims/Walking = SubResource( 39 )
+
+[node name="Kajiya" type="Sprite" parent="NPCs"]
+position = Vector2( -90, 82 )
+texture = ExtResource( 70 )
+hframes = 4
+script = ExtResource( 72 )
+
+[node name="Kajiya Animator" type="AnimationPlayer" parent="NPCs/Kajiya"]
+anims/Default = SubResource( 66 )
+anims/Walking = SubResource( 67 )
 
 [node name="Gun Chest" type="Area2D" parent="."]
 position = Vector2( 0, 45 )
@@ -1744,7 +2365,7 @@ pause_mode = 2
 script = ExtResource( 39 )
 
 [node name="SFX" type="AudioStreamPlayer" parent="Cutscene Manager"]
-stream = ExtResource( 60 )
+stream = ExtResource( 71 )
 bus = "SFX"
 
 [node name="Dialog" type="CanvasLayer" parent="Cutscene Manager"]
@@ -1764,7 +2385,7 @@ z_index = 5
 
 [node name="Player - Dialog" parent="Cutscene Manager/Dialog/Speaker" instance=ExtResource( 35 )]
 position = Vector2( -107, -12.25 )
-frame = 2
+frame = 0
 offset = Vector2( 107, 12.25 )
 
 [node name="Speaker Name" type="Label" parent="Cutscene Manager/Dialog"]
@@ -1798,7 +2419,7 @@ script = ExtResource( 49 )
 bus = "SFX"
 
 [node name="Cutscene Camera" type="Camera2D" parent="Cutscene Manager"]
-position = Vector2( 1, -91 )
+position = Vector2( 0, 120 )
 current = true
 zoom = Vector2( 0.25, 0.25 )
 
@@ -1806,7 +2427,7 @@ zoom = Vector2( 0.25, 0.25 )
 
 [node name="Player Animator" type="Sprite" parent="Cutscene Manager/Sprites"]
 position = Vector2( 0, 81 )
-texture = ExtResource( 26 )
+texture = ExtResource( 19 )
 
 [node name="Hammergun Animator" type="Sprite" parent="Cutscene Manager/Sprites"]
 visible = false
@@ -1837,33 +2458,40 @@ position = Vector2( -1, -122 )
 scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 61 )
 
-[node name="Construction Effects" type="Node2D" parent="Cutscene Manager"]
+[node name="Kajiya Animator" type="Sprite" parent="Cutscene Manager/Sprites"]
 visible = false
+position = Vector2( 0, 114 )
+texture = ExtResource( 70 )
+flip_h = true
+hframes = 4
+
+[node name="Construction Effects" type="Node2D" parent="Cutscene Manager"]
 modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 83, 87 )
 
 [node name="Smoke 1" parent="Cutscene Manager/Construction Effects" instance=ExtResource( 53 )]
 position = Vector2( -240, 23 )
-frame = 2
+frame = 4
 
 [node name="Smoke 2" parent="Cutscene Manager/Construction Effects" instance=ExtResource( 52 )]
 position = Vector2( -142, 28 )
-frame = 8
+frame = 0
 
 [node name="Smoke 3" parent="Cutscene Manager/Construction Effects" instance=ExtResource( 51 )]
 position = Vector2( -191, -24 )
-frame = 6
+frame = 8
 
 [node name="Smoke 4" parent="Cutscene Manager/Construction Effects" instance=ExtResource( 53 )]
 position = Vector2( -158, -34 )
-frame = 6
+frame = 8
 
 [node name="Smoke 5" parent="Cutscene Manager/Construction Effects" instance=ExtResource( 52 )]
 position = Vector2( -228, -20 )
-frame = 1
+frame = 3
 
 [node name="Smoke 6" parent="Cutscene Manager/Construction Effects" instance=ExtResource( 51 )]
 position = Vector2( -198, 51 )
-frame = 9
+frame = 1
 
 [node name="Cutscene Animator" type="AnimationPlayer" parent="Cutscene Manager"]
 "anims/1 - Character Waking Up" = SubResource( 23 )
@@ -1883,8 +2511,13 @@ frame = 9
 "anims/7 - Getcha Back Home" = SubResource( 35 )
 "anims/8 - Take This" = SubResource( 37 )
 "anims/9 - First Things First" = SubResource( 34 )
-"anims/Intro Cutscene" = SubResource( 24 )
+"anims/Build Gunforge" = SubResource( 63 )
+"anims/Kajiya Entrance" = SubResource( 64 )
+"anims/Kajiya Walk to Forge" = SubResource( 65 )
+"anims/Offer to Fix" = SubResource( 55 )
 anims/RESET = SubResource( 41 )
+"anims/Zoom to Exit" = SubResource( 56 )
+"anims/Zoom to Gunforge" = SubResource( 57 )
 
 [node name="ItemSpawner" type="Node2D" parent="."]
 position = Vector2( -1, 0 )

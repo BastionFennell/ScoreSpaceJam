@@ -7,7 +7,7 @@ func _ready():
 	else:
 		get_node("Holy Tree").visible = true
 
-	if globals.get_trigger("prophecy_chamber_rebuilt"):
+	if globals.get_trigger("built-prophecy_chamber"):
 		get_node("Prophecy Stand").modulate = "#ffffffff"
 		get_node("Prophecy Stand").visible = true
 		get_node("Prophecy Stand/Prophecy Area/Collider").disabled = false

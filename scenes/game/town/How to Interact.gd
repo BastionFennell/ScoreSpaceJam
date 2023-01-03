@@ -4,6 +4,7 @@ var has_interacted = false
 var is_faded_in = false
 var player
 var globals
+var is_visible
 
 func _ready():
 	player = get_parent()
@@ -35,15 +36,25 @@ func fade_in():
 
 func _on_area_entered(body):
 	if "is_interactive" in body && body.is_interactive:
-		print("Foding in")
+		if body.has_method("on_player_entered"):
+			body.on_player_entered()
 		fade_in()
+		is_visible = true
 
 func _on_area_exited(body):
-	if "is_interactive" in body && body.is_interactive:
+	if "is_interactive" in body:
+		if body.is_interactive && body.has_method("on_player_exited"):
+			body.on_player_exited()
+
+	var should_be_visible = false
+	for a in get_overlapping_areas():
+		should_be_visible = should_be_visible || ("is_interactive" in a && a.is_interactive)
+	
+	if !should_be_visible:
 		fade_out()
 
 func _process(_delta):
-	if Input.is_action_just_pressed("ui_accept"):
+	if Input.is_action_just_pressed("ui_accept") && !get_tree().paused:
 		for a in get_overlapping_areas():
 			if "is_interactive" in a && a.is_interactive && a.has_method("on_interact"):
 				a.on_interact()

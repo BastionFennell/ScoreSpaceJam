@@ -1,7 +1,7 @@
 extends Area2D
 
 export (String) var destination = "nightmare"
-export (String) var trigger = "bed_unlocked_midori"
+export (String) var trigger = "bed_unlocked-midori"
 var globals
 
 var is_interactive = true
@@ -16,6 +16,7 @@ func on_interact():
 	if !globals.get_trigger("has_shotgun"):
 		globals.get_main_node().get_node("Cutscene Manager").on_first_dive()
 	else:
+		globals.set_trigger("entered_midori_dream")
 		if globals.networked:
 			if self.is_network_master():
 				globals.transition_to(destination)
