@@ -11,6 +11,7 @@ export (int) var MAX_PLAYERS = 2
 export (bool) var IS_CLIENT = true
 export (String) var SERVER_IP = "127.0.0.1"
 var Player = preload("res://scenes/game/characters/player/player.tscn")
+var Debug = preload("res://scenes/Debug.tscn")
 var networked = false
 var player_list = []
 
@@ -19,7 +20,7 @@ var controller_mode = false
 var time_stopped = false
 
 var cutscenes = {
-	"intro": false,
+	"intro": true,
 	"prophecy": false,
 	"on_first_dive": false,
 	"offer_to_fix": false
@@ -157,6 +158,12 @@ func _process(_delta):
 		controller_mode = true
 	if Input.is_action_pressed("non_controller_mode"):
 		controller_mode = false
+
+	if Input.is_action_pressed("debug"):
+		if !get_main_node().has_node("Debug"):
+			var debug = Debug.instance()
+			debug.name = "Debug"
+			get_main_node().add_child(debug)
 
 
 

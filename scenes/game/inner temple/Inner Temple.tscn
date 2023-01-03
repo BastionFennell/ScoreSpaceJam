@@ -2245,7 +2245,7 @@ text = "x10"
 [node name="NPCs" type="YSort" parent="."]
 
 [node name="Ki" type="Sprite" parent="NPCs"]
-position = Vector2( -10.6364, 89 )
+position = Vector2( -104, 9 )
 texture = ExtResource( 41 )
 hframes = 4
 frame = 3
@@ -2689,27 +2689,27 @@ position = Vector2( 83, 87 )
 
 [node name="Smoke 1" parent="Cutscene Manager/Construction Effects" instance=ExtResource( 53 )]
 position = Vector2( -240, 23 )
-frame = 8
+frame = 4
 
 [node name="Smoke 2" parent="Cutscene Manager/Construction Effects" instance=ExtResource( 52 )]
 position = Vector2( -142, 28 )
-frame = 4
+frame = 0
 
 [node name="Smoke 3" parent="Cutscene Manager/Construction Effects" instance=ExtResource( 51 )]
 position = Vector2( -191, -24 )
-frame = 2
+frame = 8
 
 [node name="Smoke 4" parent="Cutscene Manager/Construction Effects" instance=ExtResource( 53 )]
 position = Vector2( -158, -34 )
-frame = 2
+frame = 8
 
 [node name="Smoke 5" parent="Cutscene Manager/Construction Effects" instance=ExtResource( 52 )]
 position = Vector2( -228, -20 )
-frame = 7
+frame = 3
 
 [node name="Smoke 6" parent="Cutscene Manager/Construction Effects" instance=ExtResource( 51 )]
 position = Vector2( -198, 51 )
-frame = 5
+frame = 1
 
 [node name="Cutscene Animator" type="AnimationPlayer" parent="Cutscene Manager"]
 "anims/1 - Character Waking Up" = SubResource( 23 )

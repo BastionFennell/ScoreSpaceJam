@@ -1,0 +1,112 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://scenes/Debug.gd" type="Script" id=1]
+[ext_resource path="res://scenes/game/Trigger Base.gd" type="Script" id=2]
+[ext_resource path="res://assets/fonts/8bitOperatorPlus-Bold.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://scenes/Cutscene Base.gd" type="Script" id=4]
+
+[sub_resource type="DynamicFont" id=1]
+use_mipmaps = true
+font_data = ExtResource( 3 )
+
+[node name="Debug" type="CanvasLayer"]
+script = ExtResource( 1 )
+
+[node name="Background" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 89.0
+margin_top = 50.0
+margin_right = -89.0
+margin_bottom = -50.0
+color = Color( 0.341176, 0.341176, 0.341176, 1 )
+
+[node name="Label" type="Label" parent="."]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = 240.0
+margin_top = -259.0
+margin_right = 357.0
+margin_bottom = -235.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 1 )
+text = "Triggers"
+
+[node name="Triggers Container" type="ScrollContainer" parent="."]
+margin_left = 148.0
+margin_top = 139.0
+margin_right = 448.0
+margin_bottom = 638.0
+
+[node name="Triggers" type="VBoxContainer" parent="Triggers Container"]
+rect_pivot_offset = Vector2( -590, -135 )
+
+[node name="Trigger Base" type="NinePatchRect" parent="."]
+visible = false
+rect_min_size = Vector2( 300, 30 )
+script = ExtResource( 2 )
+
+[node name="Label" type="Label" parent="Trigger Base"]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_top = -12.0
+margin_right = 113.0
+margin_bottom = 12.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 1 )
+text = "Trigger Name"
+
+[node name="CheckBox" type="CheckBox" parent="Trigger Base"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -24.0
+margin_top = -12.0
+margin_bottom = 12.0
+
+[node name="Cutscenes Title" type="Label" parent="."]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = 850.0
+margin_top = -259.0
+margin_right = 967.0
+margin_bottom = -235.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 1 )
+text = "Cutscenes"
+
+[node name="Cutscenes Container" type="ScrollContainer" parent="."]
+margin_left = 758.0
+margin_top = 139.0
+margin_right = 1058.0
+margin_bottom = 638.0
+
+[node name="Cutscenes" type="VBoxContainer" parent="Cutscenes Container"]
+rect_pivot_offset = Vector2( -590, -135 )
+
+[node name="Cutscene Base" type="NinePatchRect" parent="."]
+visible = false
+margin_right = 300.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 300, 30 )
+script = ExtResource( 4 )
+
+[node name="Label" type="Label" parent="Cutscene Base"]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_top = -15.0
+margin_right = 128.0
+margin_bottom = 9.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 1 )
+text = "Cutscene Name"
+
+[node name="CheckBox" type="CheckBox" parent="Cutscene Base"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -24.0
+margin_top = -12.0
+margin_bottom = 12.0
