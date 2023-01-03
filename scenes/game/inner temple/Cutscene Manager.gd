@@ -654,7 +654,6 @@ func _dialog_continue():
 		dialog_man.visible = false
 		animator.play(next_dialog.animation)
 	else:
-		print(next_dialog)
 		dialog_man.update_dialog_box(next_dialog.character, next_dialog.text)
 		dialog_i += 1
 
