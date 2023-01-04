@@ -14,15 +14,4 @@ func _ready():
 func damage(amount):
 	self.remove_child(get_node("CollisionShape2D"))
 
-	_explode()
-
-	var ded = get_node("Ded")
-	if ded:
-		ded.playing = true
-		yield(ded, "finished")
-
-	get_node("/root/Globals").set_trigger("holy_tree_destroyed", true)
-
 	get_node("../../Cutscene Manager").tree_killed()
-
-	self.queue_free()

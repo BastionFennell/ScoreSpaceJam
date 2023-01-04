@@ -242,7 +242,8 @@ var dialog = {
 			"character": "ki",
 		},
 		{
-			"animation": "12 - Fix Prophecy Chamber"
+			"animation": "12 - Fix Prophecy Chamber",
+			"method": "set_tree_killed"
 		},
 	],
 	"11 - Got Wood": [
@@ -659,6 +660,10 @@ func connect_to_player(curr_player):
 
 func tree_killed():
 	start_cutscene("11 - Tree Killed")
+
+func set_tree_killed():	
+	globals.set_trigger("holy_tree_destroyed", true)
+
 
 func _animation_finished(anim):
 	if dialog.has(anim):
