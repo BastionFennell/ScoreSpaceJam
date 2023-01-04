@@ -523,7 +523,7 @@ var dialog = {
 			"character": "ki",
 		},
 		{
-			"text": "So make sure you move quickly, got it? You want to be back at the temple by nightfall, before the nightmares get here.",
+			"text": "Make sure you move quickly, ya wanna be back at the temple by nightfall, before the nightmares get here.",
 			"character": "ki",
 		},
 		{
@@ -537,7 +537,11 @@ var dialog = {
 	],
 	"Zoom to Gunforge": [
 		{
-			"text": "I reckon the first thing ya should fix up is the old Gunforge. Once the Gunsmith smells the forge, he'll come back.",
+			"text": "I reckon the first thing ya should fix up is the old Gunforge.",
+			"character": "ki",
+		},
+		{
+			"text": "Once the Gunsmith smells the forge, I'm sure he'll come back.",
 			"character": "ki",
 		},
 		{
@@ -549,6 +553,7 @@ var dialog = {
 		{
 			"text": "IS THAT THE RED HOT COALS OF A GUNFORGE THAT I SMELL?!",
 			"character": "kajiya",
+			"method": "kajiya_theme"
 		},
 		{
 			"animation": "Kajiya Entrance"
@@ -577,7 +582,7 @@ var dialog = {
 			"character": "kajiya",
 		},
 		{
-			"text": "I reckon you best do what he says. He's quite excitable..",
+			"text": "I reckon you best do what he says. He's quite excitable...",
 			"character": "ki",
 		},
 		{
@@ -774,9 +779,14 @@ func ki_theme():
 	get_parent().get_node("BG Music").stream = load("res://assets/audio/Ki Theme.wav")
 	get_parent().get_node("BG Music").play()
 
-func normal_theme():
-	get_parent().get_node("BG Music").stream = load("res://assets/audio/songs/Town.wav")
+func kajiya_theme():
+	get_parent().get_node("BG Music").stream = load("res://assets/audio/Kajiya Theme.wav")
 	get_parent().get_node("BG Music").play()
+
+func normal_theme():
+	if get_parent().get_node("BG Music").stream != load("res://assets/audio/songs/Town.wav"):
+		get_parent().get_node("BG Music").stream = load("res://assets/audio/songs/Town.wav")
+		get_parent().get_node("BG Music").play()
 
 func _play_sfx(sfx):
 	var SFX = get_node("SFX")

@@ -93,7 +93,6 @@ tracks/1/keys = {
 [node name="Nightmare" type="YSort"]
 position = Vector2( -2, -2 )
 script = ExtResource( 12 )
-round_length = 1.0
 
 [node name="bg fill" type="Node2D" parent="."]
 z_index = -4096
