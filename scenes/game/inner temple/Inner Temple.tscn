@@ -1,4 +1,4 @@
-[gd_scene load_steps=143 format=2]
+[gd_scene load_steps=144 format=2]
 
 [ext_resource path="res://scenes/game/inner temple/Inner Temple.gd" type="Script" id=1]
 [ext_resource path="res://scenes/game/GUI/Pause Menu.tscn" type="PackedScene" id=2]
@@ -73,6 +73,7 @@
 [ext_resource path="res://assets/audio/door.wav" type="AudioStream" id=71]
 [ext_resource path="res://scenes/game/inner temple/Kajiya.gd" type="Script" id=72]
 [ext_resource path="res://scenes/game/inner temple/Outside.gd" type="Script" id=73]
+[ext_resource path="res://scenes/game/inner temple/Night Time.gd" type="Script" id=74]
 
 [sub_resource type="RectangleShape2D" id=73]
 extents = Vector2( 78.5, 10 )
@@ -2594,6 +2595,7 @@ shape = SubResource( 20 )
 
 [node name="Cutscene Manager" type="Node2D" parent="."]
 pause_mode = 2
+z_index = 4096
 script = ExtResource( 39 )
 
 [node name="SFX" type="AudioStreamPlayer" parent="Cutscene Manager"]
@@ -2601,6 +2603,7 @@ stream = ExtResource( 71 )
 bus = "SFX"
 
 [node name="Dialog" type="CanvasLayer" parent="Cutscene Manager"]
+layer = 2
 visible = false
 script = ExtResource( 38 )
 
@@ -2617,7 +2620,7 @@ z_index = 5
 
 [node name="Player - Dialog" parent="Cutscene Manager/Dialog/Speaker" instance=ExtResource( 35 )]
 position = Vector2( -107, -12.25 )
-frame = 2
+frame = 0
 offset = Vector2( 107, 12.25 )
 
 [node name="Speaker Name" type="Label" parent="Cutscene Manager/Dialog"]
@@ -2689,27 +2692,25 @@ position = Vector2( 83, 87 )
 
 [node name="Smoke 1" parent="Cutscene Manager/Construction Effects" instance=ExtResource( 53 )]
 position = Vector2( -240, 23 )
-frame = 4
+frame = 6
 
 [node name="Smoke 2" parent="Cutscene Manager/Construction Effects" instance=ExtResource( 52 )]
 position = Vector2( -142, 28 )
-frame = 0
+frame = 2
 
 [node name="Smoke 3" parent="Cutscene Manager/Construction Effects" instance=ExtResource( 51 )]
 position = Vector2( -191, -24 )
-frame = 8
+frame = 0
 
 [node name="Smoke 4" parent="Cutscene Manager/Construction Effects" instance=ExtResource( 53 )]
 position = Vector2( -158, -34 )
-frame = 8
+frame = 0
 
 [node name="Smoke 5" parent="Cutscene Manager/Construction Effects" instance=ExtResource( 52 )]
 position = Vector2( -228, -20 )
-frame = 3
 
 [node name="Smoke 6" parent="Cutscene Manager/Construction Effects" instance=ExtResource( 51 )]
 position = Vector2( -198, 51 )
-frame = 1
 
 [node name="Cutscene Animator" type="AnimationPlayer" parent="Cutscene Manager"]
 "anims/1 - Character Waking Up" = SubResource( 23 )
@@ -2764,3 +2765,7 @@ pause_mode = 2
 stream = ExtResource( 40 )
 autoplay = true
 bus = "Music"
+
+[node name="Night Time" type="CanvasModulate" parent="."]
+color = Color( 0.824219, 0.613154, 0.113265, 1 )
+script = ExtResource( 74 )

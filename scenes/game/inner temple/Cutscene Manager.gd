@@ -5,6 +5,7 @@ var animator
 var dialog_man
 var globals
 var player
+var is_in_cutscene = false
 
 var dialog_i
 var last_anim
@@ -587,6 +588,40 @@ var dialog = {
 			"end": true,
 			"method": "on_unlock_gunsmithing"
 		}
+	],
+	"On First Anvil": [
+		{
+			"text": "THIS IS A COMPLEX AND TECHNICAL ART APPRENTICE, SO MAKE SURE YOU PAY ATTENTION!",
+			"character": "kajiya",
+		},
+		{
+			"text": "FIRST, SELECT A SCHEMATIC FROM THE TOP! I'LL LET YOU USE MY SHOTGUN SCHEMATIC FOR FREE!",
+			"character": "kajiya",
+		},
+		{
+			"text": "THEN, SELECT THE PARTS YOU WANT TO BUILD WITH FROM THE LEFT!",
+			"character": "kajiya",
+		},
+		{
+			"text": "DIFFERENT PARTS WILL GIVE YOUR GUN DIFFERENT MODIFICATIONS!",
+			"character": "kajiya",
+		},
+		{
+			"text": "TRY OUT DIFFERENT MATERIALS TO SEE WHAT WORKS BEST!",
+			"character": "kajiya",
+		},
+		{
+			"text": "ONCE YOU'RE SATISFIED, HIT MAKE AND ENJOY YOUR NEW GUN! YOU CAN SEE ALL OF YOUR GUNS IN THE NEARBY GUN CHEST!",
+			"character": "kajiya",
+		},
+		{
+			"text": "YOU'LL FIND MORE SCHEMATICS AND MATERIALS WHILE YOU'RE RESCUING THE MONKS, SO COME BACK OFTEN!",
+			"character": "kajiya",
+		},
+		{
+			"end": true,
+			"keep_paused": true
+		}
 	]
 }
 
@@ -607,6 +642,7 @@ func connect_to_player(curr_player):
 
 		animator.play("1 - Character Waking Up")
 		get_tree().paused = true
+		is_in_cutscene = true
 	elif globals.get_trigger("entered_midori_dream") && !globals.cutscenes.offer_to_fix:
 		get_node("../Players").visible = false
 		start_cutscene("Offer to Fix")
@@ -645,11 +681,13 @@ func _dialog_continue():
 
 		get_node("Cutscene Camera").current = false
 		get_node("../Players").visible = true
-		get_tree().paused = false
+		if !next_dialog.has("keep_paused"):
+			get_tree().paused = false
 		player.get_node("Camera").current = true
 		self.visible = false
 
 		globals.cutscenes.intro = true
+		is_in_cutscene = false
 	elif next_dialog.has("animation"):
 		dialog_man.visible = false
 		animator.play(next_dialog.animation)
@@ -724,6 +762,10 @@ func on_offer_to_fix():
 func on_unlock_gunsmithing():
 	globals.set_trigger("gunsmithing_unlocked", true)
 
+func on_first_anvil():
+	is_in_cutscene = true
+	_animation_finished("On First Anvil")
+
 func ki_entrance():
 	play_door()
 	ki_theme()
@@ -766,3 +808,4 @@ func start_cutscene(cutscene):
 
 	get_tree().paused = true
 	animator.play(cutscene)
+	is_in_cutscene = true

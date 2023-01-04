@@ -24,13 +24,13 @@ func _start_server():
 
 func _join_server():
 	var ip = get_node("Grid/Join Server/IP Address").text
-	print(ip)
 	globals.connect_to_server(ip)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	if Input.is_action_just_pressed("pause"):
-		if(get_tree().paused):
+		if(get_tree().paused && self.visible):
 			_unpause()
 		else:
-			_pause()
+			if !(get_parent().has_node("Gun Chest Screen") && get_parent().get_node("Gun Chest Screen").visible) && !(get_parent().has_node("Gunsmithing") && get_parent().get_node("Gunsmithing").visible):
+				_pause()

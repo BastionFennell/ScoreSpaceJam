@@ -136,6 +136,9 @@ func _on_make():
 	get_node("Helper - Schematic").visible = true
 	get_node("Helper - Parts").visible = false
 
+	if !globals.get_trigger("has_made_gun"):
+		globals.set_trigger("has_made_gun", true)
+
 func _on_close():
 	self.visible = false
 	get_tree().paused = false
@@ -143,3 +146,7 @@ func _on_close():
 func open():
 	self.visible = true
 	get_tree().paused = true
+
+func _process(_delta):
+	if Input.is_action_just_released("ui_cancel") && self.visible && !globals.get_main_node().get_node("Cutscene Manager").is_in_cutscene:
+		_on_close()

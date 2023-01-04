@@ -33,7 +33,7 @@ var unlocked_parts = ["stock", "barrel"]
 
 var guns_data = {
 	"hammergun": {
-		"icon": preload("res://assets/sprites/weapons/Shotgun Icon.png"),
+		"icon": preload("res://assets/sprites/weapons/HammerGun Icon.png"),
 		"parts": 2
 	},
 	"shotgun": {

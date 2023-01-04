@@ -51,3 +51,7 @@ func open():
 	self.visible = true
 	get_tree().paused = true
 	_display_guns()
+
+func _process(_delta):
+	if Input.is_action_just_released("pause") && self.visible:
+		_on_close()

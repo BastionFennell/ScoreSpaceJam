@@ -16,27 +16,30 @@ var networked = false
 var player_list = []
 
 var controller_mode = false
+var has_gone_outside_today = false
 
 var time_stopped = false
 
 var cutscenes = {
 	"intro": true,
-	"prophecy": false,
-	"on_first_dive": false,
-	"offer_to_fix": false
+	"prophecy": true,
+	"on_first_dive": true,
+	"offer_to_fix": true
 }
 
 var _triggers = {
-	"holy_tree_destroyed": false,
-	"built-prophecy_chamber": false,
-	"built-gunforge": false,
-	"built-signs": false,
-	"bed_unlocked-midori": false,
-	"gunsmithing_unlocked": false,
-	"yume_unlocked": false,
-	"has_shotgun": false,
-	"entered_midori_dream": false,
-	"has_gone_outside": false
+	"holy_tree_destroyed": true,
+	"built-prophecy_chamber": true,
+	"built-gunforge": true,
+	"built-signs": true,
+	"bed_unlocked-midori": true,
+	"gunsmithing_unlocked": true,
+	"yume_unlocked": true,
+	"has_shotgun": true,
+	"entered_midori_dream": true,
+	"has_gone_outside": true,
+	"has_made_gun": false,
+	"has_opened_anvil": false
 }
 
 var zone_list = {
@@ -130,6 +133,7 @@ func on_buy(item):
 	emit_signal("inventory_updated")
 
 func round_complete():
+	has_gone_outside_today = false
 	days += 1
 
 func stop_time():
