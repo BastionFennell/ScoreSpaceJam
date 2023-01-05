@@ -80,5 +80,5 @@ animations = [ {
 
 [node name="Kajiya - Dialog" type="AnimatedSprite"]
 frames = SubResource( 3 )
-frame = 17
+frame = 12
 playing = true

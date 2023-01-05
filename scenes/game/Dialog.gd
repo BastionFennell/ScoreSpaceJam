@@ -55,6 +55,17 @@ var speaker_data = {
 			"res://assets/audio/dialog/kajiya/drums 4.wav",
 		]
 	},
+	"sensei": {
+		"color": "#c0b92c",
+		"name": "Sensei",
+		"sprite": preload("res://scenes/game/cutscenes/Sensei - Dialog.tscn"),
+		"sounds": [
+			"res://assets/audio/dialog/sensei/Shanai 1.wav",
+			"res://assets/audio/dialog/sensei/Shanai 2.wav",
+			"res://assets/audio/dialog/sensei/Shanai 3.wav",
+			"res://assets/audio/dialog/sensei/Shanai 4.wav",
+		]
+	},
 }
 
 func _ready():

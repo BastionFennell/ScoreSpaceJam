@@ -1,12 +1,17 @@
-extends Sprite
+extends Area2D
 
 var target_pos
 var speed = 30
 var animator
 var should_move = false
+var is_interactive = true
 
 func _ready():
+	self.visible = get_node("/root/Globals").get_trigger("gunsmithing_unlocked")
 	on_animation_end()
+
+	if !self.visible:
+		get_node("/root/Globals").connect("triggers_updated", self, "_on_triggers_updated")
 
 func on_animation_end():
 	animator = get_node("Sensei Animator")
@@ -18,6 +23,13 @@ func move():
 func stop():
 	should_move = false
 
+func on_interact():
+	get_node("../../Cutscene Manager").start_dialog("Sensei")
+
+func _on_triggers_updated(trigger, value):
+	if trigger == "gunsmithing_unlocked":
+		self.visible = value
+
 func _process(delta):
 	if target_pos != null && global_position != target_pos:
 		animator.play("Walking")
@@ -26,12 +38,12 @@ func _process(delta):
 			global_position += velocity * speed * delta
 
 		if target_pos.x > global_position.x:
-			self.flip_h = true
+			get_node("Sprite").flip_h = true
 		else:
-			self.flip_h = false
+			get_node("Sprite").flip_h = false
 
 	if target_pos != null && global_position.distance_to(target_pos) <= 1:
 		global_position = target_pos
 		target_pos = null
-		self.flip_h = false
+		get_node("Sprite").flip_h = false
 		animator.play("Default")

@@ -628,6 +628,15 @@ var dialog = {
 			"end": true,
 			"keep_paused": true
 		}
+	],
+	"Sensei": [
+		{
+			"text": "Shhh, I'm not supposed to be here yet!",
+			"character": "sensei"
+		},
+		{
+			"end": true
+		}
 	]
 }
 
@@ -641,14 +650,13 @@ func connect_to_player(curr_player):
 	animator.connect("animation_finished", self, "_animation_finished")
 
 	if !globals.cutscenes.intro:
+		is_in_cutscene = true
 		get_node("Cutscene Camera").current = true
 		get_node("../Players").visible = false
-		get_node("../NPCs").visible = false
 		self.visible = true
 
 		animator.play("1 - Character Waking Up")
 		get_tree().paused = true
-		is_in_cutscene = true
 	elif globals.get_trigger("entered_midori_dream") && !globals.cutscenes.offer_to_fix:
 		get_node("../Players").visible = false
 		start_cutscene("Offer to Fix")
@@ -667,10 +675,14 @@ func set_tree_killed():
 
 func _animation_finished(anim):
 	if dialog.has(anim):
-		last_anim = anim
-		dialog_man.visible = true
-		dialog_i = -1
-		_dialog_continue()
+		start_dialog(anim)
+
+func start_dialog(dialog):
+	get_tree().paused = true
+	last_anim = dialog
+	dialog_man.visible = true
+	dialog_i = -1
+	_dialog_continue()
 
 func _dialog_continue():
 	var next_dialog = dialog[last_anim][dialog_i + 1]
@@ -683,12 +695,11 @@ func _dialog_continue():
 		dialog_i +=1
 		_dialog_continue()
 	elif next_dialog.has("end") && next_dialog.end:
+		is_in_cutscene = false
 		normal_theme()
 		dialog_man.visible = false
 		self.visible = false
 		
-		get_node("../NPCs").visible = true
-
 		get_node("Cutscene Camera").current = false
 		get_node("../Players").visible = true
 		if !next_dialog.has("keep_paused"):
@@ -697,7 +708,6 @@ func _dialog_continue():
 		self.visible = false
 
 		globals.cutscenes.intro = true
-		is_in_cutscene = false
 	elif next_dialog.has("animation"):
 		dialog_man.visible = false
 		animator.play(next_dialog.animation)
@@ -735,7 +745,7 @@ func intro_end():
 	get_node("Sprites/Player Animator").visible = false
 
 	var ki = get_node("../NPCs/Ki")
-	ki.on_intro_animation_end()
+	ki.on_animation_end()
 
 func prophecy_chamber_rebuilt():
 	globals.set_trigger("built-prophecy_chamber", true)

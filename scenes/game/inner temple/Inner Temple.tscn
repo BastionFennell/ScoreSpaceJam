@@ -1,4 +1,4 @@
-[gd_scene load_steps=148 format=2]
+[gd_scene load_steps=149 format=2]
 
 [ext_resource path="res://scenes/game/inner temple/Inner Temple.gd" type="Script" id=1]
 [ext_resource path="res://scenes/game/GUI/Pause Menu.tscn" type="PackedScene" id=2]
@@ -297,6 +297,9 @@ tracks/0/keys = {
 "values": [ 0, 1, 2, 3 ]
 }
 
+[sub_resource type="CircleShape2D" id=77]
+radius = 18.0
+
 [sub_resource type="Animation" id=76]
 resource_name = "Default"
 tracks/0/type = "value"
@@ -328,7 +331,7 @@ tracks/0/keys = {
 "values": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 8 ]
 }
 tracks/1/type = "method"
-tracks/1/path = NodePath(".")
+tracks/1/path = NodePath("..")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -1242,6 +1245,18 @@ tracks/3/keys = {
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
 "values": [ Vector2( 1, 113 ), Vector2( 1, 113 ), Vector2( -15, 80 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("../NPCs/Ki:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
 }
 
 [sub_resource type="Animation" id=31]
@@ -2298,6 +2313,7 @@ text = "x10"
 [node name="NPCs" type="YSort" parent="."]
 
 [node name="Ki" type="Sprite" parent="NPCs"]
+visible = false
 position = Vector2( -104, 9 )
 texture = ExtResource( 41 )
 hframes = 76
@@ -2308,26 +2324,32 @@ anims/Default = SubResource( 38 )
 anims/Walking = SubResource( 39 )
 
 [node name="Kajiya" type="Sprite" parent="NPCs"]
+visible = false
 position = Vector2( -61.8, 87.2 )
 texture = ExtResource( 70 )
 hframes = 4
-frame = 3
 script = ExtResource( 72 )
 
 [node name="Kajiya Animator" type="AnimationPlayer" parent="NPCs/Kajiya"]
 anims/Default = SubResource( 66 )
 anims/Walking = SubResource( 67 )
 
-[node name="Sensei" type="Sprite" parent="NPCs"]
-position = Vector2( 64, 62 )
-texture = ExtResource( 76 )
-hframes = 9
-frame = 8
+[node name="Sensei" type="Area2D" parent="NPCs"]
+visible = false
+position = Vector2( 47, 57 )
 script = ExtResource( 75 )
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NPCs/Sensei"]
+shape = SubResource( 77 )
+
 [node name="Sensei Animator" type="AnimationPlayer" parent="NPCs/Sensei"]
+root_node = NodePath("../Sprite")
 anims/Default = SubResource( 76 )
 anims/Walking = SubResource( 75 )
+
+[node name="Sprite" type="Sprite" parent="NPCs/Sensei"]
+texture = ExtResource( 76 )
+hframes = 9
 
 [node name="Gun Chest" type="Area2D" parent="."]
 position = Vector2( 0, 45 )
@@ -2661,7 +2683,7 @@ z_index = 5
 
 [node name="Player - Dialog" parent="Cutscene Manager/Dialog/Speaker" instance=ExtResource( 35 )]
 position = Vector2( -107, -12.25 )
-frame = 0
+frame = 1
 offset = Vector2( 107, 12.25 )
 
 [node name="Speaker Name" type="Label" parent="Cutscene Manager/Dialog"]
@@ -2733,24 +2755,26 @@ position = Vector2( 83, 87 )
 
 [node name="Smoke 1" parent="Cutscene Manager/Construction Effects" instance=ExtResource( 53 )]
 position = Vector2( -240, 23 )
-frame = 9
 
 [node name="Smoke 2" parent="Cutscene Manager/Construction Effects" instance=ExtResource( 52 )]
 position = Vector2( -142, 28 )
+frame = 9
 
 [node name="Smoke 3" parent="Cutscene Manager/Construction Effects" instance=ExtResource( 51 )]
 position = Vector2( -191, -24 )
+frame = 7
 
 [node name="Smoke 4" parent="Cutscene Manager/Construction Effects" instance=ExtResource( 53 )]
 position = Vector2( -158, -34 )
+frame = 7
 
 [node name="Smoke 5" parent="Cutscene Manager/Construction Effects" instance=ExtResource( 52 )]
 position = Vector2( -228, -20 )
-frame = 8
+frame = 2
 
 [node name="Smoke 6" parent="Cutscene Manager/Construction Effects" instance=ExtResource( 51 )]
 position = Vector2( -198, 51 )
-frame = 6
+frame = 0
 
 [node name="Cutscene Animator" type="AnimationPlayer" parent="Cutscene Manager"]
 "anims/1 - Character Waking Up" = SubResource( 23 )
