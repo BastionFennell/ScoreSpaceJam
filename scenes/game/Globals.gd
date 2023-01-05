@@ -21,10 +21,10 @@ var has_gone_outside_today = false
 var time_stopped = false
 
 var cutscenes = {
-	"intro": false,
-	"prophecy": false,
-	"on_first_dive": false,
-	"offer_to_fix": false
+	"intro": true,
+	"prophecy": true,
+	"on_first_dive": true,
+	"offer_to_fix": true
 }
 
 var _triggers = {
@@ -32,11 +32,11 @@ var _triggers = {
 	"built-prophecy_chamber": false,
 	"built-gunforge": false,
 	"built-signs": false,
-	"bed_unlocked-midori": false,
+	"bed_unlocked-midori": true,
 	"gunsmithing_unlocked": false,
 	"yume_unlocked": false,
 	"has_shotgun": false,
-	"entered_midori_dream": false,
+	"entered_midori_dream": true,
 	"has_gone_outside": false,
 	"has_made_gun": false,
 	"has_opened_anvil": false

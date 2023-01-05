@@ -2335,8 +2335,7 @@ anims/Default = SubResource( 66 )
 anims/Walking = SubResource( 67 )
 
 [node name="Sensei" type="Area2D" parent="NPCs"]
-visible = false
-position = Vector2( 47, 57 )
+position = Vector2( -41, 57 )
 script = ExtResource( 75 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="NPCs/Sensei"]
@@ -2683,7 +2682,7 @@ z_index = 5
 
 [node name="Player - Dialog" parent="Cutscene Manager/Dialog/Speaker" instance=ExtResource( 35 )]
 position = Vector2( -107, -12.25 )
-frame = 1
+frame = 2
 offset = Vector2( 107, 12.25 )
 
 [node name="Speaker Name" type="Label" parent="Cutscene Manager/Dialog"]
@@ -2755,26 +2754,25 @@ position = Vector2( 83, 87 )
 
 [node name="Smoke 1" parent="Cutscene Manager/Construction Effects" instance=ExtResource( 53 )]
 position = Vector2( -240, 23 )
+frame = 6
 
 [node name="Smoke 2" parent="Cutscene Manager/Construction Effects" instance=ExtResource( 52 )]
 position = Vector2( -142, 28 )
-frame = 9
+frame = 2
 
 [node name="Smoke 3" parent="Cutscene Manager/Construction Effects" instance=ExtResource( 51 )]
 position = Vector2( -191, -24 )
-frame = 7
+frame = 0
 
 [node name="Smoke 4" parent="Cutscene Manager/Construction Effects" instance=ExtResource( 53 )]
 position = Vector2( -158, -34 )
-frame = 7
+frame = 0
 
 [node name="Smoke 5" parent="Cutscene Manager/Construction Effects" instance=ExtResource( 52 )]
 position = Vector2( -228, -20 )
-frame = 2
 
 [node name="Smoke 6" parent="Cutscene Manager/Construction Effects" instance=ExtResource( 51 )]
 position = Vector2( -198, 51 )
-frame = 0
 
 [node name="Cutscene Animator" type="AnimationPlayer" parent="Cutscene Manager"]
 "anims/1 - Character Waking Up" = SubResource( 23 )
