@@ -7,7 +7,7 @@ var should_move = false
 var is_interactive = true
 
 func _ready():
-	self.visible = get_node("/root/Globals").get_trigger("gunsmithing_unlocked")
+	self.visible = get_node("/root/Globals").get_trigger("entered_midori_dream")
 	on_animation_end()
 
 	if !self.visible:
@@ -27,7 +27,7 @@ func on_interact():
 	get_node("../../Cutscene Manager").start_dialog("Sensei")
 
 func _on_triggers_updated(trigger, value):
-	if trigger == "gunsmithing_unlocked":
+	if trigger == "entered_midori_dream":
 		self.visible = value
 
 func _process(delta):
